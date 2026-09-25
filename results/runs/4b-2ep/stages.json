@@ -1,0 +1,22 @@
+{
+ "train": {
+  "status": "ok",
+  "seconds": 3511.0,
+  "note": ""
+ },
+ "temps": {
+  "status": "ok",
+  "seconds": 74.0,
+  "note": ""
+ },
+ "eval": {
+  "status": "ok",
+  "seconds": 1359.0,
+  "note": ""
+ },
+ "postprocess": {
+  "status": "ok",
+  "seconds": 1.0,
+  "note": "rc=0"
+ }
+}

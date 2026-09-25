@@ -1,0 +1,227 @@
+{
+ "meta": {
+  "schema": 1,
+  "stamp": "20260925-074821",
+  "source": "train/nonce_eval.py",
+  "label": "adapter on jevals-helpsteer2, nonce test",
+  "base": "Qwen/Qwen3.5-4B-Base",
+  "revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+  "adapter": "/workspace/jeb/runs/4b-v3-c20f-n3k/adapter",
+  "temperatures": {
+   "choice": 1.0886,
+   "noul": 1.2469,
+   "score": 1.3309
+  },
+  "attn": "sdpa",
+  "device": "cuda",
+  "gpu": "NVIDIA A100 80GB PCIe",
+  "dtype": "bf16",
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "transformers": "5.17.0",
+  "peft": "0.21.0",
+  "fp32_candidate_logits": true,
+  "toy": false,
+  "seed": 20260922,
+  "repeats": 3,
+  "variants": [
+   "state",
+   "instr"
+  ],
+  "batch": 16,
+  "limit": 0,
+  "max_tokens": 2048,
+  "nonce_field": "request_id",
+  "set": {
+   "id": "jevals-helpsteer2",
+   "file": "/workspace/jeb/data/test/jevals-helpsteer2.jsonl",
+   "sha256": "8b7a4f288222918f94746a21a84043614ed65be2267e8309147acdddf5d8e27a",
+   "records": 300,
+   "questions": 300,
+   "types": {
+    "score": 300
+   },
+   "license": "CC-BY-4.0"
+  },
+  "sources": {
+   "nonce_eval.py": "9e61be100e8387378bad48499b97c8404a8372433f787fe3bfb39499964fdf2e",
+   "eval_jebadiah.py": "61948e11b454ef80711d29ce9d462338612240c698cbc9b9437c60d305501ffe",
+   "jebadiah_model.py": "2c5c90dcdb748064d7be855314772b4ab8bf9ac842b0f650554e23f20acfd360",
+   "jebadiah_prompt.py": "35edd3fe1ec0b02c695f8b01efd6a0ed392f3ae4f726ade54861f8fa1eb77624",
+   "ainode_prompt_verbatim.py": "61e81179cbe39fc02607cda64770e02a433356ff1ef0020bea893d610cb9e8f9"
+  },
+  "protocol": {
+   "state": "a fresh uuid4 per (question, pass) added to the state as top-level field 'request_id'; states that are not objects or already carry the field are skipped (counted)",
+   "instr": "the same uuid appended to the question's instructions as a trailing line 'ref: <uuid>'",
+   "both": "state and instr at once",
+   "pick": "argmax with eval_jebadiah's tie rules (choice: first listed; score: lower level)",
+   "prob_tv": "0.5 * L1 distance between the nonce and clean probability vectors",
+   "p95": "nearest-rank at index int(0.95 * n) of the sorted values (eval_jebadiah's latency p95)",
+   "accuracy": "pick == label, labels read the way eval_jebadiah reads them",
+   "clean_order": "questions sorted by rendered length (stable), batches in that order: eval_jebadiah repeat 0"
+  },
+  "clean_check": {
+   "questions": 8,
+   "max_abs_prob_diff": 0.001281,
+   "mismatches": [],
+   "compared": [
+    {
+     "id": "jevals-helpsteer2:helpsteer2-11",
+     "qid": "decision",
+     "eval_pick": "3",
+     "clean_pick": "3",
+     "max_abs_prob_diff": 0.001072
+    },
+    {
+     "id": "jevals-helpsteer2:helpsteer2-14",
+     "qid": "decision",
+     "eval_pick": "4",
+     "clean_pick": "4",
+     "max_abs_prob_diff": 0.001281
+    },
+    {
+     "id": "jevals-helpsteer2:helpsteer2-17",
+     "qid": "decision",
+     "eval_pick": "2",
+     "clean_pick": "2",
+     "max_abs_prob_diff": 0.000674
+    },
+    {
+     "id": "jevals-helpsteer2:helpsteer2-21",
+     "qid": "decision",
+     "eval_pick": "1",
+     "clean_pick": "1",
+     "max_abs_prob_diff": 0.000984
+    },
+    {
+     "id": "jevals-helpsteer2:helpsteer2-22",
+     "qid": "decision",
+     "eval_pick": "3",
+     "clean_pick": "3",
+     "max_abs_prob_diff": 0.00105
+    },
+    {
+     "id": "jevals-helpsteer2:helpsteer2-26",
+     "qid": "decision",
+     "eval_pick": "2",
+     "clean_pick": "2",
+     "max_abs_prob_diff": 0.000767
+    },
+    {
+     "id": "jevals-helpsteer2:helpsteer2-32",
+     "qid": "decision",
+     "eval_pick": "3",
+     "clean_pick": "3",
+     "max_abs_prob_diff": 0.000429
+    },
+    {
+     "id": "jevals-helpsteer2:helpsteer2-5",
+     "qid": "decision",
+     "eval_pick": "0",
+     "clean_pick": "0",
+     "max_abs_prob_diff": 0.000778
+    }
+   ]
+  },
+  "truncated_prompts": {
+   "clean": 0,
+   "state": 0,
+   "instr": 0
+  },
+  "timing": {
+   "load_s": 5.6,
+   "clean_s": 18.9,
+   "check_s": 0.6,
+   "nonce_s": 104.2,
+   "prompts_scored": 2108
+  }
+ },
+ "overall": {
+  "state": {
+   "n_questions": 300,
+   "n_passes": 900,
+   "pick_agreement": 0.9222222222222223,
+   "any_flip_rate": 0.09333333333333334,
+   "p_max_abs_change_mean": 0.007551642222222221,
+   "p_max_abs_change_p95": 0.025736000000000037,
+   "prob_tv_mean": 0.018527983333333334,
+   "prob_tv_p95": 0.055333,
+   "accuracy_clean": 0.34,
+   "accuracy_nonce": 0.3488888888888889,
+   "accuracy_nonce_by_pass": [
+    0.35,
+    0.35,
+    0.3466666666666667
+   ],
+   "flips_right_to_wrong": 19,
+   "flips_wrong_to_right": 27,
+   "score_expected_abs_change_mean": 0.045337869999999995,
+   "skipped": 0
+  },
+  "instr": {
+   "n_questions": 300,
+   "n_passes": 900,
+   "pick_agreement": 0.9411111111111111,
+   "any_flip_rate": 0.1,
+   "p_max_abs_change_mean": 0.005180764444444442,
+   "p_max_abs_change_p95": 0.015182000000000029,
+   "prob_tv_mean": 0.012415535555555555,
+   "prob_tv_p95": 0.030249,
+   "accuracy_clean": 0.34,
+   "accuracy_nonce": 0.34,
+   "accuracy_nonce_by_pass": [
+    0.33666666666666667,
+    0.33666666666666667,
+    0.3466666666666667
+   ],
+   "flips_right_to_wrong": 15,
+   "flips_wrong_to_right": 15,
+   "score_expected_abs_change_mean": 0.027238017777777776,
+   "skipped": 0
+  }
+ },
+ "by_type": {
+  "score": {
+   "state": {
+    "n_questions": 300,
+    "n_passes": 900,
+    "pick_agreement": 0.9222222222222223,
+    "any_flip_rate": 0.09333333333333334,
+    "p_max_abs_change_mean": 0.007551642222222221,
+    "p_max_abs_change_p95": 0.025736000000000037,
+    "prob_tv_mean": 0.018527983333333334,
+    "prob_tv_p95": 0.055333,
+    "accuracy_clean": 0.34,
+    "accuracy_nonce": 0.3488888888888889,
+    "accuracy_nonce_by_pass": [
+     0.35,
+     0.35,
+     0.3466666666666667
+    ],
+    "flips_right_to_wrong": 19,
+    "flips_wrong_to_right": 27,
+    "score_expected_abs_change_mean": 0.045337869999999995
+   },
+   "instr": {
+    "n_questions": 300,
+    "n_passes": 900,
+    "pick_agreement": 0.9411111111111111,
+    "any_flip_rate": 0.1,
+    "p_max_abs_change_mean": 0.005180764444444442,
+    "p_max_abs_change_p95": 0.015182000000000029,
+    "prob_tv_mean": 0.012415535555555555,
+    "prob_tv_p95": 0.030249,
+    "accuracy_clean": 0.34,
+    "accuracy_nonce": 0.34,
+    "accuracy_nonce_by_pass": [
+     0.33666666666666667,
+     0.33666666666666667,
+     0.3466666666666667
+    ],
+    "flips_right_to_wrong": 15,
+    "flips_wrong_to_right": 15,
+    "score_expected_abs_change_mean": 0.027238017777777776
+   }
+  }
+ }
+}

@@ -1,0 +1,580 @@
+{
+ "files": {
+  "pool.jsonl": {
+   "sha256": "6598685e072bdde8327649a621865cd91efb8d823547d75fc2e102f824c67903",
+   "records": 6776,
+   "questions": 11576,
+   "types": {
+    "choice": 5704,
+    "noul": 3024,
+    "score": 2848
+   },
+   "subsets": {
+    "agent_trace_observability": 300,
+    "customer_service": 300,
+    "invoice_processing": 300,
+    "security_incidents": 300,
+    "contrastive_volume_discount": 112,
+    "dbpedia14": 1000,
+    "contrastive_spend_threshold": 112,
+    "contrastive_sla_response": 112,
+    "contrastive_return_window": 112,
+    "composition_rand": 1680,
+    "mnli": 1000,
+    "boolq": 1000,
+    "contrastive_warranty_claim": 112,
+    "contrastive_quantity_limit": 112,
+    "contrastive_late_fee": 112,
+    "contrastive_age_eligibility": 112
+   },
+   "sets": {
+    "typed-decisions-train": 1200,
+    "kev-v7-train": 5576
+   },
+   "upstream": {
+    "kev-suites/v7/decision-v7/train.jsonl": "7ed5254b5cb5291baefaceb09edf7e13110258211518c8038f4a12c11bd628ad"
+   }
+  },
+  "nimble_public_builds": {
+   "boolq": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "2c239fdc3e4d5f2d015a7ab9def82d0c2ff6fb49d39c96dc233d3e5911583b58",
+    "committed_dataset_sha256": "2c239fdc3e4d5f2d015a7ab9def82d0c2ff6fb49d39c96dc233d3e5911583b58",
+    "byte_identical_to_committed": true,
+    "count": 300,
+    "raw_sha256": "dbad2984e58eaa2184b6d0acfe2e94a73b9868381046255d6be6c3bed9088b68"
+   },
+   "pubmedqa": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "8ee766a759a60280373f45a19a62c9e36462b1176508f193621095e102403a40",
+    "committed_dataset_sha256": "8ee766a759a60280373f45a19a62c9e36462b1176508f193621095e102403a40",
+    "byte_identical_to_committed": true,
+    "count": 250,
+    "raw_sha256": "0b9b06e379d39fff0b7c7acb33bdeb96c843049f1ad071e41c02aeaae16277fe"
+   },
+   "paws": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "ffc7388bbf027272b1c2175cd8d4d3591b63006696b2f9889bf70fccd457d167",
+    "committed_dataset_sha256": "ffc7388bbf027272b1c2175cd8d4d3591b63006696b2f9889bf70fccd457d167",
+    "byte_identical_to_committed": true,
+    "count": 250,
+    "raw_sha256": "7d2f9c7973b04d83cde2d87ef20fb9001157e79fb6cfa27597223db9d5b86f3c"
+   },
+   "squad2": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "95316d9d810d4827d86053e9199e15e865bad3fa4b65cbcb742a54433fcdfdd7",
+    "committed_dataset_sha256": "95316d9d810d4827d86053e9199e15e865bad3fa4b65cbcb742a54433fcdfdd7",
+    "byte_identical_to_committed": true,
+    "count": 299,
+    "raw_sha256": "9e9d4bffba7f3585b67a7b244558fda7b1675c491c499a217101d8faa646f610"
+   },
+   "helpsteer2": {
+    "selection": "ids-from committed manifest with Nimble's tokenizer length filter",
+    "dataset_sha256": "c2395b2f794217ee080ec3ef89fbd6d67fd8c8c6f9f1c8d47d127301929a2ca3",
+    "committed_dataset_sha256": "c2395b2f794217ee080ec3ef89fbd6d67fd8c8c6f9f1c8d47d127301929a2ca3",
+    "byte_identical_to_committed": true,
+    "count": 249,
+    "raw_sha256": "1f5f121d1fddb540b24498ba38bfe132d87f7e2e9bac891464b32d30965884e7"
+   },
+   "aegis2": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "2d10424f7d2b06e9c38fe443f9cfb10eb958b4eb37cbec2bed4d990d109374b2",
+    "committed_dataset_sha256": "2d10424f7d2b06e9c38fe443f9cfb10eb958b4eb37cbec2bed4d990d109374b2",
+    "byte_identical_to_committed": true,
+    "count": 250,
+    "raw_sha256": "b63f6febd9f7392862d1d48c5ba7be5d7efef32b1f998f70d19adec24cb096fd"
+   },
+   "civil_comments": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "7f76c916faa51a8e67325dd4a8a1b70ee678ef124f1a551f5a32f26ebd66234e",
+    "committed_dataset_sha256": "7f76c916faa51a8e67325dd4a8a1b70ee678ef124f1a551f5a32f26ebd66234e",
+    "byte_identical_to_committed": true,
+    "count": 300,
+    "raw_sha256": "655a9eebb8c6f93981955782a9ec6fc26015136890bc99cc6080a05dc456f5ea"
+   },
+   "summeval-relevance": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "e10be11770eeaf34b6b39e529796de89d2a2341e05805071c47e716bc90f2255",
+    "committed_dataset_sha256": "e10be11770eeaf34b6b39e529796de89d2a2341e05805071c47e716bc90f2255",
+    "byte_identical_to_committed": true,
+    "count": 240,
+    "raw_sha256": "75c9f59d60455f83cb9cf2eb442ed924350863ac3f3dea9b7bcfc34d1fd6bfe0"
+   },
+   "summeval-consistency": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "86cc3627a2ddd8ca5ab10c1af43a9ee9e007b8d7d25dbf952f1a7452246e9e00",
+    "committed_dataset_sha256": "86cc3627a2ddd8ca5ab10c1af43a9ee9e007b8d7d25dbf952f1a7452246e9e00",
+    "byte_identical_to_committed": true,
+    "count": 144,
+    "raw_sha256": "75c9f59d60455f83cb9cf2eb442ed924350863ac3f3dea9b7bcfc34d1fd6bfe0"
+   },
+   "massive-en-US": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "f173a34108c1f785f5e5bf1d83534c34393651e7f7b0b2eba19deb0d5d0f2681",
+    "committed_dataset_sha256": "f173a34108c1f785f5e5bf1d83534c34393651e7f7b0b2eba19deb0d5d0f2681",
+    "byte_identical_to_committed": true,
+    "count": 350,
+    "raw_sha256": "4cba5faa11c71437928e17cb1b9b3d8b8e727e7ea363a3a9a8045e19c0491577"
+   },
+   "massive-de-DE": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "6eacfdfd5f55ee664ddf5d385deda17cbed248c18aabc06be0c643518b74ab28",
+    "committed_dataset_sha256": "6eacfdfd5f55ee664ddf5d385deda17cbed248c18aabc06be0c643518b74ab28",
+    "byte_identical_to_committed": true,
+    "count": 350,
+    "raw_sha256": "4cba5faa11c71437928e17cb1b9b3d8b8e727e7ea363a3a9a8045e19c0491577"
+   },
+   "multinli": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "e0349ce46c796b08ecddbfc3b525dd4528e02595cc64921911babc7e3620b2f1",
+    "committed_dataset_sha256": "e0349ce46c796b08ecddbfc3b525dd4528e02595cc64921911babc7e3620b2f1",
+    "byte_identical_to_committed": true,
+    "count": 299,
+    "raw_sha256": "9db14e02591c51b7c0401802382f01602ce97c21697a68a263f8c4b5958229a6"
+   },
+   "vitaminc-dev": {
+    "selection": "ids-from committed manifest",
+    "dataset_sha256": "6144a345cb8846b6594f07a0037b1221b2d9633b20d8a9bfd14f9111d15965bc",
+    "committed_dataset_sha256": "6144a345cb8846b6594f07a0037b1221b2d9633b20d8a9bfd14f9111d15965bc",
+    "byte_identical_to_committed": true,
+    "count": 599,
+    "raw_sha256": "a3258bc959754c84bade150d3bf447fd9c91a529d93bb676f034fdafda5f26e5"
+   }
+  },
+  "jevals": {
+   "pubmedqa": {
+    "suite": "0.1.0",
+    "dataset": "qiaojin/PubMedQA",
+    "config": "pqa_labeled",
+    "split": "train",
+    "hf_revision": "9001f2853fb87cab8d220904e0de81ac6973b318",
+    "seed": 20260918,
+    "n_items": 300,
+    "state_sha256_matches": 300,
+    "license": "MIT",
+    "task_file_sha256": "bb3c39515cdefb8be7b3294b423d3e36066748b55b59c9778041e66cea5d893c"
+   },
+   "banking77": {
+    "suite": "0.1.0",
+    "dataset": "mteb/banking77",
+    "config": "default",
+    "split": "test",
+    "hf_revision": "18072d2685ea682290f7b8924d94c62acc19c0b2",
+    "seed": 20260918,
+    "n_items": 300,
+    "state_sha256_matches": 300,
+    "license": "CC-BY-4.0 (Banking77, PolyAI; mirror tagged MIT)",
+    "task_file_sha256": "025286bc6e693aef21c932c7e7d4c756c18c41ba2b971bb3d09a2ed87232c38c"
+   },
+   "helpsteer2": {
+    "suite": "0.1.0",
+    "dataset": "nvidia/HelpSteer2",
+    "config": "default",
+    "split": "validation",
+    "hf_revision": "990b2711a36180dd19d9c94b8627844866f8982a",
+    "seed": 20260918,
+    "n_items": 300,
+    "state_sha256_matches": 300,
+    "license": "CC-BY-4.0",
+    "task_file_sha256": "4bb81ad0e930eac83416edbdc3afc913c88e3506085dc89416311ef918365e98"
+   }
+  },
+  "test/typed-decisions-test.jsonl": {
+   "sha256": "6740083cea1460621e792efc782066eb5148b137ff2e17562e9f9f2aef3a0575",
+   "records": 400,
+   "questions": 2000,
+   "types": {
+    "choice": 600,
+    "noul": 600,
+    "score": 800
+   },
+   "subsets": {
+    "agent_trace_observability": 100,
+    "customer_service": 100,
+    "invoice_processing": 100,
+    "security_incidents": 100
+   },
+   "license": "Apache-2.0 (synthetic; gold = mean of three teacher samples, label = its argmax)"
+  },
+  "test/kev-decision-v7__test.jsonl": {
+   "sha256": "ad4f2420ed5d3d9711cec2d5db896ac918ce27518a532074597df77bc2ab2109",
+   "records": 1176,
+   "questions": 1440,
+   "types": {
+    "choice": 696,
+    "noul": 504,
+    "score": 240
+   },
+   "subsets": {
+    "banking77": 116,
+    "boolq": 80,
+    "agnews": 116,
+    "mnli": 116,
+    "sst5": 80,
+    "yelp": 80,
+    "trec": 116,
+    "dbpedia14": 116,
+    "amazon": 80,
+    "imdb": 80,
+    "contrastive_return_window": 40,
+    "contrastive_spend_threshold": 76,
+    "contrastive_age_eligibility": 40,
+    "contrastive_quantity_limit": 40
+   },
+   "license": "Apache-2.0 repo; each upstream dataset has its own license (see kev docs/model-cards); evaluation only"
+  },
+  "test/kev-transfer-v4__test.jsonl": {
+   "sha256": "304bd95d6f00c96165dfb23bb53af154fbf1ae69ebac7fd3c63facdcd2620a8e",
+   "records": 764,
+   "questions": 764,
+   "types": {
+    "choice": 444,
+    "noul": 280,
+    "score": 40
+   },
+   "subsets": {
+    "mmlu": 116,
+    "emotion": 116,
+    "tweet_offensive": 80,
+    "qnli": 80,
+    "paws": 80,
+    "sciq": 116,
+    "contrastive_authorization": 40,
+    "contrastive_deadline": 40,
+    "composition_final_combination": 32,
+    "composition_final_negation": 32,
+    "composition_final_exception": 32
+   },
+   "license": "Apache-2.0 repo; each upstream dataset has its own license (see kev docs/model-cards); evaluation only"
+  },
+  "test/nimble-eval.jsonl": {
+   "sha256": "1b12b8a45fd9493ae5181e7a510def12f54c3593c3c08ac5ea8dc221a47694d3",
+   "records": 324,
+   "questions": 324,
+   "types": {
+    "choice": 146,
+    "noul": 114,
+    "score": 64
+   },
+   "subsets": {
+    "commerce": 58,
+    "education": 70,
+    "travel": 16,
+    "public_services": 106,
+    "media": 44,
+    "supply_chain": 30
+   },
+   "license": "no license stated: the nimble repo has no LICENSE file and GitHub reports license null (2026-09-22); the README calls it open data and the adapter on HF is Apache-2.0. Evaluation only (data/eval.jsonl): its training set is excluded from the pool"
+  },
+  "test/nimble-public__boolq.jsonl": {
+   "sha256": "4c18bc6febd034e264754c2d6c255905a1f245d71b5fc314aa407ef88f038a14",
+   "records": 300,
+   "questions": 300,
+   "types": {
+    "noul": 300
+   },
+   "subsets": {
+    "boolq": 300
+   },
+   "license": "CC BY-SA 3.0"
+  },
+  "test/nimble-public__pubmedqa.jsonl": {
+   "sha256": "5c97f2ce4072f1400f987ca6918b924999157fb5b6fcd32a98423bd1e24c241e",
+   "records": 250,
+   "questions": 250,
+   "types": {
+    "choice": 250
+   },
+   "subsets": {
+    "pubmedqa": 250
+   },
+   "license": "MIT"
+  },
+  "test/nimble-public__paws.jsonl": {
+   "sha256": "ec177b2ce6105ec7c5be3670d7c7a54e6eca76707fa82dae9403fb7976dee800",
+   "records": 250,
+   "questions": 250,
+   "types": {
+    "noul": 250
+   },
+   "subsets": {
+    "paws": 250
+   },
+   "license": "Google PAWS license: may be freely used for any purpose"
+  },
+  "test/nimble-public__squad2.jsonl": {
+   "sha256": "9fd44689d6413cc3db50b66ab50b75e2d86220625fe18debb557b4bf59819429",
+   "records": 299,
+   "questions": 299,
+   "types": {
+    "noul": 299
+   },
+   "subsets": {
+    "squad2": 299
+   },
+   "license": "CC BY-SA 4.0"
+  },
+  "test/nimble-public__helpsteer2.jsonl": {
+   "sha256": "31b350799d4accbb73c2f8332661400871b4d693a7fa66f6eb3d9737bf4f6bba",
+   "records": 249,
+   "questions": 249,
+   "types": {
+    "score": 249
+   },
+   "subsets": {
+    "helpsteer2": 249
+   },
+   "license": "CC BY-4.0"
+  },
+  "test/nimble-public__aegis2.jsonl": {
+   "sha256": "70b9ed0ad8ef51e4f114489094a32ae2770cf554a8f57a0c7ca2115a15cde60b",
+   "records": 250,
+   "questions": 250,
+   "types": {
+    "noul": 250
+   },
+   "subsets": {
+    "aegis2": 250
+   },
+   "license": "CC BY 4.0"
+  },
+  "test/nimble-public__civil_comments.jsonl": {
+   "sha256": "fbac7c50d3b035d1e49db4eadbca0a73bfc39cea9a337b164eb3a58998d8e635",
+   "records": 300,
+   "questions": 300,
+   "types": {
+    "noul": 300
+   },
+   "subsets": {
+    "civil_comments": 300
+   },
+   "license": "CC0 1.0"
+  },
+  "test/nimble-public__summeval-relevance.jsonl": {
+   "sha256": "387bcbe80afbc001dbdef9d93b9f52204a889ffd5a1ece21a8f3056bce7916f2",
+   "records": 240,
+   "questions": 240,
+   "types": {
+    "score": 240
+   },
+   "subsets": {
+    "summeval-relevance": 240
+   },
+   "license": "MIT"
+  },
+  "test/nimble-public__summeval-consistency.jsonl": {
+   "sha256": "c3508a74e9d9d000f44c591d505f85b2381a3a9a73ee4c07f8264a2f45ce13e0",
+   "records": 144,
+   "questions": 144,
+   "types": {
+    "score": 144
+   },
+   "subsets": {
+    "summeval-consistency": 144
+   },
+   "license": "MIT"
+  },
+  "test/nimble-public__massive-en-US.jsonl": {
+   "sha256": "409fbe55cd7ff75e5526e445aad95d9d0292af2351eccf23748c2f0608f3d9f0",
+   "records": 350,
+   "questions": 350,
+   "types": {
+    "choice": 350
+   },
+   "subsets": {
+    "massive-en-US": 350
+   },
+   "license": "CC BY 4.0"
+  },
+  "test/nimble-public__massive-de-DE.jsonl": {
+   "sha256": "c693e5b200bbd546a9a4a0a7a85e01f9c0b170971a8e37e1c28346406753f876",
+   "records": 350,
+   "questions": 350,
+   "types": {
+    "choice": 350
+   },
+   "subsets": {
+    "massive-de-DE": 350
+   },
+   "license": "CC BY 4.0"
+  },
+  "test/nimble-public__multinli.jsonl": {
+   "sha256": "a69ea71e85bb1e3cb04329153148bb88b13cb30251290f59877fc06e79a08d6c",
+   "records": 299,
+   "questions": 299,
+   "types": {
+    "choice": 299
+   },
+   "subsets": {
+    "multinli": 299
+   },
+   "license": "Mixed per genre: OANC public domain; fiction and other sources CC BY-SA 3.0 or similar"
+  },
+  "test/nimble-public__vitaminc-dev.jsonl": {
+   "sha256": "60c71dc4639637a50dc4b62395febf4dcf2e72f38f450215b1b802ae82c9c111",
+   "records": 599,
+   "questions": 599,
+   "types": {
+    "choice": 599
+   },
+   "subsets": {
+    "vitaminc-dev": 599
+   },
+   "license": "CC BY-SA 3.0"
+  },
+  "test/jevals-pubmedqa.jsonl": {
+   "sha256": "e82eb000b924c7ce85ec5dd2cf948eb42cb22ae669cdce1e88b12026f62adfeb",
+   "records": 300,
+   "questions": 300,
+   "types": {
+    "noul": 300
+   },
+   "subsets": {
+    "pubmedqa": 300
+   },
+   "license": "MIT"
+  },
+  "test/jevals-banking77.jsonl": {
+   "sha256": "411cdf4a3973f88ceb68d651b0d09e487adf68ee4f482d65e57fb5a266e94129",
+   "records": 300,
+   "questions": 300,
+   "types": {
+    "choice": 300
+   },
+   "subsets": {
+    "banking77": 300
+   },
+   "license": "CC-BY-4.0 (Banking77, PolyAI; mirror tagged MIT)"
+  },
+  "test/jevals-helpsteer2.jsonl": {
+   "sha256": "8b7a4f288222918f94746a21a84043614ed65be2267e8309147acdddf5d8e27a",
+   "records": 300,
+   "questions": 300,
+   "types": {
+    "score": 300
+   },
+   "subsets": {
+    "helpsteer2": 300
+   },
+   "license": "CC-BY-4.0"
+  }
+ },
+ "failures": {},
+ "notes": [
+  "Labels live in the record-level `label` map; no question object carries a label (lint_data.py enforces it).",
+  "Kev's boolq and mnli training rows come from the train splits; Nimble's public boolq (validation) and multinli (dev matched) subsets share those datasets, so those two test numbers are in-distribution by dataset, not by item.",
+  "Banking77 is excluded from training so jevals-banking77 is a clean zero-shot number.",
+  "Public data only: no lab, help desk, client or blind material exists on this box."
+ ],
+ "limit": null,
+ "pins": {
+  "typed-decisions": "ea9306458d6e9563628369a3d1e72e362fb381d2",
+  "kev-suites": "a88f56db5341397299137cb68775c2ea6e3f68cb",
+  "nimble": "f136b3f75721fda4ea961f73993cc50b08488835"
+ },
+ "licenses": {
+  "typed-decisions-train": "Apache-2.0",
+  "kev-v7-train": {
+   "boolq": [
+    "keep",
+    "CC BY-SA 3.0 (google/boolq)"
+   ],
+   "mnli": [
+    "keep",
+    "CC BY-SA 3.0 / CC BY 3.0 / OANC (nyu-mll/multi_nli)"
+   ],
+   "dbpedia14": [
+    "keep",
+    "CC BY-SA 3.0 (fancyzhx/dbpedia_14)"
+   ],
+   "contrastive_*": [
+    "keep",
+    "Apache-2.0 (generated by Kev's pipeline, jaredpalmer/kev)"
+   ],
+   "composition_rand:*": [
+    "keep",
+    "Apache-2.0 (generated by Kev's pipeline, jaredpalmer/kev)"
+   ],
+   "banking77": [
+    "drop",
+    "CC BY 4.0, but Banking77 is a Jevals test source: excluded so the Jevals choice number stays clean"
+   ],
+   "agnews": [
+    "drop",
+    "no license on the HF card (unknown); the AG corpus page limits use to non-commercial"
+   ],
+   "agnews_yn": [
+    "drop",
+    "same as agnews"
+   ],
+   "trec": [
+    "drop",
+    "no license stated (CogComp/trec: unknown)"
+   ],
+   "sst5": [
+    "drop",
+    "no license stated (SetFit/sst5)"
+   ],
+   "yelp": [
+    "drop",
+    "Yelp dataset terms: academic use only, no redistribution"
+   ],
+   "yelp_yn": [
+    "drop",
+    "same as yelp"
+   ],
+   "amazon": [
+    "drop",
+    "upstream Amazon Customer Reviews terms: research only, no redistribution; the SetFit mirror's Apache tag cannot relicense it"
+   ],
+   "imdb": [
+    "drop",
+    "IMDb terms: personal, non-commercial use (HF card: other)"
+   ]
+  },
+  "nimble-train (excluded)": "no license stated: the nimble repo has no LICENSE file and GitHub reports license null (2026-09-22); the README calls it open data and the adapter on HF is Apache-2.0. Evaluation only (data/eval.jsonl): its training set is excluded from the pool"
+ },
+ "exclusions": {
+  "kev-v7-train": {
+   "agnews": {
+    "dropped_questions": 1000,
+    "why": "no license on the HF card (unknown); the AG corpus page limits use to non-commercial"
+   },
+   "agnews_yn": {
+    "dropped_questions": 2000,
+    "why": "same as agnews"
+   },
+   "amazon": {
+    "dropped_questions": 1000,
+    "why": "upstream Amazon Customer Reviews terms: research only, no redistribution; the SetFit mirror's Apache tag cannot relicense it"
+   },
+   "banking77": {
+    "dropped_questions": 1000,
+    "why": "CC BY 4.0, but Banking77 is a Jevals test source: excluded so the Jevals choice number stays clean"
+   },
+   "imdb": {
+    "dropped_questions": 1000,
+    "why": "IMDb terms: personal, non-commercial use (HF card: other)"
+   },
+   "sst5": {
+    "dropped_questions": 1000,
+    "why": "no license stated (SetFit/sst5)"
+   },
+   "trec": {
+    "dropped_questions": 1000,
+    "why": "no license stated (CogComp/trec: unknown)"
+   },
+   "yelp": {
+    "dropped_questions": 1000,
+    "why": "Yelp dataset terms: academic use only, no redistribution"
+   },
+   "yelp_yn": {
+    "dropped_questions": 1000,
+    "why": "same as yelp"
+   }
+  },
+  "nimble-train": {
+   "why": "no license stated: the nimble repo has no LICENSE file and GitHub reports license null (2026-09-22); the README calls it open data and the adapter on HF is Apache-2.0. Evaluation only (data/eval.jsonl): its training set is excluded from the pool"
+  }
+ }
+}

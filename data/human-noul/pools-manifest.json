@@ -1,0 +1,185 @@
+{
+ "c20_pool_sha256": "0bb163f364fb33a23f216bc28075c393e162cae2b4e00c3b97729884a2b82922",
+ "pools": {
+  "data-dose-c20h": {
+   "human_file": "human-noul.jsonl",
+   "records": 15740,
+   "questions": 22797,
+   "by_set_type": {
+    "helpsteer2-train score": 2573,
+    "human-condaqa noul": 1000,
+    "human-contractnli noul": 1000,
+    "human-sharc noul": 1000,
+    "kev-v7-train choice": 3904,
+    "kev-v7-train noul": 1224,
+    "kev-v7-train score": 448,
+    "summeval-train score": 1664,
+    "synth-v2 choice": 3984,
+    "typed-decisions-train choice": 1800,
+    "typed-decisions-train noul": 1800,
+    "typed-decisions-train score": 2400
+   },
+   "by_type": {
+    "choice": 9688,
+    "noul": 6024,
+    "score": 7085
+   },
+   "noul_share": 0.2642,
+   "noul_human_new": 3000,
+   "noul_other": 3024,
+   "split": {
+    "train": {
+     "records": 14826,
+     "questions": 21562,
+     "types": {
+      "choice": 9300,
+      "noul": 5726,
+      "score": 6536
+     },
+     "sets": {
+      "typed-decisions-train": 1142,
+      "kev-v7-train": 5362,
+      "helpsteer2-train": 2412,
+      "summeval-train": 1408,
+      "synth-v2": 1653,
+      "human-condaqa": 960,
+      "human-contractnli": 939,
+      "human-sharc": 950
+     }
+    },
+    "calib": {
+     "records": 914,
+     "questions": 1235,
+     "types": {
+      "choice": 388,
+      "noul": 298,
+      "score": 549
+     },
+     "sets": {
+      "typed-decisions-train": 58,
+      "kev-v7-train": 214,
+      "helpsteer2-train": 161,
+      "summeval-train": 256,
+      "synth-v2": 74,
+      "human-condaqa": 40,
+      "human-contractnli": 61,
+      "human-sharc": 50
+     }
+    },
+    "rule": "sha256(family or canonical record)[:4] mod 100 < 5 -> calib"
+   },
+   "human_questions_by_side": {
+    "train": 2849,
+    "calib": 151
+   },
+   "families_on_both_sides": 0,
+   "steps_1_epoch_8_per_step": 2696,
+   "sha256": {
+    "pool.jsonl": "144ecf13d2fe4695a062dcfeff3e50c5914185d5cac4a679f7ae9b4fe11fd81a",
+    "train.jsonl": "90cfc737ebfcda80771b9a3fe21ceed0f482923ecef2fffcda02a6cfdcdbe0f6",
+    "calib.jsonl": "9c10a1f29cff896dd2afe619a122b86aa75e5827daf017d2f53de4cba99b80dc"
+   },
+   "lint_exit": 0,
+   "lint": [
+    "ok   $JEB_ROOT/data-dose-c20h/pool.jsonl: 15740 records, no label-like key under questions, every label fits",
+    "ok   $JEB_ROOT/data-dose-c20h/train.jsonl: 14826 records, no label-like key under questions, every label fits",
+    "ok   $JEB_ROOT/data-dose-c20h/calib.jsonl: 914 records, no label-like key under questions, every label fits"
+   ]
+  },
+  "data-dose-c20h-alt": {
+   "human_file": "human-noul-alt.jsonl",
+   "records": 15740,
+   "questions": 22797,
+   "by_set_type": {
+    "helpsteer2-train score": 2573,
+    "human-condaqa noul": 1000,
+    "human-contractnli noul": 1000,
+    "human-unfairtos noul": 1000,
+    "kev-v7-train choice": 3904,
+    "kev-v7-train noul": 1224,
+    "kev-v7-train score": 448,
+    "summeval-train score": 1664,
+    "synth-v2 choice": 3984,
+    "typed-decisions-train choice": 1800,
+    "typed-decisions-train noul": 1800,
+    "typed-decisions-train score": 2400
+   },
+   "by_type": {
+    "choice": 9688,
+    "noul": 6024,
+    "score": 7085
+   },
+   "noul_share": 0.2642,
+   "noul_human_new": 3000,
+   "noul_other": 3024,
+   "split": {
+    "train": {
+     "records": 14827,
+     "questions": 21563,
+     "types": {
+      "choice": 9300,
+      "noul": 5727,
+      "score": 6536
+     },
+     "sets": {
+      "typed-decisions-train": 1142,
+      "kev-v7-train": 5362,
+      "helpsteer2-train": 2412,
+      "summeval-train": 1408,
+      "synth-v2": 1653,
+      "human-condaqa": 960,
+      "human-contractnli": 939,
+      "human-unfairtos": 951
+     }
+    },
+    "calib": {
+     "records": 913,
+     "questions": 1234,
+     "types": {
+      "choice": 388,
+      "noul": 297,
+      "score": 549
+     },
+     "sets": {
+      "typed-decisions-train": 58,
+      "kev-v7-train": 214,
+      "helpsteer2-train": 161,
+      "summeval-train": 256,
+      "synth-v2": 74,
+      "human-condaqa": 40,
+      "human-contractnli": 61,
+      "human-unfairtos": 49
+     }
+    },
+    "rule": "sha256(family or canonical record)[:4] mod 100 < 5 -> calib"
+   },
+   "human_questions_by_side": {
+    "train": 2850,
+    "calib": 150
+   },
+   "families_on_both_sides": 0,
+   "steps_1_epoch_8_per_step": 2696,
+   "sha256": {
+    "pool.jsonl": "8f0f8547876ecbe2c490b393ff15397a6a1ad2fbcd8e6ff7dfff06367695f6ea",
+    "train.jsonl": "14e022f16b0359b2d30b839ef75509c7ba2a47cbef488a9b929d79c7190b8a76",
+    "calib.jsonl": "eb4a6c37d348689ef59e93458a1b05f2151adf63d8fcf2d50f4fd8516eed0df8"
+   },
+   "lint_exit": 0,
+   "lint": [
+    "ok   $JEB_ROOT/data-dose-c20h-alt/pool.jsonl: 15740 records, no label-like key under questions, every label fits",
+    "ok   $JEB_ROOT/data-dose-c20h-alt/train.jsonl: 14827 records, no label-like key under questions, every label fits",
+    "ok   $JEB_ROOT/data-dose-c20h-alt/calib.jsonl: 913 records, no label-like key under questions, every label fits"
+   ]
+  }
+ },
+ "human_files_lint_exit": 0,
+ "human_files_lint": [
+  "ok   data/human-noul/human-condaqa.jsonl: 1000 records, no label-like key under questions, every label fits",
+  "ok   data/human-noul/human-contractnli.jsonl: 1000 records, no label-like key under questions, every label fits",
+  "ok   data/human-noul/human-sharc.jsonl: 1000 records, no label-like key under questions, every label fits",
+  "ok   data/human-noul/human-unfairtos.jsonl: 1000 records, no label-like key under questions, every label fits",
+  "ok   data/human-noul/human-noul.jsonl: 3000 records, no label-like key under questions, every label fits",
+  "ok   data/human-noul/human-noul-alt.jsonl: 3000 records, no label-like key under questions, every label fits"
+ ],
+ "c20_pool_sha256_after": "0bb163f364fb33a23f216bc28075c393e162cae2b4e00c3b97729884a2b82922"
+}

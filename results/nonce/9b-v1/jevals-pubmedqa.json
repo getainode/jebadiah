@@ -1,0 +1,223 @@
+{
+ "meta": {
+  "schema": 1,
+  "stamp": "20260922-222811",
+  "source": "train/nonce_eval.py",
+  "label": "adapter on jevals-pubmedqa, nonce test",
+  "base": "Qwen/Qwen3.5-9B-Base",
+  "revision": "68c46c4b3498877f3ef123c856ecfde50c39f404",
+  "adapter": "/workspace/jeb/runs/9b-v1/adapter",
+  "temperatures": {
+   "choice": 1.1301,
+   "noul": 1.2641,
+   "score": 1.1762
+  },
+  "attn": "sdpa",
+  "device": "cuda",
+  "gpu": "NVIDIA H100 PCIe",
+  "dtype": "bf16",
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "transformers": "5.17.0",
+  "peft": "0.21.0",
+  "fp32_candidate_logits": true,
+  "toy": false,
+  "seed": 20260922,
+  "repeats": 3,
+  "variants": [
+   "state",
+   "instr"
+  ],
+  "batch": 16,
+  "limit": 0,
+  "max_tokens": 2048,
+  "nonce_field": "request_id",
+  "set": {
+   "id": "jevals-pubmedqa",
+   "file": "/workspace/jeb/data/test/jevals-pubmedqa.jsonl",
+   "sha256": "e82eb000b924c7ce85ec5dd2cf948eb42cb22ae669cdce1e88b12026f62adfeb",
+   "records": 300,
+   "questions": 300,
+   "types": {
+    "noul": 300
+   },
+   "license": "MIT"
+  },
+  "sources": {
+   "nonce_eval.py": "9e61be100e8387378bad48499b97c8404a8372433f787fe3bfb39499964fdf2e",
+   "eval_jebadiah.py": "61948e11b454ef80711d29ce9d462338612240c698cbc9b9437c60d305501ffe",
+   "jebadiah_model.py": "2c5c90dcdb748064d7be855314772b4ab8bf9ac842b0f650554e23f20acfd360",
+   "jebadiah_prompt.py": "35edd3fe1ec0b02c695f8b01efd6a0ed392f3ae4f726ade54861f8fa1eb77624",
+   "ainode_prompt_verbatim.py": "61e81179cbe39fc02607cda64770e02a433356ff1ef0020bea893d610cb9e8f9"
+  },
+  "protocol": {
+   "state": "a fresh uuid4 per (question, pass) added to the state as top-level field 'request_id'; states that are not objects or already carry the field are skipped (counted)",
+   "instr": "the same uuid appended to the question's instructions as a trailing line 'ref: <uuid>'",
+   "both": "state and instr at once",
+   "pick": "argmax with eval_jebadiah's tie rules (choice: first listed; score: lower level)",
+   "prob_tv": "0.5 * L1 distance between the nonce and clean probability vectors",
+   "p95": "nearest-rank at index int(0.95 * n) of the sorted values (eval_jebadiah's latency p95)",
+   "accuracy": "pick == label, labels read the way eval_jebadiah reads them",
+   "clean_order": "questions sorted by rendered length (stable), batches in that order: eval_jebadiah repeat 0"
+  },
+  "clean_check": {
+   "questions": 8,
+   "max_abs_prob_diff": 0.000863,
+   "mismatches": [],
+   "compared": [
+    {
+     "id": "jevals-pubmedqa:pubmedqa-0",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.000141
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-11",
+     "qid": "decision",
+     "eval_pick": "false",
+     "clean_pick": "false",
+     "max_abs_prob_diff": 3.5e-05
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-14",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.000663
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-16",
+     "qid": "decision",
+     "eval_pick": "false",
+     "clean_pick": "false",
+     "max_abs_prob_diff": 0.000376
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-20",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.00062
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-24",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.000863
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-28",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.000601
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-4",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.000129
+    }
+   ]
+  },
+  "truncated_prompts": {
+   "clean": 0,
+   "state": 0,
+   "instr": 0
+  },
+  "timing": {
+   "load_s": 7.4,
+   "clean_s": 39.1,
+   "check_s": 1.9,
+   "nonce_s": 203.4,
+   "prompts_scored": 2108
+  }
+ },
+ "overall": {
+  "state": {
+   "n_questions": 300,
+   "n_passes": 900,
+   "pick_agreement": 0.9777777777777777,
+   "any_flip_rate": 0.03,
+   "p_max_abs_change_mean": 0.010582935555555555,
+   "p_max_abs_change_p95": 0.03926299999999994,
+   "prob_tv_mean": 0.010979147777777778,
+   "prob_tv_p95": 0.042011,
+   "accuracy_clean": 0.8966666666666666,
+   "accuracy_nonce": 0.8833333333333333,
+   "accuracy_nonce_by_pass": [
+    0.8866666666666667,
+    0.88,
+    0.8833333333333333
+   ],
+   "flips_right_to_wrong": 16,
+   "flips_wrong_to_right": 4,
+   "skipped": 0
+  },
+  "instr": {
+   "n_questions": 300,
+   "n_passes": 900,
+   "pick_agreement": 0.9922222222222222,
+   "any_flip_rate": 0.016666666666666666,
+   "p_max_abs_change_mean": 0.006777168888888888,
+   "p_max_abs_change_p95": 0.028557999999999972,
+   "prob_tv_mean": 0.006955618888888889,
+   "prob_tv_p95": 0.030118,
+   "accuracy_clean": 0.8966666666666666,
+   "accuracy_nonce": 0.8977777777777778,
+   "accuracy_nonce_by_pass": [
+    0.9,
+    0.8933333333333333,
+    0.9
+   ],
+   "flips_right_to_wrong": 3,
+   "flips_wrong_to_right": 4,
+   "skipped": 0
+  }
+ },
+ "by_type": {
+  "noul": {
+   "state": {
+    "n_questions": 300,
+    "n_passes": 900,
+    "pick_agreement": 0.9777777777777777,
+    "any_flip_rate": 0.03,
+    "p_max_abs_change_mean": 0.010582935555555555,
+    "p_max_abs_change_p95": 0.03926299999999994,
+    "prob_tv_mean": 0.010979147777777778,
+    "prob_tv_p95": 0.042011,
+    "accuracy_clean": 0.8966666666666666,
+    "accuracy_nonce": 0.8833333333333333,
+    "accuracy_nonce_by_pass": [
+     0.8866666666666667,
+     0.88,
+     0.8833333333333333
+    ],
+    "flips_right_to_wrong": 16,
+    "flips_wrong_to_right": 4
+   },
+   "instr": {
+    "n_questions": 300,
+    "n_passes": 900,
+    "pick_agreement": 0.9922222222222222,
+    "any_flip_rate": 0.016666666666666666,
+    "p_max_abs_change_mean": 0.006777168888888888,
+    "p_max_abs_change_p95": 0.028557999999999972,
+    "prob_tv_mean": 0.006955618888888889,
+    "prob_tv_p95": 0.030118,
+    "accuracy_clean": 0.8966666666666666,
+    "accuracy_nonce": 0.8977777777777778,
+    "accuracy_nonce_by_pass": [
+     0.9,
+     0.8933333333333333,
+     0.9
+    ],
+    "flips_right_to_wrong": 3,
+    "flips_wrong_to_right": 4
+   }
+  }
+ }
+}

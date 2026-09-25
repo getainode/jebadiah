@@ -1,0 +1,77 @@
+{
+ "temperatures": {
+  "choice": 0.9006,
+  "noul": 0.9131,
+  "score": 0.3881
+ },
+ "applied_target": "hard",
+ "calib_file": "/workspace/jeb/data/calib.jsonl",
+ "n": {
+  "choice": 225,
+  "noul": 147,
+  "score": 132
+ },
+ "fits": {
+  "hard": {
+   "choice": {
+    "T": 0.9006,
+    "nll_before": 0.3399,
+    "nll_after": 0.3385
+   },
+   "noul": {
+    "T": 0.9131,
+    "nll_before": 0.3291,
+    "nll_after": 0.3283
+   },
+   "score": {
+    "T": 0.3881,
+    "nll_before": 0.5469,
+    "nll_after": 0.3999
+   }
+  },
+  "train": {
+   "choice": {
+    "T": 1.3117,
+    "nll_before": 0.4654,
+    "nll_after": 0.4521
+   },
+   "noul": {
+    "T": 1.3154,
+    "nll_before": 0.4088,
+    "nll_after": 0.4004
+   },
+   "score": {
+    "T": 1.0241,
+    "nll_before": 0.8379,
+    "nll_after": 0.8378
+   }
+  }
+ },
+ "nll_before": {
+  "choice": 0.3399,
+  "noul": 0.3291,
+  "score": 0.5469
+ },
+ "nll_after": {
+  "choice": 0.3385,
+  "noul": 0.3283,
+  "score": 0.3999
+ },
+ "ece_before": {
+  "choice": 0.071,
+  "noul": 0.1053,
+  "score": 0.2237
+ },
+ "ece_after": {
+  "choice": 0.0651,
+  "noul": 0.0931,
+  "score": 0.0564
+ },
+ "accuracy": {
+  "choice": 0.8889,
+  "noul": 0.8912,
+  "score": 0.8636
+ },
+ "score_targets": "source",
+ "score_ordinal_adjacent": 0.2
+}

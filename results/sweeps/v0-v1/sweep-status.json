@@ -1,0 +1,275 @@
+{
+ "created": "2026-09-22T09:59:30Z",
+ "gpu": "NVIDIA H100 PCIe, 81559 MiB",
+ "runs": [
+  {
+   "name": "smoke",
+   "letter": "0",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 6,
+   "est_min_a100": 8,
+   "started": "2026-09-22T09:59:30Z",
+   "started_epoch": 1790071170.3827262,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-4B-Base",
+   "finished": "2026-09-22T10:53:19Z",
+   "minutes": 53.8,
+   "stage": "complete",
+   "headline": 69.712,
+   "minutes_by_stage": {
+    "train": 4.8,
+    "temps": 1.2,
+    "eval": 3.0,
+    "postprocess": 0.0,
+    "total": 9.0
+   }
+  },
+  {
+   "name": "9b-v0",
+   "letter": "a",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 48,
+   "est_min_a100": 82,
+   "started": "2026-09-22T10:49:33Z",
+   "started_epoch": 1790074173.5409067,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-9B-Base",
+   "finished": "2026-09-22T12:05:31Z",
+   "minutes": 76.0,
+   "stage": "complete",
+   "headline": 72.529,
+   "minutes_by_stage": {
+    "train": 44.7,
+    "temps": 1.2,
+    "eval": 26.3,
+    "postprocess": 0.0,
+    "total": 72.2
+   }
+  },
+  {
+   "name": "4b-2ep",
+   "letter": "b",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 38,
+   "est_min_a100": 65,
+   "started": "2026-09-22T10:50:10Z",
+   "started_epoch": 1790074210.9668336,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-4B-Base",
+   "finished": "2026-09-22T13:27:57Z",
+   "minutes": 157.8,
+   "stage": "complete",
+   "headline": 69.673,
+   "minutes_by_stage": {
+    "train": 58.5,
+    "temps": 1.2,
+    "eval": 22.6,
+    "postprocess": 0.0,
+    "total": 82.3
+   }
+  },
+  {
+   "name": "4b-scorefix",
+   "letter": "c",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 26,
+   "est_min_a100": 44,
+   "started": "2026-09-22T10:50:27Z",
+   "started_epoch": 1790074227.3282204,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-4B-Base",
+   "finished": "2026-09-22T14:31:16Z",
+   "minutes": 220.8,
+   "stage": "complete",
+   "headline": 70.052,
+   "minutes_by_stage": {
+    "train": 39.2,
+    "temps": 1.1,
+    "eval": 22.9,
+    "postprocess": 0.0,
+    "total": 63.2
+   }
+  },
+  {
+   "name": "4b-v0",
+   "letter": "d0",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 26,
+   "est_min_a100": 44,
+   "started": "2026-09-22T10:50:44Z",
+   "started_epoch": 1790074244.1188748,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-4B-Base",
+   "finished": "2026-09-22T15:33:56Z",
+   "minutes": 283.2,
+   "stage": "complete",
+   "headline": 70.938,
+   "minutes_by_stage": {
+    "train": 38.8,
+    "temps": 1.1,
+    "eval": 22.8,
+    "postprocess": 0.0,
+    "total": 62.7
+   }
+  },
+  {
+   "name": "4b-lr2e-4",
+   "letter": "d1",
+   "status": "skipped",
+   "optional": false,
+   "est_min_h100_pcie": 26,
+   "est_min_a100": 44,
+   "started": "2026-09-22T10:51:00Z",
+   "started_epoch": 1790074260.2303622,
+   "note": "SKIP: trimmed for budget (marker /workspace/jeb/SKIP-4b-lr2e-4)",
+   "finished": "2026-09-22T15:33:57Z",
+   "minutes": 282.9,
+   "stage": "failed:train",
+   "headline": null,
+   "minutes_by_stage": {
+    "train": 0.3,
+    "total": 0.3
+   }
+  },
+  {
+   "name": "4b-r32",
+   "letter": "d",
+   "status": "skipped",
+   "optional": false,
+   "est_min_h100_pcie": 27,
+   "est_min_a100": 46,
+   "started": "2026-09-22T10:51:17Z",
+   "started_epoch": 1790074277.408374,
+   "note": "SKIP: trimmed for budget (marker /workspace/jeb/SKIP-4b-r32)",
+   "finished": "2026-09-22T15:33:57Z",
+   "minutes": 282.7,
+   "stage": "failed:train",
+   "headline": null,
+   "minutes_by_stage": {
+    "train": 0.3,
+    "total": 0.3
+   }
+  },
+  {
+   "name": "9b-best",
+   "letter": "e",
+   "status": "skipped",
+   "optional": false,
+   "est_min_h100_pcie": 50,
+   "est_min_a100": 85,
+   "finished": "2026-09-22T15:33:57Z",
+   "note": "SKIP: trimmed for budget (marker /workspace/jeb/SKIP-9b-best)"
+  },
+  {
+   "name": "9b-base-eval",
+   "letter": "f",
+   "status": "done",
+   "optional": true,
+   "est_min_h100_pcie": 14,
+   "est_min_a100": 24,
+   "started": "2026-09-22T10:51:35Z",
+   "started_epoch": 1790074295.7955418,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-9B-Base",
+   "stage": "complete",
+   "headline": 68.703,
+   "minutes_by_stage": {
+    "eval": 18.6,
+    "postprocess": 0.0,
+    "total": 18.6
+   },
+   "finished": "2026-09-22T15:52:35Z",
+   "minutes": 301.0
+  },
+  {
+   "name": "9b-v1",
+   "letter": "g",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 85,
+   "est_min_a100": 145,
+   "started": "2026-09-22T17:52:05Z",
+   "started_epoch": 1790099525.1924412,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-9B-Base",
+   "stage": "complete",
+   "headline": 73.287,
+   "minutes_by_stage": {
+    "train": 115.6,
+    "temps": 2.4,
+    "eval": 25.5,
+    "postprocess": 0.0,
+    "total": 143.5
+   },
+   "finished": "2026-09-22T20:15:38Z",
+   "minutes": 143.6
+  },
+  {
+   "name": "4b-v1",
+   "letter": "h",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130,
+   "started": "2026-09-22T20:15:38Z",
+   "started_epoch": 1790108138.7985175,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-4B-Base",
+   "stage": "complete",
+   "headline": 70.34,
+   "minutes_by_stage": {
+    "train": 99.2,
+    "temps": 2.0,
+    "eval": 24.1,
+    "postprocess": 0.0,
+    "total": 125.3
+   },
+   "finished": "2026-09-22T22:21:03Z",
+   "minutes": 125.4
+  },
+  {
+   "name": "4b-v1-lr2e-4",
+   "letter": "p1",
+   "status": "done",
+   "optional": true,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130,
+   "started": "2026-09-22T22:50:03Z",
+   "started_epoch": 1790117403.4887826,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-4B-Base",
+   "stage": "complete",
+   "headline": 69.681,
+   "minutes_by_stage": {
+    "train": 98.9,
+    "temps": 2.0,
+    "eval": 22.3,
+    "postprocess": 0.0,
+    "total": 123.2
+   },
+   "finished": "2026-09-23T00:53:17Z",
+   "minutes": 123.2
+  },
+  {
+   "name": "4b-v1-r32",
+   "letter": "p2",
+   "status": "skipped",
+   "optional": true,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130,
+   "finished": "2026-09-23T00:53:17Z",
+   "note": "SKIP: trimmed for budget (marker /workspace/jeb/SKIP-4b-v1-r32)"
+  }
+ ],
+ "updated": "2026-09-23T00:53:17Z",
+ "attn": "sdpa",
+ "done": [
+  "smoke",
+  "9b-v0",
+  "4b-2ep",
+  "4b-scorefix",
+  "4b-v0",
+  "9b-base-eval",
+  "9b-v1",
+  "4b-v1",
+  "4b-v1-lr2e-4"
+ ],
+ "failed": [],
+ "pending": []
+}

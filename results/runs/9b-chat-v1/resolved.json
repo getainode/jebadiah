@@ -1,0 +1,14 @@
+{
+ "epochs": 1,
+ "rank": 16,
+ "lr": 0.0001,
+ "score_targets": "ordinal",
+ "temperature_target": "train",
+ "score_ordinal_adjacent": 0.2,
+ "batch_size": 8,
+ "grad_accum": 1,
+ "eval_repeats": 5,
+ "eval_repeats_for": "jevals-=5,nimble-eval=3,kev-transfer=3,typed-decisions=2,kev-decision=1,nimble-public=1",
+ "base": "9b-chat",
+ "data_dir": "/workspace/jeb/data-v1"
+}

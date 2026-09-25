@@ -1,0 +1,39 @@
+[project]
+name = "jebadiah-server"
+version = "0.1.0"
+description = "Standalone Jebadiah decision server: POST /v1/systemone and /v1/decide on one GPU or an Apple Silicon Mac, with a browser playground"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "Apache-2.0" }
+dependencies = [
+  "torch==2.14.0",
+  "transformers==5.17.0",
+  "accelerate==1.15.0",
+  "safetensors>=0.6",
+  "huggingface-hub>=1.0",
+  "fastapi>=0.115",
+  "uvicorn>=0.30",
+]
+
+[project.optional-dependencies]
+# Fast linear-attention kernels for the Qwen3.5 layers on CUDA. Without them transformers
+# falls back to its torch path, which is correct and slower. Not installable on macOS.
+cuda = ["flash-linear-attention>=0.5"]
+
+[project.scripts]
+jebadiah-serve = "jebadiah_server.cli:main"
+
+[dependency-groups]
+# aiohttp only so the identity test can import AINode's live route modules
+dev = ["pytest>=8", "httpx>=0.27", "aiohttp>=3.9"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jebadiah_server"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning:fastapi.testclient", "ignore:Using `httpx`"]

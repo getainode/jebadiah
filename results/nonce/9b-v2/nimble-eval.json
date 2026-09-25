@@ -1,0 +1,309 @@
+{
+ "meta": {
+  "schema": 1,
+  "stamp": "20260923-192545",
+  "source": "train/nonce_eval.py",
+  "label": "adapter on nimble-eval, nonce test",
+  "base": "Qwen/Qwen3.5-9B-Base",
+  "revision": "68c46c4b3498877f3ef123c856ecfde50c39f404",
+  "adapter": "/workspace/jeb/runs/9b-v2/adapter",
+  "temperatures": {
+   "choice": 1.111,
+   "noul": 1.0772,
+   "score": 1.2854
+  },
+  "attn": "sdpa",
+  "device": "cuda",
+  "gpu": "NVIDIA H100 PCIe",
+  "dtype": "bf16",
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "transformers": "5.17.0",
+  "peft": "0.21.0",
+  "fp32_candidate_logits": true,
+  "toy": false,
+  "seed": 20260922,
+  "repeats": 3,
+  "variants": [
+   "state",
+   "instr"
+  ],
+  "batch": 16,
+  "limit": 0,
+  "max_tokens": 2048,
+  "nonce_field": "request_id",
+  "set": {
+   "id": "nimble-eval",
+   "file": "/workspace/jeb/data/test/nimble-eval.jsonl",
+   "sha256": "1b12b8a45fd9493ae5181e7a510def12f54c3593c3c08ac5ea8dc221a47694d3",
+   "records": 324,
+   "questions": 324,
+   "types": {
+    "choice": 146,
+    "noul": 114,
+    "score": 64
+   },
+   "license": "no license stated: the nimble repo has no LICENSE file and GitHub reports license null (2026-09-22); the README calls it open data and the adapter on HF is Apache-2.0. Evaluation only (data/eval.jsonl): its training set is excluded from the pool"
+  },
+  "sources": {
+   "nonce_eval.py": "9e61be100e8387378bad48499b97c8404a8372433f787fe3bfb39499964fdf2e",
+   "eval_jebadiah.py": "61948e11b454ef80711d29ce9d462338612240c698cbc9b9437c60d305501ffe",
+   "jebadiah_model.py": "2c5c90dcdb748064d7be855314772b4ab8bf9ac842b0f650554e23f20acfd360",
+   "jebadiah_prompt.py": "35edd3fe1ec0b02c695f8b01efd6a0ed392f3ae4f726ade54861f8fa1eb77624",
+   "ainode_prompt_verbatim.py": "61e81179cbe39fc02607cda64770e02a433356ff1ef0020bea893d610cb9e8f9"
+  },
+  "protocol": {
+   "state": "a fresh uuid4 per (question, pass) added to the state as top-level field 'request_id'; states that are not objects or already carry the field are skipped (counted)",
+   "instr": "the same uuid appended to the question's instructions as a trailing line 'ref: <uuid>'",
+   "both": "state and instr at once",
+   "pick": "argmax with eval_jebadiah's tie rules (choice: first listed; score: lower level)",
+   "prob_tv": "0.5 * L1 distance between the nonce and clean probability vectors",
+   "p95": "nearest-rank at index int(0.95 * n) of the sorted values (eval_jebadiah's latency p95)",
+   "accuracy": "pick == label, labels read the way eval_jebadiah reads them",
+   "clean_order": "questions sorted by rendered length (stable), batches in that order: eval_jebadiah repeat 0"
+  },
+  "clean_check": {
+   "questions": 8,
+   "max_abs_prob_diff": 0.005723,
+   "mismatches": [],
+   "compared": [
+    {
+     "id": "nimble-eval:scale-diverse-007-001-base",
+     "qid": "decision",
+     "eval_pick": "major_seller_correction_not_ready",
+     "clean_pick": "major_seller_correction_not_ready",
+     "max_abs_prob_diff": 0.000388
+    },
+    {
+     "id": "nimble-eval:scale-diverse-007-001-counterfactual",
+     "qid": "decision",
+     "eval_pick": "ready_publish",
+     "clean_pick": "ready_publish",
+     "max_abs_prob_diff": 0.002657
+    },
+    {
+     "id": "nimble-eval:scale-diverse-007-004-base",
+     "qid": "decision",
+     "eval_pick": "major_seller_correction_not_ready",
+     "clean_pick": "major_seller_correction_not_ready",
+     "max_abs_prob_diff": 0.00109
+    },
+    {
+     "id": "nimble-eval:scale-diverse-007-004-counterfactual",
+     "qid": "decision",
+     "eval_pick": "ready_publish",
+     "clean_pick": "ready_publish",
+     "max_abs_prob_diff": 0.000215
+    },
+    {
+     "id": "nimble-eval:scale-diverse-007-005-base",
+     "qid": "decision",
+     "eval_pick": "major_seller_correction_not_ready",
+     "clean_pick": "major_seller_correction_not_ready",
+     "max_abs_prob_diff": 0.000251
+    },
+    {
+     "id": "nimble-eval:scale-diverse-007-005-counterfactual",
+     "qid": "decision",
+     "eval_pick": "ready_publish",
+     "clean_pick": "ready_publish",
+     "max_abs_prob_diff": 0.005723
+    },
+    {
+     "id": "nimble-eval:scale-diverse-008-003-base",
+     "qid": "decision",
+     "eval_pick": "major_specialist_review_no",
+     "clean_pick": "major_specialist_review_no",
+     "max_abs_prob_diff": 0.000224
+    },
+    {
+     "id": "nimble-eval:scale-diverse-008-003-counterfactual",
+     "qid": "decision",
+     "eval_pick": "major_specialist_review_no",
+     "clean_pick": "major_specialist_review_no",
+     "max_abs_prob_diff": 0.000305
+    }
+   ]
+  },
+  "truncated_prompts": {
+   "clean": 0,
+   "state": 0,
+   "instr": 0
+  },
+  "timing": {
+   "load_s": 7.3,
+   "clean_s": 39.2,
+   "check_s": 1.6,
+   "nonce_s": 157.3,
+   "prompts_scored": 1736
+  }
+ },
+ "overall": {
+  "state": {
+   "n_questions": 144,
+   "n_passes": 432,
+   "pick_agreement": 0.9930555555555556,
+   "any_flip_rate": 0.013888888888888888,
+   "p_max_abs_change_mean": 0.01579304861111111,
+   "p_max_abs_change_p95": 0.055723999999999996,
+   "prob_tv_mean": 0.01648905787037037,
+   "prob_tv_p95": 0.055724,
+   "accuracy_clean": 0.7569444444444444,
+   "accuracy_nonce": 0.7546296296296297,
+   "accuracy_nonce_by_pass": [
+    0.7569444444444444,
+    0.75,
+    0.7569444444444444
+   ],
+   "flips_right_to_wrong": 2,
+   "flips_wrong_to_right": 1,
+   "score_expected_abs_change_mean": 0.019024547619047632,
+   "skipped": 180
+  },
+  "instr": {
+   "n_questions": 324,
+   "n_passes": 972,
+   "pick_agreement": 0.9876543209876543,
+   "any_flip_rate": 0.024691358024691357,
+   "p_max_abs_change_mean": 0.011496506172839505,
+   "p_max_abs_change_p95": 0.04127400000000003,
+   "prob_tv_mean": 0.012750562757201647,
+   "prob_tv_p95": 0.042631,
+   "accuracy_clean": 0.7469135802469136,
+   "accuracy_nonce": 0.7530864197530864,
+   "accuracy_nonce_by_pass": [
+    0.75,
+    0.7561728395061729,
+    0.7530864197530864
+   ],
+   "flips_right_to_wrong": 3,
+   "flips_wrong_to_right": 9,
+   "score_expected_abs_change_mean": 0.015583609374999998,
+   "skipped": 0
+  }
+ },
+ "by_type": {
+  "choice": {
+   "state": {
+    "n_questions": 110,
+    "n_passes": 330,
+    "pick_agreement": 0.990909090909091,
+    "any_flip_rate": 0.01818181818181818,
+    "p_max_abs_change_mean": 0.017036257575757573,
+    "p_max_abs_change_p95": 0.058772999999999964,
+    "prob_tv_mean": 0.017894548484848484,
+    "prob_tv_p95": 0.058773,
+    "accuracy_clean": 0.7454545454545455,
+    "accuracy_nonce": 0.7424242424242424,
+    "accuracy_nonce_by_pass": [
+     0.7454545454545455,
+     0.7363636363636363,
+     0.7454545454545455
+    ],
+    "flips_right_to_wrong": 2,
+    "flips_wrong_to_right": 1
+   },
+   "instr": {
+    "n_questions": 146,
+    "n_passes": 438,
+    "pick_agreement": 0.9908675799086758,
+    "any_flip_rate": 0.02054794520547945,
+    "p_max_abs_change_mean": 0.01534980136986301,
+    "p_max_abs_change_p95": 0.05524299999999993,
+    "prob_tv_mean": 0.016654785388127855,
+    "prob_tv_p95": 0.055598,
+    "accuracy_clean": 0.7123287671232876,
+    "accuracy_nonce": 0.7123287671232876,
+    "accuracy_nonce_by_pass": [
+     0.7054794520547946,
+     0.7191780821917808,
+     0.7123287671232876
+    ],
+    "flips_right_to_wrong": 2,
+    "flips_wrong_to_right": 2
+   }
+  },
+  "noul": {
+   "state": {
+    "n_questions": 20,
+    "n_passes": 60,
+    "pick_agreement": 1.0,
+    "any_flip_rate": 0.0,
+    "p_max_abs_change_mean": 0.011721399999999996,
+    "p_max_abs_change_p95": 0.046426999999999996,
+    "prob_tv_mean": 0.0117214,
+    "prob_tv_p95": 0.046427,
+    "accuracy_clean": 0.8,
+    "accuracy_nonce": 0.8,
+    "accuracy_nonce_by_pass": [
+     0.8,
+     0.8,
+     0.8
+    ],
+    "flips_right_to_wrong": 0,
+    "flips_wrong_to_right": 0
+   },
+   "instr": {
+    "n_questions": 114,
+    "n_passes": 342,
+    "pick_agreement": 0.97953216374269,
+    "any_flip_rate": 0.03508771929824561,
+    "p_max_abs_change_mean": 0.0072944210526315785,
+    "p_max_abs_change_p95": 0.02942,
+    "prob_tv_mean": 0.007828956140350877,
+    "prob_tv_p95": 0.032072,
+    "accuracy_clean": 0.8947368421052632,
+    "accuracy_nonce": 0.9152046783625731,
+    "accuracy_nonce_by_pass": [
+     0.9210526315789473,
+     0.9122807017543859,
+     0.9122807017543859
+    ],
+    "flips_right_to_wrong": 0,
+    "flips_wrong_to_right": 7
+   }
+  },
+  "score": {
+   "state": {
+    "n_questions": 14,
+    "n_passes": 42,
+    "pick_agreement": 1.0,
+    "any_flip_rate": 0.0,
+    "p_max_abs_change_mean": 0.011841619047619061,
+    "p_max_abs_change_p95": 0.031340000000000034,
+    "prob_tv_mean": 0.012256857142857142,
+    "prob_tv_p95": 0.031925,
+    "accuracy_clean": 0.7857142857142857,
+    "accuracy_nonce": 0.7857142857142857,
+    "accuracy_nonce_by_pass": [
+     0.7857142857142857,
+     0.7857142857142857,
+     0.7857142857142857
+    ],
+    "flips_right_to_wrong": 0,
+    "flips_wrong_to_right": 0,
+    "score_expected_abs_change_mean": 0.019024547619047632
+   },
+   "instr": {
+    "n_questions": 64,
+    "n_passes": 192,
+    "pick_agreement": 0.9947916666666666,
+    "any_flip_rate": 0.015625,
+    "p_max_abs_change_mean": 0.010191140625,
+    "p_max_abs_change_p95": 0.023796999999999957,
+    "prob_tv_mean": 0.012610666666666666,
+    "prob_tv_p95": 0.02893,
+    "accuracy_clean": 0.5625,
+    "accuracy_nonce": 0.5572916666666666,
+    "accuracy_nonce_by_pass": [
+     0.546875,
+     0.5625,
+     0.5625
+    ],
+    "flips_right_to_wrong": 1,
+    "flips_wrong_to_right": 0,
+    "score_expected_abs_change_mean": 0.015583609374999998
+   }
+  }
+ }
+}

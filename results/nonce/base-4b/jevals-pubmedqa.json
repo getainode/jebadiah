@@ -1,0 +1,219 @@
+{
+ "meta": {
+  "schema": 1,
+  "stamp": "20260922-171005",
+  "source": "train/nonce_eval.py",
+  "label": "Qwen/Qwen3.5-4B-Base on jevals-pubmedqa, nonce test",
+  "base": "Qwen/Qwen3.5-4B-Base",
+  "revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+  "adapter": null,
+  "temperatures": {},
+  "attn": "sdpa",
+  "device": "cuda",
+  "gpu": "NVIDIA H100 PCIe",
+  "dtype": "bf16",
+  "torch": "2.11.0+cu128",
+  "cuda": "12.8",
+  "transformers": "5.17.0",
+  "peft": "0.21.0",
+  "fp32_candidate_logits": true,
+  "toy": false,
+  "seed": 20260922,
+  "repeats": 3,
+  "variants": [
+   "state",
+   "instr"
+  ],
+  "batch": 16,
+  "limit": 0,
+  "max_tokens": 2048,
+  "nonce_field": "request_id",
+  "set": {
+   "id": "jevals-pubmedqa",
+   "file": "/workspace/jeb/data/test/jevals-pubmedqa.jsonl",
+   "sha256": "e82eb000b924c7ce85ec5dd2cf948eb42cb22ae669cdce1e88b12026f62adfeb",
+   "records": 300,
+   "questions": 300,
+   "types": {
+    "noul": 300
+   },
+   "license": "MIT"
+  },
+  "sources": {
+   "nonce_eval.py": "9e61be100e8387378bad48499b97c8404a8372433f787fe3bfb39499964fdf2e",
+   "eval_jebadiah.py": "61948e11b454ef80711d29ce9d462338612240c698cbc9b9437c60d305501ffe",
+   "jebadiah_model.py": "2c5c90dcdb748064d7be855314772b4ab8bf9ac842b0f650554e23f20acfd360",
+   "jebadiah_prompt.py": "35edd3fe1ec0b02c695f8b01efd6a0ed392f3ae4f726ade54861f8fa1eb77624",
+   "ainode_prompt_verbatim.py": "61e81179cbe39fc02607cda64770e02a433356ff1ef0020bea893d610cb9e8f9"
+  },
+  "protocol": {
+   "state": "a fresh uuid4 per (question, pass) added to the state as top-level field 'request_id'; states that are not objects or already carry the field are skipped (counted)",
+   "instr": "the same uuid appended to the question's instructions as a trailing line 'ref: <uuid>'",
+   "both": "state and instr at once",
+   "pick": "argmax with eval_jebadiah's tie rules (choice: first listed; score: lower level)",
+   "prob_tv": "0.5 * L1 distance between the nonce and clean probability vectors",
+   "p95": "nearest-rank at index int(0.95 * n) of the sorted values (eval_jebadiah's latency p95)",
+   "accuracy": "pick == label, labels read the way eval_jebadiah reads them",
+   "clean_order": "questions sorted by rendered length (stable), batches in that order: eval_jebadiah repeat 0"
+  },
+  "clean_check": {
+   "questions": 8,
+   "max_abs_prob_diff": 0.0,
+   "mismatches": [],
+   "compared": [
+    {
+     "id": "jevals-pubmedqa:pubmedqa-0",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.0
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-11",
+     "qid": "decision",
+     "eval_pick": "false",
+     "clean_pick": "false",
+     "max_abs_prob_diff": 0.0
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-14",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.0
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-16",
+     "qid": "decision",
+     "eval_pick": "false",
+     "clean_pick": "false",
+     "max_abs_prob_diff": 0.0
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-20",
+     "qid": "decision",
+     "eval_pick": "false",
+     "clean_pick": "false",
+     "max_abs_prob_diff": 0.0
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-24",
+     "qid": "decision",
+     "eval_pick": "false",
+     "clean_pick": "false",
+     "max_abs_prob_diff": 0.0
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-28",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.0
+    },
+    {
+     "id": "jevals-pubmedqa:pubmedqa-4",
+     "qid": "decision",
+     "eval_pick": "true",
+     "clean_pick": "true",
+     "max_abs_prob_diff": 0.0
+    }
+   ]
+  },
+  "truncated_prompts": {
+   "clean": 0,
+   "state": 0,
+   "instr": 0
+  },
+  "timing": {
+   "load_s": 4.7,
+   "clean_s": 32.7,
+   "check_s": 1.7,
+   "nonce_s": 164.6,
+   "prompts_scored": 2108
+  }
+ },
+ "overall": {
+  "state": {
+   "n_questions": 300,
+   "n_passes": 900,
+   "pick_agreement": 0.9777777777777777,
+   "any_flip_rate": 0.04,
+   "p_max_abs_change_mean": 0.019864593333333333,
+   "p_max_abs_change_p95": 0.04768499999999998,
+   "prob_tv_mean": 0.02015298,
+   "prob_tv_p95": 0.048932,
+   "accuracy_clean": 0.7766666666666666,
+   "accuracy_nonce": 0.7588888888888888,
+   "accuracy_nonce_by_pass": [
+    0.7633333333333333,
+    0.7566666666666667,
+    0.7566666666666667
+   ],
+   "flips_right_to_wrong": 18,
+   "flips_wrong_to_right": 2,
+   "skipped": 0
+  },
+  "instr": {
+   "n_questions": 300,
+   "n_passes": 900,
+   "pick_agreement": 0.9477777777777778,
+   "any_flip_rate": 0.06666666666666667,
+   "p_max_abs_change_mean": 0.04257610111111111,
+   "p_max_abs_change_p95": 0.10441200000000006,
+   "prob_tv_mean": 0.04449568,
+   "prob_tv_p95": 0.107301,
+   "accuracy_clean": 0.7766666666666666,
+   "accuracy_nonce": 0.8,
+   "accuracy_nonce_by_pass": [
+    0.7966666666666666,
+    0.8066666666666666,
+    0.7966666666666666
+   ],
+   "flips_right_to_wrong": 13,
+   "flips_wrong_to_right": 34,
+   "skipped": 0
+  }
+ },
+ "by_type": {
+  "noul": {
+   "state": {
+    "n_questions": 300,
+    "n_passes": 900,
+    "pick_agreement": 0.9777777777777777,
+    "any_flip_rate": 0.04,
+    "p_max_abs_change_mean": 0.019864593333333333,
+    "p_max_abs_change_p95": 0.04768499999999998,
+    "prob_tv_mean": 0.02015298,
+    "prob_tv_p95": 0.048932,
+    "accuracy_clean": 0.7766666666666666,
+    "accuracy_nonce": 0.7588888888888888,
+    "accuracy_nonce_by_pass": [
+     0.7633333333333333,
+     0.7566666666666667,
+     0.7566666666666667
+    ],
+    "flips_right_to_wrong": 18,
+    "flips_wrong_to_right": 2
+   },
+   "instr": {
+    "n_questions": 300,
+    "n_passes": 900,
+    "pick_agreement": 0.9477777777777778,
+    "any_flip_rate": 0.06666666666666667,
+    "p_max_abs_change_mean": 0.04257610111111111,
+    "p_max_abs_change_p95": 0.10441200000000006,
+    "prob_tv_mean": 0.04449568,
+    "prob_tv_p95": 0.107301,
+    "accuracy_clean": 0.7766666666666666,
+    "accuracy_nonce": 0.8,
+    "accuracy_nonce_by_pass": [
+     0.7966666666666666,
+     0.8066666666666666,
+     0.7966666666666666
+    ],
+    "flips_right_to_wrong": 13,
+    "flips_wrong_to_right": 34
+   }
+  }
+ }
+}

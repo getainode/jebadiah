@@ -1,0 +1,4 @@
+{"state": {"ticket": "Customer says the invoice total does not match the quote."},
+ "questions": {
+  "route": {"type": "choice", "instructions": "Which team should take this ticket?", "criteria": {"billing": "an invoice, a charge or a refund", "support": "a product question", "sales": "a quote or a renewal"}},
+  "urgent": {"type": "noul", "instructions": "The customer is blocked from working.", "criteria": {"true": "work has stopped", "false": "it can wait"}}}}

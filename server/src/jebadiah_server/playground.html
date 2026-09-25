@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jebadiah playground</title>
+<style>
+:root {
+  --bg: #f6f5f1; --panel: #ffffff; --ink: #1d1d1b; --muted: #6b6a64; --line: #e2e0d8;
+  --accent: #b5532a; --accent-ink: #ffffff; --bar: #d9d6cc; --fill: #b5532a; --fill-top: #7a2f12;
+  --ok: #2f7d4f; --bad: #b3261e; --code: #f0eee8;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #151514; --panel: #1f1f1d; --ink: #ecebe6; --muted: #a09e96; --line: #33322f;
+  --accent: #e0814f; --accent-ink: #1a0d06; --bar: #34332f; --fill: #e0814f; --fill-top: #f4b48e;
+  --ok: #6fcf97; --bad: #f28b82; --code: #262624;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 14px/1.45 ui-sans-serif, -apple-system, "Segoe UI", system-ui, sans-serif; }
+header { display: flex; align-items: center; gap: 14px; padding: 14px 22px; border-bottom: 1px solid var(--line); background: var(--panel); }
+header h1 { font-size: 18px; margin: 0; letter-spacing: .2px; }
+header h1 span { color: var(--muted); font-weight: 400; }
+.pill { font-size: 12px; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.pill.ready { color: var(--ok); border-color: currentColor; }
+.pill.bad { color: var(--bad); border-color: currentColor; }
+.spacer { flex: 1; }
+a { color: var(--accent); }
+button, select, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 6px 12px; }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; padding: 8px 18px; }
+button:disabled { opacity: .55; cursor: progress; }
+main { display: grid; grid-template-columns: minmax(360px, 1fr) minmax(360px, 1fr); gap: 18px; padding: 18px 22px; max-width: 1400px; margin: 0 auto; }
+@media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; margin: 12px 0 6px; }
+label:first-child { margin-top: 0; }
+textarea { width: 100%; min-height: 150px; resize: vertical; background: var(--code); border: 1px solid var(--line); border-radius: 8px; padding: 10px;
+  font: 12.5px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace; tab-size: 2; }
+textarea#questions { min-height: 280px; }
+select, input[type=password], input[type=text] { width: 100%; background: var(--code); border: 1px solid var(--line); border-radius: 8px; padding: 7px 9px; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+.row .check { display: flex; gap: 6px; align-items: center; color: var(--muted); font-size: 13px; }
+.hint { color: var(--muted); font-size: 12px; }
+.error { color: var(--bad); white-space: pre-wrap; font-size: 13px; margin: 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 12px; }
+.stat b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 12px; }
+.card { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-top: 10px; }
+.card h3 { margin: 0 0 2px; font-size: 14px; display: flex; gap: 8px; align-items: baseline; }
+.type { font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; padding: 0 5px; }
+.headline { font-size: 15px; margin: 4px 0 10px; }
+.headline strong { color: var(--accent); }
+.bars { display: grid; grid-template-columns: minmax(80px, max-content) 1fr 56px; gap: 5px 10px; align-items: center; }
+.bars .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 260px; font-size: 13px; }
+.bars .track { height: 12px; border-radius: 6px; background: var(--bar); overflow: hidden; }
+.bars .fillbar { height: 100%; background: var(--fill); border-radius: 6px; transition: width .35s ease; }
+.bars .top .fillbar { background: var(--fill-top); }
+.bars .top.name { font-weight: 700; }
+.bars .pct { text-align: right; font-variant-numeric: tabular-nums; font-size: 12.5px; color: var(--muted); }
+details { margin-top: 14px; }
+details pre { background: var(--code); border-radius: 8px; padding: 10px; overflow: auto; font: 12px/1.45 ui-monospace, Menlo, monospace; max-height: 360px; }
+.empty { color: var(--muted); padding: 24px 4px; }
+footer { text-align: center; color: var(--muted); font-size: 12.5px; padding: 18px 0 26px; }
+kbd { font: 11px ui-monospace, Menlo, monospace; border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Jebadiah <span>playground</span></h1>
+  <span id="status" class="pill">checking...</span>
+  <span class="spacer"></span>
+  <a href="/docs">API docs</a>
+  <button id="theme" type="button" title="Switch light and dark">Theme</button>
+</header>
+
+<main>
+  <section class="panel">
+    <label for="example">Example</label>
+    <select id="example"></select>
+
+    <label for="state">State (any JSON; a string goes to the model verbatim)</label>
+    <textarea id="state" spellcheck="false"></textarea>
+
+    <label for="questions">Questions (keyed by id: type, instructions, criteria)</label>
+    <textarea id="questions" spellcheck="false"></textarea>
+
+    <label for="key">API key (only when the server sets JEBADIAH_API_KEY)</label>
+    <input id="key" type="password" autocomplete="off" placeholder="stays in this browser">
+
+    <div class="row">
+      <button id="send" class="primary" type="button">Send</button>
+      <span class="check"><input id="raw" type="checkbox"><label for="raw" style="all:unset;cursor:pointer">raw (skip fitted temperatures)</label></span>
+      <span class="spacer"></span>
+      <span class="hint"><kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>Enter</kbd> sends</span>
+    </div>
+  </section>
+
+  <section class="panel" id="out">
+    <div class="empty">Pick an example or write your own, then Send. Every question in the request is answered in one batched pass over the same state.</div>
+  </section>
+</main>
+
+<footer>POST /v1/systemone &middot; one forward pass per question, probabilities over the options you supply &middot; Made in Texas</footer>
+
+<script>
+"use strict";
+const EXAMPLES = [
+  { name: "Ticket routing (the model card's example)",
+    state: { ticket: "Customer says the invoice total does not match the quote." },
+    questions: {
+      route: { type: "choice", instructions: "Which team should take this ticket?",
+        criteria: { billing: "an invoice, a charge or a refund", support: "a product question", sales: "a quote or a renewal" } },
+      urgent: { type: "noul", instructions: "The customer is blocked from working.",
+        criteria: { true: "work has stopped", false: "it can wait" } } } },
+  { name: "Agent action review (choice, noul, score)",
+    state: { agent: "release-bot", constraints: ["Never force-push to main", "Ask before deleting data"],
+      proposed_action: { tool: "git", command: "git push --force origin main" },
+      reason: "Local history was rewritten to drop a large file." },
+    questions: {
+      verdict: { type: "choice", instructions: "What should happen to the proposed action?",
+        criteria: { allow: "safe and within the constraints", ask_human: "needs a person to confirm", block: "violates a constraint" } },
+      destructive: { type: "noul", instructions: "The action can destroy work that cannot be recovered." },
+      risk: { type: "score", instructions: "How risky is this action?", criteria: ["none", "low", "moderate", "high", "severe"] } } },
+  { name: "Answer quality (score with described levels)",
+    state: { question: "How do I rotate an API key without downtime?",
+      answer: "Create the new key, deploy it beside the old one, switch callers over, then revoke the old key once traffic on it reaches zero." },
+    questions: {
+      helpful: { type: "score", instructions: "How helpful is the answer to the question?",
+        criteria: { poor: "does not address the question", fair: "partly addresses it", good: "addresses it with minor gaps", excellent: "complete and actionable" } },
+      grounded: { type: "noul", instructions: "Every claim in the answer is correct." } } },
+  { name: "Intent classification (plain string state)",
+    state: "hey can u move my appointment from thursday to next monday morning? thx",
+    questions: {
+      intent: { type: "choice", instructions: "What does the message ask for?",
+        criteria: { book: "a new appointment", reschedule: "move an existing appointment", cancel: "cancel an appointment", question: "information only" } },
+      sentiment: { type: "score", instructions: "The tone of the message.", criteria: ["negative", "neutral", "positive"] } } }
+];
+
+const $ = (id) => document.getElementById(id);
+const pretty = (v) => JSON.stringify(v, null, 2);
+const pct = (p) => (100 * p).toFixed(p >= 0.995 || p < 0.001 ? 0 : 1) + "%";
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function setTheme(t) { document.documentElement.dataset.theme = t; localStorage.setItem("jeb-theme", t); }
+setTheme(localStorage.getItem("jeb-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+$("theme").onclick = () => setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+
+EXAMPLES.forEach((ex, i) => $("example").add(new Option(ex.name, i)));
+function loadExample(i) { $("state").value = pretty(EXAMPLES[i].state); $("questions").value = pretty(EXAMPLES[i].questions); }
+$("example").onchange = (e) => loadExample(+e.target.value);
+loadExample(0);
+
+$("key").value = localStorage.getItem("jeb-key") || "";
+$("key").oninput = () => localStorage.setItem("jeb-key", $("key").value);
+const headers = () => {
+  const h = { "content-type": "application/json" };
+  if ($("key").value) h.authorization = "Bearer " + $("key").value;
+  return h;
+};
+
+async function poll() {
+  const el = $("status");
+  try {
+    const r = await fetch("/health");
+    const h = await r.json();
+    const name = (h.model || "").split("/").pop();
+    el.textContent = h.status === "ready" ? `${name} ready on ${h.device}` : `${name} ${h.status}${h.error ? ": " + h.error : ""}`;
+    el.className = "pill " + (h.status === "ready" ? "ready" : h.status === "failed" ? "bad" : "");
+    el.title = h.error || `${h.model} (${h.dtype}), batch ${h.batch_size}` + (h.authentication ? ", key required" : "");
+    if (h.status !== "ready" && h.status !== "failed") setTimeout(poll, 3000);
+  } catch (e) { el.textContent = "server unreachable"; el.className = "pill bad"; setTimeout(poll, 5000); }
+}
+poll();
+
+function parseField(id, what) {
+  const text = $(id).value.trim();
+  if (!text) return undefined;
+  try { return JSON.parse(text); }
+  catch (e) {
+    if (id === "state") return text;  // a plain string state is fine as typed
+    throw new Error(`${what} is not valid JSON: ${e.message}`);
+  }
+}
+
+function bars(rows) {
+  const top = Math.max(...rows.map((r) => r.p));
+  return `<div class="bars">` + rows.map((r) => {
+    const cls = r.p === top ? " top" : "";
+    return `<div class="name${cls}" title="${esc(r.name)}">${esc(r.name)}</div>` +
+      `<div class="track${cls}"><div class="fillbar" style="width:${(100 * r.p).toFixed(2)}%"></div></div>` +
+      `<div class="pct">${pct(r.p)}</div>`;
+  }).join("") + `</div>`;
+}
+
+function card(id, a) {
+  let head = "", body = "";
+  if (a.type === "choice") {
+    head = `<strong>${esc(a.choice)}</strong> &middot; confidence ${a.confidence.toFixed(3)}`;
+    body = a.probabilities ? bars(Object.entries(a.probabilities).map(([name, p]) => ({ name, p }))) : "";
+  } else if (a.type === "noul") {
+    head = `P(true) = <strong>${a.noul.toFixed(3)}</strong>`;
+    body = bars([{ name: "true", p: a.noul }, { name: "false", p: 1 - a.noul }]);
+  } else if (a.type === "score") {
+    const n = Object.keys(a.legend).length;
+    head = `expected level <strong>${a.score.toFixed(2)}</strong> of 0..${n - 1} &middot; confidence ${a.confidence.toFixed(3)}`;
+    body = a.probabilities ? bars(Object.entries(a.probabilities).map(([k, p]) => ({ name: `${k} ${a.legend[k]}`, p }))) : "";
+  }
+  return `<div class="card"><h3>${esc(id)} <span class="type">${esc(a.type)}</span></h3><div class="headline">${head}</div>${body}</div>`;
+}
+
+async function send() {
+  const out = $("out"), btn = $("send");
+  let body;
+  try {
+    body = { state: parseField("state", "State"), questions: parseField("questions", "Questions") };
+    if ($("raw").checked) body.calibration = "raw";
+  } catch (e) { out.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
+  btn.disabled = true; btn.textContent = "Asking...";
+  const t0 = performance.now();
+  try {
+    const r = await fetch("/v1/systemone", { method: "POST", headers: headers(), body: JSON.stringify(body) });
+    const rtt = performance.now() - t0;
+    const data = await r.json().catch(() => ({ error: { message: "the reply was not JSON" } }));
+    if (!r.ok) {
+      out.innerHTML = `<p class="error"><b>${r.status}</b> ${esc((data.error && data.error.message) || pretty(data))}</p>` +
+        `<details open><summary>Response</summary><pre>${esc(pretty(data))}</pre></details>`;
+      return;
+    }
+    const cal = data.calibration || {};
+    const n = Object.keys(data.answers).length;
+    out.innerHTML =
+      `<div class="stats">` +
+      `<div class="stat"><b>${data.latency_ms.toFixed(0)} ms</b><span>server, ${n} question${n === 1 ? "" : "s"}</span></div>` +
+      `<div class="stat"><b>${rtt.toFixed(0)} ms</b><span>round trip</span></div>` +
+      `<div class="stat"><b>${data.usage.input_tokens}</b><span>prompt tokens</span></div>` +
+      `<div class="stat"><b>${cal.applied ? "fitted" : "raw"}</b><span>calibration</span></div>` +
+      `</div>` +
+      Object.entries(data.answers).map(([id, a]) => card(id, a)).join("") +
+      `<details><summary>Response JSON</summary><pre>${esc(pretty(data))}</pre></details>` +
+      `<details><summary>curl</summary><pre>${esc(curl(body))}</pre></details>`;
+  } catch (e) {
+    out.innerHTML = `<p class="error">${esc(e.message)}</p>`;
+  } finally { btn.disabled = false; btn.textContent = "Send"; }
+}
+
+function curl(body) {
+  const auth = $("key").value ? ` \\\n  -H 'authorization: Bearer $JEBADIAH_API_KEY'` : "";
+  return `curl -s ${location.origin}/v1/systemone \\\n  -H 'content-type: application/json'${auth} \\\n  -d '${JSON.stringify(body).replace(/'/g, "'\\''")}'`;
+}
+
+$("send").onclick = send;
+// a link can open an example and send it: /#example=2&send
+const hash = new URLSearchParams(location.hash.slice(1));
+if (hash.has("example") && EXAMPLES[+hash.get("example")]) { $("example").value = hash.get("example"); loadExample(+hash.get("example")); }
+if (hash.has("send")) send();
+document.addEventListener("keydown", (e) => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") send(); });
+</script>
+</body>
+</html>

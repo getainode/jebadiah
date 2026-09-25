@@ -1,0 +1,316 @@
+{
+ "eval_overlap": {
+  "test_dir": "data/pool-v2/v1-rebuild/data-v1/test",
+  "test_sets": [
+   "jevals-banking77.jsonl",
+   "jevals-helpsteer2.jsonl",
+   "jevals-pubmedqa.jsonl",
+   "kev-decision-v7__test.jsonl",
+   "kev-transfer-v4__test.jsonl",
+   "nimble-eval.jsonl",
+   "nimble-public__aegis2.jsonl",
+   "nimble-public__boolq.jsonl",
+   "nimble-public__civil_comments.jsonl",
+   "nimble-public__helpsteer2.jsonl",
+   "nimble-public__massive-de-DE.jsonl",
+   "nimble-public__massive-en-US.jsonl",
+   "nimble-public__multinli.jsonl",
+   "nimble-public__paws.jsonl",
+   "nimble-public__pubmedqa.jsonl",
+   "nimble-public__squad2.jsonl",
+   "nimble-public__summeval-consistency.jsonl",
+   "nimble-public__summeval-relevance.jsonl",
+   "nimble-public__vitaminc-dev.jsonl",
+   "typed-decisions-test.jsonl"
+  ],
+  "test_states": 7445,
+  "rule": "drop on normalised hash match or 5-gram containment >= 0.5 (pool-v2/finalize.py)"
+ },
+ "sources": {
+  "condaqa": {
+   "source": "huggingface.co/datasets/lasha-nlp/CONDAQA train.json+test.json @3c9caa2f2f69",
+   "raw": 13072,
+   "files_sha256": {
+    "train": "f5f8a9d1b64a6c3b111b00d2e125f1d7f4da8b50acfdbc788d2901e2e43d79ec",
+    "test": "ffd7f4ad85689b2317283430a226cd759c3ccc40070e6a32652e7ae84ae90e8e"
+   },
+   "yes_no": 11797,
+   "yes_no_labels": {
+    "true": 5748,
+    "false": 6049
+   },
+   "yes_no_by_class": {
+    "False": 6049,
+    "True": 5748
+   },
+   "overlap_dropped": 11,
+   "overlap_dropped_states": 4,
+   "overlap_family_extra_dropped": 0,
+   "overlap_dropped_by_test_set": {
+    "nimble-public__boolq": 11
+   },
+   "overlap_examples": [
+    {
+     "id": "test/p1307/e0/q10/s15586",
+     "containment": 1.0,
+     "test_item": "nimble-public__boolq:nimble-public:boolq-628ea1001ed7f0c6",
+     "state_head": "The crisis was documented by photographers, musicians, and authors, many hired during the Great Depression by the federal government. For instance, the Farm Security Administration hired numerous photographers to document the crisis. Artists such as Dorothea Lange were aided by having salaried work "
+    },
+    {
+     "id": "test/p1307/e0/q20/s15587",
+     "containment": 1.0,
+     "test_item": "nimble-public__boolq:nimble-public:boolq-628ea1001ed7f0c6",
+     "state_head": "The crisis was documented by photographers, musicians, and authors, many hired during the Great Depression by the federal government. For instance, the Farm Security Administration hired numerous photographers to document the crisis. Artists such as Dorothea Lange were aided by having salaried work "
+    },
+    {
+     "id": "test/p1307/e0/q11/s15588",
+     "containment": 1.0,
+     "test_item": "nimble-public__boolq:nimble-public:boolq-628ea1001ed7f0c6",
+     "state_head": "The crisis was documented by photographers, musicians, and authors, many hired during the Great Depression by the federal government. For instance, the Farm Security Administration hired numerous photographers to document the crisis. Artists such as Dorothea Lange were aided by having salaried work "
+    }
+   ],
+   "max_containment_kept": {
+    "value": 0.077,
+    "test_item": "jevals-helpsteer2:jevals-helpsteer2:helpsteer2-94",
+    "record": "train/p75/e0/q10/s885"
+   },
+   "after_overlap": 11786,
+   "after_overlap_labels": {
+    "true": 5743,
+    "false": 6043
+   },
+   "after_overlap_by_class": {
+    "False": 6043,
+    "True": 5743
+   },
+   "balance": {
+    "families_whole": 100,
+    "families_partial": 3,
+    "unfilled": {}
+   },
+   "after_balance": 1000,
+   "after_balance_labels": {
+    "true": 500,
+    "false": 500
+   },
+   "after_balance_by_class": {
+    "False": 500,
+    "True": 500
+   },
+   "families": 103,
+   "state_words": {
+    "mean": 112.5,
+    "median": 115.0,
+    "min": 22,
+    "max": 190
+   },
+   "file": {
+    "path": "human-condaqa.jsonl",
+    "records": 1000,
+    "sha256": "988642c3c4f932ed95e2d05e56a77b00bda816b4b690fc92ef04c3be28d7dc82"
+   }
+  },
+  "contractnli": {
+   "source": "stanfordnlp.github.io/contract-nli/resources/contract-nli.zip sha256=e03fc77bbf8b53e2976a250e81d8a294bc3d5e5fb014521e477dee9340d6287b train.json",
+   "raw": 7191,
+   "archive_sha256": "e03fc77bbf8b53e2976a250e81d8a294bc3d5e5fb014521e477dee9340d6287b",
+   "ec_excerpt_median_words": 125,
+   "yes_no": 7191,
+   "yes_no_labels": {
+    "true": 3530,
+    "false": 3661
+   },
+   "yes_no_by_class": {
+    "Entailment": 3530,
+    "Contradiction": 841,
+    "NotMentioned": 2820
+   },
+   "overlap_dropped": 0,
+   "overlap_dropped_states": 0,
+   "overlap_family_extra_dropped": 0,
+   "overlap_dropped_by_test_set": {},
+   "overlap_examples": [],
+   "max_containment_kept": {
+    "value": 0.172,
+    "test_item": "jevals-helpsteer2:jevals-helpsteer2:helpsteer2-694",
+    "record": "doc261/nda-10"
+   },
+   "after_overlap": 7191,
+   "after_overlap_labels": {
+    "true": 3530,
+    "false": 3661
+   },
+   "after_overlap_by_class": {
+    "Entailment": 3530,
+    "Contradiction": 841,
+    "NotMentioned": 2820
+   },
+   "balance": {
+    "families_whole": 42,
+    "families_partial": 83,
+    "unfilled": {}
+   },
+   "after_balance": 1000,
+   "after_balance_labels": {
+    "true": 500,
+    "false": 500
+   },
+   "after_balance_by_class": {
+    "Entailment": 500,
+    "Contradiction": 250,
+    "NotMentioned": 250
+   },
+   "families": 125,
+   "state_words": {
+    "mean": 148.4,
+    "median": 135.0,
+    "min": 19,
+    "max": 539
+   },
+   "file": {
+    "path": "human-contractnli.jsonl",
+    "records": 1000,
+    "sha256": "7be92b80eca745702eb01ebdd273e74993ed45bdd00b4992027b89e30e4e5778"
+   }
+  },
+  "sharc": {
+   "source": "sharc-data.github.io/data/sharc1-official.zip sha256=72dca3f4f3ba73b1d796b40e952a80d53cd2011ef90b2168b8bcaa818f5edd1e json/sharc_train.json (the file HF UCLNLP/sharc's loader downloads)",
+   "raw": 21890,
+   "archive_sha256": "72dca3f4f3ba73b1d796b40e952a80d53cd2011ef90b2168b8bcaa818f5edd1e",
+   "yes_no_negative_sample_ids": 1693,
+   "yes_no": 13830,
+   "yes_no_labels": {
+    "true": 6773,
+    "false": 7057
+   },
+   "yes_no_by_class": {
+    "True": 6773,
+    "False": 7057
+   },
+   "overlap_dropped": 0,
+   "overlap_dropped_states": 0,
+   "overlap_family_extra_dropped": 0,
+   "overlap_dropped_by_test_set": {},
+   "overlap_examples": [],
+   "max_containment_kept": {
+    "value": 0.065,
+    "test_item": "kev-decision-v7__test:kev-decision-v7__test:imdb/test/18948",
+    "record": "07d50ae45ab7121a02bc34e5c14d8a91c7f40f1a"
+   },
+   "after_overlap": 13830,
+   "after_overlap_labels": {
+    "true": 6773,
+    "false": 7057
+   },
+   "after_overlap_by_class": {
+    "True": 6773,
+    "False": 7057
+   },
+   "balance": {
+    "families_whole": 500,
+    "families_partial": 0,
+    "unfilled": {}
+   },
+   "after_balance": 1000,
+   "after_balance_labels": {
+    "true": 500,
+    "false": 500
+   },
+   "after_balance_by_class": {
+    "False": 500,
+    "True": 500
+   },
+   "families": 500,
+   "negative_sample_ids_picked": 182,
+   "max_per_tree_id": 2,
+   "state_words": {
+    "mean": 85.6,
+    "median": 79.0,
+    "min": 27,
+    "max": 274
+   },
+   "file": {
+    "path": "human-sharc.jsonl",
+    "records": 1000,
+    "sha256": "523072a36b527c25e5a58d8789ce6615d0ea426c5eabac28ee975a960e6757e4"
+   }
+  },
+  "unfairtos": {
+   "source": "huggingface.co/datasets/coastalcph/lex_glue config=unfair_tos split=train @c23fdff1a6bf via datasets-server rows API (rows file sha256=3a45eba336e9619e1ab7c71d5f8b636cf31255da287f9b1ed34307992c8712ab)",
+   "raw": 5532,
+   "rows_file_sha256": "3a45eba336e9619e1ab7c71d5f8b636cf31255da287f9b1ed34307992c8712ab",
+   "yes_no": 5532,
+   "yes_no_labels": {
+    "true": 630,
+    "false": 4902
+   },
+   "yes_no_by_class": {
+    "False": 4902,
+    "True": 630
+   },
+   "overlap_dropped": 0,
+   "overlap_dropped_states": 0,
+   "overlap_family_extra_dropped": 0,
+   "overlap_dropped_by_test_set": {},
+   "overlap_examples": [],
+   "max_containment_kept": {
+    "value": 0.333,
+    "test_item": "nimble-public__vitaminc-dev:nimble-public:vitaminc-5ee39419c9e77c0008ccfc9a_2",
+    "record": "train/2491"
+   },
+   "after_overlap": 5532,
+   "after_overlap_labels": {
+    "true": 630,
+    "false": 4902
+   },
+   "after_overlap_by_class": {
+    "False": 4902,
+    "True": 630
+   },
+   "balance": {
+    "families_whole": 978,
+    "families_partial": 0,
+    "unfilled": {}
+   },
+   "after_balance": 1000,
+   "after_balance_labels": {
+    "true": 500,
+    "false": 500
+   },
+   "after_balance_by_class": {
+    "False": 500,
+    "True": 500
+   },
+   "families": 978,
+   "state_words": {
+    "mean": 37.4,
+    "median": 29.0,
+    "min": 6,
+    "max": 441
+   },
+   "file": {
+    "path": "human-unfairtos.jsonl",
+    "records": 1000,
+    "sha256": "5e463f56ae62ac6dade450d427ced8c7a8bbbed350c2873ad4326553147fa2a2"
+   }
+  }
+ },
+ "human-noul.jsonl": {
+  "sources": [
+   "condaqa",
+   "contractnli",
+   "sharc"
+  ],
+  "records": 3000,
+  "sha256": "c2cd518363e514bb79e51b3920a2275a7b4cf7ce2dce9046c72313b0b46415c6"
+ },
+ "human-noul-alt.jsonl": {
+  "sources": [
+   "condaqa",
+   "contractnli",
+   "unfairtos"
+  ],
+  "records": 3000,
+  "sha256": "35f30d9e88bea0604cc69868befdf54fc711f34844507d21ec05f4bcb8030e1c"
+ }
+}

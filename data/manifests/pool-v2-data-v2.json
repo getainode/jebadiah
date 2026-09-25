@@ -1,0 +1,1140 @@
+{
+ "built": "2026-09-23T07:26:14",
+ "pool-v2.jsonl": {
+  "sha256": "9572cf9ef5fe6cfba747f13ad21c089d874f12cc0615e89ce81808fbc35b42f3",
+  "records": 14266,
+  "questions": 30527,
+  "types": {
+   "choice": 13562,
+   "noul": 9880,
+   "score": 7085
+  },
+  "score_share": 0.2321,
+  "sets": {
+   "typed-decisions-train": 1200,
+   "kev-v7-train": 5576,
+   "helpsteer2-train": 2573,
+   "summeval-train": 1664,
+   "synth-v2": 3253
+  },
+  "by_family": {
+   "helpdesk_ticket": 126,
+   "cs_chat": 138,
+   "agent_tool_selection": 141,
+   "invoice_receipt": 147,
+   "meeting_actions": 129,
+   "incident_alert": 126,
+   "email_routing": 130,
+   "content_policy": 135,
+   "product_review": 124,
+   "log_severity": 156,
+   "code_review_comment": 128,
+   "pr_triage": 127,
+   "scheduling_dispatch": 147,
+   "sales_lead": 126,
+   "form_validation": 139,
+   "claim_evidence": 128,
+   "summary_faithfulness": 134,
+   "translation_adequacy": 144,
+   "voice_intent": 131,
+   "jde_echo": 140,
+   "jde_parts": 125,
+   "jde_coverage": 131,
+   "jde_added_requirements": 135,
+   "jde_parrot": 166
+  }
+ },
+ "v1_part": {
+  "records": 11013,
+  "questions": 15813,
+  "types": {
+   "choice": 5704,
+   "noul": 3024,
+   "score": 7085
+  },
+  "score_share": 0.448,
+  "sha256": "de89a05396599889cd6791498a73aae5ab068df1ce565cc017bfc9c517ce015a",
+  "how": "rebuilt on this Mac with the package's train/convert_data.py (all stages, no --limit, JEB_SCORE_CAP default 0.45); no v1 pool.jsonl existed under package/results/",
+  "convert_manifest_failures": {}
+ },
+ "synth_part": {
+  "records": 3253,
+  "questions": 14714,
+  "types": {
+   "choice": 7858,
+   "noul": 6856
+  },
+  "score_share": 0.0,
+  "set": "synth-v2",
+  "source": "AINode synthetic 2026-09-22, teachers DeepSeek V4 Flash + Qwen3.8 27B via /v1/decide",
+  "license": "Apache-2.0 (AINode)",
+  "teachers": {
+   "deepseek": "fraserprice/DeepSeek-V4-Flash-DSpark",
+   "qwen": "unsloth/Qwen3.8-27B-NVFP4"
+  },
+  "by_family": {
+   "helpdesk_ticket": {
+    "states_authored": 128,
+    "states_kept": 126,
+    "questions": 618,
+    "by_type": {
+     "choice": 389,
+     "noul": 229
+    },
+    "noul_labels": {
+     "true": 116,
+     "false": 113
+    },
+    "noul_true_share": 0.507,
+    "drops": {
+     "lint_answer_in_instructions": 1,
+     "teachers_disagree_both_unsure": 2,
+     "top_below_0.4": 1
+    },
+    "teacher_agreement": 0.808,
+    "questions_judged_by_both": 621,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.864,
+    "choice_label_position_unordered": {
+     "0": 47,
+     "1": 80,
+     "2": 57,
+     "3": 54,
+     "4": 18,
+     "5": 7,
+     "6": 1
+    },
+    "choice_option_counts": {
+     "2": 18,
+     "3": 3,
+     "4": 246,
+     "5": 92,
+     "6": 25,
+     "7": 1,
+     "8": 4
+    }
+   },
+   "cs_chat": {
+    "states_authored": 143,
+    "states_kept": 138,
+    "questions": 624,
+    "by_type": {
+     "choice": 345,
+     "noul": 279
+    },
+    "noul_labels": {
+     "false": 129,
+     "true": 150
+    },
+    "noul_true_share": 0.538,
+    "drops": {
+     "lint_answer_in_instructions": 1,
+     "lint_state_leaks_answer": 1,
+     "teachers_disagree_both_unsure": 1,
+     "top_below_0.4": 1
+    },
+    "teacher_agreement": 0.843,
+    "questions_judged_by_both": 626,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.881,
+    "choice_label_position_unordered": {
+     "0": 51,
+     "1": 76,
+     "2": 53,
+     "3": 67,
+     "4": 45,
+     "5": 22,
+     "6": 3,
+     "7": 2
+    },
+    "choice_option_counts": {
+     "2": 4,
+     "3": 17,
+     "4": 93,
+     "5": 133,
+     "6": 71,
+     "7": 12,
+     "8": 15
+    }
+   },
+   "agent_tool_selection": {
+    "states_authored": 164,
+    "states_kept": 141,
+    "questions": 622,
+    "by_type": {
+     "choice": 372,
+     "noul": 250
+    },
+    "noul_labels": {
+     "false": 150,
+     "true": 100
+    },
+    "noul_true_share": 0.4,
+    "drops": {
+     "lint_label_like_field": 1,
+     "lint_state_leaks_answer": 22,
+     "noul_balance_trim": 48,
+     "teachers_disagree_both_unsure": 6,
+     "top_below_0.4": 8
+    },
+    "teacher_agreement": 0.781,
+    "questions_judged_by_both": 684,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.841,
+    "choice_label_position_unordered": {
+     "0": 63,
+     "1": 83,
+     "2": 75,
+     "3": 64,
+     "4": 41,
+     "5": 28,
+     "6": 6
+    },
+    "choice_option_counts": {
+     "2": 9,
+     "3": 7,
+     "4": 98,
+     "5": 127,
+     "6": 92,
+     "7": 35,
+     "8": 3,
+     "9": 1
+    }
+   },
+   "invoice_receipt": {
+    "states_authored": 160,
+    "states_kept": 147,
+    "questions": 610,
+    "by_type": {
+     "noul": 202,
+     "choice": 408
+    },
+    "noul_labels": {
+     "false": 121,
+     "true": 81
+    },
+    "noul_true_share": 0.401,
+    "drops": {
+     "lint_state_leaks_answer": 12,
+     "noul_balance_trim": 82,
+     "teachers_disagree_both_unsure": 21,
+     "top_below_0.4": 10
+    },
+    "teacher_agreement": 0.726,
+    "questions_judged_by_both": 723,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.817,
+    "choice_label_position_unordered": {
+     "0": 45,
+     "1": 59,
+     "2": 80,
+     "3": 60,
+     "4": 59,
+     "5": 25,
+     "6": 11,
+     "7": 7,
+     "8": 1
+    },
+    "choice_option_counts": {
+     "2": 2,
+     "3": 3,
+     "4": 62,
+     "5": 140,
+     "6": 112,
+     "7": 31,
+     "8": 35,
+     "9": 18,
+     "10": 2,
+     "11": 3
+    }
+   },
+   "meeting_actions": {
+    "states_authored": 131,
+    "states_kept": 129,
+    "questions": 610,
+    "by_type": {
+     "choice": 375,
+     "noul": 235
+    },
+    "noul_labels": {
+     "false": 123,
+     "true": 112
+    },
+    "noul_true_share": 0.477,
+    "drops": {
+     "lint_state_leaks_answer": 1,
+     "teachers_disagree_both_unsure": 2,
+     "top_below_0.4": 1
+    },
+    "teacher_agreement": 0.927,
+    "questions_judged_by_both": 613,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.949,
+    "choice_label_position_unordered": {
+     "0": 83,
+     "1": 89,
+     "2": 61,
+     "3": 66,
+     "4": 50,
+     "5": 2
+    },
+    "choice_option_counts": {
+     "2": 29,
+     "3": 32,
+     "4": 111,
+     "5": 151,
+     "6": 48,
+     "7": 4
+    }
+   },
+   "incident_alert": {
+    "states_authored": 128,
+    "states_kept": 126,
+    "questions": 611,
+    "by_type": {
+     "choice": 381,
+     "noul": 230
+    },
+    "noul_labels": {
+     "true": 118,
+     "false": 112
+    },
+    "noul_true_share": 0.513,
+    "drops": {
+     "lint_answer_in_instructions": 1,
+     "lint_state_leaks_answer": 1,
+     "teachers_disagree_both_unsure": 3
+    },
+    "teacher_agreement": 0.806,
+    "questions_judged_by_both": 614,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.844,
+    "choice_label_position_unordered": {
+     "0": 51,
+     "1": 77,
+     "2": 70,
+     "3": 56,
+     "4": 1
+    },
+    "choice_option_counts": {
+     "2": 21,
+     "4": 349,
+     "5": 11
+    }
+   },
+   "email_routing": {
+    "states_authored": 135,
+    "states_kept": 130,
+    "questions": 612,
+    "by_type": {
+     "choice": 326,
+     "noul": 286
+    },
+    "noul_labels": {
+     "true": 130,
+     "false": 156
+    },
+    "noul_true_share": 0.455,
+    "drops": {
+     "lint_no_questions": 3,
+     "teachers_disagree_both_unsure": 2
+    },
+    "teacher_agreement": 0.891,
+    "questions_judged_by_both": 614,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.911,
+    "choice_label_position_unordered": {
+     "0": 107,
+     "1": 79,
+     "2": 63,
+     "3": 32
+    },
+    "choice_option_counts": {
+     "2": 33,
+     "3": 138,
+     "4": 151,
+     "5": 4
+    }
+   },
+   "content_policy": {
+    "states_authored": 187,
+    "states_kept": 135,
+    "questions": 610,
+    "by_type": {
+     "choice": 293,
+     "noul": 317
+    },
+    "noul_labels": {
+     "false": 164,
+     "true": 153
+    },
+    "noul_true_share": 0.483,
+    "drops": {
+     "lint_label_like_field": 52,
+     "teachers_disagree_both_unsure": 16,
+     "top_below_0.4": 6
+    },
+    "teacher_agreement": 0.75,
+    "questions_judged_by_both": 632,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.833,
+    "choice_label_position_unordered": {
+     "0": 34,
+     "1": 36,
+     "2": 39,
+     "3": 23,
+     "4": 23,
+     "5": 21,
+     "6": 12,
+     "7": 2
+    },
+    "choice_option_counts": {
+     "2": 5,
+     "3": 16,
+     "4": 28,
+     "5": 137,
+     "6": 52,
+     "7": 48,
+     "8": 5,
+     "9": 2
+    }
+   },
+   "product_review": {
+    "states_authored": 126,
+    "states_kept": 124,
+    "questions": 610,
+    "by_type": {
+     "choice": 394,
+     "noul": 216
+    },
+    "noul_labels": {
+     "false": 128,
+     "true": 88
+    },
+    "noul_true_share": 0.407,
+    "drops": {
+     "teachers_disagree_both_unsure": 2
+    },
+    "teacher_agreement": 0.84,
+    "questions_judged_by_both": 612,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.896,
+    "choice_label_position_unordered": {
+     "0": 105,
+     "1": 94,
+     "2": 97,
+     "3": 50,
+     "4": 26,
+     "5": 8,
+     "6": 1,
+     "7": 1
+    },
+    "choice_option_counts": {
+     "2": 6,
+     "3": 150,
+     "4": 125,
+     "5": 36,
+     "6": 61,
+     "7": 10,
+     "8": 6
+    }
+   },
+   "log_severity": {
+    "states_authored": 157,
+    "states_kept": 156,
+    "questions": 611,
+    "by_type": {
+     "choice": 469,
+     "noul": 142
+    },
+    "noul_labels": {
+     "true": 57,
+     "false": 85
+    },
+    "noul_true_share": 0.401,
+    "drops": {
+     "noul_balance_trim": 155,
+     "teachers_disagree_both_unsure": 3
+    },
+    "teacher_agreement": 0.887,
+    "questions_judged_by_both": 769,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.892,
+    "choice_label_position_unordered": {
+     "0": 56,
+     "1": 47,
+     "2": 45,
+     "3": 47,
+     "4": 23,
+     "5": 7,
+     "7": 1,
+     "8": 2,
+     "9": 1
+    },
+    "choice_option_counts": {
+     "2": 3,
+     "3": 3,
+     "4": 102,
+     "5": 283,
+     "6": 20,
+     "7": 20,
+     "8": 14,
+     "9": 9,
+     "10": 9,
+     "11": 3,
+     "12": 3
+    }
+   },
+   "code_review_comment": {
+    "states_authored": 129,
+    "states_kept": 128,
+    "questions": 611,
+    "by_type": {
+     "noul": 287,
+     "choice": 324
+    },
+    "noul_labels": {
+     "false": 115,
+     "true": 172
+    },
+    "noul_true_share": 0.599,
+    "drops": {
+     "lint_label_like_field": 1,
+     "noul_balance_trim": 12,
+     "teachers_disagree_both_unsure": 5
+    },
+    "teacher_agreement": 0.86,
+    "questions_judged_by_both": 628,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.897,
+    "choice_label_position_unordered": {
+     "0": 61,
+     "1": 60,
+     "2": 62,
+     "3": 52,
+     "4": 14,
+     "5": 13,
+     "6": 13,
+     "7": 18
+    },
+    "choice_option_counts": {
+     "2": 15,
+     "3": 9,
+     "4": 171,
+     "5": 12,
+     "7": 1,
+     "8": 116
+    }
+   },
+   "pr_triage": {
+    "states_authored": 131,
+    "states_kept": 127,
+    "questions": 612,
+    "by_type": {
+     "choice": 372,
+     "noul": 240
+    },
+    "noul_labels": {
+     "true": 131,
+     "false": 109
+    },
+    "noul_true_share": 0.546,
+    "drops": {
+     "lint_answer_in_instructions": 1,
+     "teachers_disagree_both_unsure": 2,
+     "top_below_0.4": 2
+    },
+    "teacher_agreement": 0.857,
+    "questions_judged_by_both": 616,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.885,
+    "choice_label_position_unordered": {
+     "0": 36,
+     "1": 54,
+     "2": 46,
+     "3": 48,
+     "4": 27,
+     "5": 20,
+     "6": 14
+    },
+    "choice_option_counts": {
+     "2": 5,
+     "3": 130,
+     "4": 75,
+     "5": 38,
+     "6": 6,
+     "7": 118
+    }
+   },
+   "scheduling_dispatch": {
+    "states_authored": 151,
+    "states_kept": 147,
+    "questions": 611,
+    "by_type": {
+     "choice": 406,
+     "noul": 205
+    },
+    "noul_labels": {
+     "true": 82,
+     "false": 123
+    },
+    "noul_true_share": 0.4,
+    "drops": {
+     "lint_state_leaks_answer": 2,
+     "noul_balance_trim": 53,
+     "teachers_disagree_both_unsure": 18,
+     "top_below_0.4": 5
+    },
+    "teacher_agreement": 0.747,
+    "questions_judged_by_both": 687,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.808,
+    "choice_label_position_unordered": {
+     "0": 87,
+     "1": 90,
+     "2": 109,
+     "3": 97,
+     "4": 10
+    },
+    "choice_option_counts": {
+     "2": 2,
+     "3": 26,
+     "4": 324,
+     "5": 49,
+     "6": 5
+    }
+   },
+   "sales_lead": {
+    "states_authored": 129,
+    "states_kept": 126,
+    "questions": 611,
+    "by_type": {
+     "choice": 364,
+     "noul": 247
+    },
+    "noul_labels": {
+     "true": 110,
+     "false": 137
+    },
+    "noul_true_share": 0.445,
+    "drops": {
+     "lint_state_leaks_answer": 2,
+     "teachers_disagree_both_unsure": 7,
+     "top_below_0.4": 2
+    },
+    "teacher_agreement": 0.839,
+    "questions_judged_by_both": 620,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.878,
+    "choice_label_position_unordered": {
+     "0": 51,
+     "1": 61,
+     "2": 55,
+     "3": 39
+    },
+    "choice_option_counts": {
+     "3": 53,
+     "4": 308,
+     "5": 2,
+     "6": 1
+    }
+   },
+   "form_validation": {
+    "states_authored": 184,
+    "states_kept": 139,
+    "questions": 611,
+    "by_type": {
+     "choice": 326,
+     "noul": 285
+    },
+    "noul_labels": {
+     "false": 151,
+     "true": 134
+    },
+    "noul_true_share": 0.47,
+    "drops": {
+     "lint_label_like_field": 4,
+     "lint_no_questions": 37,
+     "lint_state_leaks_answer": 3,
+     "teachers_disagree_both_unsure": 24,
+     "top_below_0.4": 11
+    },
+    "teacher_agreement": 0.724,
+    "questions_judged_by_both": 646,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.787,
+    "choice_label_position_unordered": {
+     "0": 67,
+     "1": 78,
+     "2": 76,
+     "3": 62,
+     "4": 22,
+     "5": 8,
+     "8": 1
+    },
+    "choice_option_counts": {
+     "2": 1,
+     "3": 13,
+     "4": 166,
+     "5": 98,
+     "6": 33,
+     "7": 10,
+     "8": 1,
+     "9": 4
+    }
+   },
+   "claim_evidence": {
+    "states_authored": 128,
+    "states_kept": 128,
+    "questions": 610,
+    "by_type": {
+     "noul": 359,
+     "choice": 251
+    },
+    "noul_labels": {
+     "false": 182,
+     "true": 177
+    },
+    "noul_true_share": 0.493,
+    "drops": {
+     "teachers_disagree_both_unsure": 13,
+     "top_below_0.4": 2
+    },
+    "teacher_agreement": 0.827,
+    "questions_judged_by_both": 625,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.891,
+    "choice_label_position_unordered": {
+     "0": 63,
+     "1": 67,
+     "2": 74,
+     "3": 18,
+     "4": 8,
+     "5": 6,
+     "7": 1
+    },
+    "choice_option_counts": {
+     "2": 1,
+     "3": 130,
+     "4": 66,
+     "5": 28,
+     "6": 14,
+     "7": 5,
+     "8": 4,
+     "9": 3
+    }
+   },
+   "summary_faithfulness": {
+    "states_authored": 136,
+    "states_kept": 134,
+    "questions": 612,
+    "by_type": {
+     "choice": 243,
+     "noul": 369
+    },
+    "noul_labels": {
+     "false": 204,
+     "true": 165
+    },
+    "noul_true_share": 0.447,
+    "drops": {
+     "lint_label_like_field": 1,
+     "teachers_disagree_both_unsure": 9,
+     "top_below_0.4": 9
+    },
+    "teacher_agreement": 0.763,
+    "questions_judged_by_both": 630,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.832,
+    "choice_label_position_unordered": {
+     "0": 55,
+     "1": 61,
+     "2": 39,
+     "3": 32,
+     "4": 32,
+     "5": 17
+    },
+    "choice_option_counts": {
+     "2": 6,
+     "3": 24,
+     "4": 45,
+     "5": 36,
+     "6": 128,
+     "7": 3,
+     "8": 1
+    }
+   },
+   "translation_adequacy": {
+    "states_authored": 147,
+    "states_kept": 144,
+    "questions": 612,
+    "by_type": {
+     "choice": 265,
+     "noul": 347
+    },
+    "noul_labels": {
+     "true": 208,
+     "false": 139
+    },
+    "noul_true_share": 0.599,
+    "drops": {
+     "lint_label_like_field": 1,
+     "noul_balance_trim": 59,
+     "teachers_disagree_both_unsure": 26,
+     "top_below_0.4": 14
+    },
+    "teacher_agreement": 0.73,
+    "questions_judged_by_both": 711,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.813,
+    "choice_label_position_unordered": {
+     "0": 21,
+     "1": 33,
+     "2": 22,
+     "3": 15,
+     "4": 17,
+     "5": 14,
+     "6": 18
+    },
+    "choice_option_counts": {
+     "2": 7,
+     "3": 3,
+     "4": 128,
+     "5": 2,
+     "6": 2,
+     "7": 123
+    }
+   },
+   "voice_intent": {
+    "states_authored": 134,
+    "states_kept": 131,
+    "questions": 611,
+    "by_type": {
+     "choice": 381,
+     "noul": 230
+    },
+    "noul_labels": {
+     "false": 92,
+     "true": 138
+    },
+    "noul_true_share": 0.6,
+    "drops": {
+     "lint_state_leaks_answer": 2,
+     "noul_balance_trim": 11,
+     "teachers_disagree_both_unsure": 6,
+     "top_below_0.4": 1
+    },
+    "teacher_agreement": 0.814,
+    "questions_judged_by_both": 629,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.858,
+    "choice_label_position_unordered": {
+     "0": 66,
+     "1": 79,
+     "2": 74,
+     "3": 73,
+     "4": 43,
+     "5": 8,
+     "6": 6,
+     "7": 1,
+     "8": 2
+    },
+    "choice_option_counts": {
+     "2": 17,
+     "3": 23,
+     "4": 102,
+     "5": 137,
+     "6": 68,
+     "7": 9,
+     "8": 19,
+     "9": 2,
+     "10": 3,
+     "12": 1
+    }
+   },
+   "jde_echo": {
+    "states_authored": 141,
+    "states_kept": 140,
+    "questions": 618,
+    "by_type": {
+     "noul": 418,
+     "choice": 200
+    },
+    "noul_labels": {
+     "false": 221,
+     "true": 197
+    },
+    "noul_true_share": 0.471,
+    "drops": {},
+    "teacher_agreement": 0.871,
+    "questions_judged_by_both": 618,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.906,
+    "choice_label_position_unordered": {
+     "0": 37,
+     "1": 36,
+     "2": 35,
+     "3": 40,
+     "4": 31
+    },
+    "choice_option_counts": {
+     "3": 5,
+     "4": 27,
+     "5": 166,
+     "6": 2
+    }
+   },
+   "jde_parts": {
+    "states_authored": 126,
+    "states_kept": 125,
+    "questions": 611,
+    "by_type": {
+     "choice": 251,
+     "noul": 360
+    },
+    "noul_labels": {
+     "false": 172,
+     "true": 188
+    },
+    "noul_true_share": 0.522,
+    "drops": {
+     "teachers_disagree_both_unsure": 6,
+     "top_below_0.4": 1
+    },
+    "teacher_agreement": 0.832,
+    "questions_judged_by_both": 618,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.88,
+    "choice_label_position_unordered": {
+     "0": 31,
+     "1": 31,
+     "2": 27,
+     "3": 38,
+     "4": 4,
+     "5": 2,
+     "6": 1
+    },
+    "choice_option_counts": {
+     "2": 3,
+     "3": 22,
+     "4": 122,
+     "5": 74,
+     "6": 29,
+     "7": 1
+    }
+   },
+   "jde_coverage": {
+    "states_authored": 133,
+    "states_kept": 131,
+    "questions": 618,
+    "by_type": {
+     "choice": 270,
+     "noul": 348
+    },
+    "noul_labels": {
+     "true": 169,
+     "false": 179
+    },
+    "noul_true_share": 0.486,
+    "drops": {
+     "teachers_disagree_both_unsure": 10,
+     "top_below_0.4": 3
+    },
+    "teacher_agreement": 0.84,
+    "questions_judged_by_both": 631,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.886,
+    "choice_label_position_unordered": {
+     "0": 58,
+     "1": 60,
+     "2": 50,
+     "3": 16,
+     "5": 1
+    },
+    "choice_option_counts": {
+     "3": 172,
+     "4": 75,
+     "5": 22,
+     "6": 1
+    }
+   },
+   "jde_added_requirements": {
+    "states_authored": 136,
+    "states_kept": 135,
+    "questions": 612,
+    "by_type": {
+     "noul": 413,
+     "choice": 199
+    },
+    "noul_labels": {
+     "false": 195,
+     "true": 218
+    },
+    "noul_true_share": 0.528,
+    "drops": {
+     "lint_no_questions": 1,
+     "teachers_disagree_both_unsure": 4,
+     "top_below_0.4": 4
+    },
+    "teacher_agreement": 0.9,
+    "questions_judged_by_both": 620,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.922,
+    "choice_label_position_unordered": {
+     "0": 42,
+     "1": 42,
+     "2": 46,
+     "3": 37,
+     "4": 10,
+     "5": 3,
+     "6": 2
+    },
+    "choice_option_counts": {
+     "2": 2,
+     "3": 10,
+     "4": 87,
+     "5": 78,
+     "6": 18,
+     "7": 4
+    }
+   },
+   "jde_parrot": {
+    "states_authored": 167,
+    "states_kept": 166,
+    "questions": 616,
+    "by_type": {
+     "choice": 254,
+     "noul": 362
+    },
+    "noul_labels": {
+     "true": 145,
+     "false": 217
+    },
+    "noul_true_share": 0.401,
+    "drops": {
+     "noul_balance_trim": 135,
+     "teachers_disagree_both_unsure": 6
+    },
+    "teacher_agreement": 0.929,
+    "questions_judged_by_both": 757,
+    "questions_single_teacher": 0,
+    "mean_top_probability": 0.954,
+    "choice_label_position_unordered": {
+     "0": 56,
+     "1": 64,
+     "2": 50,
+     "3": 64,
+     "4": 1
+    },
+    "choice_option_counts": {
+     "3": 6,
+     "4": 247,
+     "5": 1
+    }
+   }
+  }
+ },
+ "split": {
+  "ok": true,
+  "output": {
+   "train": {
+    "records": 13428,
+    "questions": 28947,
+    "types": {
+     "choice": 12985,
+     "noul": 9426,
+     "score": 6536
+    },
+    "sets": {
+     "typed-decisions-train": 1142,
+     "kev-v7-train": 5362,
+     "helpsteer2-train": 2412,
+     "summeval-train": 1408,
+     "synth-v2": 3104
+    }
+   },
+   "calib": {
+    "records": 838,
+    "questions": 1580,
+    "types": {
+     "choice": 577,
+     "noul": 454,
+     "score": 549
+    },
+    "sets": {
+     "typed-decisions-train": 58,
+     "kev-v7-train": 214,
+     "helpsteer2-train": 161,
+     "summeval-train": 256,
+     "synth-v2": 149
+    }
+   },
+   "rule": "sha256(family or canonical record)[:4] mod 100 < 5 -> calib"
+  },
+  "families_on_both_sides": 0
+ },
+ "eval_overlap": {
+  "test_sets": [
+   "jevals-banking77.jsonl",
+   "jevals-helpsteer2.jsonl",
+   "jevals-pubmedqa.jsonl",
+   "kev-decision-v7__test.jsonl",
+   "kev-transfer-v4__test.jsonl",
+   "nimble-eval.jsonl",
+   "nimble-public__aegis2.jsonl",
+   "nimble-public__boolq.jsonl",
+   "nimble-public__civil_comments.jsonl",
+   "nimble-public__helpsteer2.jsonl",
+   "nimble-public__massive-de-DE.jsonl",
+   "nimble-public__massive-en-US.jsonl",
+   "nimble-public__multinli.jsonl",
+   "nimble-public__paws.jsonl",
+   "nimble-public__pubmedqa.jsonl",
+   "nimble-public__squad2.jsonl",
+   "nimble-public__summeval-consistency.jsonl",
+   "nimble-public__summeval-relevance.jsonl",
+   "nimble-public__vitaminc-dev.jsonl",
+   "typed-decisions-test.jsonl"
+  ],
+  "test_states": 7445,
+  "rule": "drop a synthetic state with 5-gram containment >= 0.5 in any test state, or a normalised hash match",
+  "max_containment_seen": {
+   "value": 0.077,
+   "test_item": "jevals-helpsteer2:jevals-helpsteer2:helpsteer2-259",
+   "synth_record": "synth-v2:voice_intent:f94aff941d6742a3"
+  },
+  "dropped_questions": 0
+ },
+ "lint": {
+  "exit": 0,
+  "output": [
+   "ok   data/pool-v2/data-v2/pool-v2.jsonl: 14266 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/train.jsonl: 13428 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/calib.jsonl: 838 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-helpdesk_ticket.jsonl: 126 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-cs_chat.jsonl: 138 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-agent_tool_selection.jsonl: 141 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-invoice_receipt.jsonl: 147 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-meeting_actions.jsonl: 129 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-incident_alert.jsonl: 126 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-email_routing.jsonl: 130 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-content_policy.jsonl: 135 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-product_review.jsonl: 124 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-log_severity.jsonl: 156 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-code_review_comment.jsonl: 128 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-pr_triage.jsonl: 127 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-scheduling_dispatch.jsonl: 147 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-sales_lead.jsonl: 126 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-form_validation.jsonl: 139 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-claim_evidence.jsonl: 128 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-summary_faithfulness.jsonl: 134 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-translation_adequacy.jsonl: 144 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-voice_intent.jsonl: 131 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-jde_echo.jsonl: 140 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-jde_parts.jsonl: 125 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-jde_coverage.jsonl: 131 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-jde_added_requirements.jsonl: 135 records, no label-like key under questions, every label fits",
+   "ok   data/pool-v2/data-v2/synth-jde_parrot.jsonl: 166 records, no label-like key under questions, every label fits"
+  ]
+ }
+}

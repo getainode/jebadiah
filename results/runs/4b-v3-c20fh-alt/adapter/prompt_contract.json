@@ -1,0 +1,11 @@
+{
+ "prompt_source_commit": "e5c089386e0239c9eb270eeb490d181722b8da5b",
+ "prompt_source_sha256": "d2660ebec28bd3f1704235bda88d24a397c1c62475e740519cb8ef2d08f25fdd",
+ "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+ "single_token_labels": 68,
+ "chat_template_kwargs": {
+  "add_generation_prompt": true,
+  "enable_thinking": false,
+  "thinking": false
+ }
+}

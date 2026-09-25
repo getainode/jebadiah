@@ -1,0 +1,13 @@
+{
+ "epochs": 1,
+ "rank": 16,
+ "lr": 0.0001,
+ "score_targets": "source",
+ "temperature_target": "hard",
+ "score_ordinal_adjacent": 0.2,
+ "batch_size": 8,
+ "grad_accum": 1,
+ "eval_repeats": 2,
+ "eval_repeats_for": "jevals-=3,nimble-eval=2,kev-transfer=2,typed-decisions=1,kev-decision=1,nimble-public=1",
+ "base": "9b"
+}

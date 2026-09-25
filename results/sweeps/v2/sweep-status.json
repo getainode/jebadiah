@@ -1,0 +1,338 @@
+{
+ "created": "2026-09-25T11:19:33Z",
+ "gpu": "NVIDIA A100 80GB PCIe, 81920 MiB",
+ "runs": [
+  {
+   "name": "smoke",
+   "letter": "0",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 6,
+   "est_min_a100": 8
+  },
+  {
+   "name": "9b-v0",
+   "letter": "a",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 48,
+   "est_min_a100": 82
+  },
+  {
+   "name": "4b-2ep",
+   "letter": "b",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 38,
+   "est_min_a100": 65
+  },
+  {
+   "name": "4b-scorefix",
+   "letter": "c",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 26,
+   "est_min_a100": 44
+  },
+  {
+   "name": "4b-v0",
+   "letter": "d0",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 26,
+   "est_min_a100": 44
+  },
+  {
+   "name": "4b-lr2e-4",
+   "letter": "d1",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 26,
+   "est_min_a100": 44
+  },
+  {
+   "name": "4b-r32",
+   "letter": "d",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 27,
+   "est_min_a100": 46
+  },
+  {
+   "name": "9b-best",
+   "letter": "e",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 50,
+   "est_min_a100": 85
+  },
+  {
+   "name": "9b-base-eval",
+   "letter": "f",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 14,
+   "est_min_a100": 24
+  },
+  {
+   "name": "9b-v1",
+   "letter": "g",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 85,
+   "est_min_a100": 145
+  },
+  {
+   "name": "4b-v1",
+   "letter": "h",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130
+  },
+  {
+   "name": "4b-v1-lr2e-4",
+   "letter": "p1",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130
+  },
+  {
+   "name": "4b-v1-r32",
+   "letter": "p2",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130
+  },
+  {
+   "name": "9b-v2",
+   "letter": "v2",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 85,
+   "est_min_a100": 145
+  },
+  {
+   "name": "4b-v2",
+   "letter": "v2",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130
+  },
+  {
+   "name": "4b-v2-r32",
+   "letter": "v2",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130
+  },
+  {
+   "name": "4b-v2-cn",
+   "letter": "v2",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130
+  },
+  {
+   "name": "4b-v2-score",
+   "letter": "v2",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130
+  },
+  {
+   "name": "9b-v2b",
+   "letter": "v2",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 85,
+   "est_min_a100": 145
+  },
+  {
+   "name": "4b-c20",
+   "letter": "dose",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 139,
+   "est_min_a100": 236
+  },
+  {
+   "name": "4b-c33",
+   "letter": "dose",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 152,
+   "est_min_a100": 258
+  },
+  {
+   "name": "4b-c10",
+   "letter": "dose",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 132,
+   "est_min_a100": 224
+  },
+  {
+   "name": "9b-c20",
+   "letter": "dose",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 159,
+   "est_min_a100": 270
+  },
+  {
+   "name": "4b-c20h",
+   "letter": "dose",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 217,
+   "est_min_a100": 260
+  },
+  {
+   "name": "4b-c20h-alt",
+   "letter": "dose",
+   "status": "pending",
+   "optional": true,
+   "est_min_h100_pcie": 217,
+   "est_min_a100": 260
+  },
+  {
+   "name": "4b-v3-c20f",
+   "letter": "dose",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 139,
+   "est_min_a100": 236
+  },
+  {
+   "name": "4b-v3-c20f-n3k",
+   "letter": "dose",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 139,
+   "est_min_a100": 236
+  },
+  {
+   "name": "4b-v3-c20fh-alt",
+   "letter": "dose",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 139,
+   "est_min_a100": 236
+  },
+  {
+   "name": "9b-v3",
+   "letter": "dose",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 139,
+   "est_min_a100": 236
+  },
+  {
+   "name": "4b-v3-full",
+   "letter": "dose",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 139,
+   "est_min_a100": 236
+  },
+  {
+   "name": "9b-v3s",
+   "letter": "dose",
+   "status": "pending",
+   "optional": false,
+   "est_min_h100_pcie": 139,
+   "est_min_a100": 236
+  },
+  {
+   "name": "4b-chat-v1",
+   "letter": "h",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130,
+   "started": "2026-09-25T11:19:33Z",
+   "started_epoch": 1790335173.4974482,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-4B",
+   "stage": "complete",
+   "headline": 72.488,
+   "minutes_by_stage": {
+    "train": 67.0,
+    "temps": 1.6,
+    "eval": 11.4,
+    "postprocess": 0.0,
+    "total": 80.0
+   },
+   "finished": "2026-09-25T12:39:32Z",
+   "minutes": 80.0
+  },
+  {
+   "name": "9b-chat-v1",
+   "letter": "h",
+   "status": "done",
+   "optional": false,
+   "est_min_h100_pcie": 76,
+   "est_min_a100": 130,
+   "started": "2026-09-25T12:53:25Z",
+   "started_epoch": 1790340805.0932496,
+   "note": "attn=sdpa base=Qwen/Qwen3.5-9B",
+   "stage": "complete",
+   "headline": 73.931,
+   "minutes_by_stage": {
+    "train": 90.1,
+    "temps": 1.4,
+    "eval": 15.9,
+    "postprocess": 0.0,
+    "total": 107.4
+   },
+   "finished": "2026-09-25T14:40:52Z",
+   "minutes": 107.5
+  }
+ ],
+ "updated": "2026-09-25T14:40:52Z",
+ "attn": "sdpa",
+ "done": [
+  "4b-chat-v1",
+  "9b-chat-v1"
+ ],
+ "failed": [],
+ "pending": [
+  "smoke",
+  "9b-v0",
+  "4b-2ep",
+  "4b-scorefix",
+  "4b-v0",
+  "4b-lr2e-4",
+  "4b-r32",
+  "9b-best",
+  "9b-base-eval",
+  "9b-v1",
+  "4b-v1",
+  "4b-v1-lr2e-4",
+  "4b-v1-r32",
+  "9b-v2",
+  "4b-v2",
+  "4b-v2-r32",
+  "4b-v2-cn",
+  "4b-v2-score",
+  "9b-v2b",
+  "4b-c20",
+  "4b-c33",
+  "4b-c10",
+  "9b-c20",
+  "4b-c20h",
+  "4b-c20h-alt",
+  "4b-v3-c20f",
+  "4b-v3-c20f-n3k",
+  "4b-v3-c20fh-alt",
+  "9b-v3",
+  "4b-v3-full",
+  "9b-v3s"
+ ]
+}

@@ -1,0 +1,12 @@
+{
+ "Qwen/Qwen3.5-4B-Base": {
+  "revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+  "path": "/workspace/jeb/hf/hub/models--Qwen--Qwen3.5-4B-Base/snapshots/1001bb4d826a52d1f399e183466143f4da7b741b",
+  "gb": 9.34
+ },
+ "Qwen/Qwen3.5-9B-Base": {
+  "revision": "68c46c4b3498877f3ef123c856ecfde50c39f404",
+  "path": "/workspace/jeb/hf/hub/models--Qwen--Qwen3.5-9B-Base/snapshots/68c46c4b3498877f3ef123c856ecfde50c39f404",
+  "gb": 19.33
+ }
+}
