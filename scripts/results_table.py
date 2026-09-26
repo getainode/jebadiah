@@ -17,7 +17,7 @@ HEAD = ["jevals-pubmedqa", "jevals-banking77", "jevals-helpsteer2", "nimble-eval
 HUMAN_NOUL = ["jevals-pubmedqa", "nimble-public__boolq", "nimble-public__paws", "nimble-public__squad2",
               "nimble-public__aegis2", "nimble-public__civil_comments"]
 PUBLISHED = {"4b-v0": "4B v0", "9b-v0": "9B v0", "4b-v1": "4B v1", "9b-v1": "9B v1",
-             "4b-chat-v1": "4B v2", "9b-chat-v1": "9B v2"}
+             "4b-chat-v1": "4B v2", "9b-chat-v1": "9B v2", "27b-chat-v1": "27B"}
 
 
 def load_runs() -> dict[str, dict]:

@@ -15,6 +15,7 @@ public BoolQ, PAWS, SQuAD2, Aegis2 and Civil Comments sets. DSj = Jevals Decisio
 | `9b-v1` | 9B v1 | Qwen3.5-9B-Base | data-v1 | 73.29 | 89.7 | 70.0 | 40.3 | 78.7 | 84.0 | 77.0 | 84.6 | 11.9 | 0.063 | 115.6 |
 | `4b-chat-v1` | 4B v2 | Qwen3.5-4B | data-v1 | 72.49 | 88.7 | 70.0 | 40.0 | 77.2 | 83.2 | 75.9 | 83.2 | 9.3 | 0.092 | 67.0 |
 | `9b-chat-v1` | 9B v2 | Qwen3.5-9B | data-v1 | 73.93 | 90.3 | 70.7 | 40.7 | 81.2 | 83.8 | 77.0 | 84.2 | 10.4 | 0.085 | 90.1 |
+| `27b-chat-v1` | 27B | Qwen3.8-27B | data-v1 | 78.95 | 90.0 | 77.0 | 48.7 | 93.5 | 85.9 | 78.6 | 83.8 | 19.9 | 0.145 | 166.8 |
 
 ## Every other run
 
@@ -105,6 +106,7 @@ public BoolQ, PAWS, SQuAD2, Aegis2 and Civil Comments sets. DSj = Jevals Decisio
 
 | label | public acc (231) | easy | standard | hard (111) | ECE all | ECE hard | Brier hard | calibration formula, public hard |
 |---|---|---|---|---|---|---|---|---|
+| `jebadiah-27b-local` | 0.866 | 48/48 | 70/72 | 82/111 | 0.078 | 0.113 | 0.335 | 83.7 |
 | `jebadiah-4b-chat-v1-local` | 0.758 | 48/48 | 70/72 | 57/111 | 0.059 | 0.088 | 0.553 | 79.6 |
 | `jebadiah-4b-v1` | 0.762 | 48/48 | 72/72 | 56/111 | 0.051 | 0.087 | 0.560 | 76.9 |
 | `jebadiah-4b-v3-c20f-local` | 0.792 | 48/48 | 71/72 | 64/111 | 0.069 | 0.071 | 0.486 | 82.7 |

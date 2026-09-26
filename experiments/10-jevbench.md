@@ -13,6 +13,7 @@ v1 training pool and the public items.
 
 | system | public acc | easy | standard | hard | ECE hard | source |
 |---|---:|---|---|---|---:|---|
+| **Jebadiah 27B** (`27b-chat-v1`) | 0.866 | 48/48 | 70/72 | 82/111 | 0.113 | our run, standalone server |
 | Jebadiah 9B v1 | 0.818 | 48/48 | 70/72 | 71/111 | 0.127 | our run |
 | **Jebadiah 9B v2** (`9b-chat-v1`) | 0.818 | 48/48 | 71/72 | 70/111 | 0.052 | our run |
 | Jebadiah 9B v3 (unpublished) | 0.814 | 48/48 | 69/72 | 71/111 | 0.071 | our run |
@@ -27,6 +28,16 @@ v1 training pool and the public items.
 | decider-4b v2 | 0.835 | | | | | board |
 | decider-35b-a3b | 0.831 | | | | | board |
 | Hopper | 0.823 | | | | | board |
+
+**The 27B (2026-09-26).** Run the same way except for the server: `frontier-infra/jebadiah-27b` at revision
+1c0d794f (which carries the refit score temperature, 0.76) served by this repository's standalone server
+(`server/`, `jebadiah-serve --model <local copy> --device mps --alias jebadiah-27b-local`, bf16, 56 GB), which answers
+`POST /v1/systemone` itself, so no shim was needed. The weights were a local copy whose 18 safetensors files and
+tokenizer matched the hub's sha256 at that revision; the served model name the records carry was a local path and
+is replaced there by `frontier-infra/jebadiah-27b@1c0d794f`. 231 of 231 answered and valid, none renormalized, same
+dataset hash. Of its 29 hard misses, 21 are the planted surface answer; temporal and numeric 4 of 15. On the 111 hard
+items it gets 18 right that 9B v2 misses and misses 6 that 9B v2 gets. Latency on MPS is p50 1.9 s, p95 25.7 s
+(1,528 s for all 231), which is a Mac bf16 number and not a serving claim.
 
 **Where we stand, candidly.** On the public items Jebadiah 9B (v1 or v2, 0.818) is below every model on that list.
 The easy and standard tiers are at the ceiling; the whole gap is the hard tier (70 or 71 of 111 against Jev's 81 and

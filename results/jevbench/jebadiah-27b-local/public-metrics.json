@@ -1,0 +1,56 @@
+{
+ "n": 231,
+ "correct": 200,
+ "public_accuracy": 0.8658008658008658,
+ "tiers_public": {
+  "easy": {
+   "n": 48,
+   "correct": 48,
+   "accuracy": 1.0
+  },
+  "original": {
+   "n": 72,
+   "correct": 70,
+   "accuracy": 0.9722222222222222
+  },
+  "hard": {
+   "n": 111,
+   "correct": 82,
+   "accuracy": 0.7387387387387387
+  }
+ },
+ "valid": 231,
+ "renormalized": 0,
+ "brier_mean_all": 0.17428642150558876,
+ "ece_all": 0.07847075324675333,
+ "brier_mean_hard": 0.33514509984390994,
+ "ece_hard": 0.11275125225225224,
+ "probability_items": 10,
+ "mean_tvd_gold_probs": 0.0999381,
+ "calibration_v13_formula_public_hard_only": 83.72796977477478,
+ "hard_by_family": {
+  "adversarial": "6/6",
+  "ambiguous": "5/7",
+  "judge_hard": "14/17",
+  "long_policy": "12/19",
+  "multi_hop": "14/18",
+  "probability": "9/10",
+  "routing_hard": "5/5",
+  "temporal_numeric": "4/15",
+  "tradeoff": "5/6",
+  "trap": "8/8"
+ },
+ "ordinal_mae": 0.16949377777777783,
+ "latency_raw_s": {
+  "p50": 1.8946403749287128,
+  "p95": 25.68957564595621,
+  "max": 38.20793779101223,
+  "sum": 1527.886984121753
+ },
+ "latency_adjusted_s": {
+  "p50": 3.9392807498574256,
+  "p95": 51.52915129191242
+ },
+ "speed_axis_if_scored_like_board": 56.92530076719456,
+ "mean_input_tokens": 654.6969696969697
+}
