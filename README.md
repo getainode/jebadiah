@@ -184,13 +184,13 @@ We ran its 231 public items through its own unchanged harness ([10](experiments/
 
 Candidly: the 27B scores 0.866 on the public items (200 of 231), 82 of the 111 hard items, with a hard-tier ECE of
 0.113. That is a self-run on the public items through the unchanged harness, not the sealed board. It matches Jev
-1.13.0's public accuracy (Jev has 81 hard items right) and is above the other board rows we compared with in [10](experiments/10-jevbench.md); only JPT-4B's
-self-reported 0.879 is higher. The 9B and 4B are below every leading model there. The easy and standard tiers are at
+1.13.0's public accuracy (Jev has 81 hard items right) and is above the other board rows we compared with in
+[10](experiments/10-jevbench.md); only JPT-4B's self-reported 0.879 is higher. The 9B and 4B are below every leading model there. The easy and standard tiers are at
 the ceiling for every size; the gap is the hard tier, where the models most often take the planted surface answer
 (21 of the 27B's 29 hard misses), above all on temporal and numeric items, where the 27B gets 4 of 15, no better than
-9B v1. The chat checkpoint made the 9B much better calibrated where it is wrong; the 27B is not there yet, with a
-hard-tier ECE of 0.113 against 9B v2's 0.052, so it is right more often but less honest about the items it misses.
-These are self-run public numbers; the board's ranking also uses sealed items that only its maintainer runs, where
+9B v1. The chat checkpoint made the 9B much better calibrated where it is wrong; the 27B is not there yet, at 0.113
+against 9B v2's 0.052, so it is right more often but less honest about the items it misses.
+The board's ranking also uses sealed items that only its maintainer runs, where
 every top-ten row drops 48 to 57 points, and we have not been measured there. Nothing in this repository was tuned
 toward JevBench, and an overlap check found no shared 8-word span between our training pool (the v1 pool, which the
 27B also trained on) and its public items.
