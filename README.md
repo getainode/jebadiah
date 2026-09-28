@@ -202,6 +202,11 @@ progress and its results are pending, so there is no Decision Index number here 
 
 ## Run it yourself
 
+**[Run Jeb locally](docs/run-locally.md)** is the setup guide for every runtime: Ollama, LM Studio, llama.cpp's
+`llama-server`, vLLM, MLX on a Mac and AINode, each with the install, the exact request, the output to expect and
+the gotchas, plus how to use Jeb as [JDE](https://github.com/Titanium-Devops/jde)'s judge.
+[`clients/python`](clients/python) is `jebadiah-decide`, one small client with a backend for each of them.
+
 `server/` is a standalone server for the published models. It runs on one CUDA GPU or an Apple Silicon Mac and
 needs Python 3.12 and [uv](https://docs.astral.sh/uv/):
 
@@ -238,9 +243,10 @@ Jeb reads label probabilities rather than generating text, so it needs a runner 
 window. The GGUF files need llama.cpp v0.5.0 or later (older builds do not know the architecture), and each GGUF
 repository carries `scripts/decide_gguf.py`, which renders the prompt the way AINode does and reads the labels from
 llama-server. Each MLX repository carries `scripts/decide_mlx.py` (checked with mlx-lm 0.31.3). The GGUF repositories
-also carry `scripts/decide_lmstudio.py`, which does the same through LM Studio's local server with reasoning off; it
-has been tested on the 9B only, and because LM Studio returns the top 20 log probabilities it is limited to 20
-options per question, the same cap as AINode's route.
+also carry `scripts/decide_lmstudio.py`, which does the same through LM Studio's local server with reasoning off
+(tested on the 9B only), and `scripts/decide_ollama.py`, which does it through Ollama's `/api/generate` in raw mode
+(tested on all three sizes). LM Studio and Ollama return the top 20 log probabilities, so both are limited to 20
+options per question, the same cap as AINode's route. The [local setup guide](docs/run-locally.md) covers each one.
 
 Third-party quantizations exist too. [mradermacher/jebadiah-9b-v2-GGUF](https://huggingface.co/mradermacher/jebadiah-9b-v2-GGUF)
 is one; his Q8_0 gives the same pick as ours on 260 of 260 questions. The models are mirrored on
@@ -304,6 +310,8 @@ Copy a built pool directory into `$JEB_ROOT` and name it in the run's `data_dir`
 | `configs/` | `sweep.json` (every run and its settings) and `temperatures/` for each published model |
 | `scripts/` | `setup.sh`, `run_sweep.sh`, `nonce_all.sh`, `results_table.py`, and `make_v1_card.py` (the model card generator) |
 | `server/` | the standalone server: `/v1/systemone`, `/v1/decide`, a browser playground and its tests |
+| `clients/python/` | `jebadiah-decide`, the client for llama-server, Ollama, LM Studio, vLLM, MLX and any `/v1/systemone` server, and its tests |
+| `docs/` | [`run-locally.md`](docs/run-locally.md), the setup guide per runtime, and `examples/` (JDE with a local Jeb as its judge) |
 
 ## What's next
 
