@@ -144,10 +144,20 @@ def test_runtime_http_error_is_a_jeb_error(renderer, runtime):
         Jeb("ollama", url=rt.url, model="m", renderer=renderer, temperature_table=TEMPS).decide(REQ["state"], REQ["questions"])
 
 
-def test_render_backends_need_a_repo():
-    with pytest.raises(JebError, match="needs repo="):
-        Jeb("ollama", model="m")
-    with pytest.raises(JebError, match="needs --model"):
-        Jeb("ollama", repo="x")
+def test_defaults_and_unknowns():
+    from jebadiah_decide import defaults
+    assert defaults.default_model("ollama", "9b") == "hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0"
+    assert defaults.default_repo("vllm", "27b") == "frontier-infra/jebadiah-27b"
     with pytest.raises(JebError, match="unknown backend"):
         Jeb("nope")
+    with pytest.raises(JebError, match="unknown size"):
+        Jeb("ollama", size="70b")
+
+
+def test_capped_backend_refuses_more_than_20_options(renderer, runtime):
+    rt = runtime(lambda path, b: (500, {}))
+    jeb = Jeb("ollama", url=rt.url, model="m", renderer=renderer, temperature_table=TEMPS)
+    q = {"type": "choice", "instructions": "Which?", "criteria": {f"o{i}": None for i in range(21)}}
+    with pytest.raises(JebError, match="21 options, but Ollama returns only its top 20"):
+        jeb.decide({"x": 1}, {"wide": q})
+    assert rt.requests == []   # refused before the runtime was called

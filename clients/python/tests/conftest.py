@@ -68,11 +68,17 @@ class FakeRuntime:
             def log_message(self, *a):
                 pass
 
+            def do_GET(self):
+                rt.requests.append({"path": self.path, "body": None, "auth": self.headers.get("Authorization")})
+                self._answer(*rt.respond(self.path, None))
+
             def do_POST(self):
                 body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
                 rt.requests.append({"path": self.path, "body": body, "auth": self.headers.get("Authorization")})
-                code, out = rt.respond(self.path, body)
-                data = json.dumps(out).encode()
+                self._answer(*rt.respond(self.path, body))
+
+            def _answer(self, code, out):
+                data = (out if isinstance(out, bytes) else json.dumps(out).encode())
                 self.send_response(code)
                 self.send_header("Content-Type", "application/json")
                 self.send_header("Content-Length", str(len(data)))

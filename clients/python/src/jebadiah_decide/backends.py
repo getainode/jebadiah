@@ -40,6 +40,29 @@ def post_json(url: str, body: dict, api_key: str | None = None, timeout: float =
         raise JebError(f"{url}: {e.reason}") from None
 
 
+def get_json(url: str, api_key: str | None = None, timeout: float = 10) -> dict:
+    headers = {"Authorization": "Bearer " + api_key} if api_key else {}
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.loads(r.read() or b"{}")
+    except urllib.error.HTTPError as e:
+        raise JebError(f"{url}: HTTP {e.code}: {e.read().decode(errors='replace')[:300]}") from None
+    except (urllib.error.URLError, OSError) as e:
+        raise JebError(f"{url}: {getattr(e, 'reason', e)}") from None
+
+
+def _reachable(url: str, api_key: str | None, what: str, how: str) -> dict:
+    try:
+        return get_json(url, api_key)
+    except JebError as e:
+        if "HTTP 401" in str(e) or "HTTP 403" in str(e):
+            raise JebError(f"{what} wants an API key: {e}. Pass --api-key.") from None
+        if "HTTP" in str(e):
+            raise
+        raise JebError(f"{what} is not answering at {url.rsplit('/', 2)[0] if url.count('/') > 3 else url}. {how}") from None
+
+
 def _by_text(top: list[tuple[str, float]], letters: list[str]) -> Reading:
     """Match labels by exact token text ("A", not " A"); the first occurrence wins."""
     lp: dict[str, float] = {}
@@ -68,6 +91,15 @@ class LlamaServer:
                  timeout: float = 900, **_):
         self.url, self.n_probs, self.api_key, self.check, self.timeout = url.rstrip("/"), n_probs, api_key, check_tokens, timeout
         self.top_max = None
+
+    def prepare(self, progress=print) -> dict:
+        _reachable(self.url + "/health", self.api_key, "llama-server",
+                   "Start it: llama-server -m jebadiah-9b-v2-Q8_0.gguf -c 4096 -np 1 --port 8080")
+        props = get_json(self.url + "/props", self.api_key)
+        path = str(props.get("model_path") or "")
+        if path and "jebadiah" not in path.lower():
+            raise JebError(f"llama-server has {path} loaded, not a Jebadiah GGUF.")
+        return {"model_path": path}
 
     def read(self, rd, n_local: int, local_ids: list[int] | None = None) -> Reading:
         if self.check and local_ids is not None:
@@ -100,6 +132,36 @@ class Ollama:
             raise JebError("the ollama backend needs --model, the name Ollama knows the model by")
         self.url, self.model, self.api_key, self.timeout = url.rstrip("/"), model, api_key, timeout
 
+    def prepare(self, progress=print) -> dict:
+        v = _reachable(self.url + "/api/version", self.api_key, "Ollama",
+                       "Start it (open the Ollama app, or run `ollama serve`), or install it from https://ollama.com/download")
+        names = {m.get("name", "").lower() for m in get_json(self.url + "/api/tags", self.api_key).get("models", [])}
+        if self.model.lower() not in names:
+            progress(f"Pulling {self.model} into Ollama (first run only)...")
+            self._pull(progress)
+        return {"ollama": v.get("version"), "model": self.model}
+
+    def _pull(self, progress):
+        req = urllib.request.Request(self.url + "/api/pull", data=json.dumps({"model": self.model, "stream": True}).encode(),
+                                     headers={"Content-Type": "application/json"})
+        last = -10
+        try:
+            with urllib.request.urlopen(req, timeout=3600) as r:
+                for line in r:
+                    ev = json.loads(line or b"{}")
+                    if ev.get("error"):
+                        raise JebError(f"ollama pull {self.model}: {ev['error']}")
+                    total, done = ev.get("total"), ev.get("completed")
+                    if total and done is not None:
+                        pct = int(100 * done / total)
+                        if pct >= last + 10:
+                            last = pct
+                            progress(f"  {pct}% of {total / 1e9:.1f} GB")
+                    if ev.get("status") == "success":
+                        progress("  pulled")
+        except urllib.error.URLError as e:
+            raise JebError(f"ollama pull {self.model}: {e.reason}") from None
+
     def read(self, rd, n_local: int, local_ids=None) -> Reading:
         r = post_json(self.url + "/api/generate", {
             "model": self.model, "prompt": rd.prompt, "raw": True, "stream": False, "think": False,
@@ -121,12 +183,32 @@ class LMStudio:
     needs_renderer = True
     top_max = 20
 
-    def __init__(self, url: str, model: str, api_key: str | None = None, timeout: float = 900, **_):
-        if not model:
-            raise JebError("the lmstudio backend needs --model, the identifier LM Studio shows for the loaded model")
+    HOW_TO_LOAD = ("In LM Studio: open Discover (the magnifying glass), search for jebadiah-9b-v2, and download the "
+                   "Q8_0 from frontier-infra/jebadiah-9b-v2-GGUF. Then open the Developer tab, click \"Select a model "
+                   "to load\" and pick it. From a terminal, `lms ls` lists what you have and `lms load <name>` loads it.")
+
+    def __init__(self, url: str, model: str | None = None, api_key: str | None = None, timeout: float = 900, **_):
         self.url, self.model, self.api_key, self.timeout = url.rstrip("/"), model, api_key, timeout
 
+    def prepare(self, progress=print) -> dict:
+        models = _reachable(self.url + "/v1/models", self.api_key, "LM Studio's server",
+                            "Start it: in LM Studio open the Developer tab and switch the server on, or run `lms server start`.")
+        ids = [m.get("id", "") for m in models.get("data", [])]
+        if self.model:
+            if self.model not in ids:
+                raise JebError(f"LM Studio has no model called {self.model!r} (it has: {', '.join(ids) or 'none'}). "
+                               + self.HOW_TO_LOAD)
+        else:
+            jeb = [i for i in ids if "jebadiah" in i.lower()]
+            if not jeb:
+                raise JebError("LM Studio's server is running but no Jebadiah model is there. " + self.HOW_TO_LOAD)
+            self.model = jeb[0]
+            progress(f"Using LM Studio's {self.model}")
+        return {"model": self.model}
+
     def read(self, rd, n_local: int, local_ids=None) -> Reading:
+        if not self.model:
+            self.prepare(lambda *_: None)
         r = post_json(self.url + "/v1/chat/completions", {
             "model": self.model, "messages": rd.messages, "max_tokens": 1, "temperature": 0,
             "logprobs": True, "top_logprobs": self.top_max, "reasoning_effort": "none", "stream": False},
@@ -153,6 +235,15 @@ class VLLM:
         self.url, self.model, self.api_key, self.top_max, self.timeout = url.rstrip("/"), model, api_key, top_n, timeout
         if self.url.endswith("/v1"):
             self.url = self.url[:-3]
+
+    def prepare(self, progress=print) -> dict:
+        models = _reachable(self.url + "/v1/models", self.api_key, "vLLM",
+                            "Start it: vllm serve frontier-infra/jebadiah-9b-v2 --max-model-len 4096 --language-model-only "
+                            "--served-model-name frontier-infra/jebadiah-9b-v2")
+        ids = [m.get("id") for m in models.get("data", [])]
+        if self.model not in ids:
+            raise JebError(f"the server has no model {self.model!r} (it has: {', '.join(map(str, ids)) or 'none'})")
+        return {"model": self.model}
 
     def read(self, rd, n_local: int, local_ids=None) -> Reading:
         r = post_json(self.url + "/v1/completions", {
@@ -192,6 +283,9 @@ class MLX:
         tied = getattr(lm.args, "tie_word_embeddings", False) or not hasattr(lm, "lm_head")
         self.head = self.core.embed_tokens if tied else lm.lm_head
 
+    def prepare(self, progress=print) -> dict:
+        return {"model": self.path}
+
     def temperatures_path(self) -> str | None:
         import os
         for p in (os.path.join(self.path, "temperatures.json"), os.path.join(self.path, "..", "temperatures.json")):
@@ -229,6 +323,22 @@ class SystemOne:
             self.url = self.url[: -len("/v1/systemone")]
         elif self.url.endswith("/v1"):
             self.url = self.url[:-3]
+
+    def prepare(self, progress=print) -> dict:
+        body = {"state": {"ping": "ok"}, "questions": {"ok": {"type": "noul", "instructions": "The state says ok."}}}
+        if self.model:
+            body["model"] = self.model
+        try:
+            post_json(self.url + "/v1/systemone", body, self.api_key, 120)
+        except JebError as e:
+            raise JebError(f"the /v1/systemone server at {self.url} did not answer a test question: {e}") from None
+        return {"model": self.model}
+
+    def decide(self, body: dict) -> dict:
+        body = dict(body)
+        if self.model and not body.get("model"):
+            body["model"] = self.model
+        return post_json(self.url + "/v1/decide", body, self.api_key, self.timeout)
 
     def ask(self, state, questions: dict, calibrated: bool = True) -> dict:
         body = {"state": state, "questions": questions}

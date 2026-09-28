@@ -84,16 +84,43 @@ def _tokenizer_dir():
     return d if d and os.path.isdir(d) else None
 
 
+def test_route_file_is_the_servers_copy_but_one_import():
+    from jebadiah_decide._contract import ROUTE_FILE
+    ours = open(os.path.join(REPO_ROOT, "clients", "python", "src", "jebadiah_decide", "_contract", ROUTE_FILE)).read().splitlines()
+    theirs_path = os.path.join(REPO_ROOT, "server", "src", "jebadiah_server", ROUTE_FILE)
+    if not os.path.exists(theirs_path):
+        pytest.skip("not inside the jebadiah repository")
+    theirs = open(theirs_path).read().splitlines()
+    diff = [(a, b) for a, b in zip(ours, theirs) if a != b]
+    assert len(ours) == len(theirs) and diff == [
+        ("from ainode_prompt_verbatim import MAX_OPTIONS  # the one line changed from the server copy",
+         "from jebadiah_server.model_scripts import MAX_OPTIONS")]
+
+
 @pytest.mark.skipif(_tokenizer_dir() is None, reason="set JEBADIAH_TEST_TOKENIZER to a Jebadiah repo folder")
 def test_real_renderer_matches_golden():
-    from transformers import AutoTokenizer
-
     from jebadiah_decide.client import _MessageRenderer
-    tok = AutoTokenizer.from_pretrained(_tokenizer_dir())
+    from jebadiah_decide.tokenizer import LightTokenizer
+    tok = LightTokenizer(_tokenizer_dir())
     r = _MessageRenderer(tok, 2048)
     for qid, q in REQ["questions"].items():
         rd = r.render(REQ["state"], q)
         assert rd.prompt == GOLD[qid]["prompt"]
         assert rd.cand_ids == GOLD[qid]["cand_ids"]
+        assert len(tok.encode(rd.prompt)) == GOLD[qid]["n_tokens"]
         assert tok.apply_chat_template(rd.messages, tokenize=False, add_generation_prompt=True,
                                        enable_thinking=False) == rd.prompt
+
+
+@pytest.mark.skipif(_tokenizer_dir() is None, reason="set JEBADIAH_TEST_TOKENIZER to a Jebadiah repo folder")
+def test_light_tokenizer_matches_transformers():
+    transformers = pytest.importorskip("transformers")
+    from jebadiah_decide._contract import CHAT_TEMPLATE_KWARGS, build_messages
+    from jebadiah_decide.tokenizer import LightTokenizer
+    hf = transformers.AutoTokenizer.from_pretrained(_tokenizer_dir())
+    lt = LightTokenizer(_tokenizer_dir())
+    for state in ['{"ticket":"x"}', "héllo wörld 日本語 🙂 \t tabs\n\nnew", "x" * 3000]:
+        m = build_messages(state, "Shared rules.", "Q?", ["a", "b", "c"])
+        a = hf.apply_chat_template(m, tokenize=False, **CHAT_TEMPLATE_KWARGS)
+        assert a == lt.apply_chat_template(m, tokenize=False, **CHAT_TEMPLATE_KWARGS)
+        assert hf.encode(a, add_special_tokens=False) == lt.encode(a)

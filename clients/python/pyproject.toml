@@ -1,6 +1,6 @@
 [project]
 name = "jebadiah-decide"
-version = "0.1.0"
+version = "0.2.0"
 description = "Typed decisions from a Jebadiah model on your own runtime: llama-server, Ollama, LM Studio, vLLM, MLX or a /v1/systemone server"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -12,12 +12,15 @@ classifiers = [
   "Programming Language :: Python :: 3",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
-dependencies = []
+dependencies = [
+  # the tokenizer and chat template only: no transformers, no torch
+  "tokenizers>=0.21",
+  "jinja2>=3.1",
+  "huggingface-hub>=0.30",
+]
 
 [project.optional-dependencies]
-# rendering the prompt locally (every backend except systemone and mlx): the tokenizer only, no torch
-render = ["transformers>=4.51", "huggingface-hub>=0.30", "jinja2>=3.1"]
-mlx = ["mlx-lm>=0.31", "huggingface-hub>=0.30"]
+mlx = ["mlx-lm>=0.31"]
 dev = ["pytest>=8"]
 
 [project.urls]
@@ -25,6 +28,7 @@ Homepage = "https://github.com/getainode/jebadiah"
 Guide = "https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
 
 [project.scripts]
+jeb = "jebadiah_decide.cli:main"
 jebadiah-decide = "jebadiah_decide.cli:main"
 
 [build-system]
