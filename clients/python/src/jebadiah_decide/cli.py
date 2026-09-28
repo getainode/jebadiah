@@ -151,13 +151,16 @@ def cmd_doctor(a) -> int:
             if abs(got_b - want["billing"]) > defaults.TOLERANCE or abs(got_u - want["urgent"]) > defaults.TOLERANCE:
                 raise JebError(f"billing {got_b:.4f} and urgent {got_u:.4f}, expected about {want['billing']} and "
                                f"{want['urgent']}. Is --size right for the loaded model?")
-        return (f"billing {got_b:.4f} (expected {want['billing']}), urgent {got_u:.4f} (expected {want['urgent']}), "
-                f"{out['latency_ms']:.0f} ms, prompt tokens matched")
+        checked = ", prompt token counts matched" if j.renderer is not None else ""
+        return (f"billing {got_b:.4f} (expected about {want['billing']}), urgent {got_u:.4f} (expected about "
+                f"{want['urgent']}), {out['latency_ms']:.0f} ms{checked}")
 
     if step("tokenizer, chat template and temperatures", load) and step("runtime reachable, model present", reach):
-        step("known example (token counts checked on every call)", example)
+        step("known example", example)
     if ok:
-        print(f"\nReady. Start it with: jeb serve --backend {a.backend}" + (f" --size {a.size}" if a.size != defaults.DEFAULT_SIZE else ""))
+        flags = [f"--backend {a.backend}"] + ([f"--size {a.size}"] if a.size != defaults.DEFAULT_SIZE else []) \
+            + ([f"--url {a.url}"] if a.url else []) + (["--api-key ..."] if a.api_key else [])
+        print("\nReady. Start it with: jeb serve " + " ".join(flags))
     return 0 if ok else 1
 
 
