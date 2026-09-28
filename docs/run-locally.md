@@ -438,7 +438,9 @@ a Go map the options arrived sorted, and billing's probability moved from 0.987 
 ## Set it up with your AI
 
 Paste this into Claude Code, Cursor, Copilot or any coding agent working in your project. It carries
-everything the agent needs.
+everything the agent needs. We tried it on a scratch project: the agent installed `jeb`, ran doctor, started
+the server, wired a help-desk urgency check into the code with thresholds, and had its tests passing against
+the live server in about a minute (with the model already downloaded).
 
 ````text
 Set up Jebadiah (Jeb), an open decision model, in this project, and wire it into our code.
@@ -450,21 +452,28 @@ It never generates text. A local server, `jeb serve`, puts it on http://localhos
    "criteria": <choice: {"option": "description", ...} (2 to 20, order matters); noul: omit; score: ["level0", "level1", ...]>}}}
   Answers: choice -> {"choice", "confidence", "probabilities": {option: p}}; noul -> {"noul": P(statement is true)};
   score -> {"score": expected level index, "probabilities": {"0": p, ...}, "legend"}.
+  Threshold on probabilities[choice] (for a noul, on noul for "true" or 1 - noul for "false"). The separate
+  "confidence" field is chance-corrected and is not the one to threshold.
 - POST /v1/decide (AINode's shape): {"state", "questions": {"<id>": {"question", "options": [...]} | {"question", "type": "boolean"}}}
   -> {"decisions": {"<id>": {"answer", "confidence", "distribution"}}}.
+- GET /health answers 200 when the server is up.
 
 Steps:
-1. Ask me which runtime I use: Ollama (default), LM Studio, llama.cpp's llama-server, vLLM, MLX (Mac) or AINode.
-   If I have none, use Ollama (https://ollama.com/download).
+1. Which runtime do I use? If I haven't said: Ollama (default), LM Studio, llama.cpp's llama-server, vLLM,
+   MLX (Mac) or AINode. If I have none, use Ollama (https://ollama.com/download).
 2. Install the CLI: pip install "jebadiah-decide @ git+https://github.com/getainode/jebadiah#subdirectory=clients/python"
 3. Run `jeb doctor --backend <runtime>` and fix whatever it reports (it says what to do). Then start
-   `jeb serve --backend <runtime>` in its own terminal. Ollama pulls the model on first run (9.8 GB; use --size 4b for 4.6 GB).
+   `jeb serve --backend <runtime>` in the background (or its own terminal) and wait until GET /health returns 200.
+   Ollama pulls the model on first run (9.8 GB; use --size 4b for 4.6 GB).
 4. Find the decision in this codebase that I describe (or ask me for one), and write a small client in our
-   language that calls /v1/systemone with timeouts, reads the probability of the picked option, and maps it
-   to act (>= 0.9), confirm (>= 0.6) or escalate (below), with the thresholds as named constants.
-   Keep option order fixed, keep each question to 20 options or fewer, and treat any HTTP error as escalate.
+   language that calls /v1/systemone with a timeout and maps the probability to three actions, with the
+   thresholds as named constants: act (>= 0.9: do it), confirm (>= 0.6: do it, but flag it or ask a person
+   first) and escalate (below 0.6, or any HTTP or parse error: hand it to a person). Ask me what confirm
+   and escalate should do in this app if it isn't obvious. Keep option order fixed and each question to 20
+   options or fewer.
 5. Add a test that stubs the HTTP call with a recorded Jeb response and checks the threshold mapping, and a
-   second test, skipped unless JEB_URL is set, that calls the live server.
+   second test, skipped unless JEB_URL is set, that sends one clear example of each outcome to the live
+   server and checks the pick.
 Rules: never use the runtime's chat window or /api/chat for Jeb; always go through jeb serve or the
 jebadiah-decide package. Docs: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md
 ````
