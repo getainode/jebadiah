@@ -31,8 +31,7 @@ decision API or the Jev wire format can use it: JDE, your own code, a coding age
 Everything below needs Python 3.10 or newer for the `jeb` command:
 
 ```bash
-pip install "jebadiah-decide @ git+https://github.com/getainode/jebadiah#subdirectory=clients/python"
-# once it is on PyPI: pip install jebadiah-decide
+pip install jebadiah-decide
 ```
 
 It installs `tokenizers`, `jinja2` and `huggingface-hub`. No torch, no transformers.
@@ -166,7 +165,7 @@ as step 4 of the [Ollama path](#ollama), with the same numbers. **You're ready.*
 No other runtime needed, no option cap.
 
 ```bash
-pip install "jebadiah-decide[mlx] @ git+https://github.com/getainode/jebadiah#subdirectory=clients/python"
+pip install "jebadiah-decide[mlx]"
 jeb serve --backend mlx          # downloads frontier-infra/jebadiah-9b-v2-MLX (8-bit) the first time
 ```
 
@@ -461,7 +460,7 @@ It never generates text. A local server, `jeb serve`, puts it on http://localhos
 Steps:
 1. Which runtime do I use? If I haven't said: Ollama (default), LM Studio, llama.cpp's llama-server, vLLM,
    MLX (Mac) or AINode. If I have none, use Ollama (https://ollama.com/download).
-2. Install the CLI: pip install "jebadiah-decide @ git+https://github.com/getainode/jebadiah#subdirectory=clients/python"
+2. Install the CLI: pip install jebadiah-decide
 3. Run `jeb doctor --backend <runtime>` and fix whatever it reports (it says what to do). Then start
    `jeb serve --backend <runtime>` in the background (or its own terminal) and wait until GET /health returns 200.
    Ollama pulls the model on first run (9.8 GB; use --size 4b for 4.6 GB).
