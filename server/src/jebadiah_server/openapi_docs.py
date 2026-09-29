@@ -53,7 +53,7 @@ SYSTEMONE_RESPONSE_EXAMPLE = {
     "usage": {"input_tokens": 312, "output_tokens": 3},
     "latency_ms": 180.4,
     "calibration": {"applied": True,
-                    "temperatures": {"choice": 1.1863, "noul": 1.0903, "score": 1.2162}},
+                    "temperatures": {"choice": 1.1863, "noul": 1.0903, "score": 0.8329}},
 }
 
 DECIDE_EXAMPLE = {
@@ -106,7 +106,7 @@ DECIDE_RESPONSE_EXAMPLE = {
     },
     "usage": {"prompt_tokens": 260, "completion_tokens": 1, "calls": 1},
     "calibration": {"applied": True,
-                    "temperatures": {"choice": 1.1863, "noul": 1.0903, "score": 1.2162}},
+                    "temperatures": {"choice": 1.1863, "noul": 1.0903, "score": 0.8329}},
 }
 
 _err = {"application/json": {"example": {"error": {"message": "...", "type": "..."}}}}

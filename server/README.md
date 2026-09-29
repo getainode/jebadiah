@@ -70,15 +70,16 @@ curl -s localhost:8000/v1/systemone -H 'content-type: application/json' -d '{
   "route":  {"type": "choice", "choice": "billing", "confidence": 0.388277,
              "probabilities": {"billing": 0.592185, "support": 0.082171, "sales": 0.325644}},
   "urgent": {"type": "noul", "noul": 0.154602},
-  "risk":   {"type": "score", "score": 0.991045, "confidence": 0.381791,
+  "risk":   {"type": "score", "score": 0.99041, "confidence": 0.54034,
              "legend": {"0": "none", "1": "a little", "2": "a lot"},
-             "probabilities": {"0": 0.210547, "1": 0.587861, "2": 0.201592}}},
+             "probabilities": {"0": 0.158015, "1": 0.69356, "2": 0.148425}}},
  "usage": {"input_tokens": 298, "output_tokens": 3},
  "latency_ms": 1136.2,
- "calibration": {"applied": true, "temperatures": {"choice": 1.1167, "noul": 1.3319, "score": 1.1974}}}
+ "calibration": {"applied": true, "temperatures": {"choice": 1.1167, "noul": 1.3319, "score": 0.8312}}}
 ```
 
-That is real output from `frontier-infra/jebadiah-4b-v2` on an M3 Ultra (MPS, bf16).
+That is real output from `frontier-infra/jebadiah-4b-v2` on an M3 Ultra (MPS, bf16), with the score answer re-tempered
+to the score temperature the model has applied since 2026-09-29 (0.8312, was 1.1974).
 
 ### `POST /v1/systemone`
 

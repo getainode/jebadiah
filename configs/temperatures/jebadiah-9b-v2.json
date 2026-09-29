@@ -2,9 +2,25 @@
  "temperatures": {
   "choice": 1.1863,
   "noul": 1.0903,
-  "score": 1.2162
+  "score": 0.8329
  },
- "applied_target": "train",
+ "applied_target": "mixed",
+ "applied_fits": {
+  "choice": "train",
+  "noul": "train",
+  "score": "hard"
+ },
+ "previous": {
+  "applied_target": "train",
+  "temperatures": {
+   "choice": 1.1863,
+   "noul": 1.0903,
+   "score": 1.2162
+  },
+  "replaced": "2026-09-29"
+ },
+ "why": "Refit 2026-09-29 without retraining, the rule the 27B has applied since 2026-09-26. Both fits are unchanged and come from the calibration split only. Score questions calibrate better at the hard fit (T 0.83) than at the train fit (T 1.22), whose ordinal target is deliberately smoothed: on held-out halves of the calibration split score ECE 0.119 -> 0.079. Choice and noul stay on the train fit. Re-tempering the stored logits of the 20 evaluation sets: question-weighted ECE 0.0796 -> 0.0709, macro 0.0709 -> 0.0653, NLL 0.5887 -> 0.5799; accuracy unchanged. Jevals HelpSteer2 gets worse (0.039 -> 0.082). See eval/RESULTS.md, Temperature fits.",
+ "top_level_stats_describe": "the train fit (nll_before/nll_after/ece_before/ece_after below are its calibration-split numbers)",
  "calib_file": "/workspace/jeb/data-v1/calib.jsonl",
  "n": {
   "choice": 225,
@@ -44,6 +60,26 @@
     "T": 1.2162,
     "nll_before": 1.1017,
     "nll_after": 1.0929
+   }
+  },
+  "mixed": {
+   "choice": {
+    "T": 1.1863,
+    "nll_before": 0.4594,
+    "nll_after": 0.4542,
+    "source": "train"
+   },
+   "noul": {
+    "T": 1.0903,
+    "nll_before": 0.3776,
+    "nll_after": 0.3768,
+    "source": "train"
+   },
+   "score": {
+    "T": 0.8329,
+    "nll_before": 0.9298,
+    "nll_after": 0.9225,
+    "source": "hard"
    }
   }
  },

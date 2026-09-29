@@ -93,8 +93,9 @@ criteria.
 | untrained 9B base, for reference | Qwen3.5-9B-Base | | 68.70 | 86.7 | 69.7 | 42.0 | 69.1 | 74.6 | 70.1 | 9.6 | [`9b-base-eval`](results/runs/9b-base-eval/results.json) |
 
 Accuracy in percent (repeat 0). DSj is the Jevals Decision Score: 100 is perfect, 0 is guessing the base rates.
-The 27B's DSj is the run's record, made with the score temperature it shipped with; with the refit described below
-it is 21.3, and no accuracy changes. All numbers are ours, measured with the evaluator in this repository. Every
+The DSj of the 27B, 9B v2 and 4B v2 is each run's record, made with the score temperature it shipped with; with the
+refits described below they are 21.3, 10.5 and 9.4, and no accuracy changes. All numbers are ours, measured with
+the evaluator in this repository. Every
 run, including the ones we did not publish, is in [`results/SUMMARY.md`](results/SUMMARY.md), generated from the records by `scripts/results_table.py`.
 Per-question evaluation rows are not committed here (about 13 MB per run); the published model repositories carry
 them for their own runs under `eval/`.
@@ -164,7 +165,16 @@ from 0.071 to 0.064, and NLL from 0.523 to 0.514. Per set it is not a clean win:
 transfer is unchanged, and 2 get worse (Kev decision-v7 0.027 to 0.040, Nimble public HelpSteer2 0.049 to 0.061).
 Nimble 324 stays above its untempered 0.103, because what is left there is in-distribution choice, which this does
 not touch. The temperatures are fitted on our training distribution; anyone thresholding on them should refit on
-their own traffic. The 9B v2 and 4B v2 keep the temperatures they shipped with.
+their own traffic.
+
+On 2026-09-29 the 9B v2 and 4B v2 got the same rule: score takes the fit against the label (0.83 for both, from 1.22
+and 1.20), choice and noul keep their training-target fits, and nothing is retrained. On held-out halves of the
+calibration slice, score ECE goes from 0.119 to 0.079 (9B) and 0.105 to 0.066 (4B). Over the 20 evaluation sets,
+question-weighted ECE goes from 0.080 to 0.071 (9B) and 0.086 to 0.080 (4B), NLL goes down on both, and no pick
+changes. Typed-decisions improves (0.156 to 0.121, 0.171 to 0.135) and so does Nimble 324 (0.085 to 0.070, 0.092 to
+0.071); both HelpSteer2 sets get worse (Jevals 0.039 to 0.082 and 0.048 to 0.074), because the calibration slice's
+HelpSteer2 labels are close to uniform and natural HelpSteer2 traffic puts over 70% of its labels at 3 or 4. Each
+model card and its `eval/RESULTS.md` carry the per-set numbers.
 
 ## Where we stand on JevBench
 
