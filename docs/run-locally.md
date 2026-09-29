@@ -56,7 +56,7 @@ The first time, this pulls `hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0` into 
 
 ```
 Jeb is up: ollama (hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0), temperatures on, up to 20 options per question.
-  POST http://localhost:8100/v1/systemone   (Jev wire: JDE's jevJudge, TypeSafe clients)
+  POST http://localhost:8100/v1/systemone   (Jev wire: JDE's default judge, TypeSafe clients)
   POST http://localhost:8100/v1/decide      (AINode's decide shape)
   GET  http://localhost:8100/health
 ```
@@ -193,27 +193,29 @@ Then use `http://<node>:3000/v1/systemone` with `"model": "frontier-infra/jebadi
 ## Use it from JDE
 
 [JDE](https://github.com/Titanium-Devops/jde), the Jev Decision Engine, turns a judge's answers into actions
-with policy bands and a ledger. Its `jevJudge` posts the Jev wire to one endpoint, so `jeb serve` is a judge:
+with policy bands and a ledger. Its default judge is a local Jeb at `http://localhost:8100/v1/systemone`,
+which is exactly where `jeb serve` listens. So once `jeb serve` is running, JDE just works: no key, no config.
 
 ```ts
-import { ask, jevJudge, nullLedger } from "@titanium/jde";
+import { ask } from "@titanium/jde";
 
-const judge = jevJudge({ endpoint: "http://localhost:8100/v1/systemone", model: "jebadiah" });
-const outcome = await ask({ decision, state, questions }, { judge });
+const outcome = await ask({ decision, state, questions });   // judged by the Jeb behind jeb serve
 ```
 
-Two things to know. `jevJudge` refuses to run without `TYPESAFE_API_KEY` set; `jeb serve` ignores it, so any
-value works (or start `jeb serve --key ...` and use the same value). And JDE's shipped policy gives a
-judgment 750 ms, a hosted budget; set `timeout_ms` to your own machine's p95. On this Mac Jeb 9B in Ollama
-answered in 36 to 230 ms.
+To point it somewhere else, set `JDE_JEB_ENDPOINT` (AINode: `http://<node>:3000/v1/systemone`, with
+`JDE_JEB_API_KEY` for its key) and `JDE_JEB_MODEL`. If nothing answers, the decision takes its policy's
+fallback and the error says to start a local Jeb; JDE never switches to a hosted service on its own.
+TypeSafe's hosted Jev is still there if you ask for it (`"judge": "jev"` in the policy, with
+`TYPESAFE_API_KEY`). JDE's shipped policy gives a judgment 2 seconds; on this Mac, Jeb 9B in Ollama answered
+a whole completion check in about half a second one at a time.
 
 Both of these were run as written against `jeb serve`:
 [`examples/jde-tool-gate.mjs`](examples/jde-tool-gate.mjs) (the tool-call gate in the scenarios below) and
 [`examples/jde-local-jeb.mjs`](examples/jde-local-jeb.mjs) (JDE's completion check over one of JDE's case
 files; a wiring check, not a measurement).
 
-**Judge Jeb.** An adapter specialised for JDE's judging questions, and a `jebJudge` provider so JDE can ask
-Jeb directly, are planned but not published; they're under [What's next](../README.md#whats-next).
+**Judge Jeb.** A Jeb tuned on JDE's own judging questions is planned and not released yet (see
+[What's next](../README.md#whats-next)). When it ships, JDE moves to it with the one `JDE_JEB_MODEL` setting.
 
 ---
 

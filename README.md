@@ -320,8 +320,8 @@ All of this is in progress or planned; none of it has a result yet.
 - **Judge Jeb.** An adapter specialised for [JDE](https://github.com/Titanium-Devops/jde)'s judging questions (does
   an agent's answer cover every part of the task), trained on JDE-shaped states that the current pool does not have.
   In training.
-- **JDE calibration and jebJudge.** Temperatures fitted per question family on JDE's own labelled traffic, and a
-  `jebJudge` provider so JDE can ask Jeb directly, on AINode, the standalone server or a GGUF.
+- **JDE calibration.** JDE now judges with Jeb by default (its `jeb` judge, pointed at `jeb serve`, AINode or the
+  standalone server). Still to come: temperatures fitted per question family on JDE's own labelled traffic.
 - **Coding-agent hooks.** Jeb as a check inside a coding agent's hooks, in shadow mode first: it answers beside the
   existing check and acts on nothing until its numbers are in.
 - **DecisionBench.** Planned: a benchmark for typed decisions designed to be fair to every model, ours included.
