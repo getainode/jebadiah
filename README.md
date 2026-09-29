@@ -176,6 +176,13 @@ changes. Typed-decisions improves (0.156 to 0.121, 0.171 to 0.135) and so does N
 HelpSteer2 labels are close to uniform and natural HelpSteer2 traffic puts over 70% of its labels at 3 or 4. Each
 model card and its `eval/RESULTS.md` carry the per-set numbers.
 
+A held-out check on 2026-09-29 says the label mix is only part of it. On the 418 HelpSteer2 validation rows that
+neither Jevals nor Nimble uses (natural label mix, never in the training pool), the score answers want a temperature of
+1.26 (4B) and 1.29 (9B), and still 1.08 and 1.11 at a flat label mix, where the calibration slice's own HelpSteer2
+questions want about 0.8. If your traffic looks like HelpSteer2, keep the older score temperature (1.20 on the 4B, 1.22
+on the 9B, the `train` fit in `temperatures.json`) or refit on your own labels. v3's calibration split will draw
+HelpSteer2 from held-out data.
+
 ## Where we stand on JevBench
 
 [JevBench](https://github.com/fstandhartinger/jevbench) (v1.4.2) is a public benchmark for exactly this kind of model.
