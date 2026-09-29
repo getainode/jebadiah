@@ -1,0 +1,37 @@
+{
+ "route": {
+  "prompt": "<|im_start|>system\nYou are a decision function. Answer with the single letter of the best option and nothing else.<|im_end|>\n<|im_start|>user\nSTATE:\n{\"ticket\":\"Customer says the invoice total does not match the quote.\"}\n\nQUESTION: Which team should take this ticket?\n\nOPTIONS:\nA. billing: an invoice, a charge or a refund\nB. support: a product question\nC. sales: a quote or a renewal\n\nAnswer with the label of one option and nothing else.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "letters": [
+   "A",
+   "B",
+   "C"
+  ],
+  "cand_ids": [
+   32,
+   33,
+   34
+  ],
+  "keys": [
+   "billing",
+   "support",
+   "sales"
+  ],
+  "n_tokens": 110
+ },
+ "urgent": {
+  "prompt": "<|im_start|>system\nYou are a decision function. Answer with the single letter of the best option and nothing else.<|im_end|>\n<|im_start|>user\nSTATE:\n{\"ticket\":\"Customer says the invoice total does not match the quote.\"}\n\nQUESTION: The customer is blocked from working.\n\nOPTIONS:\nA. true: work has stopped\nB. false: it can wait\n\nAnswer with the label of one option and nothing else.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "letters": [
+   "A",
+   "B"
+  ],
+  "cand_ids": [
+   32,
+   33
+  ],
+  "keys": [
+   "true",
+   "false"
+  ],
+  "n_tokens": 95
+ }
+}
