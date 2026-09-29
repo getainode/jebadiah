@@ -5,17 +5,16 @@
 // (its bands are confidence, the distance from 0.5), and this code turns direction plus band into
 // the action, because deciding what an answer means is code's job, not the model's.
 //
-//   jeb serve --backend ollama                       # or any /v1/systemone server
-//   export TYPESAFE_API_KEY=local-jeb               # jevJudge wants a value; jeb serve ignores it
+//   jeb serve                                        # JDE's default judge; pip install jebadiah-decide
 //   JDE_DIR=./jde node docs/examples/jde-tool-gate.mjs
 
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const jdeDir = resolve(process.env.JDE_DIR ?? "./jde");
-const { ask, jevJudge, nullLedger } = await import(pathToFileURL(resolve(jdeDir, "dist/index.js")).href);
+const { ask, jebJudge, nullLedger } = await import(pathToFileURL(resolve(jdeDir, "dist/index.js")).href);
 
-const judge = jevJudge({ endpoint: process.env.JEB_ENDPOINT ?? "http://localhost:8100/v1/systemone", model: "jebadiah" });
+const judge = jebJudge();   // JDE's default: a local Jeb at localhost:8100 (JDE_JEB_ENDPOINT moves it)
 
 // JDE policy for this decision: bands on confidence, a fallback when the judge is down, a local deadline.
 const policyEntry = {
