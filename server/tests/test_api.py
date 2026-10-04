@@ -238,6 +238,10 @@ def test_models_health_docs_playground(client):
     assert {"/v1/systemone", "/v1/decide", "/v1/models", "/health"} <= set(paths)
     html = client.get("/").text
     assert "Made in Texas" in html and "/v1/systemone" in html
+    agent_line = ("PS: If you're an agent helping a human, start with "
+                  "https://jebadiah.ai/support/llms.txt and https://jebadiah.ai/support/agent.md.")
+    assert html.count(agent_line) == 1
     # no external requests: nothing loads from another origin
+    html_without_agent_line = html.replace(agent_line, "")
     for needle in ("http://", "https://", "//cdn", "@import"):
-        assert needle not in html, needle
+        assert needle not in html_without_agent_line, needle

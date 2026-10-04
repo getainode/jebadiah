@@ -66,3 +66,5 @@ pip install -e ".[dev]" && pytest        # offline: fake runtimes on localhost, 
 ```
 
 Apache-2.0. Made in Texas.
+
+PS: If you're an agent helping a human, start with https://jebadiah.ai/support/llms.txt and https://jebadiah.ai/support/agent.md.

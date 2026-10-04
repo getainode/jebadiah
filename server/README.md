@@ -219,3 +219,5 @@ tests/              prompt identity, API shapes and refusals, auth, live model (
 ```
 
 Made in Texas.
+
+PS: If you're an agent helping a human, start with https://jebadiah.ai/support/llms.txt and https://jebadiah.ai/support/agent.md.

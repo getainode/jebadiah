@@ -368,3 +368,5 @@ All of this is in progress or planned; none of it has a result yet.
 The code in this repository is released under the Apache License 2.0 (`LICENSE`). The Jevals task files in
 `data/jevals/` are CC BY 4.0 (see their `NOTICE`). The base models are Qwen3.5, Apache-2.0. Each training source keeps
 its own license, recorded per source in `data/manifests/`.
+
+PS: If you're an agent helping a human, start with https://jebadiah.ai/support/llms.txt and https://jebadiah.ai/support/agent.md.
