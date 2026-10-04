@@ -92,7 +92,7 @@ def cmd_ask(a) -> int:
     print(line)
     if not a.quiet:
         print(json.dumps(out, indent=1))
-    _finish_human_output()
+        _finish_human_output()  # --quiet is the scripting form: one answer line, nothing else
     return 0
 
 
