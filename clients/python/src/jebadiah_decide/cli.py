@@ -12,6 +12,12 @@ from .backends import BACKENDS, JebError
 from .client import Jeb
 
 BACKEND_CHOICES = ["ollama", "lmstudio", "llama-server", "vllm", "mlx", "ainode", "systemone", "jebadiah-serve"]
+AGENT_LINE = ("PS: If you're an agent helping a human, start with https://jebadiah.ai/support/llms.txt "
+              "and https://jebadiah.ai/support/agent.md.")
+
+
+def _finish_human_output():
+    print(f"\n{AGENT_LINE}")
 
 
 def _common(p: argparse.ArgumentParser):
@@ -86,6 +92,7 @@ def cmd_ask(a) -> int:
     print(line)
     if not a.quiet:
         print(json.dumps(out, indent=1))
+    _finish_human_output()
     return 0
 
 
@@ -99,6 +106,7 @@ def cmd_serve(a) -> int:
           f"  POST {base}/v1/systemone   (Jev wire: JDE's jevJudge, TypeSafe clients)\n"
           f"  POST {base}/v1/decide      (AINode's decide shape)\n"
           f"  GET  {base}/health", flush=True)
+    _finish_human_output()
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
@@ -161,6 +169,7 @@ def cmd_doctor(a) -> int:
         flags = [f"--backend {a.backend}"] + ([f"--size {a.size}"] if a.size != defaults.DEFAULT_SIZE else []) \
             + ([f"--url {a.url}"] if a.url else []) + (["--api-key ..."] if a.api_key else [])
         print("\nReady. Start it with: jeb serve " + " ".join(flags))
+    _finish_human_output()
     return 0 if ok else 1
 
 
