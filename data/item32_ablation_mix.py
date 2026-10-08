@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import sys
 
 LEGACY_HASHES = {
     "train.jsonl": "2069602f17b53761f607c29e9cf0404aa16a301e9f12cf41bb0ab56eb5a72687",
@@ -76,7 +77,7 @@ def write_split(path, rows):
             "questions": sum(len(r["questions"]) for r in rows)}
 
 
-def build(legacy, v21, output, overlap_hits):
+def build(legacy, v21, output, overlap_hits, tokenizer_path):
     check_hash(v21 / "manifest.json", V21_MANIFEST_HASH)
     manifest = json.loads((v21 / "manifest.json").read_text())
     for name in ("train.jsonl", "calib.jsonl"):
@@ -117,6 +118,40 @@ def build(legacy, v21, output, overlap_hits):
             excluded["legacy_duplicate_or_calibration_family"] += len(r["questions"])
             continue
         candidates[source].append(r)
+    # Check option-only prompts before selection. Long state can be truncated,
+    # but long instructions/options cannot fit the fixed v2 sequence budget.
+    from transformers import AutoTokenizer
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "train"))
+    from jebadiah_prompt import Renderer
+    tokenizer = AutoTokenizer.from_pretrained(str(tokenizer_path), local_files_only=True)
+    if sha(tokenizer_path / "tokenizer.json") != manifest["tokenizer_hashes"]["9b"]:
+        raise ValueError("Tokenizer does not match the frozen 9B data manifest")
+    eligibility_renderer = Renderer(tokenizer, max_tokens=1984)  # 64-token permutation reserve
+    unrenderable = Counter()
+    over_2048 = Counter()
+    reserve_only = Counter()
+    full_budget_renderer = Renderer(tokenizer, max_tokens=2048)
+    for source, rows in list(candidates.items()):
+        valid = []
+        for r in rows:
+            try:
+                for question in r["questions"].values():
+                    eligibility_renderer.render("", question)
+            except ValueError as error:
+                if "exceed max sequence length" not in str(error):
+                    raise
+                unrenderable[source] += len(r["questions"])
+                try:
+                    for question in r["questions"].values():
+                        full_budget_renderer.render("", question)
+                except ValueError:
+                    over_2048[r["subset"]] += len(r["questions"])
+                else:
+                    reserve_only[r["subset"]] += len(r["questions"])
+                continue
+            valid.append(r)
+        candidates[source] = valid
+        print("eligibility", source, len(rows), "records checked", flush=True)
     legacy_count = sum(len(r["questions"]) for r in old["train"])
     # Maximal new budget at <=50%; 10% cap on each new upstream source.
     cap = (legacy_count * 2) // 10
@@ -162,6 +197,11 @@ def build(legacy, v21, output, overlap_hits):
                   "new_questions": n if name == "a3" else 0,
                   "new_fraction": n / total if name == "a3" else 0,
                   "candidate_exclusions": dict(excluded),
+                  "unrenderable_new_questions_by_upstream": dict(unrenderable),
+                  "over_2048_new_questions_by_subset": dict(over_2048),
+                  "permutation_reserve_excluded_questions_by_subset": dict(reserve_only),
+                  "option_only_prompt_budget": 1984,
+                  "tokenizer_sha256": sha(tokenizer_path / "tokenizer.json"),
                   "source_variant_question_counts": dict(Counter({s: sum(len(r["questions"]) for r in train if r["subset"] == s) for s in used})),
                   "type_question_counts": dict(Counter(q["type"] for r in train for q in r["questions"].values()))}
         (dest / "manifest.json").write_text(json.dumps(report, indent=2) + "\n")
@@ -173,6 +213,7 @@ if __name__ == "__main__":
     p.add_argument("--legacy", type=Path, required=True)
     p.add_argument("--v21", type=Path, required=True)
     p.add_argument("--output", type=Path, required=True)
+    p.add_argument("--tokenizer", type=Path, required=True, help="local pinned Qwen3.5-9B tokenizer directory")
     p.add_argument("--overlap-hits", type=Path, required=True, help="private full-suite scanner record-ID ledger")
     a = p.parse_args()
-    build(a.legacy, a.v21, a.output, a.overlap_hits)
+    build(a.legacy, a.v21, a.output, a.overlap_hits, a.tokenizer)

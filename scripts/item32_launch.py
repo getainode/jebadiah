@@ -12,7 +12,7 @@ import shlex
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-TIMEOUT_MINUTES = {'a1': 100, 'a3': 150}
+TIMEOUT_MINUTES = {'a1': 100, 'a3': 135}
 
 
 def command(run, dataset_revision, code_revision):

@@ -50,6 +50,7 @@ python data/item32_ablation_mix.py \
   --legacy /path/to/archived/data-v1 \
   --v21 /path/to/pinned/v21-release \
   --overlap-hits /path/to/private/contamination-hits.json \
+  --tokenizer /path/to/pinned/Qwen3.5-9B-tokenizer \
   --output /tmp/item32-final-mixes
 ```
 
@@ -63,10 +64,16 @@ python scripts/item32_launch.py a3 DATASET_COMMIT_SHA
 ```
 
 The committed JSON configs specify the same recipe and private destinations.
-Training jobs have hard timeouts of 100 and 150 minutes. Two proxy jobs reserve
+The first training allocations used hard timeouts of 100 and 150 minutes. A3
+failed before step 1 because an options-only prompt exceeded 2,048 tokens. The
+builder now checks every eligible new record against the pinned tokenizer,
+reserving 64 tokens for choice-order variation, and records per-source exclusions
+for prompts that cannot fit. Long state is truncated under the unchanged v2
+renderer. The A3 retry uses 135 minutes. Two proxy jobs reserve
 35 minutes each. At $2.75/hour, the combined maximum allocation is $14.6667,
-under the $15 approval. Failed or retried allocations count against this same
-cap. Private spend evidence records job IDs, durations and estimated charges.
+under the $15 approval. The failed A3 job ran 652 seconds, estimated $0.4981;
+the reduced retry allocation gives a revised combined ceiling of $14.4773.
+Failed or retried allocations count against this same cap. Private spend evidence records job IDs, durations and estimated charges.
 
 ## Interpretation
 
