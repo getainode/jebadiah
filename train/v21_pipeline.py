@@ -81,6 +81,14 @@ def validate_data(train, calib):
     return report
 
 
+def split_manifest_entry(manifest, filename, manifest_file):
+    files = manifest["files"]
+    if filename in files:
+        return files[filename]
+    relative = str(Path(filename).relative_to(Path(manifest_file).parent))
+    return files[relative]
+
+
 def run(script, *args):
     subprocess.run([sys.executable, str(HERE / script), *map(str, args)], check=True)
 
@@ -156,8 +164,7 @@ def main():
     manifest = json.loads((data / args.manifest_file).read_text())
     for split, filename in (("train", args.train_file), ("calib", args.calib_file)):
         # Split manifests may live alongside nested ablation files in one dataset.
-        manifest_key = str(Path(filename).relative_to(Path(args.manifest_file).parent))
-        entry = manifest["files"].get(filename) or manifest["files"][manifest_key]
+        entry = split_manifest_entry(manifest, filename, args.manifest_file)
         for key in ("sha256", "rows", "questions"):
             if entry[key] != data_report[split][key]:
                 raise ValueError(f"Manifest mismatch: {filename} {key}")
