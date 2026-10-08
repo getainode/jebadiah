@@ -155,7 +155,9 @@ def main():
     data_report = validate_data(train, calib)
     manifest = json.loads((data / args.manifest_file).read_text())
     for split, filename in (("train", args.train_file), ("calib", args.calib_file)):
-        entry = manifest["files"][filename]
+        # Split manifests may live alongside nested ablation files in one dataset.
+        manifest_key = str(Path(filename).relative_to(Path(args.manifest_file).parent))
+        entry = manifest["files"].get(filename) or manifest["files"][manifest_key]
         for key in ("sha256", "rows", "questions"):
             if entry[key] != data_report[split][key]:
                 raise ValueError(f"Manifest mismatch: {filename} {key}")
