@@ -123,9 +123,13 @@ def build(legacy, v21, output, overlap_hits, tokenizer_path):
     from transformers import AutoTokenizer
     sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "train"))
     from jebadiah_prompt import Renderer
+    from jebadiah_model import template_sha256
     tokenizer = AutoTokenizer.from_pretrained(str(tokenizer_path), local_files_only=True)
     if sha(tokenizer_path / "tokenizer.json") != manifest["tokenizer_hashes"]["9b"]:
         raise ValueError("Tokenizer does not match the frozen 9B data manifest")
+    contract = json.loads((Path(__file__).resolve().parents[1] / "results/runs/9b-chat-v1/adapter/prompt_contract.json").read_text())
+    if template_sha256(tokenizer) != contract["chat_template_sha256"]:
+        raise ValueError("Tokenizer chat template does not match v2")
     eligibility_renderer = Renderer(tokenizer, max_tokens=1984)  # 64-token permutation reserve
     unrenderable = Counter()
     over_2048 = Counter()
