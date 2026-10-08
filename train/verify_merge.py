@@ -8,6 +8,9 @@ import torch
 
 from jebadiah_model import Scorer, load_base, load_adapter, load_tokenizer
 
+MARGIN = 0.05     # a flip counts only if the unmerged answer led by more than this
+MAX_DELTA = 0.05  # largest allowed probability shift from merging into bf16
+
 
 def verify(base, adapter, merged, calib, device="cuda", max_tokens=4096):
     rows = [json.loads(line) for line in Path(calib).read_text(encoding="utf-8").split("\n") if line.strip()]
@@ -32,11 +35,18 @@ def verify(base, adapter, merged, calib, device="cuda", max_tokens=4096):
         raise ValueError("No merge verification questions")
     picks = sum(max(range(len(a)), key=a.__getitem__) == max(range(len(b)), key=b.__getitem__)
                 for a, b in zip(before, after))
+    def margin(p):
+        top = sorted(p, reverse=True)
+        return top[0] - (top[1] if len(top) > 1 else 0.0)
+    # bf16 merging moves probabilities a little; a pick may flip only where the unmerged answer was a near-tie.
+    clear_flips = sum(max(range(len(a)), key=a.__getitem__) != max(range(len(b)), key=b.__getitem__) and margin(a) > MARGIN
+                      for a, b in zip(before, after))
     report = {"questions": len(items), "identical_picks": picks, "agreement": picks / len(items),
-              "max_probability_delta": max(abs(x-y) for a, b in zip(before, after) for x, y in zip(a, b))}
+              "max_probability_delta": max(abs(x-y) for a, b in zip(before, after) for x, y in zip(a, b)),
+              "clear_margin_flips": clear_flips, "margin_threshold": MARGIN, "max_delta_allowed": MAX_DELTA}
     (Path(merged) / "merge_verification.json").write_text(json.dumps(report, indent=2) + "\n")
-    if report["agreement"] < 0.99:
-        raise ValueError(f"Merge agreement below 99 percent: {report}")
+    if clear_flips or report["max_probability_delta"] > MAX_DELTA:
+        raise ValueError(f"Merge changed confident answers or moved probabilities too far: {report}")
     return report
 
 
