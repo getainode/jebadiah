@@ -94,3 +94,35 @@ The final report must include paired group-bootstrap intervals versus v2,
 five area deltas, BANKING77, When2Call, RAGTruth, API-Bank and CLINC150+OOS,
 coverage/failures, immutable artifacts, actual epoch completion and spend.
 No full-suite score is inferred from this proxy.
+
+## Completed frozen-proxy results
+
+Both private models completed one full epoch (1,325 and 2,649 steps), passed
+merge verification with zero confident flips, and completed all 11,079 frozen
+proxy requests with no failures. These are proxy results, not leaderboard scores.
+
+| Run | Proxy | Delta versus v2 | Paired 95% interval |
+|---|---:|---:|---|
+| v2 | 44.67 | baseline | baseline |
+| v2.1 r1 | 38.12 | -6.55 | [-8.26, -4.59] |
+| A1 | 45.25 | +0.57 | [-0.80, +1.88] |
+| A3 | 46.97 | +2.30 | [+1.04, +3.60] |
+
+A3 minus A1 is +1.73 points, paired interval [+0.32, +3.23]. Each interval
+uses 2,000 complete-group draws within benchmark/domain/track strata, seed
+20261008, with official metrics recomputed per draw. Deltas use unrounded scores.
+
+A1 is compatible with v2, arguing against the collective scrub as the main
+cause of the r1 loss. This specific capped mix improves over A1 under the v2
+recipe, with retrieval contributing most (+4.50 area points). The evidence
+points toward dilution and/or r1's changed recipe and realized exposure, but
+cannot separate rank, length, type mix, source balance and partial-epoch effects.
+A3 still loses 9.08 When2Call skill points versus v2 and 13.15 RAGTruth skill
+points versus A1, despite its better aggregate score.
+
+Estimated total compute spend is $6.2303, including the failed A3 setup and
+both proxies, under the $15 cap. Private report, benchmark tables, intervals,
+immutable model/results pins and spend evidence are stored under
+`analysis/item32-ablations` in
+`jbrashear/jebadiah-9b-v2-1-index-results`. All requested training, proxy and
+local validation work is complete; review and merge remain with the lead.
