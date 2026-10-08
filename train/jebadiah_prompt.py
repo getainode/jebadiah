@@ -178,6 +178,14 @@ class Renderer:
             state_text = self.tok.decode(ids) + " [truncated]"
             prompt = self.render_messages(state_text, t.question, t.options, shown)
             truncated = True
+            remaining = len(self.tok.encode(prompt, add_special_tokens=False))
+            while remaining > self.max_tokens and keep > 0:
+                keep = max(0, keep - (remaining - self.max_tokens) - 4)
+                state_text = self.tok.decode(ids[:keep]) + " [truncated]"
+                prompt = self.render_messages(state_text, t.question, t.options, shown)
+                remaining = len(self.tok.encode(prompt, add_special_tokens=False))
+            if remaining > self.max_tokens:
+                raise ValueError("Question and options exceed max sequence length without any state")
         return Rendered(prompt, keys, letters, cand_ids, truncated, scheme)
 
 

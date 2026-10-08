@@ -1,26 +1,30 @@
-"""Proof that the copied renderer is AINode's: render a sample of records through both and
-compare bytes. Runs on the Mac against the checked-out repo (pip install not needed)."""
-import json, os, sys, random
-sys.path.insert(0, os.environ.get("AINODE_SRC", "ainode-src"))  # a checkout of getainode/ainode at the pinned commit
-from ainode.api import decide as D, systemone as S
-import ainode_prompt_verbatim as V
-from jebadiah_prompt import flatten_text
+"""852 byte-identical question renders against independent pinned-source golden outputs."""
+import gzip
+import hashlib
+import json
+from pathlib import Path
 
-def render_real(state, q):
-    t = S.translate_one("q", q)
-    return D.build_messages(D.serialize_state(state), None, t.question, t.options), t.names
-def render_copy(state, q):
-    t = V.translate_one("q", q)
-    return V.build_messages(V.serialize_state(state), None, t.question, t.options), t.names
+import ainode_prompt_verbatim as renderer
 
-paths = sys.argv[1:]
-n = 0
-for p in paths:
-    rows = [json.loads(l) for l in open(p)]
-    random.Random(0).shuffle(rows)
-    for r in rows[:300]:
-        for qid, q in r["questions"].items():
-            a = render_real(r["state"], q); b = render_copy(r["state"], q)
-            assert a == b, (p, r["id"], qid)
-            n += 1
-print("identical for", n, "questions across", len(paths), "files; commit", V.PROMPT_SOURCE_COMMIT[:12], "sha", V.PROMPT_SOURCE_SHA256[:16])
+
+def test_852_pinned_renders():
+    root = Path(__file__).parent / "fixtures"
+    contract = json.loads((root / "prompt_fixture_contract.json").read_text())
+    payload = gzip.decompress((root / "prompt_renders.jsonl.gz").read_bytes())
+    assert hashlib.sha256(payload).hexdigest() == contract["uncompressed_sha256"]
+    assert renderer.PROMPT_SOURCE_COMMIT == contract["prompt_source_commit"]
+    assert renderer.PROMPT_SOURCE_SHA256 == contract["prompt_source_sha256"]
+    rows = [json.loads(line) for line in payload.splitlines()]
+    assert len(rows) == contract["renders"] == 852
+    for row in rows:
+        t = renderer.translate_one("q", row["question"])
+        actual = renderer.build_messages(renderer.serialize_state(row["state"]), None, t.question, t.options)
+        assert t.names == row["names"]
+        for got, expected in zip(actual, row["messages"], strict=True):
+            assert got["role"].encode("utf-8") == expected["role"].encode("utf-8")
+            assert got["content"].encode("utf-8") == expected["content"].encode("utf-8")
+
+
+if __name__ == "__main__":
+    test_852_pinned_renders()
+    print("PASS: 852 pinned question renders match byte for byte; no AINode import")

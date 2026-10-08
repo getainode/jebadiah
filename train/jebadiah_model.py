@@ -84,13 +84,13 @@ class Scorer:
     temperature per question type applied to the candidate logits before the softmax."""
 
     def __init__(self, model, tokenizer, max_tokens: int = 2048, temperatures: dict | None = None,
-                 device: str = "cuda", renderer: Renderer | None = None):
+                 device: str | None = None, renderer: Renderer | None = None):
         self.model = model
         self.tok = tokenizer
         self.renderer = renderer or Renderer(tokenizer, max_tokens)
         self.max_tokens = max_tokens
         self.temperatures = temperatures or {}
-        self.device = device
+        self.device = device or str(next(model.parameters()).device)
         self.model.eval()
 
     @property
