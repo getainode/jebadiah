@@ -68,7 +68,12 @@ The first training allocations used hard timeouts of 100 and 150 minutes. A3
 failed before step 1 because an options-only prompt exceeded 2,048 tokens. The
 builder now checks every eligible new record against the pinned tokenizer,
 reserving 64 tokens for choice-order variation, and records per-source exclusions
-for prompts that cannot fit. Long state is truncated under the unchanged v2
+for prompts that cannot fit. The complete eligible new pool excludes 27
+questions that cannot fit 2,048 tokens: 16 HelpSteer3/preference, 10
+HelpSteer3/edit_quality and one UltraFeedback-paired. Eight more HelpSteer3
+questions (four per subset) fail the 64-token permutation reserve. Only one
+question in the original selected A3 mix needs replacement; its total count
+stays unchanged. Long state is truncated under the unchanged v2
 renderer. The A3 retry uses 135 minutes. Two proxy jobs reserve
 35 minutes each. At $2.75/hour, the combined maximum allocation is $14.6667,
 under the $15 approval. The failed A3 job ran 652 seconds, estimated $0.4981;
