@@ -25,7 +25,7 @@ python bootstrap.py --suite /private/suite-0.3 \
   --replicates 2000 --out /private/item31-bootstrap.json
 ```
 
-The bootstrap draws the same complete groups for both models, with replacement within benchmark/domain/track strata, and recomputes the official benchmark metrics and area aggregation each time. Independent copies preserve repeated macro-cluster weights. Its percentile 95% interval is conditional on this proxy, not a measure of full-suite sampling uncertainty. Missing manifest rows prevent a paired interval; failed rows retain the official failure and coverage treatment.
+The bootstrap draws the same complete groups for both models, with replacement within benchmark/domain/track strata, and recomputes the official benchmark metrics and area aggregation each time. Draws receive distinct group identities while retaining native song/user metadata clusters, so the official macro metrics keep their published definitions. Its percentile 95% interval is conditional on this proxy, not a measure of full-suite sampling uncertainty. Missing manifest rows prevent a paired interval; failed rows retain the official failure and coverage treatment.
 
 The supplied wrapper's `ROWS_IN_SUITE` expects full benchmark-row JSONL, not an ID list. `run.py` privately materializes the validated manifest rows before calling the unchanged kit runner and scorer. It forces compact results, verifies the pinned suite revision, rejects limit/rows overrides and public uploads, and removes temporary row text afterward. Results go to a private dataset.
 

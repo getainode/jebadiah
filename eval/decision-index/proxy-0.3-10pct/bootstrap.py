@@ -4,6 +4,8 @@ import argparse
 import collections
 import json
 import random
+import multiprocessing
+from concurrent.futures import ProcessPoolExecutor
 import time
 from pathlib import Path
 from sample import read_ids
@@ -54,11 +56,8 @@ def resample(strata, rng):
             for original in members:
                 r = dict(original)
                 r['_evaluation'] = dict(original['_evaluation'], group_id=f"{original['_evaluation']['group_id']}:bootstrap:{draw}")
-                # Duplicate draws must retain independent macro-cluster weight.
-                if original['_evaluation']['catalog_id'] in (22, 23):
-                    r['metadata'] = dict(original['metadata'])
-                    key = 'song_id' if original['_evaluation']['catalog_id'] == 22 else 'user_id'
-                    r['metadata'][key] = f"{r['metadata'][key]}:bootstrap:{draw}"
+                # Keep native metadata clusters and tracks unchanged. Only the
+                # sampled catalog/group identity is duplicated for each draw.
                 rows.append(r)
     return rows
 
@@ -71,6 +70,22 @@ def quantile(values, p):
     return values[lo] + (values[hi] - values[lo]) * (x - lo)
 
 
+_BOOTSTRAP = None
+
+
+def initialize_worker(strata, baseline, candidate, seed):
+    global _BOOTSTRAP
+    _BOOTSTRAP = strata, baseline, candidate, seed
+
+
+def paired_draw(i):
+    strata, baseline, candidate, seed = _BOOTSTRAP
+    sampled = resample(strata, random.Random(seed + i))
+    b, ba = official_index(sampled, baseline)
+    c, ca = official_index(sampled, candidate)
+    return c - b, {a: ca[a] - ba[a] for a in ba}
+
+
 def main():
     from decision_index.suite.io import Suite
     from decision_index.scoring.report import load_results
@@ -81,6 +96,7 @@ def main():
     p.add_argument('--out', type=Path, required=True)
     p.add_argument('--replicates', type=int, default=2000)
     p.add_argument('--seed', type=int, default=20261008)
+    p.add_argument('--workers', type=int, default=4)
     args = p.parse_args()
     root = Path(__file__).resolve().parent
     manifest = json.loads((root / 'manifest.json').read_text())
@@ -94,21 +110,20 @@ def main():
     bscore, bareas = official_index(rows, baseline)
     cscore, careas = official_index(rows, candidate)
     strata = group_strata(rows)
-    rng = random.Random(args.seed)
     deltas, area_deltas = [], collections.defaultdict(list)
     start = time.monotonic()
-    for i in range(args.replicates):
-        sampled = resample(strata, rng)
-        b, ba = official_index(sampled, baseline)
-        c, ca = official_index(sampled, candidate)
-        deltas.append(c - b)
-        for a in ba:
-            area_deltas[a].append(ca[a] - ba[a])
-        if (i + 1) % 25 == 0:
-            print(json.dumps(dict(replicates=i+1, seconds=round(time.monotonic()-start, 1))), flush=True)
+    with ProcessPoolExecutor(max_workers=args.workers, mp_context=multiprocessing.get_context('fork'),
+                             initializer=initialize_worker,
+                             initargs=(strata, baseline, candidate, args.seed)) as pool:
+        for i, (delta, differences) in enumerate(pool.map(paired_draw, range(args.replicates), chunksize=5)):
+            deltas.append(delta)
+            for a, difference in differences.items():
+                area_deltas[a].append(difference)
+            if (i + 1) % 25 == 0:
+                print(json.dumps(dict(replicates=i+1, seconds=round(time.monotonic()-start, 1))), flush=True)
     output = dict(proxy=True, note='Proxy, not a leaderboard score; conditional interval over this frozen proxy, not full-suite sampling uncertainty.',
                   method='paired percentile bootstrap of complete catalog_id/group_id units with replacement within benchmark/domain/track strata; official scorer recomputed for each draw',
-                  seed=args.seed, replicates=args.replicates, manifest_sha256=manifest['run_ids_sha256'],
+                  seed=args.seed, replicate_seed_rule='seed + zero-based replicate index', replicates=args.replicates, manifest_sha256=manifest['run_ids_sha256'],
                   baseline=bscore, candidate=cscore, difference=cscore-bscore,
                   difference_ci95=[quantile(deltas, .025), quantile(deltas, .975)],
                   areas={a: dict(difference=careas[a]-bareas[a], difference_ci95=[quantile(v,.025),quantile(v,.975)]) for a,v in area_deltas.items()})

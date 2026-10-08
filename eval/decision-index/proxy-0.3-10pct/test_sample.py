@@ -59,7 +59,7 @@ class SamplingTest(unittest.TestCase):
         proxy = load_proxy(Suite(), {'1:a:0', '1:a:1'})
         self.assertEqual(len(proxy.selected), 2)
 
-    def test_bootstrap_draw_preserves_case_chunks_and_cluster_multiplicity(self):
+    def test_bootstrap_draw_preserves_case_chunks_and_native_clusters(self):
         rows = [row(22, 'song', c) for c in (0, 1)]
         for r in rows:
             r['metadata']['song_id'] = 'song'
@@ -67,7 +67,7 @@ class SamplingTest(unittest.TestCase):
         self.assertEqual(len(sampled), 2)
         self.assertEqual(len({r['_evaluation']['group_id'] for r in sampled}), 1)
         self.assertEqual({r['_evaluation']['run_id'] for r in sampled}, {'22:song:0', '22:song:1'})
-        self.assertEqual({r['metadata']['song_id'] for r in sampled}, {'song:bootstrap:0'})
+        self.assertEqual({r['metadata']['song_id'] for r in sampled}, {'song'})
 
 
 if __name__ == '__main__':
