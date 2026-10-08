@@ -32,6 +32,7 @@ import time
 import torch
 from torch.utils.data import Dataset
 from transformers import Trainer, TrainingArguments, TrainerCallback
+from transformers.trainer_pt_utils import LengthGroupedSampler
 
 from jebadiah_model import FP32_CANDIDATE_LOGITS, Scorer, load_base, load_tokenizer, option_logits, template_sha256
 from hub_checkpoints import HubCheckpoint, resolve_resume
@@ -53,6 +54,7 @@ class DecideDataset(Dataset):
 
     def __init__(self, records):
         self.items = []
+        self.lengths = None
         for r in records:
             for qid, q in r["questions"].items():
                 target = (r.get("target") or {}).get(qid)
@@ -63,6 +65,17 @@ class DecideDataset(Dataset):
 
     def __getitem__(self, i):
         return self.items[i]
+
+    def measure_lengths(self, renderer):
+        """Lengths of the actual contracted prompts, without consuming the shuffle RNG.
+
+        Choice permutations can move a token boundary slightly, but keep the same state,
+        question and options. Canonical order is sufficient for padding-efficient sampling.
+        """
+        self.lengths = [len(renderer.tok.encode(renderer.render(state, q).prompt,
+                                              add_special_tokens=False))
+                        for state, q, *_ in self.items]
+        return self.lengths
 
 
 def label_index(q: dict, label, keys: list[str]) -> int:
@@ -111,7 +124,8 @@ class DecideCollator:
     learn a position prior."""
 
     def __init__(self, tokenizer, renderer: Renderer, shuffle_choice: bool, seed: int = 0,
-                 score_targets: str = "source", score_adjacent: float = 0.2):
+                 score_targets: str = "source", score_adjacent: float = 0.2,
+                 pad_to_multiple_of: int | None = None):
         self.tok = tokenizer
         self.renderer = renderer
         self.shuffle_choice = shuffle_choice
@@ -121,6 +135,9 @@ class DecideCollator:
             raise ValueError(f"score_targets must be 'source' or 'ordinal', got {score_targets!r}")
         self.score_targets = score_targets
         self.score_adjacent = float(score_adjacent)
+        if pad_to_multiple_of is not None and pad_to_multiple_of < 1:
+            raise ValueError("pad_to_multiple_of must be positive")
+        self.pad_to_multiple_of = pad_to_multiple_of
 
     def __call__(self, batch):
         prompts, cands, labels, targets = [], [], [], []
@@ -136,7 +153,8 @@ class DecideCollator:
             li = label_index(q, label, r.keys)
             labels.append(li)
             targets.append(make_target(q, label, r.keys, target, self.score_targets, self.score_adjacent))
-        enc = self.tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False)
+        enc = self.tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False,
+                       pad_to_multiple_of=self.pad_to_multiple_of)
         kmax = max(len(c) for c in cands)
         cand = torch.full((len(batch), kmax), -1, dtype=torch.long)
         tgt = torch.zeros((len(batch), kmax))
@@ -152,8 +170,38 @@ class DecideTrainer(Trainer):
     label logits at the answer position (the Nimble objective; Kev's soft form when the source
     gives a distribution). Padded candidate slots are -inf and carry zero target."""
 
+    def __init__(self, *args, checkpoint_min_tokens=None, backbone_autocast=False, **kwargs):
+        super().__init__(*args, **kwargs)
+        if checkpoint_min_tokens is not None and checkpoint_min_tokens < 1:
+            raise ValueError("checkpoint_min_tokens must be positive")
+        self.checkpoint_min_tokens = checkpoint_min_tokens
+        self.backbone_autocast = backbone_autocast
+        self.checkpoint_modules = [module for module in self.model.modules()
+                                   if getattr(module, "gradient_checkpointing", False)]
+        if checkpoint_min_tokens is not None and not self.checkpoint_modules:
+            raise ValueError("Adaptive checkpointing requires enabled gradient checkpointing")
+
+    def _get_train_sampler(self, train_dataset=None):
+        dataset = self.train_dataset if train_dataset is None else train_dataset
+        if self.args.train_sampling_strategy == "group_by_length":
+            if getattr(dataset, "lengths", None) is None:
+                raise ValueError("Length grouping requires measured rendered prompt lengths")
+            return LengthGroupedSampler(
+                self.args.train_batch_size * self.args.gradient_accumulation_steps,
+                lengths=dataset.lengths,
+            )
+        return super()._get_train_sampler(train_dataset)
+
     def compute_loss(self, model, inputs, return_outputs=False, num_items_in_batch=None):
-        logits = option_logits(model, inputs["input_ids"], inputs["attention_mask"], inputs["cand_ids"])
+        if self.checkpoint_min_tokens is not None and model.training:
+            # Each microbatch is backpropagated before the next forward. Short batches can
+            # retain activations; long batches retain the original non-reentrant checkpoint
+            # functions and RNG preservation. Do not re-register PEFT's input-grad hooks.
+            enabled = inputs["input_ids"].shape[1] >= self.checkpoint_min_tokens
+            for module in self.checkpoint_modules:
+                module.gradient_checkpointing = enabled
+        logits = option_logits(model, inputs["input_ids"], inputs["attention_mask"], inputs["cand_ids"],
+                               backbone_autocast=self.backbone_autocast)
         logp = torch.log_softmax(logits, dim=-1)
         target = inputs["target"].to(logp.device)
         loss = -(target * logp.masked_fill(target == 0, 0.0)).sum(dim=-1).mean()
@@ -300,9 +348,16 @@ def main():
     train_records = read_jsonl(cfg["dataset_path"])
     calib_records = read_jsonl(cfg["eval_dataset_path"]) if cfg.get("eval_dataset_path") else []
     train_ds = DecideDataset(train_records)
+    if cfg.get("group_by_length", False):
+        length_t0 = time.perf_counter()
+        lengths = train_ds.measure_lengths(renderer)
+        print(json.dumps({"length_setup_s": round(time.perf_counter() - length_t0, 2),
+                          "prompt_tokens_mean": round(sum(lengths) / len(lengths), 1),
+                          "prompt_tokens_max": max(lengths)}), flush=True)
     collator = DecideCollator(tok, renderer, shuffle_choice=bool(dec.get("shuffle_choice_options", True)), seed=seed,
                               score_targets=dec.get("score_targets", "source"),
-                              score_adjacent=float(dec.get("score_ordinal_adjacent", 0.2)))
+                              score_adjacent=float(dec.get("score_ordinal_adjacent", 0.2)),
+                              pad_to_multiple_of=cfg.get("pad_to_multiple_of"))
 
     targs = TrainingArguments(
         output_dir=os.path.join(out_dir, "checkpoints"),
@@ -324,6 +379,7 @@ def main():
         report_to=[],
         seed=seed,
         dataloader_num_workers=0,
+        train_sampling_strategy="group_by_length" if cfg.get("group_by_length", False) else "random",
         remove_unused_columns=False,
         gradient_checkpointing=False,  # enabled on the PEFT model above
         optim="adamw_torch",
@@ -336,7 +392,8 @@ def main():
                                    every=int(cfg.get("eval_steps", 0)), limit=dec.get("calib_eval_limit"))
         callbacks.append(calib_callback)
     trainer = DecideTrainer(model=model, args=targs, train_dataset=train_ds, data_collator=collator,
-                            callbacks=callbacks)
+                            callbacks=callbacks, checkpoint_min_tokens=cfg.get("checkpoint_min_tokens"),
+                            backbone_autocast=bool(cfg.get("backbone_autocast", False)))
 
     trainer.model_accepts_loss_kwargs = False  # mean loss must be divided by accumulation
     if device == "cuda":
