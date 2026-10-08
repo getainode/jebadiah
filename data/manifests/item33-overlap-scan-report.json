@@ -1,0 +1,32 @@
+{
+  "edition": "0.3",
+  "scanner_origin_sha256": "d62ed3fc2d6c1b8e8cf9f8eea2506a4da89f8f3ed3abf681216937c58279b8d2",
+  "protected_index_sha256": "cf54ade9013c05db74f4c70925287382708de965fbf3cba62145ee821adad0ff",
+  "scanner_sha256": "f3c217cd0a7d6a44ef5c9405746d8c40d0634bb6b0561b79da453161d31c87af",
+  "suite_revision": "e57106b5e0698e74bd1a88b3b4c19b94a0dc8328",
+  "source_level": true,
+  "word_span": 13,
+  "sources": {
+    "hwu-original": {
+      "scanned_records": 92132,
+      "input_sha256": "0cd1d5b72217695e9d13210e1db089e4fe46e0f0b75b6d7f4370d7b7a26741a2",
+      "rejected": false,
+      "overlap_ids": []
+    },
+    "item33-tool-worlds": {
+      "scanned_records": 1500,
+      "input_sha256": "0b07e605699856fb1e4d0cad422797f1801d1db25f52e9b4ad7c8e17e3609ea6",
+      "rejected": false,
+      "overlap_ids": []
+    },
+    "item33-evidence-worlds": {
+      "scanned_records": 1500,
+      "input_sha256": "097de55f77a1aa10adb9fa71c4995a853eedf300fb8ead1b3fe36420a186463b",
+      "rejected": false,
+      "overlap_ids": []
+    }
+  },
+  "hits": [],
+  "benchmark_payloads_in_report": false,
+  "semantic_independence_proven": false
+}
