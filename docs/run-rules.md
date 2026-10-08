@@ -27,3 +27,35 @@ anything we ship; a run that measures their cost is still a single-change run.
 | v2.1 r1 | v2 | three changes at once (breaks rule 2) | | 38.12, dropped |
 | A1 | v2 | the scrub alone: v2 recipe on v2 data minus BoolQ, DBpedia14, MNLI, SummEval and 42 overlapping HelpSteer2 records | the cost of the required scrub; becomes the clean floor | pending |
 | A3 | A1 | new v2.1 sources, capped at 10% each and 50% total | interval vs A1 above zero | pending |
+
+## ITEM 34 proposed ladder
+
+Research proposals only, not launched runs. [Evidence and ranked gaps](item34-nimble-v3-research.md)
+come from public Nimble configs and Decision Index scores; v3's actual data and optimizer recipe
+are undisclosed. Establish A1's compliant floor first. Test each rung independently against the
+current accepted compliant recipe, keeping source exclusions, prompt, seed, question presentations,
+training steps and all other settings fixed. A later combination is its own measured run.
+
+For every rung, **keep only if the frozen-proxy paired 95% difference interval is above zero and
+the candidate proxy score exceeds 44.67**; otherwise drop. Additional checks below also apply.
+No full 175k or 27B run is authorized by this proposal.
+
+| Rung | One change and what it tests | Additional keep/drop check | Estimated RTX PRO 6000 training + proxy cost |
+|---|---|---|---|
+| N1 | Replace 10% of training slots with independently authored, verified minimal factual-flip pairs, matching domain/type counts; tests evidence sensitivity and compositional decisions | Keep only with improved correctness on a separate owned pair holdout; otherwise drop | 1.5 to 3 h, $4.13 to $8.25 |
+| N2 | Replace 10% of choice slots with our own deterministic 32/64/128/255-option taxonomy tasks with hard distractors/no-match; tests wide-choice and OOS competition | Keep only if the paired retrieval-area 95% interval is also above zero; otherwise drop | 2 to 4 h, $5.50 to $11.00 |
+| N3 | Rank 16 to 64 at fixed alpha/rank=2 (alpha 32 to 128); tests adapter capacity | Standard proxy rule above | 2 to 3 h, $5.50 to $8.25 |
+| N4 | LoRA dropout 0.05 to 0.0; tests deterministic adapter updates | Standard proxy rule above; record train/holdout divergence | 1.5 to 3 h, $4.13 to $8.25 |
+| N5 | Peak LR 1e-4 to 5e-5, retaining cosine schedule/warmup/epochs; tests conservative updates | Standard proxy rule above | 1.5 to 3 h, $4.13 to $8.25 |
+
+Costs assume a fixed pilot of at most 15,000 question presentations, about 4.18 questions/s from
+[ITEM 27](item27-training-speed.md), plus setup/merge/uploads and the ITEM 31 proxy's 18.7-minute
+evaluation. Rate: $2.75/h. These are estimates, not measured runtimes; cap jobs at the upper bound
+and inspect throughput early. Data authoring/review is local; optional paid teacher generation is
+outside these estimates and needs a separate decision. If an accepted recipe already has a rung's
+setting, skip that rung rather than claim a new experiment.
+
+Nimble v3 and its run code/results are CC BY-NC 4.0. Learn from public facts only: never train on
+its outputs or weights, initialize from its adapter, copy its restricted data, or import its run code
+into commercial Jeb. Independently implement experiments with our permitted data and the existing
+source-first contamination and license manifests.
