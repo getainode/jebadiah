@@ -46,3 +46,18 @@ python scripts/item36_proxy.py r3 R3_MODEL_COMMIT
 The run log in `docs/run-rules.md` was written before launch. Final results,
 intervals versus A3 and v2, five area deltas, item31 worst five, immutable pins,
 epoch/merge/coverage evidence and spend will be recorded after both jobs finish.
+
+## Launch evidence
+
+Training code pin: `66ae7af` (unchanged item32 trainer).
+A3 data pin: `bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed`.
+R3 data pin: `7430dae8b94337f3f9561ca98ecf7c6fc63dbecf`.
+
+- N3: `6ac82b48095c5780892fff24`.
+- R3: `6ac82b48fee2c900701710ee`.
+
+Local build verification: 24 tests and 117 subtests pass; regenerated item33
+train/calibration/manifest/source-scan hashes exactly match PR17. No overlap
+index or source-scan text is uploaded. The composed mix contains 25,240
+training questions and byte-identical original 512-question calibration.
+The unchanged scorer reproduces A3 46.97 with all 11,079 proxy requests ok.

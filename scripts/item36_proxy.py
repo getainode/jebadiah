@@ -19,8 +19,8 @@ def command(run, revision):
     setup = f'''set -euo pipefail
 export HF_HUB_DISABLE_XET=0
 pip install -q 'huggingface_hub==1.33.0' hf_xet
-hf download {RESULTS} --revision {CODE_REVISION} --include 'code/*' --repo-type dataset --local-dir /workspace/item36-proxy-src
-ENGINE=jebadiah_engine:JebadiahEngine RUN_NAME={name} ENGINE_OPTS={shlex.quote(options)} RESULTS_REPO={RESULTS} SUITE_DATASET=jbrashear/decision-index-suite-0.3 SYNC_SEC=120 ROWS_IN_SUITE='' LIMIT='' ATTEMPTS=1 bash /workspace/item36-proxy-src/code/indexrun-job.sh 2>&1 | tee /workspace/item36-indexrun-job.log
+hf download {RESULTS} --revision {CODE_REVISION} --include 'code/*' --repo-type dataset --local-dir /tmp/src
+ENGINE=jebadiah_engine:JebadiahEngine RUN_NAME={name} ENGINE_OPTS={shlex.quote(options)} RESULTS_REPO={RESULTS} SUITE_DATASET=jbrashear/decision-index-suite-0.3 SYNC_SEC=120 ROWS_IN_SUITE='' LIMIT='' ATTEMPTS=1 bash /tmp/src/code/indexrun-job.sh 2>&1 | tee /workspace/item36-indexrun-job.log
 '''
     return ['hf', 'jobs', 'run', '--detach', '--name', f'item36-{run}-proxy',
             '--flavor', 'rtx-pro-6000', '--timeout', '35m', '--secrets', 'HF_TOKEN',
