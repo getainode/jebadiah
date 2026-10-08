@@ -43,7 +43,7 @@ Five one-hour GPU caps bounded the maximum to $13.75. Completed GPU runtime tota
 
 The [150-step loss curves](../results/runs/item27-speed/loss-curves.png) show mean candidate loss 0.87875 for r04 and 0.89576 for r05, a +0.01701 shift. Individual 10-step block differences range from -0.1251 to +0.1710. Trainer/dropout seed 17 and grouped question order match, but the scratch harness initialized LoRA before Trainer seeded it, so cross-job comparisons also include initialization variation. These curves do not isolate the precision change or prove full-epoch quality. The archived [r05 harness](../results/runs/item27-speed/benchmark-r05.py) records exactly what ran.
 
-On the M3 Ultra CPU, the r04 adapter and bf16 merge preserved 64/64 calibration picks, had zero clear-margin flips, and maximum probability shift 0.00543. The inference check loads one model at a time under the shared model lock, using fp32 arithmetic on the stored base/merged weights. This is a limited calibration probe rather than a full validation suite.
+On the M3 Ultra CPU, the r04 adapter and bf16 merge preserved 64/64 calibration picks, had zero clear-margin flips, and maximum probability shift 0.00543. The inference check loads one model at a time under the shared model lock, using fp32 arithmetic on the stored base/merged weights. The r05 adapter and bf16 merge also preserved 64/64 picks, with zero clear-margin flips and maximum probability shift 0.00659. On those same 64 questions, merged r04 scored 46 correct picks (71.9%) and target NLL 0.66777; merged r05 scored 51 (79.7%) and NLL 0.61839. The two merged models agree on 57/64 picks, and their maximum cross-recipe probability difference is 0.38232. Those differences exceed mere merge rounding, but initialization and training vary, so they cannot be attributed to autocast alone. No gross quality regression was observed in this limited sample. This is a limited calibration probe rather than a full validation suite.
 
 ## Fresh-run controls
 
@@ -59,7 +59,7 @@ H100 at $3.96/h must sustain more than 1.44 times the selected RTX recipe's thro
 
 ## Launch pattern
 
-For the batching/checkpoint recipe, use a new `JEB_ROOT` and new private destinations with:
+The recommended default recipe for a fresh full-175k 9B run is r04, with autocast disabled. Existing CLI defaults remain compatible with earlier recipes and 27B runs. Use a new `JEB_ROOT` and new private destinations with:
 
 ```bash
 JEB_ROOT=/workspace/jeb-item27-new-run bash scripts/v21.sh \

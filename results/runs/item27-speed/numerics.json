@@ -421,5 +421,35 @@
     "dtype": "float32",
     "fp32_candidate_head": true,
     "agreement": 1.0
+  },
+  "r05_merge": {
+    "run": "r05",
+    "questions": 64,
+    "identical_picks": 64,
+    "clear_margin_flips": 0,
+    "max_probability_delta": 0.0065888166427612305,
+    "device": "Apple M3 Ultra CPU",
+    "dtype": "float32",
+    "fp32_candidate_head": true,
+    "agreement": 1.0
+  },
+  "calibration_comparison": {
+    "per_recipe": {
+      "r04": {
+        "questions": 64,
+        "correct_picks": 46,
+        "accuracy": 0.71875,
+        "mean_target_nll": 0.6677664102219979
+      },
+      "r05": {
+        "questions": 64,
+        "correct_picks": 51,
+        "accuracy": 0.796875,
+        "mean_target_nll": 0.6183946491836408
+      }
+    },
+    "r04_r05_merged_pick_agreement": 0.890625,
+    "mean_target_nll_difference": -0.049371761038357005,
+    "max_cross_recipe_probability_difference": 0.38231950998306274
   }
 }
