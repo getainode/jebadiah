@@ -12,7 +12,7 @@ from hub_checkpoints import private_repo, validate_resume
 from jebadiah_model import option_logits
 from merge_export import merge
 from train_jebadiah import make_target, DecideTrainer, NonFiniteLoss
-from v21_pipeline import validate_data, parser, read_jsonl
+from v21_pipeline import validate_data, parser, read_jsonl, split_manifest_entry
 
 
 @pytest.mark.parametrize("autocast", [False, True])
@@ -331,3 +331,13 @@ def test_read_jsonl_keeps_unicode_line_separators(tmp_path):
     rows = [{"state": "a\u2028b\u0085c"}, {"state": "plain"}]
     path.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n", encoding="utf-8")
     assert read_jsonl(path) == rows
+
+
+@pytest.mark.parametrize("filename,manifest_file,key", [
+    ("train.jsonl", "metadata/manifest.json", "train.jsonl"),
+    ("a1/train.jsonl", "a1/manifest.json", "train.jsonl"),
+    ("a1/train.jsonl", "metadata/manifest.json", "a1/train.jsonl"),
+])
+def test_manifest_paths_preserve_direct_keys_and_support_relative_splits(filename, manifest_file, key):
+    entry = {"sha256": "test-hash", "rows": 2, "questions": 3}
+    assert split_manifest_entry({"files": {key: entry}}, filename, manifest_file) == entry
