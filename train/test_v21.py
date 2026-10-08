@@ -87,6 +87,115 @@ def test_v21_defaults():
     args = parser().parse_args([])
     assert args.sizes == ["9b", "27b"]
     assert (args.rank, args.alpha, args.max_seq_length, args.microbatch * args.accumulation) == (64, 128, 4096, 8)
+    assert args.gradient_checkpointing and not args.group_by_length
+    tuned = parser().parse_args(["--no-gradient-checkpointing", "--group-by-length"])
+    assert not tuned.gradient_checkpointing and tuned.group_by_length
+
+
+def test_length_grouping_reduces_padding_without_dropping_questions():
+    from transformers import TrainingArguments
+    from train_jebadiah import DecideDataset
+    # Distinct lengths alternate: a random batch spends most tokens on padding.
+    dataset = DecideDataset([])
+    dataset.items = [None] * 400
+    dataset.lengths = [32, 128, 512, 2048] * 100
+    trainer = object.__new__(DecideTrainer)
+    trainer.train_dataset = dataset
+    trainer.args = TrainingArguments(output_dir="unused", per_device_train_batch_size=4,
+        gradient_accumulation_steps=2, train_sampling_strategy="group_by_length", use_cpu=True,
+        report_to=[])
+    torch.manual_seed(17)
+    indices = list(trainer._get_train_sampler())
+    assert sorted(indices) == list(range(len(dataset)))
+    def padded(order):
+        return sum(4 * max(dataset.lengths[j] for j in order[i:i+4]) for i in range(0, len(order), 4))
+    torch.manual_seed(17)
+    assert padded(indices) < padded(torch.randperm(len(dataset)).tolist()) / 2
+
+
+def test_length_grouping_recipe_change_refuses_resume(tmp_path):
+    cfg = {"base_identity": "tiny", "group_by_length": True}
+    (tmp_path / "run_config.json").write_text(json.dumps(cfg))
+    with pytest.raises(ValueError, match="group_by_length"):
+        validate_resume(tmp_path, {"base_identity": "tiny"})
+
+
+def test_kernel_selection_detects_reference_fallback():
+    from cuda_preflight import selected_kernel
+    from functools import wraps
+    def fallback():
+        pass
+    def wrapper(implementation):
+        @wraps(fallback)
+        def wrapped(*args, **kwargs):
+            return implementation(*args, **kwargs)
+        return wrapped
+    assert selected_kernel(wrapper(fallback)) == {"module": __name__, "name": "fallback"}
+
+
+def test_rounded_padding_preserves_tokens_targets_and_fp32_logits(tmp_path):
+    from tiny_smoke import prepare
+    from jebadiah_model import load_tokenizer, load_base
+    from jebadiah_prompt import Renderer
+    from train_jebadiah import DecideDataset, DecideCollator, read_jsonl
+    prepare(tmp_path)
+    tok = load_tokenizer(str(tmp_path / "base"))
+    renderer = Renderer(tok, 4096)
+    dataset = DecideDataset(read_jsonl(tmp_path / "data/train.jsonl"))
+    rows = [dataset[i] for i in range(3)]
+    plain = DecideCollator(tok, renderer, False, score_targets="ordinal")(rows)
+    rounded = DecideCollator(tok, renderer, False, score_targets="ordinal", pad_to_multiple_of=64)(rows)
+    assert rounded["input_ids"].shape[1] % 64 == 0
+    for i in range(len(rows)):
+        n = int(plain["attention_mask"][i].sum())
+        torch.testing.assert_close(plain["input_ids"][i, :n], rounded["input_ids"][i, :n])
+        assert not rounded["attention_mask"][i, n:].any()
+    for key in ("cand_ids", "label_idx", "target"):
+        torch.testing.assert_close(plain[key], rounded[key], atol=0, rtol=0)
+    model = load_base(str(tmp_path / "base"), device="cpu", dtype=torch.float32).eval()
+    with torch.no_grad():
+        a = option_logits(model, plain["input_ids"], plain["attention_mask"], plain["cand_ids"])
+        b = option_logits(model, rounded["input_ids"], rounded["attention_mask"], rounded["cand_ids"])
+    assert a.dtype == b.dtype == torch.float32
+    torch.testing.assert_close(a, b, atol=1e-6, rtol=1e-5)
+
+
+def test_adaptive_checkpointing_preserves_loss_gradients_and_dropout(tmp_path):
+    import copy
+    from transformers import TrainingArguments, Qwen3_5ForCausalLM
+    from peft import get_peft_model, LoraConfig
+    from cuda_preflight import tiny_config
+    torch.manual_seed(17)
+    config = tiny_config()
+    config.num_hidden_layers = 1
+    config.layer_types = ["full_attention"]
+    initial = get_peft_model(Qwen3_5ForCausalLM(config), LoraConfig(r=2, lora_alpha=4,
+        lora_dropout=.05, target_modules="all-linear", task_type="CAUSAL_LM"))
+    models = [copy.deepcopy(initial) for _ in range(2)]
+    trainers = []
+    for i, model in enumerate(models):
+        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+        model.enable_input_require_grads()
+        trainers.append(DecideTrainer(model=model, args=TrainingArguments(output_dir=str(tmp_path / str(i)),
+            use_cpu=True, report_to=[]), checkpoint_min_tokens=4 if i == 1 else None))
+    for length in (3, 8, 3):
+        inputs = {"input_ids": torch.arange(length).repeat(2, 1),
+                  "attention_mask": torch.ones(2, length, dtype=torch.long),
+                  "cand_ids": torch.tensor([[30, 31], [30, 31]]),
+                  "target": torch.tensor([[1., 0.], [0., 1.]])}
+        losses = []
+        for trainer in trainers:
+            trainer.model.train()
+            trainer.model.zero_grad(set_to_none=True)
+            torch.manual_seed(123)
+            loss = trainer.compute_loss(trainer.model, inputs)
+            loss.backward()
+            losses.append(loss.detach())
+        torch.testing.assert_close(*losses, atol=0, rtol=0)
+        assert all(m.gradient_checkpointing == (length >= 4) for m in trainers[1].checkpoint_modules)
+        for (_, a), (_, b) in zip(models[0].named_parameters(), models[1].named_parameters()):
+            if a.requires_grad:
+                torch.testing.assert_close(a.grad, b.grad, atol=1e-6, rtol=1e-5)
 
 
 def test_family_leakage_rejected(tmp_path):
@@ -102,7 +211,8 @@ def test_family_leakage_rejected(tmp_path):
         validate_data(*paths)
 
 
-def test_effective_batch_and_optimizer_resume_match(tmp_path):
+@pytest.mark.parametrize("grouped", [False, True])
+def test_effective_batch_and_optimizer_resume_match(tmp_path, grouped):
     import copy
     from transformers import TrainingArguments, TrainerCallback, Qwen3_5ForCausalLM
     from peft import get_peft_model, LoraConfig
@@ -114,8 +224,11 @@ def test_effective_batch_and_optimizer_resume_match(tmp_path):
     config.layer_types = ["full_attention"]
     initial = get_peft_model(Qwen3_5ForCausalLM(config), LoraConfig(r=2, lora_alpha=4, lora_dropout=0,
                             target_modules="all-linear", task_type="CAUSAL_LM"))
-    dataset = [{"input_ids": torch.tensor([1, 2, i+3]), "attention_mask": torch.ones(3, dtype=torch.long),
+    class Rows(list):
+        lengths = [3] * 4
+    dataset = Rows([{"input_ids": torch.tensor([1, 2, i+3]), "attention_mask": torch.ones(3, dtype=torch.long),
                 "cand_ids": torch.tensor([30, 31]), "target": torch.tensor([float(i % 2), float(1-i % 2)])} for i in range(4)]
+    )
     def collate(rows):
         return {key: torch.stack([row[key] for row in rows]) for key in rows[0]}
     recipe = {"base_identity": "tiny", "lora_rank": 2, "dataset_sha256": "fixed"}
@@ -128,7 +241,8 @@ def test_effective_batch_and_optimizer_resume_match(tmp_path):
         args = TrainingArguments(output_dir=str(folder), max_steps=2, per_device_train_batch_size=micro,
             gradient_accumulation_steps=accum, learning_rate=.001, lr_scheduler_type="constant",
             save_strategy="steps", save_steps=1, use_cpu=True, remove_unused_columns=False,
-            report_to=[], disable_tqdm=True, seed=17)
+            report_to=[], disable_tqdm=True, seed=17,
+            train_sampling_strategy="group_by_length" if grouped else "random")
         model = copy.deepcopy(initial)
         callbacks = [HubCheckpoint(recipe)] + ([Stop()] if interrupted else [])
         trainer = DecideTrainer(model=model, args=args, train_dataset=dataset, data_collator=collate, callbacks=callbacks)

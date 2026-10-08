@@ -107,6 +107,14 @@ def parser():
     p.add_argument("--lr", type=float, default=1e-4)
     p.add_argument("--microbatch", type=int, default=1)
     p.add_argument("--accumulation", type=int, default=8)
+    p.add_argument("--gradient-checkpointing", action=argparse.BooleanOptionalAction, default=True,
+                   help="recompute activations to save memory; disable only after measuring peak memory")
+    p.add_argument("--group-by-length", action="store_true",
+                   help="shuffle length-sorted windows to reduce batch padding")
+    p.add_argument("--pad-to-multiple-of", type=int,
+                   help="round padded batch lengths to this token multiple to reduce kernel tuning shapes")
+    p.add_argument("--checkpoint-min-tokens", type=int,
+                   help="checkpoint batches at or above this padded length; retain short-batch activations")
     p.add_argument("--save-steps", type=int, default=100)
     p.add_argument("--max-steps", type=int, default=-1)
     p.add_argument("--resume", default="auto", help="auto, hub, none or checkpoint path")
@@ -183,12 +191,22 @@ def main():
                "dataset_sha256": data_report["train"]["sha256"], "eval_dataset_sha256": data_report["calib"]["sha256"],
                "lora_rank": args.rank, "lora_alpha": args.alpha, "max_seq_length": args.max_seq_length,
                "num_epochs": args.epochs, "learning_rate": args.lr, "batch_size": args.microbatch,
-               "gradient_accumulation_steps": args.accumulation, "use_gradient_checkpointing": True,
+               "gradient_accumulation_steps": args.accumulation, "use_gradient_checkpointing": args.gradient_checkpointing,
                "warmup_steps": 30 if args.max_steps < 0 else 0, "seed": 17, "save_steps": args.save_steps,
                "checkpoint_repo": checkpoint_repo, "resume": args.resume, "device": args.device,
                "dtype": "bfloat16" if args.device == "cuda" else "float32", "logging_steps": 10,
                "decide": {"target_modules": "all-linear", "lora_dropout": 0.05, "score_targets": "ordinal",
                           "score_ordinal_adjacent": 0.2, "shuffle_choice_options": True}}
+        if args.group_by_length:
+            cfg["group_by_length"] = True
+        if args.pad_to_multiple_of is not None:
+            if args.pad_to_multiple_of < 1:
+                raise ValueError("--pad-to-multiple-of must be positive")
+            cfg["pad_to_multiple_of"] = args.pad_to_multiple_of
+        if args.checkpoint_min_tokens is not None:
+            if args.checkpoint_min_tokens < 1 or not args.gradient_checkpointing:
+                raise ValueError("--checkpoint-min-tokens requires a positive threshold and gradient checkpointing")
+            cfg["checkpoint_min_tokens"] = args.checkpoint_min_tokens
         if not args.base:
             pinned_contract = json.loads((HERE.parent / "results" / "runs" / f"{size}-chat-v1" / "adapter" / "prompt_contract.json").read_text())
             for key in ("prompt_source_sha256", "chat_template_sha256", "single_token_labels"):

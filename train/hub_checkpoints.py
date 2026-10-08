@@ -13,7 +13,8 @@ RESUME_KEYS = ("base_identity", "base_revision", "dataset_sha256", "eval_dataset
                "method", "lora_rank", "lora_alpha", "max_seq_length", "batch_size",
                "gradient_accumulation_steps", "learning_rate", "num_epochs", "seed", "decide", "max_steps",
                "warmup_steps", "lr_scheduler_type", "weight_decay", "max_grad_norm", "dtype",
-               "use_gradient_checkpointing", "prompt_source_sha256", "chat_template_sha256", "single_token_labels")
+               "use_gradient_checkpointing", "group_by_length", "pad_to_multiple_of", "checkpoint_min_tokens",
+               "prompt_source_sha256", "chat_template_sha256", "single_token_labels")
 
 
 def private_repo(repo_id, api=None):
