@@ -60,13 +60,16 @@ class SamplingTest(unittest.TestCase):
         self.assertEqual(len(proxy.selected), 2)
 
     def test_bootstrap_draw_preserves_case_chunks_and_native_clusters(self):
-        rows = [row(22, 'song', c) for c in (0, 1)]
+        rows = [row(22, g, c) for g in ('song', 'other') for c in (0, 1)]
         for r in rows:
             r['metadata']['song_id'] = 'song'
-        sampled = resample(group_strata(rows), random.Random(20261008))
-        self.assertEqual(len(sampled), 2)
-        self.assertEqual(len({r['_evaluation']['group_id'] for r in sampled}), 1)
-        self.assertEqual({r['_evaluation']['run_id'] for r in sampled}, {'22:song:0', '22:song:1'})
+        class RepeatFirst:
+            def randrange(self, n):
+                return 0
+        sampled = resample(group_strata(rows), RepeatFirst())
+        self.assertEqual(len(sampled), 4)
+        self.assertEqual(len({r['_evaluation']['group_id'] for r in sampled}), 2)
+        self.assertEqual({r['_evaluation']['run_id'] for r in sampled}, {'22:other:0', '22:other:1'})
         self.assertEqual({r['metadata']['song_id'] for r in sampled}, {'song'})
 
 
