@@ -85,7 +85,8 @@ Failed or retried allocations count against this same cap. Private spend evidenc
 Compare A1 with v2 to estimate the scrub cost, including the disclosed 37-question
 additional training removal and batching-order confounder. Compare A3 with A1
 to estimate adding new upstream sources at bounded dilution under the same
-recipe. A3 versus r1 also changes rank, length, question-type mix, data volume,
+recipe. A3 also doubles optimizer steps for a full epoch, so that contrast
+combines added-source content, mixture balance and additional optimization. A3 versus r1 also changes rank, length, question-type mix, data volume,
 source balance and epoch completion. These two runs cannot uniquely attribute
 any r1 residual to rank, truncation or partial-epoch exposure.
 
