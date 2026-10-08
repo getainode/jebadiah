@@ -21,6 +21,10 @@
 #   6. builds the PUBLIC training pool and test sets with train/convert_data.py, lints, splits
 #   7. writes $JEB_ROOT/READY
 # Secrets: none needed. HF_TOKEN is honoured from the environment and never written anywhere.
+if [[ ${1:-} == --v21 ]]; then
+  shift
+  exec bash "$(dirname "${BASH_SOURCE[0]}")/v21.sh" "$@"
+fi
 set -uo pipefail
 export DEBIAN_FRONTEND=noninteractive
 START=$(date +%s)

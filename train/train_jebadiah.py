@@ -34,6 +34,7 @@ from torch.utils.data import Dataset
 from transformers import Trainer, TrainingArguments, TrainerCallback
 
 from jebadiah_model import FP32_CANDIDATE_LOGITS, Scorer, load_base, load_tokenizer, option_logits, template_sha256
+from hub_checkpoints import HubCheckpoint, resolve_resume
 from jebadiah_prompt import PROMPT_SOURCE_COMMIT, PROMPT_SOURCE_SHA256, Renderer, wire_keys
 
 
@@ -114,7 +115,7 @@ class DecideCollator:
         self.tok = tokenizer
         self.renderer = renderer
         self.shuffle_choice = shuffle_choice
-        self.rng = random.Random(seed)
+        self.rng = random  # Trainer checkpoints and restores the global RNG state
         self.truncated = 0
         if score_targets not in ("source", "ordinal"):
             raise ValueError(f"score_targets must be 'source' or 'ordinal', got {score_targets!r}")
@@ -156,11 +157,19 @@ class DecideTrainer(Trainer):
         logp = torch.log_softmax(logits, dim=-1)
         target = inputs["target"].to(logp.device)
         loss = -(target * logp.masked_fill(target == 0, 0.0)).sum(dim=-1).mean()
+        if not torch.isfinite(loss):
+            raise NonFiniteLoss("non-finite candidate-logit loss")
         return (loss, {"logits": logits}) if return_outputs else loss
 
 
 class FiniteGuard(TrainerCallback):
     """A non-finite loss or grad norm ends the run; nothing is saved (AGENTS.md rule)."""
+
+    def on_pre_optimizer_step(self, args, state, control, model=None, **kwargs):
+        checks = [torch.isfinite(parameter.grad).all() for parameter in model.parameters()
+                  if parameter.grad is not None]
+        if checks and not torch.stack(checks).all():
+            raise NonFiniteLoss(f"non-finite gradient at step {state.global_step}")
 
     def on_log(self, args, state, control, logs=None, **kwargs):
         for k in ("loss", "grad_norm"):
@@ -234,6 +243,17 @@ def main():
     ap.add_argument("--max-steps", type=int, default=-1, help="cut the run short (smoke tests)")
     args = ap.parse_args()
     cfg = json.load(open(args.config))
+    cfg["max_steps"] = args.max_steps
+    if cfg.get("method", "lora") != "lora":
+        raise ValueError("Only method=lora is supported; refusing a different training method")
+    for key in ("lora_rank", "lora_alpha", "max_seq_length", "batch_size", "gradient_accumulation_steps", "save_steps"):
+        if key in cfg and int(cfg[key]) < 1:
+            raise ValueError(f"{key} must be positive")
+    for key in ("num_epochs", "learning_rate"):
+        if key in cfg and (not math.isfinite(float(cfg[key])) or float(cfg[key]) <= 0):
+            raise ValueError(f"{key} must be finite and positive")
+    device = cfg.get("device", "cuda")
+    dtype = getattr(torch, cfg.get("dtype", "bfloat16" if device == "cuda" else "float32"))
     dec = cfg.get("decide", {})
     out_dir = cfg["output_dir"]
     os.makedirs(out_dir, exist_ok=True)
@@ -243,14 +263,17 @@ def main():
 
     t0 = time.time()
     tok = load_tokenizer(cfg["base_model"], cfg.get("base_revision"))
-    renderer = Renderer(tok, int(cfg.get("max_seq_length", 2048)))
+    renderer = Renderer(tok, int(cfg.get("max_seq_length", 4096)))
     prompt_contract = {"prompt_source_commit": PROMPT_SOURCE_COMMIT, "prompt_source_sha256": PROMPT_SOURCE_SHA256,
                        "chat_template_sha256": template_sha256(tok), "single_token_labels": renderer.max_options,
                        "chat_template_kwargs": {"add_generation_prompt": True, "enable_thinking": False, "thinking": False}}
     if cfg.get("prompt_source_sha256") and cfg["prompt_source_sha256"] != PROMPT_SOURCE_SHA256:
         raise SystemExit(f"config pins prompt_source_sha256 {cfg['prompt_source_sha256'][:12]} but the renderer is {PROMPT_SOURCE_SHA256[:12]}")
+    for key in ("chat_template_sha256", "single_token_labels"):
+        if key in cfg and cfg[key] != prompt_contract[key]:
+            raise ValueError(f"Pinned prompt contract mismatch for {key}")
     model = load_base(cfg["base_model"], cfg.get("base_revision"),
-                      attn_implementation=cfg.get("attn_implementation", "sdpa"))
+                      attn_implementation=cfg.get("attn_implementation", "sdpa"), dtype=dtype, device=device)
     load_s = time.time() - t0
 
     from peft import LoraConfig, get_peft_model
@@ -259,7 +282,7 @@ def main():
         targets, missing = "all-linear", []
     else:
         targets, missing = target_modules_for(model, requested)
-    lcfg = LoraConfig(r=int(cfg.get("lora_rank", 16)), lora_alpha=int(cfg.get("lora_alpha", 32)),
+    lcfg = LoraConfig(r=int(cfg.get("lora_rank", 64)), lora_alpha=int(cfg.get("lora_alpha", 128)),
                       lora_dropout=float(dec.get("lora_dropout", 0.05)), bias="none",
                       target_modules=targets, task_type="CAUSAL_LM")
     model = get_peft_model(model, lcfg)
@@ -291,10 +314,13 @@ def main():
         weight_decay=float(cfg.get("weight_decay", 0.0)),
         warmup_steps=int(cfg.get("warmup_steps", 0)),
         lr_scheduler_type=cfg.get("lr_scheduler_type", "cosine"),
-        bf16=True,
+        bf16=device == "cuda" and dtype == torch.bfloat16,
+        use_cpu=device == "cpu",
         logging_steps=int(cfg.get("logging_steps", 10)),
         logging_nan_inf_filter=False,
-        save_strategy="no",
+        save_strategy="steps",
+        save_steps=int(cfg.get("save_steps", 100)),
+        save_total_limit=int(cfg.get("save_total_limit", 2)),
         report_to=[],
         seed=seed,
         dataloader_num_workers=0,
@@ -303,24 +329,28 @@ def main():
         optim="adamw_torch",
         max_grad_norm=float(cfg.get("max_grad_norm", 1.0)),
     )
-    callbacks = [FiniteGuard()]
+    callbacks = [FiniteGuard(), HubCheckpoint(cfg)]
+    calib_callback = None
     if calib_records:
-        callbacks.append(CalibEval(calib_records, tok, renderer,
-                                   every=int(cfg.get("eval_steps", 0)), limit=dec.get("calib_eval_limit")))
+        calib_callback = CalibEval(calib_records, tok, renderer,
+                                   every=int(cfg.get("eval_steps", 0)), limit=dec.get("calib_eval_limit"))
+        callbacks.append(calib_callback)
     trainer = DecideTrainer(model=model, args=targs, train_dataset=train_ds, data_collator=collator,
                             callbacks=callbacks)
 
-    torch.cuda.reset_peak_memory_stats()
+    trainer.model_accepts_loss_kwargs = False  # mean loss must be divided by accumulation
+    if device == "cuda":
+        torch.cuda.reset_peak_memory_stats()
     t1 = time.time()
     try:
-        trainer.train()
+        trainer.train(resume_from_checkpoint=resolve_resume(cfg, targs.output_dir))
     except NonFiniteLoss as e:
         print(f"AINODE_ERROR:NAN_LOSS {e}", flush=True)
         sys.exit(3)
     train_s = time.time() - t1
-    peak_gb = torch.cuda.max_memory_allocated() / 1e9
+    peak_gb = torch.cuda.max_memory_allocated() / 1e9 if device == "cuda" else None
 
-    final = callbacks[-1].run(model) if calib_records else {}
+    final = calib_callback.run(model) if calib_callback else {}
     adapter_dir = os.path.join(out_dir, "adapter")
     model.save_pretrained(adapter_dir)
     tok.save_pretrained(adapter_dir)
@@ -329,11 +359,11 @@ def main():
     summary = {
         "config": cfg, "target_modules": targets, "lora_modules": lora_leaves, "trainable_params": trainable,
         **prompt_contract,
-        "train_examples": len(train_ds), "calib_examples": len(calib_records),
+        "train_examples": len(train_ds), "calib_examples": len(DecideDataset(calib_records)),
         "truncated_prompts": collator.truncated, "steps": trainer.state.global_step,
         "wall_clock_s": round(train_s, 1), "load_s": round(load_s, 1),
-        "peak_memory_allocated_gb": round(peak_gb, 2),
-        "final_calib": final, "hardware": torch.cuda.get_device_name(0),
+        "peak_memory_allocated_gb": round(peak_gb, 2) if peak_gb is not None else None,
+        "final_calib": final, "hardware": torch.cuda.get_device_name(0) if device == "cuda" else device,
         "torch": torch.__version__, "adapter_dir": adapter_dir,
         "fp32_candidate_logits": FP32_CANDIDATE_LOGITS,
         "score_targets": collator.score_targets, "score_ordinal_adjacent": collator.score_adjacent,

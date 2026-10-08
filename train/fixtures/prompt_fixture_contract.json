@@ -1,0 +1,15 @@
+{
+  "prompt_source_commit": "e5c089386e0239c9eb270eeb490d181722b8da5b",
+  "prompt_source_sha256": "d2660ebec28bd3f1704235bda88d24a397c1c62475e740519cb8ef2d08f25fdd",
+  "source_files_sha256": {
+    "decide.py": "9bb19247c120541ab109de5901a503101f24bb42ad3c8734b6bb3015e6167aea",
+    "systemone.py": "d809cc898c7d32d236d7499eab9edd83a35a2f4d41c1674f6541b34c0c9a0d84"
+  },
+  "pool_files_sha256": {
+    "train.jsonl": "2069602f17b53761f607c29e9cf0404aa16a301e9f12cf41bb0ab56eb5a72687",
+    "calib.jsonl": "7da25d87eaf08ca58aa78cc96192d867865c0f3e09bd14bdf0163db8a3da0469"
+  },
+  "renders": 852,
+  "uncompressed_sha256": "0be0c642f55cc99c6a4e01ad814e6c9927aa1c3459d3fc93d29fd89cce72458c",
+  "generation": "Pinned source AST extraction, seed 0, 300 train plus 300 calibration records"
+}

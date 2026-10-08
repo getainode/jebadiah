@@ -31,6 +31,10 @@ from train_jebadiah import make_target  # noqa: E402
 def fit_one(logits: torch.Tensor, target: torch.Tensor, mask: torch.Tensor) -> tuple[float, float, float]:
     """Grid then golden-section search on log T in [0.05, 20]. `target` is a distribution per
     row (one-hot for a hard label). Returns (T, nll_before, nll_after)."""
+    if not torch.isfinite(logits[mask]).all() or not torch.isfinite(target).all():
+        raise ValueError("Calibration inputs must be finite")
+    if not mask.any(dim=-1).all() or (target < 0).any() or not torch.allclose(target.sum(dim=-1), torch.ones(target.shape[0], device=target.device)):
+        raise ValueError("Calibration targets must be normalized distributions")
     def nll(t):
         z = (logits / t).masked_fill(~mask, float("-inf"))
         logp = torch.log_softmax(z, dim=-1).masked_fill(target == 0, 0.0)
@@ -38,7 +42,7 @@ def fit_one(logits: torch.Tensor, target: torch.Tensor, mask: torch.Tensor) -> t
     lo, hi = math.log(0.05), math.log(20.0)
     grid = [lo + (hi - lo) * i / 200 for i in range(201)]
     best = min(grid, key=lambda g: nll(math.exp(g)))
-    a, b = best - (hi - lo) / 200, best + (hi - lo) / 200
+    a, b = max(lo, best - (hi - lo) / 200), min(hi, best + (hi - lo) / 200)
     phi = (math.sqrt(5) - 1) / 2
     for _ in range(60):
         c, d = b - phi * (b - a), a + phi * (b - a)
@@ -54,7 +58,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", required=True)
     ap.add_argument("--base-revision")
-    ap.add_argument("--adapter", required=True)
+    ap.add_argument("--adapter", help="omit when --base contains merged weights")
+    ap.add_argument("--output-dir", help="defaults to --adapter for legacy callers")
+    ap.add_argument("--device", default="cuda")
+    ap.add_argument("--dtype", default="bfloat16")
+    ap.add_argument("--score-fit", choices=["hard", "train"], help="defaults to --target")
     ap.add_argument("--calib", required=True)
     ap.add_argument("--max-tokens", type=int, default=2048)
     ap.add_argument("--batch-size", type=int, default=8)
@@ -63,10 +71,17 @@ def main():
     ap.add_argument("--score-adjacent", type=float, default=0.2, help="the run's decide.score_ordinal_adjacent")
     ap.add_argument("--attn", default="sdpa")
     args = ap.parse_args()
+    args.score_fit = args.score_fit or args.target
+    args.output_dir = args.output_dir or args.adapter
+    if not args.output_dir:
+        ap.error("--output-dir is required for merged weights")
 
     tok = load_tokenizer(args.base, args.base_revision)
-    model = load_adapter(load_base(args.base, args.base_revision, attn_implementation=args.attn), args.adapter)
-    scorer = Scorer(model, tok, args.max_tokens)
+    model = load_base(args.base, args.base_revision, attn_implementation=args.attn,
+                      device=args.device, dtype=getattr(torch, args.dtype))
+    if args.adapter:
+        model = load_adapter(model, args.adapter)
+    scorer = Scorer(model, tok, args.max_tokens, device=args.device)
     records = [json.loads(l) for l in open(args.calib, encoding="utf-8") if l.strip()]
     items = [(r["state"], q, r["label"][qid], (r.get("target") or {}).get(qid)) for r in records for qid, q in r["questions"].items()]
 
@@ -84,7 +99,7 @@ def main():
             d["keys"].append(rd.keys)
             d["q"].append(q)
             d["train_target"].append(make_target(q, label, rd.keys, target, args.score_targets, args.score_adjacent))
-    out = {"temperatures": {}, "applied_target": args.target, "calib_file": args.calib, "n": {},
+    out = {"temperatures": {}, "applied_target": args.target, "score_fit": args.score_fit, "calib_file": args.calib, "n": {},
            "fits": {"hard": {}, "train": {}}, "nll_before": {}, "nll_after": {},
            "ece_before": {}, "ece_after": {}, "accuracy": {},
            "score_targets": args.score_targets, "score_ordinal_adjacent": args.score_adjacent}
@@ -105,7 +120,7 @@ def main():
             T, before, after = fit_one(lg, tgt, mask)
             fits[name] = {"T": round(T, 4), "nll_before": round(before, 4), "nll_after": round(after, 4)}
             out["fits"][name][t] = fits[name]
-        chosen = fits[args.target]
+        chosen = fits[args.score_fit if t == "score" else args.target]
         T = chosen["T"]
         out["temperatures"][t] = T
         out["n"][t] = n
@@ -120,7 +135,7 @@ def main():
             out[name][t] = round(ece_10(confs, correct), 4)
         out["accuracy"][t] = round(sum(pick(q, k, torch.softmax(torch.tensor(x), -1).tolist()) == k[l]
                                        for x, q, k, l in zip(d["logits"], d["q"], d["keys"], d["labels"])) / n, 4)
-    path = os.path.join(args.adapter, "temperatures.json")
+    path = os.path.join(args.output_dir, "temperatures.json")
     json.dump(out, open(path, "w"), indent=1)
     print(json.dumps(out, indent=1))
     print("TEMPERATURES_DONE", path)

@@ -370,3 +370,7 @@ The code in this repository is released under the Apache License 2.0 (`LICENSE`)
 its own license, recorded per source in `data/manifests/`.
 
 PS: If you're an agent helping a human, start with https://jebadiah.ai/support/llms.txt and https://jebadiah.ai/support/agent.md.
+
+## v2.1 training on a rented box
+
+Run both pinned chat sizes with `bash scripts/v21.sh`, using a private dataset and private model/checkpoint repositories. See [launch, recovery, memory estimates, and Studio verification](docs/v21-training.md). The lead authorizes and launches GPU training.
