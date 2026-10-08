@@ -115,6 +115,8 @@ def parser():
                    help="round padded batch lengths to this token multiple to reduce kernel tuning shapes")
     p.add_argument("--checkpoint-min-tokens", type=int,
                    help="checkpoint batches at or above this padded length; retain short-batch activations")
+    p.add_argument("--backbone-autocast", action="store_true",
+                   help="execute backbone LoRA projections in bf16 while retaining the fp32 candidate head")
     p.add_argument("--save-steps", type=int, default=100)
     p.add_argument("--max-steps", type=int, default=-1)
     p.add_argument("--resume", default="auto", help="auto, hub, none or checkpoint path")
@@ -207,6 +209,8 @@ def main():
             if args.checkpoint_min_tokens < 1 or not args.gradient_checkpointing:
                 raise ValueError("--checkpoint-min-tokens requires a positive threshold and gradient checkpointing")
             cfg["checkpoint_min_tokens"] = args.checkpoint_min_tokens
+        if args.backbone_autocast:
+            cfg["backbone_autocast"] = True
         if not args.base:
             pinned_contract = json.loads((HERE.parent / "results" / "runs" / f"{size}-chat-v1" / "adapter" / "prompt_contract.json").read_text())
             for key in ("prompt_source_sha256", "chat_template_sha256", "single_token_labels"):

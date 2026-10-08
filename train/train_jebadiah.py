@@ -170,11 +170,12 @@ class DecideTrainer(Trainer):
     label logits at the answer position (the Nimble objective; Kev's soft form when the source
     gives a distribution). Padded candidate slots are -inf and carry zero target."""
 
-    def __init__(self, *args, checkpoint_min_tokens=None, **kwargs):
+    def __init__(self, *args, checkpoint_min_tokens=None, backbone_autocast=False, **kwargs):
         super().__init__(*args, **kwargs)
         if checkpoint_min_tokens is not None and checkpoint_min_tokens < 1:
             raise ValueError("checkpoint_min_tokens must be positive")
         self.checkpoint_min_tokens = checkpoint_min_tokens
+        self.backbone_autocast = backbone_autocast
         self.checkpoint_modules = [module for module in self.model.modules()
                                    if getattr(module, "gradient_checkpointing", False)]
         if checkpoint_min_tokens is not None and not self.checkpoint_modules:
@@ -199,7 +200,8 @@ class DecideTrainer(Trainer):
             enabled = inputs["input_ids"].shape[1] >= self.checkpoint_min_tokens
             for module in self.checkpoint_modules:
                 module.gradient_checkpointing = enabled
-        logits = option_logits(model, inputs["input_ids"], inputs["attention_mask"], inputs["cand_ids"])
+        logits = option_logits(model, inputs["input_ids"], inputs["attention_mask"], inputs["cand_ids"],
+                               backbone_autocast=self.backbone_autocast)
         logp = torch.log_softmax(logits, dim=-1)
         target = inputs["target"].to(logp.device)
         loss = -(target * logp.masked_fill(target == 0, 0.0)).sum(dim=-1).mean()
@@ -390,7 +392,8 @@ def main():
                                    every=int(cfg.get("eval_steps", 0)), limit=dec.get("calib_eval_limit"))
         callbacks.append(calib_callback)
     trainer = DecideTrainer(model=model, args=targs, train_dataset=train_ds, data_collator=collator,
-                            callbacks=callbacks, checkpoint_min_tokens=cfg.get("checkpoint_min_tokens"))
+                            callbacks=callbacks, checkpoint_min_tokens=cfg.get("checkpoint_min_tokens"),
+                            backbone_autocast=bool(cfg.get("backbone_autocast", False)))
 
     trainer.model_accepts_loss_kwargs = False  # mean loss must be divided by accumulation
     if device == "cuda":

@@ -56,7 +56,10 @@ def main():
     optimizer = torch.optim.AdamW(p for p in model.parameters() if p.requires_grad)
     for step in range(2):
         ids = torch.randint(0, 128, (1, 512), device="cuda")
-        logits = option_logits(model, ids, torch.ones_like(ids), torch.tensor([[30, 31]], device="cuda"))
+        with torch.autocast("cuda", dtype=torch.bfloat16):
+            logits = option_logits(model, ids, torch.ones_like(ids), torch.tensor([[30, 31]], device="cuda"),
+                                   backbone_autocast=True)
+        assert logits.dtype == torch.float32
         loss = torch.nn.functional.cross_entropy(logits, torch.tensor([0], device="cuda"))
         loss.backward()
         assert torch.isfinite(loss)

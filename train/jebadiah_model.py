@@ -59,21 +59,29 @@ FP32_CANDIDATE_LOGITS = os.environ.get("JEB_FP32_HEAD", "1") != "0"
 
 
 def option_logits(model, input_ids: torch.Tensor, attention_mask: torch.Tensor,
-                  cand_ids: torch.Tensor) -> torch.Tensor:
+                  cand_ids: torch.Tensor, backbone_autocast: bool = False) -> torch.Tensor:
     """Logits over each row's candidate tokens at its answer position (the last real token).
     cand_ids is [B, Kmax] padded with -1; padded slots come back as -inf. Only the answer
     position goes through the head, so memory does not scale with vocab x sequence."""
     core = core_of(model)
-    hidden = core.model(input_ids=input_ids, attention_mask=attention_mask).last_hidden_state
+    # This direct backbone call bypasses Accelerate's autocast wrapper on PEFT.forward.
+    # Keep fp32 LoRA master weights/gradients, but execute their projections in the base
+    # dtype when requested. Scope autocast to the backbone, never the candidate head.
+    head_dtype = core.lm_head.weight.dtype
+    enabled = backbone_autocast and input_ids.device.type == "cuda" and head_dtype in (torch.bfloat16, torch.float16)
+    with torch.autocast(input_ids.device.type, dtype=head_dtype if enabled else None, enabled=enabled):
+        hidden = core.model(input_ids=input_ids, attention_mask=attention_mask).last_hidden_state
     last = attention_mask.sum(dim=1) - 1
     h_last = hidden[torch.arange(hidden.shape[0], device=hidden.device), last]
     safe = cand_ids.clamp(min=0)
     if FP32_CANDIDATE_LOGITS:
         head = core.lm_head
-        w = head.weight[safe].float()                       # [B, K, H], a few KB per row
-        cand = torch.einsum("bkh,bh->bk", w, h_last.float())
-        if getattr(head, "bias", None) is not None:
-            cand = cand + head.bias[safe].float()
+        # .float() alone is insufficient: autocast can downcast einsum again.
+        with torch.autocast(input_ids.device.type, enabled=False):
+            w = head.weight[safe].float()                   # [B, K, H], a few KB per row
+            cand = torch.einsum("bkh,bh->bk", w, h_last.float())
+            if getattr(head, "bias", None) is not None:
+                cand = cand + head.bias[safe].float()
     else:
         cand = core.lm_head(h_last).float().gather(1, safe)
     return cand.masked_fill(cand_ids < 0, float("-inf"))

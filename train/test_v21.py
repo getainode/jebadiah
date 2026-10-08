@@ -15,13 +15,15 @@ from train_jebadiah import make_target, DecideTrainer, NonFiniteLoss
 from v21_pipeline import validate_data, parser, read_jsonl
 
 
-def test_candidate_head_remains_fp32():
+@pytest.mark.parametrize("autocast", [False, True])
+def test_candidate_head_remains_fp32(autocast):
     hidden = torch.tensor([[[0.998, 1.02], [1.11, 0.13]]], dtype=torch.bfloat16, requires_grad=True)
     head = torch.nn.Linear(2, 4, bias=False, dtype=torch.bfloat16)
     head.weight.data.copy_(torch.tensor([[1., .2], [1.01, .19], [0., 1.], [2., 0.]]))
     core = SimpleNamespace(model=lambda **kwargs: SimpleNamespace(last_hidden_state=hidden), lm_head=head)
     ids, mask, candidates = torch.tensor([[1, 2]]), torch.tensor([[1, 1]]), torch.tensor([[0, 1, -1]])
-    logits = option_logits(core, ids, mask, candidates)
+    with torch.autocast("cpu", dtype=torch.bfloat16, enabled=autocast):
+        logits = option_logits(core, ids, mask, candidates)
     assert logits.dtype == torch.float32
     torch.testing.assert_close(logits[0, :2], head.weight[:2].float() @ hidden[0, 1].float())
     assert torch.isneginf(logits[0, 2])
