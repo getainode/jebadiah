@@ -24,13 +24,19 @@ def sha256(path):
     return h.hexdigest()
 
 
+def read_jsonl(path):
+    """One record per newline. Not str.splitlines(): JSON strings may hold U+2028/U+0085, which it also splits on."""
+    with open(path, encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
 def validate_data(train, calib):
     from jebadiah_prompt import wire_keys
     from ainode_prompt_verbatim import translate_one, criteria_pairs, MAX_CRITERIA
     from train_jebadiah import label_index, make_target
     report, families, ids = {}, [], []
     for name, path in (("train", train), ("calib", calib)):
-        records = [json.loads(line) for line in Path(path).read_text().splitlines() if line.strip()]
+        records = read_jsonl(path)
         if not records:
             raise ValueError(f"Empty {name} split")
         fam, row_ids, types, count = set(), set(), set(), 0

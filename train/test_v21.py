@@ -12,7 +12,7 @@ from hub_checkpoints import private_repo, validate_resume
 from jebadiah_model import option_logits
 from merge_export import merge
 from train_jebadiah import make_target, DecideTrainer, NonFiniteLoss
-from v21_pipeline import validate_data, parser
+from v21_pipeline import validate_data, parser, read_jsonl
 
 
 def test_candidate_head_remains_fp32():
@@ -208,3 +208,10 @@ def test_temperature_fit_stays_in_bounds_at_extreme_optima():
     assert hot == pytest.approx(20, abs=1e-4)
     with pytest.raises(ValueError, match="finite"):
         fit_one(torch.tensor([[float("nan"), 0.]]), torch.tensor([[1., 0.]]), mask)
+
+
+def test_read_jsonl_keeps_unicode_line_separators(tmp_path):
+    path = tmp_path / "rows.jsonl"
+    rows = [{"state": "a\u2028b\u0085c"}, {"state": "plain"}]
+    path.write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in rows) + "\n", encoding="utf-8")
+    assert read_jsonl(path) == rows
