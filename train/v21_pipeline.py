@@ -117,6 +117,8 @@ def parser():
                    help="checkpoint batches at or above this padded length; retain short-batch activations")
     p.add_argument("--backbone-autocast", action="store_true",
                    help="execute backbone LoRA projections in bf16 while retaining the fp32 candidate head")
+    p.add_argument("--eval-steps", type=int, default=0, help="held-out accuracy/NLL interval during training")
+    p.add_argument("--calib-eval-limit", type=int, help="maximum held-out questions per training evaluation")
     p.add_argument("--save-steps", type=int, default=100)
     p.add_argument("--max-steps", type=int, default=-1)
     p.add_argument("--resume", default="auto", help="auto, hub, none or checkpoint path")
@@ -195,10 +197,15 @@ def main():
                "num_epochs": args.epochs, "learning_rate": args.lr, "batch_size": args.microbatch,
                "gradient_accumulation_steps": args.accumulation, "use_gradient_checkpointing": args.gradient_checkpointing,
                "warmup_steps": 30 if args.max_steps < 0 else 0, "seed": 17, "save_steps": args.save_steps,
+               "eval_steps": args.eval_steps,
                "checkpoint_repo": checkpoint_repo, "resume": args.resume, "device": args.device,
                "dtype": "bfloat16" if args.device == "cuda" else "float32", "logging_steps": 10,
                "decide": {"target_modules": "all-linear", "lora_dropout": 0.05, "score_targets": "ordinal",
                           "score_ordinal_adjacent": 0.2, "shuffle_choice_options": True}}
+        if args.eval_steps < 0 or (args.calib_eval_limit is not None and args.calib_eval_limit < 1):
+            raise ValueError("Evaluation interval must be nonnegative and limit positive")
+        if args.calib_eval_limit is not None:
+            cfg["decide"]["calib_eval_limit"] = args.calib_eval_limit
         if args.group_by_length:
             cfg["group_by_length"] = True
         if args.pad_to_multiple_of is not None:
