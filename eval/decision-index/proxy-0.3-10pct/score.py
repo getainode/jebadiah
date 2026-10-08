@@ -31,11 +31,13 @@ def load_proxy(suite, ids):
 
 
 def score(proxy, results_path, out, engine):
-    from decision_index.pipeline import score_run
+    from decision_index.pipeline import score_run_v02
     from decision_index.scoring.report import load_results
-    result = score_run(proxy, results_path, engine, out)
     results = load_results(results_path)
     expected = {r['_evaluation']['run_id'] for r in proxy.selected}
+    Path(out).mkdir(parents=True, exist_ok=True)
+    selected_results = {rid: result for rid, result in results.items() if rid in expected}
+    result = score_run_v02(proxy, selected_results, engine, Path(out))
     present = expected & results.keys()
     groups = collections.defaultdict(list)
     for r in proxy.selected:
