@@ -194,3 +194,17 @@ def test_setup_downloads_both_pinned_chat_checkpoints(tmp_path, monkeypatch):
     v21_pipeline.main()
     assert calls == [("Qwen/Qwen3.5-9B", "c202236235762e1c871ad0ccb60c8ee5ba337b9a"),
                      ("Qwen/Qwen3.8-27B", "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0")]
+
+
+
+def test_temperature_fit_stays_in_bounds_at_extreme_optima():
+    from fit_temperature import fit_one
+    logits = torch.tensor([[10., 0.]])
+    mask = torch.tensor([[True, True]])
+    cold, _, _ = fit_one(logits, torch.tensor([[1., 0.]]), mask)
+    hot, _, _ = fit_one(logits, torch.tensor([[.5, .5]]), mask)
+    assert .05 <= cold <= 20
+    assert .05 <= hot <= 20
+    assert hot == pytest.approx(20, abs=1e-4)
+    with pytest.raises(ValueError, match="finite"):
+        fit_one(torch.tensor([[float("nan"), 0.]]), torch.tensor([[1., 0.]]), mask)

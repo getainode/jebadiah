@@ -31,6 +31,10 @@ from train_jebadiah import make_target  # noqa: E402
 def fit_one(logits: torch.Tensor, target: torch.Tensor, mask: torch.Tensor) -> tuple[float, float, float]:
     """Grid then golden-section search on log T in [0.05, 20]. `target` is a distribution per
     row (one-hot for a hard label). Returns (T, nll_before, nll_after)."""
+    if not torch.isfinite(logits[mask]).all() or not torch.isfinite(target).all():
+        raise ValueError("Calibration inputs must be finite")
+    if not mask.any(dim=-1).all() or (target < 0).any() or not torch.allclose(target.sum(dim=-1), torch.ones(target.shape[0], device=target.device)):
+        raise ValueError("Calibration targets must be normalized distributions")
     def nll(t):
         z = (logits / t).masked_fill(~mask, float("-inf"))
         logp = torch.log_softmax(z, dim=-1).masked_fill(target == 0, 0.0)
@@ -38,7 +42,7 @@ def fit_one(logits: torch.Tensor, target: torch.Tensor, mask: torch.Tensor) -> t
     lo, hi = math.log(0.05), math.log(20.0)
     grid = [lo + (hi - lo) * i / 200 for i in range(201)]
     best = min(grid, key=lambda g: nll(math.exp(g)))
-    a, b = best - (hi - lo) / 200, best + (hi - lo) / 200
+    a, b = max(lo, best - (hi - lo) / 200), min(hi, best + (hi - lo) / 200)
     phi = (math.sqrt(5) - 1) / 2
     for _ in range(60):
         c, d = b - phi * (b - a), a + phi * (b - a)
