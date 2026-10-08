@@ -37,7 +37,7 @@ def generate(source, pool, output):
     for filename in ("train.jsonl", "calib.jsonl"):
         path = Path(pool) / filename
         pool_hashes[filename] = hashlib.sha256(path.read_bytes()).hexdigest()
-        rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+        rows = [json.loads(line) for line in path.read_text(encoding="utf-8").split("\n") if line.strip()]
         random.Random(0).shuffle(rows)
         for record in rows[:300]:
             for qid, question in record["questions"].items():

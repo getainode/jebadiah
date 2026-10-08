@@ -10,7 +10,7 @@ from jebadiah_model import Scorer, load_base, load_adapter, load_tokenizer
 
 
 def verify(base, adapter, merged, calib, device="cuda", max_tokens=4096):
-    rows = [json.loads(line) for line in Path(calib).read_text().splitlines() if line.strip()]
+    rows = [json.loads(line) for line in Path(calib).read_text(encoding="utf-8").split("\n") if line.strip()]
     items = [(r["state"], q) for r in rows for q in r["questions"].values()][:260]
     dtype = torch.bfloat16 if device == "cuda" else torch.float32
     def score(path, adapter_path=None):
