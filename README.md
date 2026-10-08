@@ -224,6 +224,10 @@ progress and its results are pending, so there is no Decision Index number here 
 the gotchas, plus how to use Jeb as [JDE](https://github.com/Titanium-Devops/jde)'s judge.
 [`clients/python`](clients/python) is `jebadiah-decide`, one small client with a backend for each of them.
 
+For a first try in a chat window, [optional guidance profiles](docs/chat-window.md)
+point to the setup guide. They leave the decision templates intact; the LM Studio
+preset still needs GUI and API validation.
+
 `server/` is a standalone server for the published models. It runs on one CUDA GPU or an Apple Silicon Mac and
 needs Python 3.12 and [uv](https://docs.astral.sh/uv/):
 
