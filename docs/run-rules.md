@@ -27,6 +27,7 @@ anything we ship; a run that measures their cost is still a single-change run.
 | v2.1 r1 | v2 | three changes at once (breaks rule 2) | | 38.12, dropped |
 | A1 | v2 | the scrub alone: v2 recipe on v2 data minus BoolQ, DBpedia14, MNLI, SummEval and 42 overlapping HelpSteer2 records | the cost of the required scrub; becomes the clean floor | pending |
 | A3 | A1 | new v2.1 sources, capped at 10% each and 50% total | interval vs A1 above zero | pending |
+| R3 | measured best of A1/A3 | add the item 33 skill training data to the best mix; same recipe and original calibration | paired 95% interval vs that best mix above zero | data built locally; winner/composition/evaluation pending; no launch |
 
 ## ITEM 34 proposed ladder
 

@@ -1,0 +1,62 @@
+{
+  "name": "item33-rung3-skills",
+  "seed": "item33-rung3-20261008",
+  "base_mix": "pending measured A1/A3 winner; no training launched",
+  "source_level_contamination_rule": true,
+  "license_manifest_sha256": "566d3e98ef10d3f0ca99461cda6464036ca18e904f81141eabc88ee20df47a74",
+  "render_validation": {
+    "checked_questions": 4500,
+    "max_prompt_tokens": 287,
+    "budget_with_64_token_reserve": 1984,
+    "prompt_source_sha256": "d2660ebec28bd3f1704235bda88d24a397c1c62475e740519cb8ef2d08f25fdd",
+    "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+    "canonical_and_reversed_choice_order": true,
+    "truncated": 0
+  },
+  "files": {
+    "train.jsonl": {
+      "sha256": "ca1e9a8c9f60033faf9ebedf96e1d32c0b9c6c7f7357cebf8dbf54d6c70ee430",
+      "questions": 4050
+    },
+    "calib.jsonl": {
+      "sha256": "af4c205b37226916c133617b8607b67821a2b7f94311c875a53ac28448124196",
+      "questions": 450
+    },
+    "overlap-scan-report.json": {
+      "sha256": "97ca0e01efe2fe17be395cbe387383e88b73353d008d30d19267fc6300ea0fec"
+    }
+  },
+  "splits": {
+    "train": {
+      "questions": 4050,
+      "skills": {
+        "tool_timing": 1350,
+        "grounding": 1350,
+        "intent_routing": 1350
+      },
+      "types": {
+        "choice": 2250,
+        "score": 450,
+        "noul": 1350
+      },
+      "families": 144
+    },
+    "calib": {
+      "questions": 450,
+      "skills": {
+        "grounding": 150,
+        "intent_routing": 150,
+        "tool_timing": 150
+      },
+      "types": {
+        "noul": 150,
+        "score": 50,
+        "choice": 250
+      },
+      "families": 16
+    }
+  },
+  "private_manifest_sha256": "171143ca3c6503cc242beceaf924d70875ffffb6228e1a2a2a71985dbc0f9914",
+  "local_artifact_directory": "/tmp/item33-release"
+}
