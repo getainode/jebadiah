@@ -1,0 +1,38 @@
+{
+  "note": "Cold baseline contains autotuning; prompt shapes, batch size and checkpoint policy differ. These traces explain executed paths and launch counts, not an isolated timing ratio.",
+  "profiles": [
+    {
+      "variant": "baseline-cold",
+      "source": "frontier-infra/jebadiah-9b-item27-r02-baseline-checkpoints/item27-step.trace.json",
+      "optimizer_step": 22,
+      "cuda_kernel_launches": 62872,
+      "l2norm_forward_launches": 10418,
+      "l2norm_backward_launches": 8457,
+      "float32_simt_gemm_launches": 3904,
+      "FLA_forward_calls": 96,
+      "FLA_backward_calls": 48
+    },
+    {
+      "variant": "grouped-checkpoint-all",
+      "source": "frontier-infra/jebadiah-9b-item27-r03-tuned-checkpoints/item27-step.trace.json",
+      "optimizer_step": 22,
+      "cuda_kernel_launches": 16319,
+      "l2norm_forward_launches": 96,
+      "l2norm_backward_launches": 48,
+      "float32_simt_gemm_launches": 1948,
+      "FLA_forward_calls": 48,
+      "FLA_backward_calls": 24
+    },
+    {
+      "variant": "autocast-adaptive",
+      "source": "frontier-infra/jebadiah-9b-item27-r05-autocast-adaptive-checkpoints/item27-step.trace.json",
+      "optimizer_step": 22,
+      "cuda_kernel_launches": 12832,
+      "l2norm_forward_launches": 48,
+      "l2norm_backward_launches": 48,
+      "float32_simt_gemm_launches": 0,
+      "FLA_forward_calls": 24,
+      "FLA_backward_calls": 24
+    }
+  ]
+}

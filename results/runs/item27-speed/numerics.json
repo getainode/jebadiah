@@ -1,0 +1,425 @@
+{
+  "curves": {
+    "r03-baseline": [
+      {
+        "step": 10,
+        "loss": 0.9992,
+        "grad_norm": 8.152
+      },
+      {
+        "step": 20,
+        "loss": 1.006,
+        "grad_norm": 5.42
+      },
+      {
+        "step": 30,
+        "loss": 1.097,
+        "grad_norm": 8.521
+      },
+      {
+        "step": 40,
+        "loss": 0.8431,
+        "grad_norm": 7.254
+      },
+      {
+        "step": 50,
+        "loss": 0.9552,
+        "grad_norm": 9.121
+      },
+      {
+        "step": 60,
+        "loss": 1.036,
+        "grad_norm": 16.88
+      },
+      {
+        "step": 70,
+        "loss": 0.7739,
+        "grad_norm": 4.025
+      },
+      {
+        "step": 80,
+        "loss": 0.8043,
+        "grad_norm": 8.17
+      },
+      {
+        "step": 90,
+        "loss": 0.831,
+        "grad_norm": 6.357
+      },
+      {
+        "step": 100,
+        "loss": 0.9268,
+        "grad_norm": 10.6
+      },
+      {
+        "step": 110,
+        "loss": 0.8046,
+        "grad_norm": 6.283
+      },
+      {
+        "step": 120,
+        "loss": 0.6547,
+        "grad_norm": 3.823
+      },
+      {
+        "step": 130,
+        "loss": 0.8272,
+        "grad_norm": 12.37
+      },
+      {
+        "step": 140,
+        "loss": 0.7665,
+        "grad_norm": 4.207
+      },
+      {
+        "step": 150,
+        "loss": 0.7343,
+        "grad_norm": 4.31
+      }
+    ],
+    "r03-tuned": [
+      {
+        "step": 10,
+        "loss": 1.146,
+        "grad_norm": 6.941
+      },
+      {
+        "step": 20,
+        "loss": 1.002,
+        "grad_norm": 5.398
+      },
+      {
+        "step": 30,
+        "loss": 1.031,
+        "grad_norm": 5.264
+      },
+      {
+        "step": 40,
+        "loss": 0.8501,
+        "grad_norm": 11.02
+      },
+      {
+        "step": 50,
+        "loss": 0.5478,
+        "grad_norm": 0.8023
+      },
+      {
+        "step": 60,
+        "loss": 1.192,
+        "grad_norm": 6.16
+      },
+      {
+        "step": 70,
+        "loss": 0.7952,
+        "grad_norm": 9.932
+      },
+      {
+        "step": 80,
+        "loss": 1.126,
+        "grad_norm": 7.48
+      },
+      {
+        "step": 90,
+        "loss": 0.8963,
+        "grad_norm": 2.893
+      },
+      {
+        "step": 100,
+        "loss": 0.5728,
+        "grad_norm": 5.773
+      },
+      {
+        "step": 110,
+        "loss": 1.09,
+        "grad_norm": 5.653
+      },
+      {
+        "step": 120,
+        "loss": 0.7668,
+        "grad_norm": 6.972
+      },
+      {
+        "step": 130,
+        "loss": 1.167,
+        "grad_norm": 7.633
+      },
+      {
+        "step": 140,
+        "loss": 0.8512,
+        "grad_norm": 4.541
+      },
+      {
+        "step": 150,
+        "loss": 0.5793,
+        "grad_norm": 5.82
+      }
+    ],
+    "r04-adaptive": [
+      {
+        "step": 10,
+        "loss": 1.167,
+        "grad_norm": 10.58
+      },
+      {
+        "step": 20,
+        "loss": 1.022,
+        "grad_norm": 4.966
+      },
+      {
+        "step": 30,
+        "loss": 1.032,
+        "grad_norm": 4.413
+      },
+      {
+        "step": 40,
+        "loss": 0.8375,
+        "grad_norm": 17.9
+      },
+      {
+        "step": 50,
+        "loss": 0.6121,
+        "grad_norm": 4.749
+      },
+      {
+        "step": 60,
+        "loss": 1.051,
+        "grad_norm": 12.72
+      },
+      {
+        "step": 70,
+        "loss": 0.7196,
+        "grad_norm": 16.09
+      },
+      {
+        "step": 80,
+        "loss": 1.139,
+        "grad_norm": 6.452
+      },
+      {
+        "step": 90,
+        "loss": 0.8687,
+        "grad_norm": 5.185
+      },
+      {
+        "step": 100,
+        "loss": 0.5081,
+        "grad_norm": 4.325
+      },
+      {
+        "step": 110,
+        "loss": 1.085,
+        "grad_norm": 10.67
+      },
+      {
+        "step": 120,
+        "loss": 0.7862,
+        "grad_norm": 6.281
+      },
+      {
+        "step": 130,
+        "loss": 1.027,
+        "grad_norm": 7.214
+      },
+      {
+        "step": 140,
+        "loss": 0.7923,
+        "grad_norm": 4.685
+      },
+      {
+        "step": 150,
+        "loss": 0.5338,
+        "grad_norm": 6.464
+      }
+    ],
+    "r05-baseline": [
+      {
+        "step": 10,
+        "loss": 1.049,
+        "grad_norm": 9.598
+      },
+      {
+        "step": 20,
+        "loss": 1.012,
+        "grad_norm": 3.128
+      },
+      {
+        "step": 30,
+        "loss": 1.065,
+        "grad_norm": 11.87
+      },
+      {
+        "step": 40,
+        "loss": 0.9132,
+        "grad_norm": 6.269
+      },
+      {
+        "step": 50,
+        "loss": 0.8838,
+        "grad_norm": 6.578
+      },
+      {
+        "step": 60,
+        "loss": 1.003,
+        "grad_norm": 14.13
+      },
+      {
+        "step": 70,
+        "loss": 0.7561,
+        "grad_norm": 4.088
+      },
+      {
+        "step": 80,
+        "loss": 0.8253,
+        "grad_norm": 9.794
+      },
+      {
+        "step": 90,
+        "loss": 0.8066,
+        "grad_norm": 4.653
+      },
+      {
+        "step": 100,
+        "loss": 1.018,
+        "grad_norm": 7.765
+      },
+      {
+        "step": 110,
+        "loss": 0.7768,
+        "grad_norm": 7.685
+      },
+      {
+        "step": 120,
+        "loss": 0.6423,
+        "grad_norm": 4.357
+      },
+      {
+        "step": 130,
+        "loss": 0.8254,
+        "grad_norm": 5.201
+      },
+      {
+        "step": 140,
+        "loss": 0.7778,
+        "grad_norm": 7.311
+      },
+      {
+        "step": 150,
+        "loss": 0.716,
+        "grad_norm": 3.776
+      }
+    ],
+    "r05-autocast-adaptive": [
+      {
+        "step": 10,
+        "loss": 1.157,
+        "grad_norm": 6.184
+      },
+      {
+        "step": 20,
+        "loss": 1.0,
+        "grad_norm": 6.956
+      },
+      {
+        "step": 30,
+        "loss": 1.028,
+        "grad_norm": 4.601
+      },
+      {
+        "step": 40,
+        "loss": 0.8261,
+        "grad_norm": 22.94
+      },
+      {
+        "step": 50,
+        "loss": 0.487,
+        "grad_norm": 7.791
+      },
+      {
+        "step": 60,
+        "loss": 1.175,
+        "grad_norm": 5.201
+      },
+      {
+        "step": 70,
+        "loss": 0.7124,
+        "grad_norm": 11.22
+      },
+      {
+        "step": 80,
+        "loss": 1.182,
+        "grad_norm": 8.465
+      },
+      {
+        "step": 90,
+        "loss": 0.8853,
+        "grad_norm": 6.381
+      },
+      {
+        "step": 100,
+        "loss": 0.5898,
+        "grad_norm": 5.771
+      },
+      {
+        "step": 110,
+        "loss": 1.008,
+        "grad_norm": 11.75
+      },
+      {
+        "step": 120,
+        "loss": 0.8038,
+        "grad_norm": 8.517
+      },
+      {
+        "step": 130,
+        "loss": 1.198,
+        "grad_norm": 5.813
+      },
+      {
+        "step": 140,
+        "loss": 0.8178,
+        "grad_norm": 3.429
+      },
+      {
+        "step": 150,
+        "loss": 0.5662,
+        "grad_norm": 4.552
+      }
+    ]
+  },
+  "validation_scope": "150 steps, seed-17 Trainer/dropout/sampling; benchmark LoRA initialization was not separately seeded before Trainer construction. Cross-job comparisons include initialization variation.",
+  "loss_comparison": {
+    "blocks": 15,
+    "mean_r04": 0.8787533333333334,
+    "mean_r05": 0.89576,
+    "mean_difference": 0.01700666666666666,
+    "max_abs_block_difference": 0.17100000000000004,
+    "differences": [
+      -0.010000000000000009,
+      -0.02200000000000002,
+      -0.0040000000000000036,
+      -0.011400000000000077,
+      -0.1251,
+      0.12400000000000011,
+      -0.007199999999999984,
+      0.04299999999999993,
+      0.016599999999999948,
+      0.0817,
+      -0.07699999999999996,
+      0.01759999999999995,
+      0.17100000000000004,
+      0.025499999999999967,
+      0.032399999999999984
+    ]
+  },
+  "r04_merge": {
+    "run": "r04",
+    "questions": 64,
+    "identical_picks": 64,
+    "clear_margin_flips": 0,
+    "max_probability_delta": 0.0054288506507873535,
+    "device": "Apple M3 Ultra CPU",
+    "dtype": "float32",
+    "fp32_candidate_head": true,
+    "agreement": 1.0
+  }
+}
