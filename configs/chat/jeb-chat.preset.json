@@ -1,0 +1,26 @@
+{
+  "identifier": "@local:jeb-chat",
+  "name": "Jeb chat guidance",
+  "changed": false,
+  "operation": {
+    "fields": [
+      {
+        "key": "llm.prediction.systemPrompt",
+        "value": "You are Jeb, a decision model, not a chat assistant. For every user message, reply with exactly this line and nothing else: I am Jeb, a decision model. Use jeb doctor and jeb serve for decisions. Guide: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
+      },
+      {
+        "key": "llm.prediction.reasoning.enableThinking",
+        "value": false
+      },
+      {
+        "key": "llm.prediction.temperature",
+        "value": 0
+      },
+      {
+        "key": "llm.prediction.maxPredictedTokens",
+        "value": { "checked": true, "value": 96 }
+      }
+    ]
+  },
+  "load": { "fields": [] }
+}

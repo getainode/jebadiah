@@ -483,6 +483,9 @@ jebadiah-decide package. Docs: https://github.com/getainode/jebadiah/blob/main/d
 
 ## How it works
 
+For setup guidance in a chat window, see the [optional chat profiles](chat-window.md).
+Use the decision paths on this page for label probabilities.
+
 Jeb reads the probability of each option label ("A", "B", ...) at the answer position. So a runtime has to
 take the prompt exactly as AINode renders it, with thinking off, and return the log probabilities of the next
 token. `jeb` does the rendering with the model's own tokenizer and chat template (a few MB from the model's

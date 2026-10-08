@@ -1,0 +1,20 @@
+{
+  "renders": 852,
+  "prompt_source_sha256": "d2660ebec28bd3f1704235bda88d24a397c1c62475e740519cb8ef2d08f25fdd",
+  "template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+  "token_ids_sha256": "cee89d4ba2003631b48a9cdddff548a9777f7375908aac5ce649cb8810d3646c",
+  "model": "frontier-infra/jebadiah-9b-v2-GGUF",
+  "filename": "jebadiah-9b-v2-Q4_K_M.gguf",
+  "gguf_sha256": "b35e6ca21ef33fb7f1943cd137d1b9c3a647bdb54af16f7144a6701034e62252",
+  "gguf_bytes": 5780090752,
+  "tokenizer_revision": "adaec6b3d1f0421706deb49fa275ab49093982ff",
+  "date": "2026-10-08",
+  "hardware": "Mac Studio M3 Ultra, 256 GiB RAM",
+  "llama_server": "0.5.0 build 11146 commit 7fe450e19",
+  "ollama": "0.34.4",
+  "lmstudio": "0.4.21+2",
+  "lmstudio_validation": "CLI system prompt and thinking-off equivalence only; exact preset GUI and Developer API validation owed",
+  "token_arrays_before_after_equal": true,
+  "full_runtime_arrays_match": true
+}

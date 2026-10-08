@@ -1,0 +1,656 @@
+{
+  "llama-before": {
+    "request": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello! How do I use Jeb?"
+        }
+      ],
+      "max_tokens": 160,
+      "temperature": 0,
+      "stream": false
+    },
+    "response": {
+      "choices": [
+        {
+          "finish_reason": "length",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "",
+            "reasoning_content": "Okay, the user is asking how to use Jeb. First, I need to figure out what Jeb refers to. Jeb could be a person, a product, a software, or maybe a typo. Let me think.\n\nWait, Jeb is a common name, but in the context of technology, maybe it's a specific tool or app. Alternatively, could it be a reference to a game character? Like in Minecraft, there's a character named Jeb, but I don't recall a specific tool named Jeb there.\n\nWait, maybe it's a typo. Did they mean \"Jeb\" as in the Minecraft developer? But the question is \"how do I use Jeb,\" which sounds like a tool or software. Alternatively, maybe it's a misspelling of \"Jeb\" as"
+          }
+        }
+      ],
+      "created": 1791483583,
+      "model": "/tmp/item29-model/jebadiah-9b-v2-Q4_K_M.gguf",
+      "system_fingerprint": "b11146-7fe450e19",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 160,
+        "prompt_tokens": 18,
+        "total_tokens": 178,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "id": "chatcmpl-f2NrfIZXjQWx0U47QLoiPD2JueBnak1u",
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 18,
+        "prompt_ms": 105.172,
+        "prompt_per_token_ms": 5.842888888888889,
+        "prompt_per_second": 171.14821435363024,
+        "predicted_n": 160,
+        "predicted_ms": 1859.341,
+        "predicted_per_token_ms": 11.693968553459118,
+        "predicted_per_second": 85.51416872967357
+      }
+    },
+    "elapsed_s": 1.9719938333146274
+  },
+  "llama-after": {
+    "request": {
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are Jeb, a decision model, not a chat assistant. For every user message, reply with exactly this line and nothing else: I am Jeb, a decision model. Use jeb doctor and jeb serve for decisions. Guide: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
+        },
+        {
+          "role": "user",
+          "content": "Hello! How do I use Jeb?"
+        }
+      ],
+      "max_tokens": 160,
+      "temperature": 0,
+      "stream": false,
+      "chat_template_kwargs": {
+        "enable_thinking": false,
+        "thinking": false
+      },
+      "reasoning_effort": "none"
+    },
+    "response": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "I am Jeb, a decision model. Use jeb doctor and jeb serve for decisions. Guide: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
+          }
+        }
+      ],
+      "created": 1791483584,
+      "model": "/tmp/item29-model/jebadiah-9b-v2-Q4_K_M.gguf",
+      "system_fingerprint": "b11146-7fe450e19",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 41,
+        "prompt_tokens": 92,
+        "total_tokens": 133,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      },
+      "id": "chatcmpl-eTkoFZRDeMZPFDh6ZfiN4qWiRt4ZAOmy",
+      "timings": {
+        "cache_n": 0,
+        "prompt_n": 92,
+        "prompt_ms": 177.552,
+        "prompt_per_token_ms": 1.9299130434782608,
+        "prompt_per_second": 518.1580607371362,
+        "predicted_n": 41,
+        "predicted_ms": 481.383,
+        "predicted_per_token_ms": 12.034575,
+        "predicted_per_second": 83.09391897927429
+      }
+    },
+    "elapsed_s": 0.6709052501246333
+  },
+  "ollama-before": {
+    "request": {
+      "model": "item29-jeb-q4-baseline",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello! How do I use Jeb?"
+        }
+      ],
+      "stream": false,
+      "think": true,
+      "keep_alive": 0,
+      "options": {
+        "temperature": 0,
+        "num_predict": 160,
+        "num_ctx": 4096
+      }
+    },
+    "response": {
+      "model": "item29-jeb-q4-baseline",
+      "created_at": "2026-10-08T18:22:11.635428Z",
+      "message": {
+        "role": "assistant",
+        "content": "",
+        "thinking": "Okay, the user is asking how to use Jeb. First, I need to figure out what Jeb refers to. Jeb could be a person, a product, a software, or maybe a typo. Let me think.\n\nWait, Jeb is a common name, but in the context of technology, maybe it's a specific tool or app. Alternatively, could it be a reference to a game character? Like in Minecraft, there's a character named Jeb, but I don't recall a specific tool named Jeb there.\n\nWait, maybe it's a typo. Did they mean \"Jeb\" as in the Minecraft developer? But the question is \"how do I use Jeb,\" which sounds like a tool or software. Alternatively, maybe it's a misspelling of \"Jeb\" as"
+      },
+      "done": true,
+      "done_reason": "length",
+      "total_duration": 6280940208,
+      "load_duration": 4309823042,
+      "prompt_eval_count": 18,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 105852000,
+      "eval_count": 160,
+      "eval_duration": 1862359000
+    },
+    "elapsed_s": 6.287463749758899
+  },
+  "ollama-final-None": {
+    "request": {
+      "model": "item29-jeb-chat",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello! How do I use Jeb?"
+        }
+      ],
+      "stream": false,
+      "keep_alive": 0,
+      "options": {
+        "num_ctx": 4096
+      }
+    },
+    "response": {
+      "model": "item29-jeb-chat",
+      "created_at": "2026-10-08T18:26:57.371735Z",
+      "message": {
+        "role": "assistant",
+        "content": "I am Jeb, a decision model. Use jeb doctor and jeb serve for decisions. Guide: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
+      },
+      "done": true,
+      "done_reason": "stop",
+      "total_duration": 1902042166,
+      "load_duration": 1291019208,
+      "prompt_eval_count": 92,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 137695000,
+      "eval_count": 41,
+      "eval_duration": 470622000
+    }
+  },
+  "ollama-final-True": {
+    "request": {
+      "model": "item29-jeb-chat",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello! How do I use Jeb?"
+        }
+      ],
+      "stream": false,
+      "keep_alive": 0,
+      "options": {
+        "num_ctx": 4096
+      },
+      "think": true
+    },
+    "response": {
+      "model": "item29-jeb-chat",
+      "created_at": "2026-10-08T18:26:59.095643Z",
+      "message": {
+        "role": "assistant",
+        "content": "I am Jeb, a decision model. Use jeb doctor and jeb serve for decisions. Guide: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
+      },
+      "done": true,
+      "done_reason": "stop",
+      "total_duration": 1722235667,
+      "load_duration": 1119756917,
+      "prompt_eval_count": 92,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 134529000,
+      "eval_count": 41,
+      "eval_duration": 466499000
+    }
+  },
+  "ollama-final-False": {
+    "request": {
+      "model": "item29-jeb-chat",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello! How do I use Jeb?"
+        }
+      ],
+      "stream": false,
+      "keep_alive": 0,
+      "options": {
+        "num_ctx": 4096
+      },
+      "think": false
+    },
+    "response": {
+      "model": "item29-jeb-chat",
+      "created_at": "2026-10-08T18:27:00.816987Z",
+      "message": {
+        "role": "assistant",
+        "content": "I am Jeb, a decision model. Use jeb doctor and jeb serve for decisions. Guide: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
+      },
+      "done": true,
+      "done_reason": "stop",
+      "total_duration": 1720310250,
+      "load_duration": 1119798083,
+      "prompt_eval_count": 92,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 135943000,
+      "eval_count": 41,
+      "eval_duration": 463191000
+    }
+  },
+  "ollama-shipped-hf": {
+    "request": {
+      "model": "item29-jeb-chat-hf",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello! How do I use Jeb?"
+        }
+      ],
+      "stream": false,
+      "keep_alive": 0,
+      "options": {
+        "num_ctx": 4096
+      }
+    },
+    "response": {
+      "model": "item29-jeb-chat-hf",
+      "created_at": "2026-10-08T18:31:52.324915Z",
+      "message": {
+        "role": "assistant",
+        "content": "I am Jeb, a decision model. Use jeb doctor and jeb serve for decisions. Guide: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
+      },
+      "done": true,
+      "done_reason": "stop",
+      "total_duration": 1659799541,
+      "load_duration": 1044918958,
+      "prompt_eval_count": 92,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 135043000,
+      "eval_count": 41,
+      "eval_duration": 477032000
+    }
+  },
+  "item29-jeb-q4-baseline-decision": {
+    "request": {
+      "model": "item29-jeb-q4-baseline",
+      "prompt": "<|im_start|>system\nYou are a decision function. Answer with the single letter of the best option and nothing else.<|im_end|>\n<|im_start|>user\nSTATE:\n{\"ticket\":\"Customer says the invoice total does not match the quote.\"}\n\nQUESTION: Which team should take this ticket?\n\nOPTIONS:\nA. billing: an invoice, a charge or a refund\nB. support: a product question\nC. sales: a quote or a renewal\n\nAnswer with the label of one option and nothing else.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "raw": true,
+      "think": false,
+      "stream": false,
+      "keep_alive": 0,
+      "logprobs": true,
+      "top_logprobs": 20,
+      "options": {
+        "num_ctx": 4096,
+        "num_predict": 1,
+        "temperature": 0
+      }
+    },
+    "response": {
+      "model": "item29-jeb-q4-baseline",
+      "created_at": "2026-10-08T18:30:52.196094Z",
+      "response": "A",
+      "done": true,
+      "done_reason": "length",
+      "total_duration": 4529652958,
+      "load_duration": 4348407083,
+      "prompt_eval_count": 110,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 178096000,
+      "eval_count": 1,
+      "eval_duration": 1000,
+      "logprobs": [
+        {
+          "token": "A",
+          "logprob": -0.3551693856716156,
+          "bytes": [
+            65
+          ],
+          "top_logprobs": [
+            {
+              "token": "A",
+              "logprob": -0.3551693856716156,
+              "bytes": [
+                65
+              ]
+            },
+            {
+              "token": "C",
+              "logprob": -1.327215313911438,
+              "bytes": [
+                67
+              ]
+            },
+            {
+              "token": "B",
+              "logprob": -3.7664260864257812,
+              "bytes": [
+                66
+              ]
+            },
+            {
+              "token": "D",
+              "logprob": -4.785552978515625,
+              "bytes": [
+                68
+              ]
+            },
+            {
+              "token": "E",
+              "logprob": -7.564647674560547,
+              "bytes": [
+                69
+              ]
+            },
+            {
+              "token": "F",
+              "logprob": -8.727864265441895,
+              "bytes": [
+                70
+              ]
+            },
+            {
+              "token": "M",
+              "logprob": -9.242830276489258,
+              "bytes": [
+                77
+              ]
+            },
+            {
+              "token": "G",
+              "logprob": -9.43777084350586,
+              "bytes": [
+                71
+              ]
+            },
+            {
+              "token": "c",
+              "logprob": -9.649245262145996,
+              "bytes": [
+                99
+              ]
+            },
+            {
+              "token": "I",
+              "logprob": -9.672369003295898,
+              "bytes": [
+                73
+              ]
+            },
+            {
+              "token": "R",
+              "logprob": -9.720987319946289,
+              "bytes": [
+                82
+              ]
+            },
+            {
+              "token": "S",
+              "logprob": -9.733208656311035,
+              "bytes": [
+                83
+              ]
+            },
+            {
+              "token": "H",
+              "logprob": -9.828556060791016,
+              "bytes": [
+                72
+              ]
+            },
+            {
+              "token": "V",
+              "logprob": -9.834932327270508,
+              "bytes": [
+                86
+              ]
+            },
+            {
+              "token": "AC",
+              "logprob": -9.870309829711914,
+              "bytes": [
+                65,
+                67
+              ]
+            },
+            {
+              "token": " A",
+              "logprob": -9.966211318969727,
+              "bytes": [
+                32,
+                65
+              ]
+            },
+            {
+              "token": "O",
+              "logprob": -10.000391960144043,
+              "bytes": [
+                79
+              ]
+            },
+            {
+              "token": "P",
+              "logprob": -10.025755882263184,
+              "bytes": [
+                80
+              ]
+            },
+            {
+              "token": "L",
+              "logprob": -10.17214584350586,
+              "bytes": [
+                76
+              ]
+            },
+            {
+              "token": "a",
+              "logprob": -10.222681045532227,
+              "bytes": [
+                97
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "item29-jeb-chat-decision": {
+    "request": {
+      "model": "item29-jeb-chat",
+      "prompt": "<|im_start|>system\nYou are a decision function. Answer with the single letter of the best option and nothing else.<|im_end|>\n<|im_start|>user\nSTATE:\n{\"ticket\":\"Customer says the invoice total does not match the quote.\"}\n\nQUESTION: Which team should take this ticket?\n\nOPTIONS:\nA. billing: an invoice, a charge or a refund\nB. support: a product question\nC. sales: a quote or a renewal\n\nAnswer with the label of one option and nothing else.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+      "raw": true,
+      "think": false,
+      "stream": false,
+      "keep_alive": 0,
+      "logprobs": true,
+      "top_logprobs": 20,
+      "options": {
+        "num_ctx": 4096,
+        "num_predict": 1,
+        "temperature": 0
+      }
+    },
+    "response": {
+      "model": "item29-jeb-chat",
+      "created_at": "2026-10-08T18:30:53.436532Z",
+      "response": "A",
+      "done": true,
+      "done_reason": "length",
+      "total_duration": 1237315792,
+      "load_duration": 1078856125,
+      "prompt_eval_count": 110,
+      "prompt_eval_cached_count": 0,
+      "prompt_eval_duration": 155922000,
+      "eval_count": 1,
+      "eval_duration": 1000,
+      "logprobs": [
+        {
+          "token": "A",
+          "logprob": -0.3551693856716156,
+          "bytes": [
+            65
+          ],
+          "top_logprobs": [
+            {
+              "token": "A",
+              "logprob": -0.3551693856716156,
+              "bytes": [
+                65
+              ]
+            },
+            {
+              "token": "C",
+              "logprob": -1.327215313911438,
+              "bytes": [
+                67
+              ]
+            },
+            {
+              "token": "B",
+              "logprob": -3.7664260864257812,
+              "bytes": [
+                66
+              ]
+            },
+            {
+              "token": "D",
+              "logprob": -4.785552978515625,
+              "bytes": [
+                68
+              ]
+            },
+            {
+              "token": "E",
+              "logprob": -7.564647674560547,
+              "bytes": [
+                69
+              ]
+            },
+            {
+              "token": "F",
+              "logprob": -8.727864265441895,
+              "bytes": [
+                70
+              ]
+            },
+            {
+              "token": "M",
+              "logprob": -9.242830276489258,
+              "bytes": [
+                77
+              ]
+            },
+            {
+              "token": "G",
+              "logprob": -9.43777084350586,
+              "bytes": [
+                71
+              ]
+            },
+            {
+              "token": "c",
+              "logprob": -9.649245262145996,
+              "bytes": [
+                99
+              ]
+            },
+            {
+              "token": "I",
+              "logprob": -9.672369003295898,
+              "bytes": [
+                73
+              ]
+            },
+            {
+              "token": "R",
+              "logprob": -9.720987319946289,
+              "bytes": [
+                82
+              ]
+            },
+            {
+              "token": "S",
+              "logprob": -9.733208656311035,
+              "bytes": [
+                83
+              ]
+            },
+            {
+              "token": "H",
+              "logprob": -9.828556060791016,
+              "bytes": [
+                72
+              ]
+            },
+            {
+              "token": "V",
+              "logprob": -9.834932327270508,
+              "bytes": [
+                86
+              ]
+            },
+            {
+              "token": "AC",
+              "logprob": -9.870309829711914,
+              "bytes": [
+                65,
+                67
+              ]
+            },
+            {
+              "token": " A",
+              "logprob": -9.966211318969727,
+              "bytes": [
+                32,
+                65
+              ]
+            },
+            {
+              "token": "O",
+              "logprob": -10.000391960144043,
+              "bytes": [
+                79
+              ]
+            },
+            {
+              "token": "P",
+              "logprob": -10.025755882263184,
+              "bytes": [
+                80
+              ]
+            },
+            {
+              "token": "L",
+              "logprob": -10.17214584350586,
+              "bytes": [
+                76
+              ]
+            },
+            {
+              "token": "a",
+              "logprob": -10.222681045532227,
+              "bytes": [
+                97
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "lmstudio-cli-after": {
+    "command": "lms chat item29-jeb-q4 --reasoning off --system-prompt <preset systemPrompt> --prompt \"Hello! How do I use Jeb?\" --dont-fetch-catalog --yes",
+    "content": "I am Jeb, a decision model. Use jeb doctor and jeb serve for decisions. Guide: https://github.com/getainode/jebadiah/blob/main/docs/run-locally.md"
+  }
+}
