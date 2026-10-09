@@ -22,6 +22,21 @@ def main():
     p.add_argument('--workers', type=int, default=8)
     a = p.parse_args()
     a.out.mkdir(parents=True, exist_ok=True)
+    sys.path.insert(0, str(PROXY))
+    from sample import read_ids
+    from score import load_proxy
+    from decision_index.suite.io import Suite
+    from decision_index.scoring.report import load_results
+    manifest = json.loads((PROXY/'manifest.json').read_text())
+    ids = read_ids(PROXY/'run-ids.txt', manifest['run_ids_sha256'])
+    suite = Suite(a.suite, '0.3')
+    suite.verify()
+    expected = {r['_evaluation']['run_id']: r['_evaluation']['payload_sha256']
+                for r in load_proxy(suite, ids).selected}
+    for results in (a.baseline, a.candidate):
+        actual = {rid: row.get('payload_sha256') for rid, row in load_results(results).items() if rid in ids}
+        if actual != expected:
+            raise ValueError('Proxy result IDs or payload hashes differ from the frozen suite')
     for name, results in [('published', a.baseline), ('a3', a.candidate)]:
         subprocess.run([sys.executable, str(PROXY/'score.py'), '--suite', str(a.suite),
                         '--results', str(results), '--engine', 'item39-27b-'+name,
