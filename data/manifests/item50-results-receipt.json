@@ -1,0 +1,57 @@
+{
+  "item": 50,
+  "data_repo": "frontier-infra/jebadiah-data-v2-1-item47",
+  "data_revision": "2242e85fae6f8aff3fc3cea3fa95869d99132522",
+  "training_code_revision": "e79026a8aa46dfb131c1bb19ef70829a566f7901",
+  "training_job": "6ac97101fee2c9007017ede7",
+  "pr": "https://github.com/getainode/jebadiah/pull/27",
+  "files": {
+    "train.jsonl": {
+      "sha256": "796b89053f48f914341d50118a05bc54cbd01bffe91d61bf3f84d8525e0f0b0d"
+    },
+    "calib.jsonl": {
+      "sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88"
+    },
+    "causal-diagnostic.jsonl": {
+      "sha256": "b0d9187a29da1b3941b29983e6f8d835b312d38d69dd39ad1d7d2c269d150db3"
+    },
+    "replacement-slots.json": {
+      "sha256": "266058c4e9cf3607b360fbfbf4bc1d3329ea51328ebb1e3045b9f1337abd79ef"
+    },
+    "source-licenses.json": {
+      "sha256": "60d3b2c1dba9c0d97c843caefff28cd11488ccd40d94f9536e1f7659e44410e8"
+    },
+    "NOTICE-Corr2Cause.txt": {
+      "sha256": "5a2e4417d27849586ad9eefdf63f81b45100cec83baadc8dfbeb49054d367d38"
+    }
+  },
+  "source_scan_sha256": "b71e225d957ac4c4322d65e6c4430df82197ac025f34eb46f7db784107e0971c",
+  "slots": {
+    "replaced_slots": 1000,
+    "upstream_questions": 1063,
+    "aggregate_cap_questions": 2119,
+    "selected_types": {
+      "choice": 556,
+      "noul": 444
+    }
+  },
+  "preflight": {
+    "manifest_hashes": true,
+    "calibration_byte_identical": true,
+    "area_type_preserved": true,
+    "diagnostic_graph_disjoint": true,
+    "a3_config_identical": true,
+    "diagnostic_metric_oracle": true,
+    "diagnostic_metric_majority_floor_balanced_accuracy": 0.5,
+    "a3_proxy_reproduced": 46.97,
+    "a3_successful_requests": 11079
+  },
+  "caps_minutes": {
+    "training": 130,
+    "proxy": 35,
+    "diagnostic": 45,
+    "recovery": 45
+  },
+  "allocation_ceiling_usd": 11.6875,
+  "result": "pending"
+}
