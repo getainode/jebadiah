@@ -34,6 +34,8 @@ git clone -q https://github.com/getainode/jebadiah.git /workspace/item44-src
 cd /workspace/item44-src
 git checkout -q {code_revision}
 export JEB_ROOT=/workspace/item44-{run}
+export HF_HOME="$JEB_ROOT/hf" TOKENIZERS_PARALLELISM=false
+export HF_HUB_DISABLE_TELEMETRY=1 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 bash scripts/v21.sh --help >/dev/null
 "$JEB_ROOT/venv/bin/python" -m pip install -q hf_xet ninja packaging
 MAX_JOBS=16 timeout 540 "$JEB_ROOT/venv/bin/python" -m pip install -q --no-build-isolation causal-conv1d
