@@ -16,10 +16,17 @@ def command(run, revision):
     options = (f'--option model={model} --option revision={revision} '
                '--option prefix_cache=true --option max_batch=64 '
                '--option cuda_alloc_conf=expandable_segments:True --option batch_tokens=32768')
-    setup = f'''set -euo pipefail
+    patch = "from pathlib import Path; p=Path('/tmp/src/code/indexrun-job.sh'); s=p.read_text(); "
+    for old in ('retry hf download "$RESULTS_REPO" code/decision-index-src.tar.gz',
+                'retry hf download "$RESULTS_REPO" --include "code/proxy/*"'):
+        new = old.replace('"$RESULTS_REPO"', '"$RESULTS_REPO" --revision ' + CODE_REVISION)
+        patch += f'assert s.count({old!r}) == 1; s=s.replace({old!r}, {new!r}); '
+    patch += 'p.write_text(s)'
+    setup = f''' set -euo pipefail
 export HF_HUB_DISABLE_XET=0
 pip install -q 'huggingface_hub==1.33.0' hf_xet
 hf download {RESULTS} --revision {CODE_REVISION} --include 'code/*' --repo-type dataset --local-dir /tmp/src
+python -c {shlex.quote(patch)}
 ENGINE=jebadiah_engine:JebadiahEngine RUN_NAME={name} ENGINE_OPTS={shlex.quote(options)} RESULTS_REPO={RESULTS} SUITE_DATASET=jbrashear/decision-index-suite-0.3 SYNC_SEC=120 ROWS_IN_SUITE='' LIMIT='' ATTEMPTS=1 bash /tmp/src/code/indexrun-job.sh 2>&1 | tee /workspace/item39-indexrun-job.log
 '''
     return ['hf', 'jobs', 'run', '--detach', '--name', f'item39-{run}-proxy',
