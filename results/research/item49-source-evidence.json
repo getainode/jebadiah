@@ -1,0 +1,93 @@
+{
+  "item": 49,
+  "verified_utc": "2026-10-09",
+  "research_backend": "TinyFish CLI 0.38.0 search query and fetch content get",
+  "live_snapshots": [
+    {
+      "url": "https://github.com/causalNLP/corr2cause",
+      "final_url": "https://github.com/causalNLP/corr2cause",
+      "retrieved_structured_text_sha256": "6c3be6c46d818f17390a93e86cd7b966f7f2cf9bd9e376228651ac540d6267eb",
+      "retrieved_structured_text_chars": 4541
+    },
+    {
+      "url": "https://github.com/causalNLP/corr2cause/blob/main/LICENSE",
+      "final_url": "https://github.com/causalNLP/corr2cause/blob/main/LICENSE",
+      "retrieved_structured_text_sha256": "3cf66d4e6c67c60c9cb3bdf016aa89ad5c9228b6998b80c66604183a40f61143",
+      "retrieved_structured_text_chars": 3891
+    },
+    {
+      "url": "https://raw.githubusercontent.com/causalNLP/corr2cause/21d80350e27a6206f536cf90a09e95d9e856c761/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/causalNLP/corr2cause/21d80350e27a6206f536cf90a09e95d9e856c761/LICENSE",
+      "retrieved_structured_text_sha256": "31460ab841a9311d3601e135a2b797ff24914606e7ef8dc62773b0f31840d13a",
+      "retrieved_structured_text_chars": 1135
+    },
+    {
+      "url": "https://huggingface.co/datasets/causalnlp/corr2cause/raw/42ba12c769e11ff6427c9f52d7db58e3f9bf3e53/README.md",
+      "final_url": "https://huggingface.co/datasets/causal-nlp/corr2cause/raw/42ba12c769e11ff6427c9f52d7db58e3f9bf3e53/README.md",
+      "retrieved_structured_text_sha256": "cf16691ed8a198217778364b20594d5f4a0332beda3ed71ada51f64a4f6ec5c0",
+      "retrieved_structured_text_chars": 822
+    },
+    {
+      "url": "https://raw.githubusercontent.com/causalNLP/corr2cause/21d80350e27a6206f536cf90a09e95d9e856c761/code/data_stats.py",
+      "final_url": "https://raw.githubusercontent.com/causalNLP/corr2cause/21d80350e27a6206f536cf90a09e95d9e856c761/code/data_stats.py",
+      "retrieved_structured_text_sha256": "dfe1f208bd5d2e0ffd411e8405fc75f8ed34574bfc3a3b4d9624b2926ab03f7e",
+      "retrieved_structured_text_chars": 3953
+    },
+    {
+      "url": "https://arxiv.org/abs/2306.05836",
+      "final_url": "https://arxiv.org/abs/2306.05836",
+      "retrieved_structured_text_sha256": "7a52f84371777f7c787c8a60a33b7003e5e5cf7768af64b31ecb33820cfa9049",
+      "retrieved_structured_text_chars": 3391
+    },
+    {
+      "url": "https://ar5iv.labs.arxiv.org/html/2306.05836",
+      "final_url": "https://ar5iv.labs.arxiv.org/html/2306.05836",
+      "retrieved_structured_text_sha256": "8b946a97d0fe100481b8936915c0f1ed32aeb3274cd4879608e64710d8864d7b",
+      "retrieved_structured_text_chars": 56197
+    },
+    {
+      "url": "TinyFish multi-URL markdown fetch of pinned generation code",
+      "retrieved_text_sha256": "bb770538dc277ee3b4c429df12491ccff6462be68dddd96e6a184972d44ba3dc"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/causalNLP/corr2cause/21d80350e27a6206f536cf90a09e95d9e856c761/code/data_realworld.py",
+      "final_url": "https://raw.githubusercontent.com/causalNLP/corr2cause/21d80350e27a6206f536cf90a09e95d9e856c761/code/data_realworld.py",
+      "retrieved_structured_text_sha256": "98d8b4baa2cae0fe451b58377e35dd80d50b30a90a25cf4f8513e00c05b47cc3",
+      "retrieved_structured_text_chars": 6900
+    }
+  ],
+  "retrieval_failures": [
+    {
+      "url": "https://colab.research.google.com/drive/1hnJfcZACPZgkZZ8kXnbQy8QAH92FtUk2?usp=sharing",
+      "error": "login_required"
+    },
+    {
+      "url": "https://arxiv.org/html/2306.05836v4",
+      "error": "page_not_found"
+    }
+  ],
+  "findings": {
+    "license": "Pinned MIT License, Copyright (c) 2023 CausalNLP, permission for use, modification, distribution, sublicensing and sale, with notice preservation.",
+    "original_authors": [
+      "Zhijing Jin",
+      "Jiarui Liu",
+      "Zhiheng Lyu",
+      "Spencer Poff",
+      "Mrinmaya Sachan",
+      "Rada Mihalcea",
+      "Mona Diab",
+      "Bernhard Schölkopf"
+    ],
+    "ancestry": "Published code enumerates original DAGs, computes d-separation and Markov-equivalence-class causal relations, then fills deterministic premise/hypothesis templates. Original train has no CLadder or other Decision Index corpus import, model output, paraphrase or teacher target in this generation path.",
+    "paper": "Live original paper describes exhaustive graph generation, correlation/conditional-independence premises and binary validity defined across compatible graphs. Finetuned MNLI models and GPT evaluations in the repository are consumers, not inputs to original data generation.",
+    "parser_adaptation": "Pinned verbalizer credits coauthor Zhiheng Lyu for the embedded raw-graph parser. Its linked Colab required login through TinyFish; the actual embedded parser and upstream C++ generator were inspected and hash-frozen, and do not fetch notebook contents or text corpora.",
+    "hub_card": "Pinned card lists original train/test/validation CSVs and perturbation configurations, and otherwise says TODO. License evidence comes from the authors upstream repository, which explicitly publishes code and data together, not from a search tag.",
+    "independence_limit": "Source-path inspection establishes synthetic-generation ancestry. Only the lead full-suite scan can admit this pinned source; unavailable private tests and base-model pretraining remain outside this evidence.",
+    "separate_story_path": "data_realworld.py calls GPT-3.5 to write dev/test story files only. It does not write original train or the ten frozen Hub release files. No story files or model-written derivatives are used or admitted."
+  },
+  "upstream_code_revision": "21d80350e27a6206f536cf90a09e95d9e856c761",
+  "hub_revision": "42ba12c769e11ff6427c9f52d7db58e3f9bf3e53",
+  "training_launched": false,
+  "protected_index_read": false,
+  "overlap_clearance": "pending_lead_studio_scan"
+}
