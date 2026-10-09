@@ -67,7 +67,10 @@ def main():
         assert read_temperatures(path)==temperatures
         scorer=Scorer(load_base(path),load_tokenizer(path),2048,temperatures=temperatures)
         rows,extra=evaluate.run_set(scorer,records,1,False,8,0)
-        result[name]=summarize(rows,records); result[name]['run_metrics']=extra
+        result[name]=summarize(rows,records); result[name]['run_metrics']=extra['timing']
+        partial=Path('/workspace/item48-evidence-diagnostic-partial.json')
+        partial.write_text(json.dumps(result,indent=2)+'\n')
+        api.upload_file(repo_id=REPO+'-checkpoints',path_or_fileobj=partial,path_in_repo=partial.name)
         del scorer; gc.collect(); torch.cuda.empty_cache()
     result['macro_accuracy_difference']=result['rung1']['macro_rule_accuracy']-result['a3']['macro_rule_accuracy']
     result['diagnostic_improves']=result['macro_accuracy_difference']>0
