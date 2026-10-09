@@ -8,6 +8,8 @@ the run could not say which change hurt.
 
 1. **The baseline to beat is 9B v2: 44.67** on the frozen 10% Decision Index proxy
    (`eval/decision-index/proxy-0.3-10pct/`, manifest SHA256 `74d81622...3405`).
+   The current accepted private recipe is **A3: 46.97**; new rungs must beat A3
+   under rule 2, while v2 remains the comparison floor.
 2. **One change per run**, measured against the current best recipe on that proxy, with the paired group
    bootstrap interval (`bootstrap.py`).
 3. **Keep a change only if it beats the baseline beyond the noise** (the 95% interval of the difference is above
@@ -25,9 +27,17 @@ anything we ship; a run that measures their cost is still a single-change run.
 |---|---|---|---|---|
 | v2 | published | baseline | | 44.67 |
 | v2.1 r1 | v2 | three changes at once (breaks rule 2) | | 38.12, dropped |
-| A1 | v2 | the scrub alone: v2 recipe on v2 data minus BoolQ, DBpedia14, MNLI, SummEval and 42 overlapping HelpSteer2 records | the cost of the required scrub; becomes the clean floor | pending |
-| A3 | A1 | new v2.1 sources, capped at 10% each and 50% total | interval vs A1 above zero | pending |
-| R3 | measured best of A1/A3 | add the item 33 skill training data to the best mix; same recipe and original calibration | paired 95% interval vs that best mix above zero | data built locally; winner/composition/evaluation pending; no launch |
+| A1 | v2 | the scrub alone: v2 recipe on v2 data minus BoolQ, DBpedia14, MNLI, SummEval and 42 overlapping HelpSteer2 records | the cost of the required scrub; becomes the clean floor | 45.25; vs v2 +0.57, CI [-0.80, +1.88]; private diagnostic floor |
+| A3 | A1 | new v2.1 sources, capped at 10% each and 50% total | interval vs A1 above zero | 46.97; vs A1 +1.73, CI [+0.32, +3.23]; vs v2 +2.30, CI [+1.04, +3.60]; accepted best recipe |
+| N3 | A3 (46.97) | rank 16 to 64, alpha 32 to 128, fixed alpha/rank 2; identical data and recipe | frozen-proxy paired 95% interval vs A3 above zero | 42.29; vs A3 -4.68, CI [-6.25, -3.12]; vs v2 -2.38, CI [-4.19, -0.60]; drop; estimated $3.2351 |
+| R3 | A3 (46.97) | add deterministically regenerated item33 4,050 skill train questions; 450 diagnostic holdout questions; preserve original calibration and recipe | frozen-proxy paired 95% interval vs A3 above zero | 46.91; vs A3 -0.06, CI [-1.26, +1.08]; vs v2 +2.24, CI [+0.74, +3.73]; drop; initial merge gate failed (0.08355), lead msg_c4892b870ed6 allowed private proxy; unchanged recovery gate passed (0.02915); estimated $3.9585 including failed stage and recovery |
+| R3 export recovery | final R3 checkpoint step 3155 | unchanged fp32 merge then bf16 cast, zero additional optimizer steps; identify shifted question | preserve original 0.05 gate and record private-only exception | completed, zero additional optimizer steps; gate passed at max shift 0.02915, 259/260 picks, zero confident flips; $0.5943 included in R3 spend |
+
+Item36 total estimated compute: **$7.1935**, including both proxies and the
+failed R3 stage/export recovery. All five timeouts sum to **$19.9375** at
+$2.75/hour, below the shared $20 cap. See [full item36 results](item36-results.md)
+and [verification repeatability follow-up](item36-merge-followup.md). Models
+stay private and are never submitted; A3 remains the best recipe.
 
 ## ITEM 34 proposed ladder
 

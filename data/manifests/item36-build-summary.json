@@ -1,0 +1,40 @@
+{
+  "name": "item36-r3",
+  "private": true,
+  "files": {
+    "train.jsonl": {
+      "sha256": "86ddd8bd210ae7cefd795ee5093a2f4e98b0d9c5cdf0296d448b335ca3d97a9d",
+      "rows": 20672,
+      "questions": 25240
+    },
+    "calib.jsonl": {
+      "sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+      "rows": 280,
+      "questions": 512
+    },
+    "skill-calib.jsonl": {
+      "sha256": "af4c205b37226916c133617b8607b67821a2b7f94311c875a53ac28448124196",
+      "rows": 450,
+      "questions": 450
+    }
+  },
+  "a3_data_revision": "bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed",
+  "a3_input_hashes": {
+    "train.jsonl": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+    "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88"
+  },
+  "skill_input_hashes": {
+    "train.jsonl": "ca1e9a8c9f60033faf9ebedf96e1d32c0b9c6c7f7357cebf8dbf54d6c70ee430",
+    "calib.jsonl": "af4c205b37226916c133617b8607b67821a2b7f94311c875a53ac28448124196"
+  },
+  "a3_manifest_sha256": "2269f3721576869e7be1df1d945259d1bd6a644557fc6bb0eae2138dff0ae7a4",
+  "skill_manifest_sha256": "171143ca3c6503cc242beceaf924d70875ffffb6228e1a2a2a71985dbc0f9914",
+  "skill_source_scan_sha256": "97ca0e01efe2fe17be395cbe387383e88b73353d008d30d19267fc6300ea0fec",
+  "calibration": "A3 original unchanged; 450 skill questions diagnostic only",
+  "base_policy": "Private diagnostic A3 exceptions remain; not a shipping candidate",
+  "cross_source_id_family_state_checks": "passed",
+  "skill_generator_sha256": "35657043dfad4e8c2cfb93f2e4e9768cd13fe8a043281bff456367ad1a9153ff",
+  "protected_index_uploaded": false,
+  "data_repository": "frontier-infra/jebadiah-data-v2-1-item36",
+  "data_revision": "7430dae8b94337f3f9561ca98ecf7c6fc63dbecf"
+}
