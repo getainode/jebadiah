@@ -1,0 +1,13 @@
+{
+  "repository": "jbrashear/jebadiah-9b-v2-1-index-results",
+  "revision": "2cbd8b7394e0cb23c0af144220e623fc4f2298c2",
+  "path": "analysis/item39-27b-a3",
+  "pr": "https://github.com/getainode/jebadiah/pull/20",
+  "estimated_spend_usd": 10.98625,
+  "published_proxy": 55.075067573860224,
+  "a3_proxy": 56.61678167092277,
+  "paired_ci95": [
+    0.3762982898575535,
+    2.8407227221034526
+  ]
+}
