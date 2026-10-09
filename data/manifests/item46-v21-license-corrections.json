@@ -1,0 +1,66 @@
+{
+  "name": "item46-v21-held-out-license-corrections",
+  "applies_to": {
+    "dataset": "frontier-infra/jebadiah-data-v2-1",
+    "revision": "a8e69f2dcab2ead8b164259d0c69102c5cc50e41",
+    "manifest_sha256": "079617f615065a39549faa1b8676ce6a720a9efe8c31c04ebe39df024ca3d172"
+  },
+  "kind": "metadata correction overlay; immutable release and training inputs are not rewritten",
+  "source_manifests": {
+    "multilingual/x-stance": {
+      "license": "CC-BY-NC-4.0",
+      "source": "multilingual/x-stance",
+      "family": "x-stance",
+      "source_id": "michiel/xstance",
+      "revision": "9edfbd801b18a454a93cf862da466893645f9e3f",
+      "upstream": {
+        "rows": {
+          "train": 4376,
+          "validation": 22,
+          "test": 23
+        },
+        "dataset": "michiel/xstance",
+        "originals": [
+          "strombergnlp/x-stance"
+        ],
+        "revisions": {
+          "michiel/xstance": "bbb9fde690c35b7b047eea721ecf05c9934a5314"
+        },
+        "license": "CC-BY-NC-4.0",
+        "license_use": "noncommercial",
+        "card_licenses": {
+          "strombergnlp/x-stance": [
+            "cc-by-nc-4.0"
+          ]
+        },
+        "original_author_data_license": "CC-BY-NC-4.0",
+        "original_author_license_evidence": "https://github.com/ZurichNLP/xstance#licenses"
+      },
+      "records": 400,
+      "questions": 400,
+      "allowed_reason": "Not admitted for commercial training or public Jeb dataset packaging; retain historical held-out provenance with the corrected non-commercial data terms.",
+      "upstream_revisions": {
+        "michiel/xstance": "bbb9fde690c35b7b047eea721ecf05c9934a5314"
+      },
+      "upstream_originals": [
+        "strombergnlp/x-stance",
+        "ZurichNLP/xstance",
+        "Smartvote comments"
+      ],
+      "previous_license": "mit",
+      "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+      "data_license_evidence_url": "https://github.com/ZurichNLP/xstance#licenses",
+      "repository_code_license": "MIT",
+      "commercial_use_ok": false,
+      "training_allowed": false,
+      "public_data_redistribution_allowed": false,
+      "release_split": "holdout",
+      "release_records": 400,
+      "release_questions": 400,
+      "ancestry": "Comments by candidates on political questions extracted from Smartvote, per original authors."
+    }
+  },
+  "audit_receipt": "results/research/item46-xstance-training-audit.json",
+  "follow_up": "Apply this metadata correction to future release manifests and exclude non-commercial sources from commercial training and any public dataset packaging; prior experiment pins remain immutable.",
+  "application": "Replace the multilingual/x-stance source_manifests entry with this complete corrected entry when producing a new release manifest; do not repin historical experiments."
+}

@@ -1,0 +1,146 @@
+{
+  "item": 46,
+  "date": "2026-10-09",
+  "purpose": "Audit x-stance source presence in actual pinned training files; not a general contamination or content-rights scan",
+  "method": "Parse every JSONL row, count questions and search provenance fields for x-stance/xstance/Smartvote/ZurichNLP aliases; verify train file SHA256 before interpreting results",
+  "provenance_fields_checked": [
+    "id",
+    "set",
+    "subset",
+    "source",
+    "source_id",
+    "family",
+    "family_id",
+    "upstream",
+    "upstream_originals",
+    "provenance"
+  ],
+  "pattern": "x[-_ /]?stance|xstance|smartvote|zurichnlp",
+  "private_training_payloads_committed": false,
+  "checks": [
+    {
+      "mix": "a1",
+      "dataset": "frontier-infra/jebadiah-data-v2-1-item32",
+      "revision": "bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed",
+      "file": "a1/train.jsonl",
+      "sha256": "ebc2434105b486e943a4c3e08c15e6c850f8de71a91fd14b691c1cebc1368143",
+      "matches_expected_sha256": true,
+      "rows_checked": 6027,
+      "questions_checked": 10595,
+      "xstance_provenance_matches": 0,
+      "type_question_counts": {
+        "choice": 3576,
+        "noul": 1928,
+        "score": 5091
+      }
+    },
+    {
+      "mix": "a3",
+      "dataset": "frontier-infra/jebadiah-data-v2-1-item32",
+      "revision": "bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed",
+      "file": "a3/train.jsonl",
+      "sha256": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+      "matches_expected_sha256": true,
+      "rows_checked": 16622,
+      "questions_checked": 21190,
+      "xstance_provenance_matches": 0,
+      "type_question_counts": {
+        "choice": 11708,
+        "noul": 3696,
+        "score": 5786
+      }
+    },
+    {
+      "mix": "r3",
+      "dataset": "frontier-infra/jebadiah-data-v2-1-item36",
+      "revision": "7430dae8b94337f3f9561ca98ecf7c6fc63dbecf",
+      "file": "r3/train.jsonl",
+      "sha256": "86ddd8bd210ae7cefd795ee5093a2f4e98b0d9c5cdf0296d448b335ca3d97a9d",
+      "matches_expected_sha256": true,
+      "rows_checked": 20672,
+      "questions_checked": 25240,
+      "xstance_provenance_matches": 0,
+      "type_question_counts": {
+        "choice": 13958,
+        "noul": 5046,
+        "score": 6236
+      }
+    },
+    {
+      "mix": "g1",
+      "dataset": "frontier-infra/jebadiah-data-v2-1-item37",
+      "revision": "98356116e9fdd9db8de8759bfab9eac5e83f0c03",
+      "file": "g1/train.jsonl",
+      "sha256": "56bac2c84f31ff62db4b168463178e3849ac6118f62cce6ac5b2b7aff09414b2",
+      "matches_expected_sha256": true,
+      "rows_checked": 17972,
+      "questions_checked": 22540,
+      "xstance_provenance_matches": 0,
+      "type_question_counts": {
+        "choice": 12158,
+        "noul": 4146,
+        "score": 6236
+      }
+    },
+    {
+      "mix": "n2",
+      "dataset": "frontier-infra/jebadiah-data-v2-1-item43",
+      "revision": "0738c0ac008528511041e059b6c5453ab8198dbf",
+      "file": "n2/train.jsonl",
+      "sha256": "c7b9fe1ccfb688b7c6c31785d14950f51d748a3a8e9bd3602fd69a31b6194c17",
+      "matches_expected_sha256": true,
+      "rows_checked": 16783,
+      "questions_checked": 21190,
+      "xstance_provenance_matches": 0,
+      "type_question_counts": {
+        "choice": 11708,
+        "noul": 3696,
+        "score": 5786
+      }
+    },
+    {
+      "mix": "v21",
+      "dataset": "frontier-infra/jebadiah-data-v2-1",
+      "revision": "a8e69f2dcab2ead8b164259d0c69102c5cc50e41",
+      "file": "train.jsonl",
+      "sha256": "d812d4930ab3cb003728f0c909c5c67f1786f21342835afc8aa4b5b328ad69a1",
+      "matches_expected_sha256": true,
+      "rows_checked": 170300,
+      "questions_checked": 175000,
+      "xstance_provenance_matches": 0,
+      "type_question_counts": {
+        "choice": 87500,
+        "noul": 43750,
+        "score": 43750
+      }
+    }
+  ],
+  "reuse_checks": {
+    "27b-a3": {
+      "same_train_file_as": "a3",
+      "config": "configs/item39-a3.json",
+      "run_evidence": "docs/item39-results.md",
+      "xstance_provenance_matches": 0
+    },
+    "d0": {
+      "same_train_file_as": "a3",
+      "config": "configs/item37-d0.json",
+      "xstance_provenance_matches": 0
+    },
+    "l5": {
+      "same_train_file_as": "a3",
+      "config": "configs/item37-l5.json",
+      "xstance_provenance_matches": 0
+    }
+  },
+  "a3_relevant_source_question_counts": {
+    "original-music-triads": 102,
+    "SpaceNLI": 102,
+    "original-music-intervals": 102,
+    "corr2cause": 102,
+    "ruletaker": 102
+  },
+  "finding": "No x-stance source provenance in v2.1 train, A1, A3, R3, G1 or N2; 27B A3, D0 and L5 reuse the checked A3 file",
+  "limits": "Checks source provenance, not unverifiable ancestry hidden inside a mislabeled record or pretraining contamination; holdout bytes were not downloaded",
+  "cleanup": "All item46 downloaded train files, metadata/cache and TinyFish scratch snapshots will be removed after durable receipts are committed; pre-existing v2.1 train and shared suite files are retained"
+}
