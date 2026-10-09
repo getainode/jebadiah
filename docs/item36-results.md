@@ -2,6 +2,10 @@
 
 **Frozen proxy, not a leaderboard score.**
 
+PR: https://github.com/getainode/jebadiah/pull/18
+
+[Durable private report and evidence](https://huggingface.co/datasets/jbrashear/jebadiah-9b-v2-1-index-results/blob/d04fe988f3386e5be0b2c96b6bff9ee49a7d832c/analysis/item36-ladder/item36-report.md).
+
 11,079 requests in 10,380 complete groups on the unchanged frozen manifest
 `74d8162296f404a676624d87bf98abb920d46acff3c38be6a12504131bc43405`.
 Each comparison uses 2,000 paired complete-group draws stratified by benchmark/domain/track,
