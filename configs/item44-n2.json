@@ -35,8 +35,8 @@
   "model_repo": "frontier-infra/jebadiah-9b-v2-1-n2",
   "checkpoint_repo": "frontier-infra/jebadiah-9b-v2-1-n2-checkpoints",
   "dataset_repo": "frontier-infra/jebadiah-data-v2-1-item43",
-  "train_file": "a3/train.jsonl",
-  "calib_file": "a3/calib.jsonl",
-  "manifest_file": "a3/manifest.json",
+  "train_file": "n2/train.jsonl",
+  "calib_file": "n2/calib.jsonl",
+  "manifest_file": "n2/manifest.json",
   "wide_diagnostic_file": "n2/wide-diagnostic.jsonl"
 }
