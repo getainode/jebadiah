@@ -61,3 +61,20 @@ train/calibration/manifest/source-scan hashes exactly match PR17. No overlap
 index or source-scan text is uploaded. The composed mix contains 25,240
 training questions and byte-identical original 512-question calibration.
 The unchanged scorer reproduces A3 46.97 with all 11,079 proxy requests ok.
+
+## Recovery and repeatability
+
+R3 completed all 3,155 optimizer steps, then the initial merge check failed
+(max probability shift 0.0835537, 259/260 picks, zero confident flips). Lead
+message `msg_c4892b870ed6` authorized private scoring of the unchanged merge.
+Export-only job `6ac8394efee2c900701718fc` recovered the saved final checkpoint
+without optimizer updates and passed the unchanged gate at 0.0291513. Both
+outcomes and the explicit private-only exception remain in the evidence.
+No algorithm change fixed the initial failure; its cause remains unresolved.
+
+The extra 45-minute export allocation brings all five job timeouts to 435
+minutes, an aggregate ceiling of $19.9375 at $2.75/hour, still below $20.
+Actual measured durations and spend are reported with the final results.
+Two Mac CPU fp32 exports are byte-identical to each other and the published
+recovery. See [the verification repeatability follow-up](item36-merge-followup.md)
+for case IDs, CPU checks, excluded causes and the remaining investigation.

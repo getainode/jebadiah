@@ -88,7 +88,7 @@ def main():
     diagnostics.sort(key=lambda x: x['max_probability_delta'], reverse=True)
     (merged / 'merge_question_diagnostics.json').write_text(json.dumps(diagnostics, indent=2)+'\n')
     print('MERGE_DIAGNOSTICS', json.dumps(diagnostics[:3]), flush=True)
-    exception = {'private_only': True, 'shipping_allowed': gate_passed,
+    exception = {'private_only': True, 'shipping_allowed': False,
                  'unchanged_merge_gate_passed': gate_passed, 'gate': report,
                  'approval': 'Lead Orca message msg_c4892b870ed6, 2026-10-09T00:42:42Z',
                  'checkpoint_revision': checkpoint_revision, 'optimizer_steps_added': 0}
@@ -106,7 +106,8 @@ def main():
     (merged/'training_provenance.json').write_text(json.dumps(provenance, indent=2)+'\n')
     (merged/'README.md').write_text('---\nbase_model: Qwen/Qwen3.5-9B\nlibrary_name: transformers\n---\n\n'
         '# Private R3 diagnostic\n\nMerge-gate failed: max shift 0.0836, 259/260 picks, 0 confident flips.\n'
-        'Private scoring authorized by the lead; shipping is blocked until the unchanged 0.05 gate passes.\n'
+        f'Recovered unchanged gate: max shift {report["max_probability_delta"]:.6f}, passed={gate_passed}.\n'
+        'Private diagnostic only; inherited A3 source-policy exceptions also block shipping.\n'
         'See private_merge_exception.json and merge_question_diagnostics.json.\n')
     assert api.model_info(model).private
     result = api.upload_folder(repo_id=model, folder_path=merged,
