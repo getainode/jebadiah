@@ -28,7 +28,7 @@ def summarize(rows, records):
         q = r['questions'][row['qid']]
         ok = row['pick'] == row['label']
         for name in ('overall', 'type:' + q['type'], 'rule:' + r['rule'],
-                     'documents:' + str(len(r['world']['documents'])),
+                     'documents:' + str(r['world']['documents']),
                      'polarity:' + str(r['world']['query']['negated']), 'status:' + r['evidence_status']):
             groups[name].append(ok)
         flips[(r['group_id'], q['type'])].append(ok)
