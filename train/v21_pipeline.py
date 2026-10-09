@@ -113,6 +113,7 @@ def parser():
     p.add_argument("--max-seq-length", type=int, default=4096)
     p.add_argument("--epochs", type=float, default=1)
     p.add_argument("--lr", type=float, default=1e-4)
+    p.add_argument("--lora-dropout", type=float, default=0.05)
     p.add_argument("--microbatch", type=int, default=1)
     p.add_argument("--accumulation", type=int, default=8)
     p.add_argument("--gradient-checkpointing", action=argparse.BooleanOptionalAction, default=True,
@@ -138,6 +139,8 @@ def main():
     from huggingface_hub import HfApi, snapshot_download
     from hub_checkpoints import private_repo
     args = parser().parse_args()
+    if not 0 <= args.lora_dropout < 1:
+        raise ValueError("LoRA dropout must be in [0, 1)")
     if args.base and len(args.sizes) != 1:
         raise ValueError("A local base requires one size")
     if not args.no_upload and not args.setup_only:
@@ -209,7 +212,7 @@ def main():
                "eval_steps": args.eval_steps,
                "checkpoint_repo": checkpoint_repo, "resume": args.resume, "device": args.device,
                "dtype": "bfloat16" if args.device == "cuda" else "float32", "logging_steps": 10,
-               "decide": {"target_modules": "all-linear", "lora_dropout": 0.05, "score_targets": "ordinal",
+               "decide": {"target_modules": "all-linear", "lora_dropout": args.lora_dropout, "score_targets": "ordinal",
                           "score_ordinal_adjacent": 0.2, "shuffle_choice_options": True}}
         if args.eval_steps < 0 or (args.calib_eval_limit is not None and args.calib_eval_limit < 1):
             raise ValueError("Evaluation interval must be nonnegative and limit positive")
