@@ -40,7 +40,7 @@ def compose(base, skills, output):
     if len(all_ids) != len(set(all_ids)):
         raise ValueError('Duplicate training IDs')
     output.mkdir(parents=True, exist_ok=True)
-    # Preserve baseline bytes and order; append exactly the regenerated train bytes.
+    # Preserve baseline bytes and order; append exactly the selected grounding train bytes.
     with (output / 'train.jsonl').open('wb') as stream:
         stream.write((base / 'train.jsonl').read_bytes())
         stream.writelines(line for line in (skills / 'train.jsonl').read_bytes().splitlines(keepends=True) if json.loads(line)['skill'] == 'grounding')

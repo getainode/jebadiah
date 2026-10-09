@@ -30,6 +30,7 @@ def main():
     model = experiment['model_repo']
     assert api.model_info(model).private
     checkpoint_repo = model + '-checkpoints'
+    assert api.model_info(checkpoint_repo).private
     checkpoint_revision = args.checkpoint_revision
     cp_root = Path(snapshot_download(checkpoint_repo, revision=checkpoint_revision,
                                     allow_patterns=[f'checkpoints/checkpoint-{step}/adapter_model.safetensors',
