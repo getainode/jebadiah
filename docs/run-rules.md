@@ -44,6 +44,8 @@ $2.75/hour, below the shared $20 cap. See [full item36 results](item36-results.m
 and [verification repeatability follow-up](item36-merge-followup.md). Models
 stay private and are never submitted; A3 remains the best recipe.
 
+| N2 (item44) | A3 (46.97) | replace 1,170 of 11,708 choice slots with scanned owned wide-choice questions; unchanged A3 recipe, calibration and temperatures | overall and Retrieval frozen-proxy paired 95% intervals vs A3 above zero, score above 44.67 | pending; private only; $12 cap including proxy and recovery |
+
 ## ITEM 34 proposed ladder
 
 Research proposals only, not launched runs. [Evidence and ranked gaps](item34-nimble-v3-research.md)
