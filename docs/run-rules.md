@@ -33,6 +33,10 @@ anything we ship; a run that measures their cost is still a single-change run.
 | R3 | A3 (46.97) | add deterministically regenerated item33 4,050 skill train questions; 450 diagnostic holdout questions; preserve original calibration and recipe | frozen-proxy paired 95% interval vs A3 above zero | 46.91; vs A3 -0.06, CI [-1.26, +1.08]; vs v2 +2.24, CI [+0.74, +3.73]; drop; initial merge gate failed (0.08355), lead msg_c4892b870ed6 allowed private proxy; unchanged recovery gate passed (0.02915); estimated $3.9585 including failed stage and recovery |
 | R3 export recovery | final R3 checkpoint step 3155 | unchanged fp32 merge then bf16 cast, zero additional optimizer steps; identify shifted question | preserve original 0.05 gate and record private-only exception | completed, zero additional optimizer steps; gate passed at max shift 0.02915, 259/260 picks, zero confident flips; $0.5943 included in R3 spend |
 
+| G1 | A3 (46.97) | add only item33 grounding train questions; retain grounding diagnostic holdout and unchanged original calibration | frozen-proxy paired 95% interval vs A3 above zero | planned before launch |
+| D0 | A3 (46.97) | LoRA dropout 0.05 to 0.0; identical data and other recipe fields | frozen-proxy paired 95% interval vs A3 above zero | planned before launch |
+| L5 | A3 (46.97) | peak LR 1e-4 to 5e-5; cosine schedule and warmup unchanged | frozen-proxy paired 95% interval vs A3 above zero | planned before launch |
+
 Item36 total estimated compute: **$7.1935**, including both proxies and the
 failed R3 stage/export recovery. All five timeouts sum to **$19.9375** at
 $2.75/hour, below the shared $20 cap. See [full item36 results](item36-results.md)
