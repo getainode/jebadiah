@@ -28,7 +28,8 @@ anything we ship; a run that measures their cost is still a single-change run.
 | A1 | v2 | the scrub alone: v2 recipe on v2 data minus BoolQ, DBpedia14, MNLI, SummEval and 42 overlapping HelpSteer2 records | the cost of the required scrub; becomes the clean floor | pending |
 | A3 | A1 | new v2.1 sources, capped at 10% each and 50% total | interval vs A1 above zero | pending |
 | N3 | A3 (46.97) | rank 16 to 64, alpha 32 to 128, fixed alpha/rank 2; identical data and recipe | frozen-proxy paired 95% interval vs A3 above zero | prelaunch; private, never submitted; item36 shared $20 cap |
-| R3 | A3 (46.97) | add deterministically regenerated item33 4,050 skill train questions; 450 diagnostic holdout questions; preserve original calibration and recipe | frozen-proxy paired 95% interval vs A3 above zero | prelaunch; private, never submitted; item36 shared $20 cap |
+| R3 | A3 (46.97) | add deterministically regenerated item33 4,050 skill train questions; 450 diagnostic holdout questions; preserve original calibration and recipe | frozen-proxy paired 95% interval vs A3 above zero | full epoch completed; merge gate failed at max shift 0.08355 with zero confident flips; lead msg_c4892b870ed6 authorizes private proxy only, shipping blocked |
+| R3 export recovery | final R3 checkpoint step 3155 | unchanged fp32 merge then bf16 cast, zero additional optimizer steps; identify shifted question | preserve original 0.05 gate and record private-only exception | prelaunch; 45-minute RTX PRO 6000 cap ($2.0625), counts toward shared $20 |
 
 ## ITEM 34 proposed ladder
 
