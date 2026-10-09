@@ -1,0 +1,54 @@
+{
+  "dataset": "frontier-infra/jebadiah-data-v2-1-item47",
+  "dataset_revision": "7b6b15f95cc9902e1ebd783656a3bd590350875d",
+  "files": {
+    "train.jsonl": {
+      "sha256": "619b75cb6812c2347c7a01ff10e1734323a3fa313e6c6433d8ef54657359582c"
+    },
+    "calib.jsonl": {
+      "sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88"
+    },
+    "evidence-diagnostic.jsonl": {
+      "sha256": "5e0884ace8cb961e767eade180c829a804b3d960fc02610facac2db7cfd2f873"
+    },
+    "replacement-slots.json": {
+      "sha256": "526651d0e6c99efd27df1d88a66a4c5b9d4662985c837eacd2d9d8f189c1ba59"
+    }
+  },
+  "scan": {
+    "scanned_records": 6300,
+    "direct_hits": 0,
+    "invalid_empty_state_records": 0,
+    "removed_families": 0,
+    "removed_records": 0,
+    "retained_records": 6300,
+    "methods": {},
+    "remaining_hits_under_scanner": 0,
+    "semantic_independence_proven": false,
+    "status": "passed",
+    "source_level": true,
+    "protected_index_sha256": "cf54ade9013c05db74f4c70925287382708de965fbf3cba62145ee821adad0ff",
+    "scanner_sha256": "f3c217cd0a7d6a44ef5c9405746d8c40d0634bb6b0561b79da453161d31c87af",
+    "candidates_sha256": "0d57520662e38ca6057184edab9d9db0bb9983cadb6d698c191d137ba9b0a865"
+  },
+  "replacements": 1000,
+  "train_questions": 21190,
+  "calibration_questions": 512,
+  "diagnostic_questions": 300,
+  "calibration_sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+  "unchanged_area_type_counts": true,
+  "allocation_minutes": {
+    "training": 130,
+    "proxy": 35,
+    "paired_diagnostic": 45,
+    "one_export_recovery": 45
+  },
+  "allocation_usd_at_2_75_per_hour": 11.6875,
+  "model_private": true,
+  "checkpoint_private": true,
+  "training_job": "6ac96b33095c57808930b2a7",
+  "training_code_revision": "345e80213fe813f9cb388a44946e4ee959d3e1b7",
+  "pre_run_log_committed_before_launch": true,
+  "a3_proxy_reproduced": 46.97,
+  "diagnostic_metric_checks": "perfect oracle rows and one incorrect three-way answer; overall, type, rule, precision/recall and group bookkeeping passed"
+}

@@ -1,0 +1,15 @@
+# ITEM 48: owned evidence replacement against A3
+
+Live run in progress. The single change replaces 1,000 matched language presentations with the owned item47 evidence source; total exposure remains 21,190 questions. The dataset is private `frontier-infra/jebadiah-data-v2-1-item47` at `7b6b15f95cc9902e1ebd783656a3bd590350875d`, folder `rung1/`. Its Studio scan covers all 6,300 source records and reports zero direct or remaining hits. The original 512-question A3 calibration bytes are unchanged. The 300-question evidence diagnostic is held out from training and temperature fitting.
+
+The run starts from Qwen/Qwen3.5-9B at `c202236235762e1c871ad0ccb60c8ee5ba337b9a`. Rank 16, alpha 32, dropout 0.05, length 2,048, learning rate 1e-4, one epoch, seed 17, ordinal score targets, effective batch 8, item27 speed flags, and autocast off match A3. The wrapper preserves A3 temperatures from model revision `9e69926a007dd636e82d33485dcd48f9751c4248` instead of fitting new temperatures. The shared trainer, renderer, merge verifier, objective, and scorer are unchanged.
+
+The pre-run hypothesis and keep rule were committed before launch in [the run log](run-rules.md). Keep only if the frozen proxy paired whole-group bootstrap 95% interval of candidate minus A3 is entirely positive, candidate score exceeds 44.67, and held-out diagnostic macro accuracy over its five rule families improves. The unchanged merge gate requires maximum probability shift at most 0.05 and zero confident pick flips. One export-only recovery is allowed, with both gate reports preserved.
+
+Private model: `frontier-infra/jebadiah-9b-v2-1-rung1`. Private checkpoints: `frontier-infra/jebadiah-9b-v2-1-rung1-checkpoints`. No model is made public or submitted. Existing A3 source exceptions still block public shipment.
+
+Training job: [6ac96b33095c57808930b2a7](https://huggingface.co/jobs/jbrashear/6ac96b33095c57808930b2a7), code `345e80213fe813f9cb388a44946e4ee959d3e1b7`. Allocation limits are 130 minutes training, 35 minutes proxy, 45 minutes paired diagnostic, and 45 minutes one export recovery. The total allocation ceiling is $11.6875 at $2.75/hour, below the $12 cap. Item44 measured 3,241 seconds training and 1,124 seconds proxy, so the initial honest ETA was 90 to 120 minutes including diagnostics and setup, with recovery potentially adding time.
+
+Atlas preflight verified all manifest file hashes and question counts, the calibration hash, and unchanged area/type counts. The unchanged scorer reproduced A3 at 46.97 with all 11,079 requests successful. Diagnostic metric checks used perfect oracle predictions and one incorrect three-way prediction to verify accuracy, precision/recall, and complete minimal-variant groups. Script compilation and whitespace checks passed on Atlas. No GitHub-hosted CI runs were requested.
+
+Proxy, five areas, HoVer, RAGTruth, CLadder, ANLI, CLINC, POP909, paired bootstrap, held-out evidence diagnostic, actual compute cost, and final keep/drop decision are pending. Scratch cleanup follows durable evidence upload and final reporting.
