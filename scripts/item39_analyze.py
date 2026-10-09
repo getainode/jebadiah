@@ -4,6 +4,7 @@ Inputs are local paths inside the item39 PRO-G40 scratch directory. This script
 never performs inference, changes scoring, or publishes a model.
 """
 import argparse
+import gzip
 import json
 from pathlib import Path
 import subprocess
@@ -26,7 +27,6 @@ def main():
     from sample import read_ids
     from score import load_proxy
     from decision_index.suite.io import Suite
-    from decision_index.scoring.report import load_results
     manifest = json.loads((PROXY/'manifest.json').read_text())
     ids = read_ids(PROXY/'run-ids.txt', manifest['run_ids_sha256'])
     suite = Suite(a.suite, '0.3')
@@ -34,7 +34,10 @@ def main():
     expected = {r['_evaluation']['run_id']: r['_evaluation']['payload_sha256']
                 for r in load_proxy(suite, ids).selected}
     for results in (a.baseline, a.candidate):
-        actual = {rid: row.get('payload_sha256') for rid, row in load_results(results).items() if rid in ids}
+        opener = gzip.open if results.suffix == '.gz' else open
+        with opener(results, 'rt') as stream:
+            actual = {row['run_id']: row.get('payload_sha256')
+                      for row in map(json.loads, stream) if row['run_id'] in ids}
         if actual != expected:
             raise ValueError('Proxy result IDs or payload hashes differ from the frozen suite')
     for name, results in [('published', a.baseline), ('a3', a.candidate)]:

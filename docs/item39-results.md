@@ -72,10 +72,81 @@ estimates 9,063 seconds, about 2.5 hours, before the batch-one overhead and a
 longer merge/proxy. The initial honest estimate is 3 to 5 hours and will be
 replaced by live measured throughput. No full-suite inference is authorized.
 
-## Remaining
+## Completed paired results
 
-Training, live memory measurement, unchanged merge verification, candidate
-proxy, 2,000 paired bootstrap draws, five area deltas, final spend, durable
-private evidence, scratch cleanup, and lead review remain. Local checks so far:
-five proxy tests, config equivalence, compilation and whitespace checks.
-No GitHub-hosted CI was launched. PR: https://github.com/getainode/jebadiah/pull/20.
+| Model | Proxy | Delta versus published | Paired 95% interval |
+|---|---:|---:|---|
+| Published 27B | 55.08 | baseline | baseline |
+| Private 27B A3 | 56.62 | +1.54 | [+0.38, +2.84] |
+
+Both scores cover all 11,079 requests with zero failures and matching frozen
+payload hashes. The 2,000-draw paired complete-group bootstrap uses seed
+20261008, the unchanged official scorer, and the frozen manifest SHA256
+`74d8162296f404a676624d87bf98abb920d46acff3c38be6a12504131bc43405`.
+Deltas and intervals use unrounded scores. The positive aggregate interval
+passes the predeclared statistical gate, so retain this private diagnostic.
+
+| Area | Published | A3 | Delta | Paired 95% delta interval |
+|---|---:|---:|---:|---|
+| Knowledge & Reasoning | 42.28 | 40.81 | -1.47 | [-4.48, +2.25] |
+| Language Understanding | 58.55 | 64.21 | +5.66 | [+3.06, +8.41] |
+| Retrieval & Classification | 55.21 | 57.60 | +2.39 | [+0.37, +4.17] |
+| Tools & Automation | 76.71 | 75.03 | -1.68 | [-2.57, -0.83] |
+| Arts & Human Taste | 39.36 | 42.23 | +2.87 | [+0.25, +5.85] |
+
+Language contributes the largest gain. Tools regresses beyond the paired
+noise despite the aggregate improvement. Knowledge also declines, with an
+interval spanning zero. The contrast tests the complete accepted A3 mix and
+recipe transfer, including its additional full-epoch exposure, against the
+published 27B; it cannot isolate source content from mixture balance or
+optimizer exposure. Microbatch one changes grouping windows and dropout draw
+partitioning while preserving effective batch eight, which is an additional
+capacity-driven comparison limitation. Intervals are conditional on this
+frozen proxy, not full-suite or training-seed uncertainty.
+
+## Live training and export proof
+
+One full epoch completed: 21,190 questions, 2,649 optimizer steps, epoch 1.0,
+10,731.9 training seconds. Peak allocated GPU memory was 71.44 GB with batch
+one and accumulation eight. All 116,727,808 trainable parameters and realized
+configuration fields match the requested recipe and exact chat parent.
+
+The original merge gate passed: 496 merged LoRA pairs, 260/260 identical picks,
+zero confident flips, maximum probability shift 0.0084695816, unchanged limit
+0.05. Temperatures are choice 1.0608, noul 1.0405, score 0.6524. All 18 merged
+shards total 55,563,006,776 bytes; tokenizer, prompt contract, temperatures and
+inference scripts are present and pinned. Candidate model revision:
+`2be961761bde8e1c641cd1d7c75afd60cc37662d`.
+Final checkpoint/evidence revision:
+`4a8665a12c7539edcd520a5ee3bf156c036904e2`.
+Both repositories are private and were never submitted.
+
+## Final spend and validation
+
+| Job | Stage | Running seconds | Estimated USD |
+|---|---|---:|---:|
+| Training 6ac90847fee2c90070179a42 | COMPLETED | 11,797 | 9.0116 |
+| Proxy 6ac936b4fee2c9007017bd1b | COMPLETED | 2,585 | 1.9747 |
+| Existing published proxy subset | reused | 0 new | 0 |
+
+Estimated total **$10.98625**, below the $35 cap, using provider running
+seconds at $2.75/hour. Final billing can differ. No failed or capacity-retry
+jobs were needed. GPU inference completed in 2,360 seconds; the initial
+3 to 5 hour estimate was consistent with measured completion. Both jobs
+settled successfully, with no remaining cloud work.
+
+Local checks: five frozen-proxy tests, four A3 source-policy tests, realized
+config and final epoch assertions, all 11,079 payload identity checks for each
+model, unchanged scoring and 2,000 paired draws, candidate shard/payload
+verification, compilation and whitespace checks. No GitHub-hosted CI ran.
+
+Private immutable candidate results:
+`jbrashear/jebadiah-9b-v2-1-index-results@1bc289de2332c25610ed4e1a548350f8873a7413`,
+path `runs/item39-27b-a3-2be96176-proxy-0.3-10pct/results.jsonl.gz`.
+Detailed score, bootstrap, hash equivalence, training summary, memory samples,
+merge evidence and spend are stored under `analysis/item39-27b-a3` in that
+private dataset. All item39 PRO-G40 scratch downloads, suite, extracted kit,
+virtual environment, caches and generated analysis are deleted after durable
+upload; no model weights were downloaded to the Mac and no local merged model
+was created. Review and merge remain with the lead at
+https://github.com/getainode/jebadiah/pull/20.
