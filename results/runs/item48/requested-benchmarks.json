@@ -1,0 +1,56 @@
+[
+  {
+    "catalog_id": 5,
+    "name": "CLINC150+OOS",
+    "metric": "macro-F1",
+    "n": 550,
+    "a3": 0.7681640964399585,
+    "rung1": 0.615337141844234,
+    "difference": -0.15282695459572448
+  },
+  {
+    "catalog_id": 12,
+    "name": "ANLI",
+    "metric": "macro-F1",
+    "n": 320,
+    "a3": 0.6073808197702003,
+    "rung1": 0.6192043620815475,
+    "difference": 0.01182354231134719
+  },
+  {
+    "catalog_id": 22,
+    "name": "POP909-CL",
+    "metric": "accuracy",
+    "n": 200,
+    "a3": 0.095,
+    "rung1": 0.12,
+    "difference": 0.024999999999999994
+  },
+  {
+    "catalog_id": 44,
+    "name": "CLadder",
+    "metric": "accuracy",
+    "n": 500,
+    "a3": 0.658,
+    "rung1": 0.64,
+    "difference": -0.018000000000000016
+  },
+  {
+    "catalog_id": 59,
+    "name": "RAGTruth response-level hallucination",
+    "metric": "F1 on hallucinated class",
+    "n": 270,
+    "a3": 0.6703296703296703,
+    "rung1": 0.6775956284153005,
+    "difference": 0.007265958085630242
+  },
+  {
+    "catalog_id": 61,
+    "name": "HoVer claim verification",
+    "metric": "accuracy",
+    "n": 401,
+    "a3": 0.6758104738154613,
+    "rung1": 0.683291770573566,
+    "difference": 0.007481296758104716
+  }
+]

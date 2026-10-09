@@ -1,0 +1,20 @@
+{
+  "scratch_path": "/data/orca/scratch/item48",
+  "removed": true,
+  "deleted_contents": [
+    "dataset",
+    "suite",
+    "source kit",
+    "environment",
+    "proof copies",
+    "downloaded inference results",
+    "logs",
+    "monitor scripts",
+    "PR payload files"
+  ],
+  "model_weights_downloaded_to_atlas": false,
+  "other_items_scratch_untouched": true,
+  "completed_utc": "2026-10-09T23:52:00Z",
+  "logical_file_bytes_counted_before_cleanup": 229819219,
+  "disk_usage_before_cleanup": "155 MiB"
+}

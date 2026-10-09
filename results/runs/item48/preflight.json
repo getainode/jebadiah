@@ -55,5 +55,9 @@
   "proxy_job": "6ac97782095c57808930b7a7",
   "diagnostic_job": "6ac97783095c57808930b7a9",
   "evaluation_code_revision": "14152d737bf1fa90a822921ecdc33e5e34b799e7",
-  "export_recovery_used": false
+  "export_recovery_used": false,
+  "diagnostic_retry_job": "6ac97a70095c57808930b8aa",
+  "successful_diagnostic_code_revision": "0a620db3c20aee8c7ba40db34f96e35eabc6d405",
+  "final_disposition": "drop",
+  "full_report_serialization_check_passed": true
 }

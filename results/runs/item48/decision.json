@@ -1,0 +1,16 @@
+{
+  "keep": false,
+  "disposition": "drop",
+  "proxy_score": 46.091167791986884,
+  "difference_vs_a3": -0.8835166213146053,
+  "difference_ci95": [
+    -2.206653594352945,
+    0.38345258457706044
+  ],
+  "above_v2_floor": true,
+  "diagnostic_improves": true,
+  "merge_gate_passed": true,
+  "estimated_total_usd": 4.247222222222222,
+  "private_only": true,
+  "public_or_submitted": false
+}
