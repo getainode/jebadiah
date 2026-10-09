@@ -1,0 +1,13 @@
+# ITEM 50: Corr2Cause replacement against A3
+
+Pre-launch contract. This single change replaces 1,000 matched knowledge presentations with original-train Corr2Cause from unused causal graph families. Private data is `frontier-infra/jebadiah-data-v2-1-item47@2242e85fae6f8aff3fc3cea3fa95869d99132522`, folder `rung2/`. Both Studio overlap scans passed: 1,035,117 release records and 6,300 converted records, zero direct or remaining hits. A3 calibration remains byte-identical at 512 questions; train exposure remains 21,190. The 300-question causal diagnostic is graph-disjoint and never enters training or temperature fitting. Preserve `NOTICE-Corr2Cause.txt` with every export.
+
+Qwen/Qwen3.5-9B parent `c202236235762e1c871ad0ccb60c8ee5ba337b9a`, rank 16, alpha 32, dropout 0.05, length 2,048, LR 1e-4, one epoch, seed 17, ordinal score targets, batch 8, item27 speed flags and autocast off all match A3. Keep A3 temperatures from model revision `9e69926a007dd636e82d33485dcd48f9751c4248`. Shared trainer, renderer and merge verifier remain unchanged.
+
+The [pre-launch log](run-rules.md) requires a paired whole-group bootstrap 95% interval entirely above zero against A3, score above 44.67, and improvement on the independent causal diagnostic. Because only 29 of 300 diagnostic labels are necessarily-valid, its predeclared primary metric is balanced accuracy over valid and not-valid. Report ordinary accuracy, valid precision/recall, and counts/accuracy by type, relation template, variable count and graph family as well. The unchanged merge gate is maximum shift at most 0.05 with zero confident pick flips. One export-only recovery is allowed; preserve both gate reports.
+
+Models and checkpoints stay private at `frontier-infra/jebadiah-9b-v2-1-rung2` and its `-checkpoints` repository. They are never public or submitted. Rung 1 is a separate comparison and its repositories are untouched.
+
+HF Jobs RTX PRO 6000 at $2.75/hour: 130-minute training, 35-minute proxy, 45-minute paired diagnostic, and 45-minute recovery hard caps total $11.6875. Item44 measured 3,241 seconds training and 1,124 seconds proxy; item48 training started with a 90 to 120 minute end-to-end estimate and remains in progress. Initial item50 ETA is 90 to 120 minutes including setup and diagnostics, with recovery potentially adding up to 45 minutes; Corr2Cause has long prompts, so throughput must be checked early. Capacity errors are retried without changing the recipe or duplicating active jobs.
+
+Results, five areas, CLadder, HoVer, ANLI, GSM8K, BBH, paired interval, causal diagnostic, actual cost and cleanup are pending. Local hardware checks only; no GitHub-hosted CI.

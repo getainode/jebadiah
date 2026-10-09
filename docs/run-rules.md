@@ -49,6 +49,8 @@ stay private and are never submitted; A3 remains the best recipe.
 | N2 (item44) | A3 (46.97) | replace 1,170 of 11,708 choice slots with scanned owned wide-choice questions; unchanged A3 recipe, calibration and temperatures | overall and Retrieval frozen-proxy paired 95% intervals vs A3 above zero, score above 44.67 | 42.68, -4.29 [-5.72, -2.78] vs A3 (Retrieval -14.09, Tools -5.27): dropped. Merge gate 259/260, max shift 0.020. Proxy run by the lead after the worker pane died (2026-10-09). Private. |
 | ITEM 39 27B A3 | published 27B, same chat parent revision | transfer accepted A3 mix and recipe to 27B; batch 1 with accumulation 8 preserves effective batch 8 for 96 GB fit | frozen-proxy paired 95% difference interval vs published 27B above zero, unchanged 0.05 merge gate passes | 56.62 vs published 55.08; +1.54, CI [+0.38, +2.84]; retain private; merge shift 0.00847, 260/260 picks, zero confident flips; estimated $10.98625 |
 
+| ITEM 50 rung 2 | A3 (46.97) | replace only 1,000 matched knowledge slots with item49 original-train Corr2Cause, pinned item47 data 2242e85fae6f8aff3fc3cea3fa95869d99132522; 21,190 presentations, unchanged calibration and A3 recipe | frozen-proxy paired whole-group bootstrap 95% interval vs A3 entirely above zero, score above 44.67, and graph-disjoint causal diagnostic balanced accuracy improves; otherwise drop | pre-launch: both Studio scans passed with 1,035,117 release and 6,300 converted records, zero hits; training, proxy and paired 300-question diagnostic pending; private only, $12 cap |
+
 ## ITEM 34 proposed ladder
 
 Research proposals only, not launched runs. [Evidence and ranked gaps](item34-nimble-v3-research.md)
