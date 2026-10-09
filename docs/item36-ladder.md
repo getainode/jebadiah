@@ -43,9 +43,10 @@ python scripts/item36_proxy.py n3 N3_MODEL_COMMIT
 python scripts/item36_proxy.py r3 R3_MODEL_COMMIT
 ```
 
-The run log in `docs/run-rules.md` was written before launch. Final results,
-intervals versus A3 and v2, five area deltas, item31 worst five, immutable pins,
-epoch/merge/coverage evidence and spend will be recorded after both jobs finish.
+The run log in `docs/run-rules.md` was written before launch and now contains
+results and decisions. [Final results](item36-results.md) record both intervals,
+five area deltas, item31 worst five, immutable pins, epoch/merge/coverage evidence
+and spend. Both changes are dropped; retain A3. Estimated compute is $7.1935.
 
 ## Launch evidence
 
