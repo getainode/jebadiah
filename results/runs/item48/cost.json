@@ -1,0 +1,32 @@
+{
+  "jobs": [
+    {
+      "job_id": "6ac96b33095c57808930b2a7",
+      "status": "COMPLETED",
+      "running_seconds": 3124,
+      "estimated_usd": 2.386388888888889
+    },
+    {
+      "job_id": "6ac97782095c57808930b7a7",
+      "status": "COMPLETED",
+      "running_seconds": 1123,
+      "estimated_usd": 0.8578472222222222
+    },
+    {
+      "job_id": "6ac97783095c57808930b7a9",
+      "status": "ERROR",
+      "running_seconds": 658,
+      "estimated_usd": 0.5026388888888889
+    },
+    {
+      "job_id": "6ac97a70095c57808930b8aa",
+      "status": "COMPLETED",
+      "running_seconds": 655,
+      "estimated_usd": 0.5003472222222223
+    }
+  ],
+  "rate_usd_per_hour": 2.75,
+  "estimated_total_usd": 4.247222222222222,
+  "cap_usd": 12,
+  "export_recovery_used": false
+}
