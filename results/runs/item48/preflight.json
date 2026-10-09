@@ -50,5 +50,10 @@
   "training_code_revision": "345e80213fe813f9cb388a44946e4ee959d3e1b7",
   "pre_run_log_committed_before_launch": true,
   "a3_proxy_reproduced": 46.97,
-  "diagnostic_metric_checks": "perfect oracle rows and one incorrect three-way answer; overall, type, rule, precision/recall and group bookkeeping passed"
+  "diagnostic_metric_checks": "perfect oracle rows and one incorrect three-way answer; overall, type, rule, precision/recall and group bookkeeping passed",
+  "candidate_revision": "e21876cc0a5b7c38b601bc3abe820131a1c1d080",
+  "proxy_job": "6ac97782095c57808930b7a7",
+  "diagnostic_job": "6ac97783095c57808930b7a9",
+  "evaluation_code_revision": "14152d737bf1fa90a822921ecdc33e5e34b799e7",
+  "export_recovery_used": false
 }
