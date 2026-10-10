@@ -1,0 +1,140 @@
+{
+  "item": 54,
+  "date": "2026-10-09",
+  "backend": "TinyFish CLI 0.38.0",
+  "snapshots": [
+    {
+      "url": "https://github.com/alexa/massive/blob/main/NOTICE.md",
+      "final_url": "https://github.com/alexa/massive/blob/main/NOTICE.md",
+      "retrieved_text_sha256": "3fb39ec7a32381c95ddaae0d9248a9b0adeaf5e6848a24936ff2efbb27edb91b",
+      "retrieved_text_chars": 379
+    },
+    {
+      "url": "https://github.com/mangopy/tool-retrieval-benchmark",
+      "final_url": "https://github.com/mangopy/tool-retrieval-benchmark",
+      "retrieved_text_sha256": "f3c7824ae0ab811f6bab18fd0be6427dbdd1979ce1224ab7088aa136da9db74d",
+      "retrieved_text_chars": 18662
+    },
+    {
+      "url": "https://huggingface.co/datasets/mangopy/ToolRet-Queries",
+      "final_url": "https://huggingface.co/datasets/mangopy/ToolRet-Queries",
+      "retrieved_text_sha256": "46abf8ed258e3a10f0b806d3aa722982f4e91df3be2ff0f540bdacc6c4982e92",
+      "retrieved_text_chars": 2973
+    },
+    {
+      "url": "https://aclanthology.org/2020.emnlp-main.588/",
+      "final_url": "https://aclanthology.org/2020.emnlp-main.588/",
+      "retrieved_text_sha256": "5c422fa022ff30aeede0669f4761652d9b41b0f28ebc26263bdff186957c3e52",
+      "retrieved_text_chars": 7028
+    },
+    {
+      "url": "https://raw.githubusercontent.com/pswietojanski/slurp/master/README.md",
+      "final_url": "https://raw.githubusercontent.com/pswietojanski/slurp/master/README.md",
+      "retrieved_text_sha256": "f337f6486aef10be6f26725dd83d00611d0c3a9e24031cb43a13e0713600118c",
+      "retrieved_text_chars": 7550
+    },
+    {
+      "url": "https://raw.githubusercontent.com/apolinario/decision-index/9eb2dbe2a358004c8782c66e40a83ac07b953fec/docs/suite.md",
+      "final_url": "https://raw.githubusercontent.com/apolinario/decision-index/9eb2dbe2a358004c8782c66e40a83ac07b953fec/docs/suite.md",
+      "retrieved_text_sha256": "5bc0553574fd39ff9b535022105afec6523a9f96d9431cf95c39d419bfa98039",
+      "retrieved_text_chars": 21126
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mangopy/tool-retrieval-benchmark/c4181d9/toolret/config.py",
+      "final_url": "https://raw.githubusercontent.com/mangopy/tool-retrieval-benchmark/c4181d9/toolret/config.py",
+      "retrieved_text_sha256": "b5c247a02ace516c7282479e6acb1c2a5f6a5443406fd6583a83a53d8b355aee",
+      "retrieved_text_chars": 2043
+    },
+    {
+      "url": "https://arxiv.org/html/2503.01763v2",
+      "final_url": "https://arxiv.org/html/2503.01763v2",
+      "retrieved_text_sha256": "904ca1d67796dce710187bad8044b63ec0ce88c7b9891df13342fc90a06666bc",
+      "retrieved_text_chars": 44445
+    },
+    {
+      "url": "https://arxiv.org/html/2011.13205",
+      "final_url": "https://arxiv.org/html/2011.13205",
+      "retrieved_text_sha256": "fc265681c5bafbf38a31ba60f04653ac34f25f55d92f74bddba13b13b2650889",
+      "retrieved_text_chars": 31557
+    },
+    {
+      "url": "https://huggingface.co/datasets/DeepPavlov/hwu64",
+      "final_url": "https://huggingface.co/datasets/DeepPavlov/hwu64",
+      "retrieved_text_sha256": "f0a584b81009faf7df298851049b10b25dfb7aba6aa217d35e1bc58bce7e81ee",
+      "retrieved_text_chars": 2500
+    },
+    {
+      "url": "https://raw.githubusercontent.com/apolinario/decision-index/9eb2dbe2a358004c8782c66e40a83ac07b953fec/hub/0.3/manifest.json",
+      "final_url": "https://raw.githubusercontent.com/apolinario/decision-index/9eb2dbe2a358004c8782c66e40a83ac07b953fec/hub/0.3/manifest.json",
+      "retrieved_text_sha256": "e24b2f990ed2220233af19713a13c0a92b3c1756af1991ddf985a3420bf1258c",
+      "retrieved_text_chars": 28131
+    },
+    {
+      "url": "https://github.com/google-research-datasets/dstc8-schema-guided-dialogue",
+      "final_url": "https://github.com/google-research-datasets/dstc8-schema-guided-dialogue",
+      "retrieved_text_sha256": "8e695ff38c68e2a81f28b41c5ff4c5fdf6f8b7a0c4127c006c08e02f8be1d95f",
+      "retrieved_text_chars": 13688
+    },
+    {
+      "url": "https://raw.githubusercontent.com/xliuhw/NLU-Evaluation-Data/master/README.md",
+      "final_url": "https://raw.githubusercontent.com/xliuhw/NLU-Evaluation-Data/master/README.md",
+      "retrieved_text_sha256": "5f664c8f5be3023e7152b10f21e7eb5cd0952f814d84a0ab9c8409d53f20b0cd",
+      "retrieved_text_chars": 3800
+    },
+    {
+      "url": "https://raw.githubusercontent.com/jianguoz/Few-Shot-Intent-Detection/main/README.md",
+      "final_url": "https://raw.githubusercontent.com/jianguoz/Few-Shot-Intent-Detection/main/README.md",
+      "retrieved_text_sha256": "f0e3f1d0ad10c7eec6ddeee7f0e3f712f95af091c397293b16f3ea8f5cf9dabb",
+      "retrieved_text_chars": 11628
+    },
+    {
+      "url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/master/README.md",
+      "final_url": "https://raw.githubusercontent.com/PolyAI-LDN/task-specific-datasets/master/README.md",
+      "retrieved_text_sha256": "7b9ce9069931cc2de89dce8c7ffb53d07806cf413601ccf133b9af5227b3a373",
+      "retrieved_text_chars": 4734
+    }
+  ],
+  "ancestry_gate": {
+    "status": "passed",
+    "lineage": [
+      "MASSIVE",
+      "SLURP",
+      "original HWU NLU-Evaluation-Data; HWU64 subset"
+    ],
+    "name_checks": {
+      "pinned_full_suite_catalog": "MASSIVE, SLURP, HWU and HWU64 absent",
+      "pinned_edition_0_3_manifest": "MASSIVE, SLURP, HWU and HWU64 absent",
+      "pinned_ToolRet_task_map": "MASSIVE, SLURP, HWU and HWU64 absent"
+    },
+    "ancestry_checks": [
+      "MASSIVE original NOTICE explicitly identifies SLURP English text parent.",
+      "SLURP paper section 3.1 identifies the text-only NLU benchmark Liu et al. (2019) as the prior release of the same collected text.",
+      "MASSIVE source card states id maps to the original SLURP ID and partition follows original SLURP split.",
+      "HWU64 source card identifies Few-Shot-Intent-Detection/Datasets/HWU64, a subset of the original HWU corpus.",
+      "Decision Index home-appliance simulator is independently generated, with no downloaded corpus.",
+      "Pinned ToolRet task-to-category map lists its 35 tool collections; none belongs to this lineage."
+    ],
+    "catalog_revision": "9eb2dbe2a358004c8782c66e40a83ac07b953fec",
+    "suite_manifest_sha256_from_item46": "e24b2f990ed2220233af19713a13c0a92b3c1756af1991ddf985a3420bf1258c",
+    "ToolRet_revision": "c4181d9",
+    "coordinator_ruling": "msg_e74e384bc86a: Follow item46; item43 hwu/hwu64 exclusions were N2 taxonomy-reuse exclusions, not contamination. Aggregate this entire lineage under 2119 questions.",
+    "semantic_independence_proven": false,
+    "full_suite_overlap_clearance": false
+  },
+  "protected_index_read": false,
+  "training_launched": false,
+  "live_parent_id_audit": {
+    "parent_revision": "8eb16545762be97ace75334109d73824217311f1",
+    "parent_files_sha256": {
+      "train.jsonl": "4a05a3de6c7f028aff298c4a90196e6a3fecd1938d96fb1c125d6fd10d5e301e",
+      "devel.jsonl": "00d346b183ecc2d160853cd3dc20e8ccd207d9e1809cf6e2c05182076bd0ecc9",
+      "test.jsonl": "fe3449af69b42fda7163345482556066c35a80f7e552a6d67e212a0e2f0783cc"
+    },
+    "parent_ids": 16521,
+    "en_US_records": 16521,
+    "missing_parent_ids": 0,
+    "exact_text_matches": 15374,
+    "intent_matches": 16292,
+    "partition_matches": 16521
+  }
+}
