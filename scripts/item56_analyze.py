@@ -61,7 +61,7 @@ def main():
         if len(raw)!=len(ids) or len({r['run_id'] for r in raw})!=len(raw):
             raise ValueError('Duplicate or missing raw proxy records: '+name)
         result=load_results(path)
-        if set(result)!=ids or any(r['status']!='ok' or r['payload_sha256']!=expected[rid] for rid,r in result.items()):
+        if set(result)!=ids or any(r['status']!='ok' or r.get('payload_sha256')!=expected[r['run_id']] for r in raw):
             raise ValueError('Incomplete or unbound frozen proxy: '+name)
         results[name]=result;inputs[name]=hashlib.sha256(path.read_bytes()).hexdigest()
         score(proxy,path,a.out/name,'item56-'+name)

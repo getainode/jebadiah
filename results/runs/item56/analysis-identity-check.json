@@ -1,0 +1,26 @@
+{
+  "test_only": true,
+  "scenario": "Both arms use the same two existing A3 seed result files; no probe results used",
+  "replicates": 2,
+  "baseline_mean_unrounded": 46.81940927298617,
+  "difference": 0.0,
+  "difference_ci95": [
+    0.0,
+    0.0
+  ],
+  "all_area_differences_zero": true,
+  "clinc_mean_loss_zero": true,
+  "unexpected_win_rejected": true,
+  "input_binding": {
+    "inputs": {
+      "a3-s17": "0e4fa51efe1a766c2eb38888fe07c574e155b6a32b6c46d4632e6312f3d9ac69",
+      "a3-s18": "1e7bf31dfc7f6e4fa23b8fa2a9ca58cd3a9030e484bc8a8751ec023505317395",
+      "probe-s17": "0e4fa51efe1a766c2eb38888fe07c574e155b6a32b6c46d4632e6312f3d9ac69",
+      "probe-s18": "1e7bf31dfc7f6e4fa23b8fa2a9ca58cd3a9030e484bc8a8751ec023505317395"
+    },
+    "replicates": 2,
+    "seed": 20261008,
+    "manifest_sha256": "74d8162296f404a676624d87bf98abb920d46acff3c38be6a12504131bc43405"
+  },
+  "payload_validation": "Raw successful unique rows match frozen IDs and payload hashes before official loader normalization"
+}
