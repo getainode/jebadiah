@@ -1,0 +1,720 @@
+{
+  "name": "item54-rung4-source-licenses",
+  "source_level_rejection": true,
+  "sources": {
+    "massive-en-US": {
+      "source_id": "massive-en-US",
+      "url": "https://huggingface.co/datasets/AmazonScience/massive",
+      "revision": "ff6bd8e4b27c3543e4f8fe2108f32bb95a6f8740",
+      "release": "1.1",
+      "archive_url": "https://amazon-massive-nlu-dataset.s3.amazonaws.com/amazon-massive-dataset-1.1.tar.gz",
+      "license": "CC-BY-4.0",
+      "commercial_use_ok": true,
+      "model_redistribution_ok": true,
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_sha256": "c2e6ea015269147de02117ebdd91f30ef09831251f5345fa8365273b1db1d435",
+      "origin": "human",
+      "generator_license": "Apache-2.0",
+      "generator_sha256": "7847c3b1d31875e9755c2827b6acdaf334650ff2fc34c0c52dd38ee150454523",
+      "generator_model": null,
+      "model_written_training_text": false,
+      "ancestry_verified": true,
+      "ancestry": [
+        "MASSIVE 1.1 English text from SLURP text, from original HWU NLU-Evaluation-Data collection by Liu et al. (2019). HWU64 is a subset of this same original corpus. Audio excluded."
+      ],
+      "aggregate_source_family": "hwu-slurp-massive",
+      "ancestry_gate": {
+        "status": "passed",
+        "lineage": [
+          "MASSIVE",
+          "SLURP",
+          "original HWU NLU-Evaluation-Data; HWU64 subset"
+        ],
+        "name_checks": {
+          "pinned_full_suite_catalog": "MASSIVE, SLURP, HWU and HWU64 absent",
+          "pinned_edition_0_3_manifest": "MASSIVE, SLURP, HWU and HWU64 absent",
+          "pinned_ToolRet_task_map": "MASSIVE, SLURP, HWU and HWU64 absent"
+        },
+        "ancestry_checks": [
+          "MASSIVE original NOTICE explicitly identifies SLURP English text parent.",
+          "SLURP paper section 3.1 identifies the text-only NLU benchmark Liu et al. (2019) as the prior release of the same collected text.",
+          "MASSIVE source card states id maps to the original SLURP ID and partition follows original SLURP split.",
+          "HWU64 source card identifies Few-Shot-Intent-Detection/Datasets/HWU64, a subset of the original HWU corpus.",
+          "Decision Index home-appliance simulator is independently generated, with no downloaded corpus.",
+          "Pinned ToolRet task-to-category map lists its 35 tool collections; none belongs to this lineage."
+        ],
+        "catalog_revision": "9eb2dbe2a358004c8782c66e40a83ac07b953fec",
+        "suite_manifest_sha256_from_item46": "e24b2f990ed2220233af19713a13c0a92b3c1756af1991ddf985a3420bf1258c",
+        "ToolRet_revision": "c4181d9",
+        "coordinator_ruling": "msg_e74e384bc86a: Follow item46; item43 hwu/hwu64 exclusions were N2 taxonomy-reuse exclusions, not contamination. Aggregate this entire lineage under 2119 questions.",
+        "semantic_independence_proven": false,
+        "full_suite_overlap_clearance": false
+      },
+      "ancestry_evidence_urls": [
+        "https://github.com/alexa/massive/blob/main/NOTICE.md",
+        "https://arxiv.org/html/2011.13205",
+        "https://huggingface.co/datasets/AmazonScience/massive/blob/ff6bd8e4b27c3543e4f8fe2108f32bb95a6f8740/README.md",
+        "https://github.com/xliuhw/NLU-Evaluation-Data"
+      ],
+      "attribution": "Jack FitzGerald et al. (2022); Amazon.com, Inc. or its affiliates; Bastianelli, Vanzo, Swietojanski and Rieser (2020); Liu, Eshghi, Swietojanski and Rieser (2019).",
+      "derivation": "Unchanged en-US utterances from train only; original SLURP-ID disjoint diagnostic from train; menus from original 60 intent names; 16 options, no native or invented OOS.",
+      "source_scope": "Entire frozen MASSIVE 1.1 release: all 52 locales and all train/dev/test splits must pass the source-level scan; candidates use only en-US train.",
+      "input_files": {
+        "item54-massive-1.1.tar.gz": {
+          "sha256": "4cba5faa11c71437928e17cb1b9b3d8b8e727e7ea363a3a9a8045e19c0491577",
+          "bytes": 40251390
+        },
+        "en-US.jsonl": {
+          "sha256": "c70f75c6a543a26e249ec383df67733ad9b1066f6c0406c2e04a3f03356e407e",
+          "bytes": 3904197
+        },
+        "LICENSE": {
+          "sha256": "c2e6ea015269147de02117ebdd91f30ef09831251f5345fa8365273b1db1d435",
+          "bytes": 18704
+        },
+        "NOTICE.md": {
+          "sha256": "b90534ccd20c6f0e1e5239567af0d150496339542b75a15bfbc3e1e737593ddb",
+          "bytes": 502
+        },
+        "CITATION.md": {
+          "sha256": "96d21569b0e2f3b64e7e8a2ff22a5b15570ec3f7f93ffdc26efb01d366fe073f",
+          "bytes": 1128
+        },
+        "README.md": {
+          "sha256": "9a74b2298db2cb509eb39725612ef5d5b9eb99d59ef7c960ab01f58526051e3d",
+          "bytes": 34420
+        },
+        "massive.py": {
+          "sha256": "b6086578ec0bd3e29000ed4d73f2841dfba48cd8e5a91b00f92c87411df368ba",
+          "bytes": 30340
+        },
+        "CITATION.cff": {
+          "sha256": "7432a8f5ed188ecb761e40a2295781d72a9de2b27dd5ba56adc6dcc21db81ad9",
+          "bytes": 1146
+        }
+      },
+      "complete_release": {
+        "af-ZA": {
+          "sha256": "03e280b08c00af4a9b7ba5b05e3c0a1a870eae8a488e3eab4526863abef6e04e",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "am-ET": {
+          "sha256": "13c5a4952e3169a940b6a7da3e0d278327d2895c999b8b5d07045285da5db231",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ar-SA": {
+          "sha256": "b604b44d3bb94e4f71f64d041229e16ceb42d7b89385df7c82873d2514737186",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "az-AZ": {
+          "sha256": "9a643dbf6e07e90ba8b1554bd95e9946b42037bd52550aac90f4e774ee58ed8c",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "bn-BD": {
+          "sha256": "de4dbf6553dda2adae44663156b940980606bc4dbc4a4b7c802410da6ee28dbf",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ca-ES": {
+          "sha256": "7da25fa3f731ea96dc9caa48363863c117c652ad628e5c7be0d9fdab7ccb7ed3",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "cy-GB": {
+          "sha256": "09d3833b6bfe8958875b29ccf3bdb2f1679ff1ff03b6383f5643c8e4ea3d1539",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "da-DK": {
+          "sha256": "29df4f5e464dfa2613b2d1b60fc1fd35f8536f12dbab4db13f65bc35dbbf3876",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "de-DE": {
+          "sha256": "5e09cc550b38d37faf002e0ff42103acd330906e23032689e8f071e1cf3ff621",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "el-GR": {
+          "sha256": "0f6509b8fff6e6cc8e87cffe1e7a90754192bd6a6766033c694ff41cf741353d",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "en-US": {
+          "sha256": "c70f75c6a543a26e249ec383df67733ad9b1066f6c0406c2e04a3f03356e407e",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "es-ES": {
+          "sha256": "310462a79fa181ff83c643a8d356c7b8155fd37a25e80a77ba3ca9b29305c4a5",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "fa-IR": {
+          "sha256": "5411b776cda6bd1d6e554263f953599e9d1cc23e23a4c94d43d1836ddccb88c1",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "fi-FI": {
+          "sha256": "16eaaf8920f66aa6494ed268c0863e2b92fa8845d78516c25c71b473c3aa3f90",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "fr-FR": {
+          "sha256": "f9bf3db170ad415b389e4c9594dd0f8f80c38188143e05cc4459a6fa7df7cf49",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "he-IL": {
+          "sha256": "21190f24f5f067f11a33fc23d5cd524ae5df6443255252365fb19e74e4a00e13",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "hi-IN": {
+          "sha256": "5ec38fdc3a424ba4ce85de7f8c2ac0a3a8838417f1df60a4a8cc5ea4fd1e700c",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "hu-HU": {
+          "sha256": "620145338c34dd7cea59b5fe463b864df1121c52b0f4f9540229d5e9e31be4e7",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "hy-AM": {
+          "sha256": "78c2d428e6974cb06d51d955e5f26d93a74346b2979e7a9e9e12f409d94dd222",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "id-ID": {
+          "sha256": "93e2b96ce2472caabf15d3959572e88a2f17ff425fbbe9b057f9df7ec0c4b534",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "is-IS": {
+          "sha256": "d1cbedd85aa5110cd2b73f24d10b284824da5285970b8cdc762ab41f2e5cf5d7",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "it-IT": {
+          "sha256": "d5125df760586376fdcbbda4dd5b0b8fa408dfb6d6219faa8a6dea4d3f74c194",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ja-JP": {
+          "sha256": "c22df382db6aa4a23dd1e7f62a2ac8f01c6158865771ad25201696be7201ab79",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "jv-ID": {
+          "sha256": "d20b87af9add44c733f06f5efb353b4043697a9aacd5b9e53225096b1ffcde16",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ka-GE": {
+          "sha256": "aca097c97fadad1745ae38ed70aedd9fad82a8ce9caedf80853ab6abc123cf50",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "km-KH": {
+          "sha256": "3a4804ef62ee51cef7e6a12233a2292b757caf4163c6d14d63711d457d32e017",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "kn-IN": {
+          "sha256": "c0ab6b5866ebedd17b85c45c831e5068a3e4d5d7732722aaaec91bd6153ef912",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ko-KR": {
+          "sha256": "3f44944978e95b1b3c083a6b378fc15ddcee996ef3371f1ca10635c772b93037",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "lv-LV": {
+          "sha256": "283e0bb217f304ac716ebbbaa5f6ee3abbc936f4287b32a184a3fd35938a8c32",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ml-IN": {
+          "sha256": "9ec62a2368b6d029a7b02878749f1c055b464dc5b964bd83531b147b0aa40fc1",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "mn-MN": {
+          "sha256": "2637c6265cff0a6a2b2d2f54ddbbea9ee7e0252739acc0b12a7d4e54dacc686d",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ms-MY": {
+          "sha256": "9bc9280d9626f3245ceb4eabef12cbcb9777a535fa33f54e26ca1f2b75e78e56",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "my-MM": {
+          "sha256": "fa30d38dcf642b5b446e89eddb54a18fd15fd6c6b927868dce93c8bcab3e19f6",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "nb-NO": {
+          "sha256": "4e25d312848540aa72ad76d4eb5d061d27917d067defeacabb71b0ef78f78fe2",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "nl-NL": {
+          "sha256": "5e9082181a82c22e3ed4d27117a4cbefe83c2b878659e9e8db93e07f33e21bfb",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "pl-PL": {
+          "sha256": "4f9cd500390bd50c71332a38c189cd60dcf7f444885d0eaac4947f229ed4b154",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "pt-PT": {
+          "sha256": "af89ce740b98e8fe73a0fb3ba69a296837910f037e954b87409ef41d467d3da0",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ro-RO": {
+          "sha256": "dd575ce48872f64a84076ad240539b9fab3be557e82f854490628a90c61ee9e1",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ru-RU": {
+          "sha256": "af7367861ea21c1d69a084b290145815f7eaf82dcdc43b7ab572b993f9b2a69d",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "sl-SL": {
+          "sha256": "23ffdbd0613a32670b750109d0ddd8e702c517c638397d2be10230f955079927",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "sq-AL": {
+          "sha256": "c1c53e1b6cff81965dcf1f43a6c1293f4fbde4f5693831bf61db1e987bc2ba23",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "sv-SE": {
+          "sha256": "eefb7dfc7eda3a84b4e5e94fd4981f9f34e726d097348ed112e3966188d3daf2",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "sw-KE": {
+          "sha256": "ecbba1155655fddc049ef501386cf2c16129f78d23f0d306d78ff04bfaa014a3",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ta-IN": {
+          "sha256": "d9a28c1644cfe36a0b3715f341bceeaea52525668d01a70f448a8751e6dc1a55",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "te-IN": {
+          "sha256": "503250e32c6312fa6db30d094b66df361adb73720fc2f5718ac85234fd7e4125",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "th-TH": {
+          "sha256": "c42c3f066d7cb6fcdca61a9cee7f95df3b45b024cb8cbe589fdf4feb2cd9c064",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "tl-PH": {
+          "sha256": "f47c548a49b94dcb33cce8246fe794f167c5e2bf1760a3ecd8ef9b5123f8ee0f",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "tr-TR": {
+          "sha256": "7823b94a69fd1f249e06b3535e33dcf113ad0bb9493439bc2c9131552ac0ef29",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "ur-PK": {
+          "sha256": "4117a7d393971c21077632d5938313cca73930e5d8d3cd522d3b0cb7c0553b1c",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "vi-VN": {
+          "sha256": "9dfff36bac20067085d836c30f1a617de968c16fd81bf4c5b802ddd637ab131a",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "zh-CN": {
+          "sha256": "992bf0bef3d678f08c27e514739bc851163e8f40f530bfb4d5970a2c24408ace",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        },
+        "zh-TW": {
+          "sha256": "e529feb6c56988575939fcc94cc837fd3391cfc48d5e62dd4e438e619beeabe7",
+          "records": 16521,
+          "partitions": {
+            "test": 2974,
+            "train": 11514,
+            "dev": 2033
+          }
+        }
+      },
+      "complete_records": 859092,
+      "en_US_partitions": {
+        "test": 2974,
+        "train": 11514,
+        "dev": 2033
+      },
+      "notice_text": "# NOTICE\n\nMASSIVE was created by translating and localizing the English text data from SLURP into 50 languages. Additionally, some of the text data from SLURP is included as part of MASSIVE. SLURP is licensed under CC BY 4.0. The license can be found here:\n\n> [https://github.com/pswietojanski/slurp/blob/master/LICENSE.txt](https://github.com/pswietojanski/slurp/blob/master/LICENSE.txt)\n\nFor additional information on SLURP, please see [their paper](https://aclanthology.org/2020.emnlp-main.588.pdf).\nMASSIVE 1.1 data: Copyright Amazon.com, Inc. or its affiliates; CC BY 4.0.\nLicense: https://creativecommons.org/licenses/by/4.0/\nSource: https://github.com/alexa/massive and https://huggingface.co/datasets/AmazonScience/massive\nAttribution: Jack FitzGerald et al. (2022), MASSIVE: A 1M-Example Multilingual Natural Language Understanding Dataset with 51 Typologically-Diverse Languages.\nSLURP: Emanuele Bastianelli, Andrea Vanzo, Pawel Swietojanski and Verena Rieser (2020), SLURP: A Spoken Language Understanding Resource Package.\nOriginal HWU collection: Xingkun Liu, Arash Eshghi, Pawel Swietojanski and Verena Rieser (2019), Benchmarking Natural Language Understanding Services for building Conversational Agents.\nChanges: Item54 deterministically selects unused en-US original train IDs and maps upstream intent labels to 16-option choice and binary annotated-intent verification questions. Original utterances are unchanged. No audio, model calls, generated requests, invented OOS labels or training launch. Converter: Apache-2.0, https://github.com/getainode/jebadiah/blob/main/LICENSE\n",
+      "notice_sha256": "2202da05542d940e127f064165f0faed366399a900108337c0b8dc48a0f6ff3d",
+      "source_evidence_sha256": "db03549b0ae62a2929849f612502301bbbe348afd2943ec07625ee65ba451296"
+    }
+  },
+  "source_exclusions": {
+    "all_splits": true,
+    "source_substrings": [
+      "bfcl",
+      "berkeley-function",
+      "gorilla",
+      "toolret",
+      "tool-retrieval",
+      "api-bank",
+      "apibank",
+      "banking77",
+      "clinc",
+      "routerbench",
+      "home-appliance",
+      "home_appliance",
+      "schema-guided",
+      "sgd",
+      "contractnli",
+      "contract-nli",
+      "anli",
+      "bpomp",
+      "humicroedit",
+      "pop909",
+      "cfcolor",
+      "mmlu",
+      "gpqa",
+      "ai2_arc",
+      "arc-easy",
+      "arc-challenge",
+      "winogrande",
+      "hellaswag",
+      "gsm8k",
+      "chessbench",
+      "searchless_chess",
+      "musr",
+      "sata-bench",
+      "simplebench",
+      "bright",
+      "esci",
+      "acos",
+      "finentity",
+      "isarcasm",
+      "isarcasmeval",
+      "pop909-cl",
+      "vast",
+      "nli4ct",
+      "cruxeval",
+      "cladder",
+      "cais/hle",
+      "forecastbench",
+      "habermas",
+      "when2call",
+      "new_yorker",
+      "new-yorker",
+      "ragtruth",
+      "hover",
+      "phishnchips",
+      "phish-n-chips",
+      "bigbench",
+      "big_bench",
+      "big-bench",
+      "bbh",
+      "cnn_dailymail",
+      "cnn/dailymail",
+      "summeval",
+      "wikipedia",
+      "dbpedia",
+      "boolq",
+      "super_glue",
+      "superglue",
+      "snli",
+      "multi_nli",
+      "mnli",
+      "chaosnli",
+      "doc-nli",
+      "winowhy",
+      "fever",
+      "vitaminc",
+      "squad",
+      "wiki_hop",
+      "wikihop",
+      "wikimedqa",
+      "wikifact",
+      "rule-reasoning/bbh",
+      "winodict",
+      "hotpotqa",
+      "hotpot_qa",
+      "hotpot-qa",
+      "mbpp",
+      "humaneval",
+      "human_eval",
+      "mtbench",
+      "mt-bench",
+      "grade-school-math",
+      "toolbench",
+      "toolllama",
+      "ms_marco",
+      "msmarco",
+      "xsum",
+      "yelp_review_full",
+      "yelp_polarity",
+      "prm800k",
+      "prm800k_dpo",
+      "hendrycks_math",
+      "competition_math",
+      "math-dpo",
+      "unli",
+      "wanli",
+      "condaqa",
+      "resnli",
+      "syntactic-augmentation-nli",
+      "autotnli",
+      "fool-me-twice",
+      "wikihow",
+      "goal-step-wikihow",
+      "stackoverflow",
+      "stackoverflow-questions",
+      "stackexchange",
+      "paws",
+      "glue",
+      "clinc150",
+      "clinc-150",
+      "banking-77"
+    ],
+    "license_allowlist": [
+      "apache-2.0",
+      "bsd",
+      "bsd-2-clause",
+      "bsd-3-clause",
+      "cc-by-3.0",
+      "cc-by-4.0",
+      "cc0-1.0",
+      "mit",
+      "odc-by"
+    ],
+    "held_out_source_families": [
+      "twitter-financial-news-sentiment",
+      "SDOH-NLI",
+      "poem_sentiment",
+      "github-issue-similarity",
+      "x-stance"
+    ]
+  }
+}
