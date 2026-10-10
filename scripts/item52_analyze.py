@@ -64,6 +64,8 @@ def main():
         print('ITEM52_COMPLETED_COMPARISON', key, json.dumps(summary['comparisons'][key]), flush=True)
     indices = {name: json.loads((a.out / name / 'index.json').read_text())
                for name in ('a3', 'replicate', 'rung1', 'rung2', 'rung2b')}
+    native = {name: json.loads((a.out / name / 'benchmark-summary.json').read_text())
+              for name in indices}
     spec = json.loads((Path(__import__('decision_index').__file__).parent / 'data/index-0.3.json').read_text())
     benchmarks = {}
     for catalog, entry in spec['chance'].items():
@@ -71,11 +73,17 @@ def main():
             benchmarks[entry['name']] = {
                 name: {k: index['benchmarks'][catalog][k] for k in ('raw', 'skill', 'coverage')}
                 for name, index in indices.items()}
+            for name in indices:
+                row = next(r for r in native[name]['benchmarks'] if r['catalog_id'] == int(catalog))
+                point = benchmarks[entry['name']][name]
+                point['raw'] = (row['detail']['cluster_macro_accuracy']
+                                if entry['name'] == 'POP909' else row['score'])
+                point['raw_metric'] = 'cluster macro accuracy' if entry['name'] == 'POP909' else row['metric']
     summary['benchmarks'] = benchmarks
     summary['areas'] = {name: {v['id']: 100 * v['skill'] for v in index['areas']}
                         for name, index in indices.items()}
-    summary['replicate_loses_tools_vs_a3'] = summary['areas']['replicate']['tools'] < summary['areas']['a3']['tools']
-    summary['replicate_loses_clinc_vs_a3'] = benchmarks['CLINC150']['replicate']['skill'] < benchmarks['CLINC150']['a3']['skill']
+    summary['replicate_loses_tools_vs_a3'] = summary['comparisons']['replicate-vs-a3']['areas']['tools']['difference'] < 0
+    summary['replicate_loses_clinc_vs_a3'] = benchmarks['CLINC150']['replicate']['raw'] < benchmarks['CLINC150']['a3']['raw']
     (a.out / 'item52-summary.json').write_text(json.dumps(summary, indent=2) + '\n')
     print(json.dumps(summary), flush=True)
 

@@ -1,0 +1,57 @@
+{
+  "model_repo": "frontier-infra/jebadiah-9b-v2-1-a3-rep1",
+  "model_revision": "f1e2f66d3e2dce25596a9fc1b9d13fbfa72003da",
+  "private": true,
+  "weights": {
+    "model.safetensors-00001-of-00004.safetensors": {
+      "size": 5276436248,
+      "sha256": "d5069ae03a6438f2248757c75698b451091e9072cd13faf67059b78245ec8b0f"
+    },
+    "model.safetensors-00002-of-00004.safetensors": {
+      "size": 5335161536,
+      "sha256": "69d7f396df3a2d47419fc33a3efb08919f2fa622e8d786d9503608aca64d0c16"
+    },
+    "model.safetensors-00003-of-00004.safetensors": {
+      "size": 5368717472,
+      "sha256": "0a3115ed8c85444544810f4b0671eb095139ba2479679685cdd0f8f09c925e6b"
+    },
+    "model.safetensors-00004-of-00004.safetensors": {
+      "size": 3325988600,
+      "sha256": "52c3a1a3c9c4f84b359431f38fbd9182b006fcdf4cf903d1eaa2a05e99bcb487"
+    }
+  },
+  "original_weights": {
+    "model.safetensors-00001-of-00004.safetensors": {
+      "size": 5276436248,
+      "sha256": "d5069ae03a6438f2248757c75698b451091e9072cd13faf67059b78245ec8b0f"
+    },
+    "model.safetensors-00002-of-00004.safetensors": {
+      "size": 5335161536,
+      "sha256": "69d7f396df3a2d47419fc33a3efb08919f2fa622e8d786d9503608aca64d0c16"
+    },
+    "model.safetensors-00003-of-00004.safetensors": {
+      "size": 5368717472,
+      "sha256": "0a3115ed8c85444544810f4b0671eb095139ba2479679685cdd0f8f09c925e6b"
+    },
+    "model.safetensors-00004-of-00004.safetensors": {
+      "size": 3325988600,
+      "sha256": "52c3a1a3c9c4f84b359431f38fbd9182b006fcdf4cf903d1eaa2a05e99bcb487"
+    }
+  },
+  "byte_identical_merged_weights": true,
+  "training_provenance_identical": true,
+  "gate": {
+    "questions": 260,
+    "identical_picks": 259,
+    "agreement": 0.9961538461538462,
+    "max_probability_delta": 0.010133415460586548,
+    "clear_margin_flips": 0,
+    "margin_threshold": 0.05,
+    "max_delta_allowed": 0.05
+  },
+  "temperatures": {
+    "choice": 1.0467,
+    "noul": 1.0284,
+    "score": 0.6805
+  }
+}
