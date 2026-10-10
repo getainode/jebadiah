@@ -18,5 +18,17 @@
   "proxy_launcher_code_revision": "f132986f3b5dd44616e23f31b189c9c14e2c0e5c",
   "optimizer_runtime_seconds": 2194.8,
   "original_optimizer_runtime_seconds": 2191.4,
-  "original_and_replicate_truncated_prompts": 36
+  "original_and_replicate_truncated_prompts": 36,
+  "seed18": {
+    "training_job": "6ac9a555095c57808930cd95",
+    "training_code_revision": "c6a078945692bac4af0980845f598c5774442bd0",
+    "seed": 18,
+    "approval_message": "msg_76e46223b4db",
+    "additional_cap_usd": 8,
+    "caps_minutes": {
+      "training": 135,
+      "proxy": 35
+    },
+    "allocation_ceiling_usd": 7.791666666666667
+  }
 }
