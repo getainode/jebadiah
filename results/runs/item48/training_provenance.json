@@ -1,0 +1,43 @@
+{
+  "base_model": "Qwen/Qwen3.5-9B",
+  "base_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "dataset": "frontier-infra/jebadiah-data-v2-1-item47",
+  "dataset_revision": "7b6b15f95cc9902e1ebd783656a3bd590350875d",
+  "effective_batch_size": 8,
+  "config": {
+    "base_revision": null,
+    "base_identity": "Qwen/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "method": "lora",
+    "dataset_sha256": "619b75cb6812c2347c7a01ff10e1734323a3fa313e6c6433d8ef54657359582c",
+    "eval_dataset_sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "max_seq_length": 2048,
+    "num_epochs": 1.0,
+    "learning_rate": 0.0001,
+    "batch_size": 8,
+    "gradient_accumulation_steps": 1,
+    "use_gradient_checkpointing": true,
+    "warmup_steps": 30,
+    "seed": 17,
+    "save_steps": 500,
+    "eval_steps": 200,
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "logging_steps": 10,
+    "decide": {
+      "target_modules": "all-linear",
+      "lora_dropout": 0.05,
+      "score_targets": "ordinal",
+      "score_ordinal_adjacent": 0.2,
+      "shuffle_choice_options": true,
+      "calib_eval_limit": 358
+    },
+    "group_by_length": true,
+    "pad_to_multiple_of": 64,
+    "checkpoint_min_tokens": 512,
+    "prompt_source_sha256": "d2660ebec28bd3f1704235bda88d24a397c1c62475e740519cb8ef2d08f25fdd",
+    "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "single_token_labels": 68
+  }
+}

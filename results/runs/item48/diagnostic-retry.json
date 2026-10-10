@@ -1,0 +1,7 @@
+{
+  "failed_job": "6ac97783095c57808930b7a9",
+  "running_seconds": 658,
+  "estimated_usd": 0.5026388888888889,
+  "reason": "Internal eval_jebadiah q_of has tuple keys; report serialization failed after both model calls. Save timing only, preserve per-model partial reports, rerun unchanged scoring protocol.",
+  "training_or_model_changed": false
+}
