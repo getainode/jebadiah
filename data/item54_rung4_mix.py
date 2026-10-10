@@ -123,7 +123,7 @@ def validate_scan(manifest, raw, incoming, licenses):
             or report.get('scanned_records') != raw_count+6300):
         raise ValueError('Unbound full-source scan')
     for phase,number,rows in (('raw',raw_count,M.raw_scan_rows(raw)),
-                              ('converted',6300,M.converted_scan_rows(splits))):
+                              ('converted',6300,M.converted_scan_rows({s:splits[s] for s in ('diagnostic','train')}))):  # scan order (item54_massive.select yields diagnostic first)
         stage = report.get(phase,{})
         if (stage.get('status') != 'passed' or stage.get('source_level') is not True
                 or stage.get('protected_index_sha256') != M.ITEM25_INDEX_SHA256

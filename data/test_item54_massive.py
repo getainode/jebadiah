@@ -226,7 +226,7 @@ class FrozenSourceTests(unittest.TestCase):
                 'source_archive_sha256':policy['sources'][M.SOURCE]['input_files'][M.ARCHIVE]['sha256'],
                 'converted_sha256':{s:M.sha(incoming_source/f'{s}.jsonl') for s in splits},
                 'scanned_records':6301,'raw':phase(fixture,1),
-                'converted':phase(M.converted_scan_rows(splits),6300)}
+                'converted':phase(M.converted_scan_rows({k:splits[k] for k in ('diagnostic','train')}),6300)}
         with tempfile.TemporaryDirectory(prefix='item54-test-') as folder:
             root=Path(folder);incoming=root/'incoming';shutil.copytree(incoming_source,incoming)
             manifest['overlap_scan']=report
