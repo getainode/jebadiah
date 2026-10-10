@@ -1,0 +1,74 @@
+{
+  "17": {
+    "checkpoint_repo": "frontier-infra/jebadiah-9b-v2-1-probe-b-s17-checkpoints",
+    "checkpoint_revision": "d84ee95d8e2a85c8bc8ed7f6fff4be84699b034c",
+    "config_sha256": "17832f0e1fae1ddd5488569c0ab6c1d3924935d44d5ce12b1b5faa91ea85144a",
+    "recipe_matches_original_a3": true,
+    "seed": 17,
+    "differences": {
+      "dataset_path": {
+        "a3": "/workspace/item32-a3/hf/hub/datasets--frontier-infra--jebadiah-data-v2-1-item32/snapshots/bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed/a3/train.jsonl",
+        "probe": "/root/.cache/huggingface/hub/datasets--frontier-infra--jebadiah-data-v2-1-item47/snapshots/1de4a087bf4aa8e7ffd2de99f0abefea7a7b2c80/probe-b/train.jsonl"
+      },
+      "checkpoint_repo": {
+        "a3": "frontier-infra/jebadiah-9b-v2-1-a3-checkpoints",
+        "probe": "frontier-infra/jebadiah-9b-v2-1-probe-b-s17-checkpoints"
+      },
+      "output_dir": {
+        "a3": "/workspace/item32-a3/runs/9b",
+        "probe": "/workspace/item52-probe-b-s17/runs/9b"
+      },
+      "base_model": {
+        "a3": "/workspace/item32-a3/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "probe": "/root/.cache/huggingface/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a"
+      },
+      "dataset_sha256": {
+        "a3": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+        "probe": "b0a096434181a51ef95fc3996a6f1af9d98a5d66b077aa66b4e2c872ae9c2786"
+      },
+      "eval_dataset_path": {
+        "a3": "/workspace/item32-a3/hf/hub/datasets--frontier-infra--jebadiah-data-v2-1-item32/snapshots/bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed/a3/calib.jsonl",
+        "probe": "/root/.cache/huggingface/hub/datasets--frontier-infra--jebadiah-data-v2-1-item47/snapshots/1de4a087bf4aa8e7ffd2de99f0abefea7a7b2c80/probe-b/calib.jsonl"
+      }
+    },
+    "all_config_differences_are_data_routing_or_approved_seed": true
+  },
+  "18": {
+    "checkpoint_repo": "frontier-infra/jebadiah-9b-v2-1-probe-b-s18-checkpoints",
+    "checkpoint_revision": "0e9075ab0be59e8b9789792940b49b2952b19f0b",
+    "config_sha256": "ec19ad59b856527cba66ee6d498ae41a45395f58f613f203a91be75c1c1e86dc",
+    "recipe_matches_original_a3": true,
+    "seed": 18,
+    "differences": {
+      "dataset_path": {
+        "a3": "/workspace/item32-a3/hf/hub/datasets--frontier-infra--jebadiah-data-v2-1-item32/snapshots/bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed/a3/train.jsonl",
+        "probe": "/root/.cache/huggingface/hub/datasets--frontier-infra--jebadiah-data-v2-1-item47/snapshots/1de4a087bf4aa8e7ffd2de99f0abefea7a7b2c80/probe-b/train.jsonl"
+      },
+      "checkpoint_repo": {
+        "a3": "frontier-infra/jebadiah-9b-v2-1-a3-checkpoints",
+        "probe": "frontier-infra/jebadiah-9b-v2-1-probe-b-s18-checkpoints"
+      },
+      "seed": {
+        "a3": 17,
+        "probe": 18
+      },
+      "output_dir": {
+        "a3": "/workspace/item32-a3/runs/9b",
+        "probe": "/workspace/item52-probe-b-s18/runs/9b"
+      },
+      "base_model": {
+        "a3": "/workspace/item32-a3/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+        "probe": "/root/.cache/huggingface/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a"
+      },
+      "dataset_sha256": {
+        "a3": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+        "probe": "b0a096434181a51ef95fc3996a6f1af9d98a5d66b077aa66b4e2c872ae9c2786"
+      },
+      "eval_dataset_path": {
+        "a3": "/workspace/item32-a3/hf/hub/datasets--frontier-infra--jebadiah-data-v2-1-item32/snapshots/bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed/a3/calib.jsonl",
+        "probe": "/root/.cache/huggingface/hub/datasets--frontier-infra--jebadiah-data-v2-1-item47/snapshots/1de4a087bf4aa8e7ffd2de99f0abefea7a7b2c80/probe-b/calib.jsonl"
+      }
+    },
+    "all_config_differences_are_data_routing_or_approved_seed": true
+  }
+}

@@ -1,0 +1,14 @@
+# NOTICE
+
+MASSIVE was created by translating and localizing the English text data from SLURP into 50 languages. Additionally, some of the text data from SLURP is included as part of MASSIVE. SLURP is licensed under CC BY 4.0. The license can be found here:
+
+> [https://github.com/pswietojanski/slurp/blob/master/LICENSE.txt](https://github.com/pswietojanski/slurp/blob/master/LICENSE.txt)
+
+For additional information on SLURP, please see [their paper](https://aclanthology.org/2020.emnlp-main.588.pdf).
+MASSIVE 1.1 data: Copyright Amazon.com, Inc. or its affiliates; CC BY 4.0.
+License: https://creativecommons.org/licenses/by/4.0/
+Source: https://github.com/alexa/massive and https://huggingface.co/datasets/AmazonScience/massive
+Attribution: Jack FitzGerald et al. (2022), MASSIVE: A 1M-Example Multilingual Natural Language Understanding Dataset with 51 Typologically-Diverse Languages.
+SLURP: Emanuele Bastianelli, Andrea Vanzo, Pawel Swietojanski and Verena Rieser (2020), SLURP: A Spoken Language Understanding Resource Package.
+Original HWU collection: Xingkun Liu, Arash Eshghi, Pawel Swietojanski and Verena Rieser (2019), Benchmarking Natural Language Understanding Services for building Conversational Agents.
+Changes: Item54 deterministically selects unused en-US original train IDs and maps upstream intent labels to 16-option choice and binary annotated-intent verification questions. Original utterances are unchanged. No audio, model calls, generated requests, invented OOS labels or training launch. Converter: Apache-2.0, https://github.com/getainode/jebadiah/blob/main/LICENSE

@@ -1,0 +1,6 @@
+Copyright 2018, 2019 DeepMind Technologies Limited.
+DeepMind mathematics_dataset by David Saxton, Edward Grefenstette, Felix Hill and Pushmeet Kohli.
+Source revision: 427f45075f84b8b9774950196ad63867ca20ffb3
+Licensed under the Apache License, Version 2.0. See LICENSE-DeepMind.txt.
+Fresh fixed-seed questions from unmodified upstream arithmetic modules; Jeb choice and noul converter is Apache-2.0.
+Reference: Analysing Mathematical Reasoning Abilities of Neural Models (2019), https://arxiv.org/abs/1904.01557.

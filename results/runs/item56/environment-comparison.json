@@ -1,0 +1,40 @@
+{
+  "17": {
+    "final_freeze_identical_to_matched_a3": true,
+    "original_lock_differences": {},
+    "matched_seed_final_package_differences": {},
+    "observed_hardware_differences": {
+      "platform": {
+        "baseline": "Linux-6.12.100-125.179.amzn2023.x86_64-x86_64-with-glibc2.35",
+        "probe": "Linux-6.12.103-127.188.amzn2023.x86_64-x86_64-with-glibc2.35"
+      }
+    },
+    "proxy_versions": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.17.0",
+      "python": "3.11.13"
+    },
+    "proxy_inference_and_runner_hashes_identical_to_matched_a3": true
+  },
+  "18": {
+    "final_freeze_identical_to_matched_a3": true,
+    "original_lock_differences": {},
+    "matched_seed_final_package_differences": {},
+    "observed_hardware_differences": {
+      "driver": {
+        "baseline": "580.159.03",
+        "probe": "580.178.04"
+      },
+      "platform": {
+        "baseline": "Linux-6.12.94-123.192.amzn2023.x86_64-x86_64-with-glibc2.35",
+        "probe": "Linux-6.12.103-127.188.amzn2023.x86_64-x86_64-with-glibc2.35"
+      }
+    },
+    "proxy_versions": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.17.0",
+      "python": "3.11.13"
+    },
+    "proxy_inference_and_runner_hashes_identical_to_matched_a3": true
+  }
+}

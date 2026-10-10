@@ -1,0 +1,19 @@
+{
+  "scratch_directory": "/data/orca/scratch/item56",
+  "deleted_at_utc": "2026-10-10T10:18:02.060508+00:00",
+  "bytes_removed": 573065450,
+  "files_removed": 2322,
+  "deleted_categories": [
+    "downloaded A3 and scanned source copies",
+    "combined probe preview, final composition and upload recheck",
+    "frozen suite and scorer checkout",
+    "baseline and probe raw result downloads",
+    "CPU analysis environment, UV cache and identity-check outputs",
+    "temporary launch, monitoring, collection and report helpers",
+    "temporary job logs and PR payloads"
+  ],
+  "merged_models_downloaded_to_atlas": false,
+  "durable_report": "docs/item56-probe-b.md",
+  "private_analysis_revision": "320506197e65a3efeb550d5e91e18de5487a715a",
+  "scratch_absent_verified": true
+}
