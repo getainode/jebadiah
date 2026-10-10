@@ -31,5 +31,24 @@
   },
   "launch_method": "Authenticated Atlas HF CLI; connector validation does not support requested RTX PRO 6000",
   "evaluation_code_revision": "9bd4979acbdef044d33ce3df4607239a73c63b8b",
-  "diagnostic_job": "6aca0b00fee2c90070185c38"
+  "diagnostic_job": "6aca0b00fee2c90070185c38",
+  "evaluation_timing": {
+    "proxy_17": {
+      "status": "RUNNING",
+      "running_seconds": 817,
+      "estimated_usd": 0.6240972222222222
+    },
+    "proxy_18": {
+      "status": "RUNNING",
+      "running_seconds": 816,
+      "estimated_usd": 0.6233333333333333
+    },
+    "diagnostic": {
+      "status": "COMPLETED",
+      "running_seconds": 768,
+      "estimated_usd": 0.5866666666666667
+    }
+  },
+  "diagnostic_results_revision": "53ba49d086d1df4b93bf35c933dd43535d997d85",
+  "diagnostic_raw_sha256": "84d48dd827f43a5240b17746406e4bdf0d430310bdd0e4017388a77970851d6a"
 }
