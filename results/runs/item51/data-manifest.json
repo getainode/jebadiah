@@ -1,0 +1,41 @@
+{
+  "name": "item51-rung2b-additive-a3",
+  "private": true,
+  "a3_revision": "bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed",
+  "rung2_revision": "2242e85fae6f8aff3fc3cea3fa95869d99132522",
+  "a3_input_hashes": {
+    "train.jsonl": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+    "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+    "manifest.json": "2269f3721576869e7be1df1d945259d1bd6a644557fc6bb0eae2138dff0ae7a4"
+  },
+  "source_scan_sha256": "b71e225d957ac4c4322d65e6c4430df82197ac025f34eb46f7db784107e0971c",
+  "questions": 22190,
+  "calibration_questions": 512,
+  "added_questions": 1000,
+  "upstream_questions": 1102,
+  "aggregate_cap_questions": 2219,
+  "files": {
+    "NOTICE-Corr2Cause.txt": {
+      "sha256": "5a2e4417d27849586ad9eefdf63f81b45100cec83baadc8dfbeb49054d367d38"
+    },
+    "addition-proof.json": {
+      "sha256": "6b93869e5f4a7ee7b326a72e538811bf34089e73854dcbd1a5391d32b55fc284"
+    },
+    "calib.jsonl": {
+      "sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88"
+    },
+    "causal-diagnostic.jsonl": {
+      "sha256": "b0d9187a29da1b3941b29983e6f8d835b312d38d69dd39ad1d7d2c269d150db3"
+    },
+    "overlap-scan-report.json": {
+      "sha256": "b71e225d957ac4c4322d65e6c4430df82197ac025f34eb46f7db784107e0971c"
+    },
+    "source-licenses.json": {
+      "sha256": "60d3b2c1dba9c0d97c843caefff28cd11488ccd40d94f9536e1f7659e44410e8"
+    },
+    "train.jsonl": {
+      "sha256": "225dc0d1d82b68b322a4c6f7cf5583c898f0e3530ea2c7b81521071201353088"
+    }
+  },
+  "base_policy": "Existing A3 private exceptions unchanged; no shipping clearance"
+}
