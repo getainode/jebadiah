@@ -219,6 +219,14 @@ progress and its results are pending, so there is no Decision Index number here 
 
 ## Run it yourself
 
+Install the client for your existing runtime:
+
+```bash
+pip install jebadiah-decide
+```
+
+If Jeb is useful in your project, I'd appreciate a star on [getainode/jebadiah](https://github.com/getainode/jebadiah). If you hit a problem, [open an issue](https://github.com/getainode/jebadiah/issues) with the runtime and a request that reproduces it.
+
 **[Run Jeb locally](docs/run-locally.md)** is the setup guide for every runtime: Ollama, LM Studio, llama.cpp's
 `llama-server`, vLLM, MLX on a Mac and AINode, each with the install, the exact request, the output to expect and
 the gotchas, plus how to use Jeb as [JDE](https://github.com/Titanium-Devops/jde)'s judge.
