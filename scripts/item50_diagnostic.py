@@ -79,7 +79,11 @@ def main():
         scorer = Scorer(load_base(path), load_tokenizer(path), 2048, temperatures=temperatures)
         rows, extra = evaluate.run_set(scorer, records, 1, False, 8, 0)
         result[name] = summarize(rows, records)
-        result[name]['run_metrics'] = extra
+        result[name]['run_metrics'] = extra['timing']
+        assert extra['timing']['questions_scored'] == 300 and extra['timing']['truncated_prompts'] == 0
+        partial = Path('/workspace/item50-causal-diagnostic-partial-' + name + '.json')
+        partial.write_text(json.dumps(result, indent=2) + '\n')
+        api.upload_file(repo_id=REPO + '-checkpoints', path_or_fileobj=partial, path_in_repo=partial.name)
         del scorer
         gc.collect()
         torch.cuda.empty_cache()

@@ -1,4 +1,4 @@
-"""Launch the paired owned diagnostic or strict export recovery within the $12 cap."""
+"""Launch the paired causal diagnostic or strict export recovery within the $12 cap."""
 import argparse
 import os
 import re
@@ -27,7 +27,7 @@ MAX_JOBS=16 timeout 540 "$JEB_ROOT/venv/bin/python" -m pip install -q --no-build
 "$JEB_ROOT/venv/bin/python" {script}
 '''
     return ['hf','jobs','run','--detach','--name',f'item50-{stage}','--flavor','rtx-pro-6000',
-            '--timeout','45m','--secrets','HF_TOKEN','pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel',
+            '--timeout','35m' if stage == 'diagnostic' else '45m','--secrets','HF_TOKEN','pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel',
             '--','bash','-lc',setup]
 
 
