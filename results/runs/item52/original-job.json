@@ -1,0 +1,10 @@
+{
+  "id": "6ac800c0fee2c9007016e987",
+  "image": "pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel",
+  "flavor": "rtx-pro-6000",
+  "command": [
+    "bash",
+    "-lc",
+    "set -euo pipefail\napt-get update -qq >/dev/null 2>&1\napt-get install -y -qq git build-essential >/dev/null 2>&1\ngit clone -q https://github.com/getainode/jebadiah.git /workspace/item32-src\ncd /workspace/item32-src\ngit checkout -q 86a8203d792463536eb009a4d8da6c8681ffdd99\nexport JEB_ROOT=/workspace/item32-a3\nbash scripts/v21.sh --help >/dev/null\n\"$JEB_ROOT/venv/bin/python\" -m pip install -q hf_xet ninja packaging\nMAX_JOBS=16 timeout 540 \"$JEB_ROOT/venv/bin/python\" -m pip install -q --no-build-isolation causal-conv1d\nJEB_SKIP_INSTALL=1 bash scripts/v21.sh --sizes 9b --dataset-id frontier-infra/jebadiah-data-v2-1-item32 --dataset-revision bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed --train-file a3/train.jsonl --calib-file a3/calib.jsonl --manifest-file a3/manifest.json --model-repo frontier-infra/jebadiah-9b-v2-1-a3 --checkpoint-repo frontier-infra/jebadiah-9b-v2-1-a3-checkpoints --rank 16 --alpha 32 --max-seq-length 2048 --epochs 1 --lr 0.0001 --microbatch 8 --accumulation 1 --group-by-length --pad-to-multiple-of 64 --checkpoint-min-tokens 512 --eval-steps 200 --calib-eval-limit 358 --save-steps 500 --resume none 2>&1 | tee /workspace/item32-train.log\n"
+  ]
+}

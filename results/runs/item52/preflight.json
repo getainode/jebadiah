@@ -1,0 +1,32 @@
+{
+  "control_run": true,
+  "zero_recipe_changes": true,
+  "original_job": "6ac800c0fee2c9007016e987",
+  "original_runtime_commit": "86a8203d792463536eb009a4d8da6c8681ffdd99",
+  "data_repo": "frontier-infra/jebadiah-data-v2-1-item32",
+  "data_revision": "bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed",
+  "hashes": {
+    "train.jsonl": {
+      "sha256": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+      "bytes": 28316267,
+      "rows": 16622,
+      "questions": 21190
+    },
+    "calib.jsonl": {
+      "sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+      "bytes": 787633,
+      "rows": 280,
+      "questions": 512
+    }
+  },
+  "model_repo": "frontier-infra/jebadiah-9b-v2-1-a3-rep1",
+  "training_timeout_minutes": 135,
+  "proxy_timeout_minutes": 35,
+  "rate_usd_per_hour": 2.75,
+  "hard_allocation_ceiling_usd": 7.791666666666667,
+  "approval_cap_usd": 8,
+  "calibration": "Refit with the original A3 fit_temperature.py command; no copied A3 temperatures",
+  "merge_gate": 0.05,
+  "private_only": true,
+  "causal_diagnostic": false
+}
