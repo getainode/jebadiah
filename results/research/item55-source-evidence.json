@@ -1,0 +1,60 @@
+{
+  "checked_at_utc": "2026-10-10",
+  "method": "TinyFish CLI live extraction plus complete pinned local Python-tree inspection",
+  "revision": "427f45075f84b8b9774950196ad63867ca20ffb3",
+  "live_fetches": [
+    {
+      "url": "https://github.com/google-deepmind/mathematics_dataset/tree/427f45075f84b8b9774950196ad63867ca20ffb3",
+      "final_url": "https://github.com/google-deepmind/mathematics_dataset/tree/427f45075f84b8b9774950196ad63867ca20ffb3",
+      "title": "GitHub - google-deepmind/mathematics_dataset at 427f45075f84b8b9774950196ad63867ca20ffb3",
+      "response_sha256": "d1aabb6e2fac63425bb4622be0a461364de3234ecdc67909a9b4bc5477629de3",
+      "result_text_sha256": "b3ca9c053b1471f975c3c2ec70031b7bcbcbabd7dfa7d468c3c4328aeb286974",
+      "verified": "Original procedural mathematics code and authorship at pinned revision"
+    },
+    {
+      "url": "https://github.com/google-deepmind/mathematics_dataset/blob/427f45075f84b8b9774950196ad63867ca20ffb3/LICENSE",
+      "final_url": "https://github.com/google-deepmind/mathematics_dataset/blob/427f45075f84b8b9774950196ad63867ca20ffb3/LICENSE",
+      "title": "mathematics_dataset/LICENSE at 427f45075f84b8b9774950196ad63867ca20ffb3 \u00b7 google-deepmind/mathematics_dataset",
+      "response_sha256": "d1aabb6e2fac63425bb4622be0a461364de3234ecdc67909a9b4bc5477629de3",
+      "result_text_sha256": "18624d8910e4df0149e2e62e75fc00da6b1938904491f9e35f6353fa31edabd2",
+      "verified": "Apache License Version 2.0 with reproduction and derivative-work permission"
+    },
+    {
+      "url": "https://github.com/google-deepmind/mathematics_dataset/blob/427f45075f84b8b9774950196ad63867ca20ffb3/mathematics_dataset/modules/arithmetic.py",
+      "final_url": "https://github.com/google-deepmind/mathematics_dataset/blob/427f45075f84b8b9774950196ad63867ca20ffb3/mathematics_dataset/modules/arithmetic.py",
+      "title": "mathematics_dataset/mathematics_dataset/modules/arithmetic.py at 427f45075f84b8b9774950196ad63867ca20ffb3 \u00b7 google-deepmind/mathematics_dataset",
+      "response_sha256": "10b96475278e9f62868d00c3c7f7d9f739ddd2bf80e7356f731133133e31f694",
+      "result_text_sha256": "d66fbea6f340e78b6ebb0bf5db1da4a2d51edd71dc936b1d4bd364ea365c6912",
+      "verified": "Original procedural mathematics code and authorship at pinned revision"
+    },
+    {
+      "url": "https://github.com/apolinario/decision-index/blob/9eb2dbe2a358004c8782c66e40a83ac07b953fec/docs/suite.md",
+      "final_url": "https://github.com/apolinario/decision-index/blob/9eb2dbe2a358004c8782c66e40a83ac07b953fec/docs/suite.md",
+      "title": "decision-index/docs/suite.md at 9eb2dbe2a358004c8782c66e40a83ac07b953fec \u00b7 apolinario/decision-index",
+      "response_sha256": "4d52982554ea785e2a450b269ed0643ad06e7e8c6adc20144796ba8d43130952",
+      "result_text_sha256": "7c5c3a474809871c71d428bcfd957a8657ca60ab2ab65e0fc596e451e4c55e1d",
+      "verified": "Edition 0.3 catalog contains GSM8K and CLadder; selected DeepMind mathematics source names are absent."
+    }
+  ],
+  "ancestry_gate": {
+    "status": "passed",
+    "basis": [
+      "Pinned arithmetic modules build expressions with internal procedural number and operator samplers. Selected calls have one module and no external entity replacement.",
+      "No imported question corpus, benchmark template, model prediction, or pre-generated release supplies this finite source.",
+      "Selected source is the DeepMind school mathematics generator attributed to Saxton, Grefenstette, Hill and Kohli, originally published in 2019. Independence conclusion is source-code provenance, not an overlap clearance."
+    ],
+    "selected_modules": [
+      "add_sub_multiple",
+      "mul_div_multiple",
+      "mixed"
+    ],
+    "scope": "Fresh finite fixed-seed universe only; no published dataset downloaded. Full-suite scan remains pending.",
+    "catalog_name_screen": {
+      "mathematics_dataset": false,
+      "deepmind-math": false,
+      "deepmind mathematics": false,
+      "catalog_revision": "9eb2dbe2a358004c8782c66e40a83ac07b953fec",
+      "status": "passed"
+    }
+  }
+}
