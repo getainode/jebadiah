@@ -1,0 +1,66 @@
+{
+  "base_model": "Qwen/Qwen3.5-9B",
+  "base_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+  "num_epochs": 1,
+  "batch_size": 8,
+  "gradient_accumulation_steps": 1,
+  "learning_rate": 0.0001,
+  "lr_scheduler_type": "cosine",
+  "lora_rank": 16,
+  "lora_alpha": 32,
+  "max_seq_length": 2048,
+  "warmup_steps": 30,
+  "weight_decay": 0.0,
+  "max_grad_norm": 1.0,
+  "use_gradient_checkpointing": true,
+  "attn_implementation": "sdpa",
+  "eval_steps": 200,
+  "logging_steps": 10,
+  "seed": 17,
+  "decide": {
+    "objective": "candidate_ce",
+    "shuffle_choice_options": true,
+    "lora_dropout": 0.05,
+    "calib_eval_limit": 358,
+    "target_modules": "all-linear",
+    "score_targets": "ordinal",
+    "score_ordinal_adjacent": 0.2
+  },
+  "ablation": "probe-b",
+  "group_by_length": true,
+  "pad_to_multiple_of": 64,
+  "checkpoint_min_tokens": 512,
+  "backbone_autocast": false,
+  "resume": "none",
+  "dataset_repo": "frontier-infra/jebadiah-data-v2-1-item47",
+  "train_file": "probe-b/train.jsonl",
+  "calib_file": "probe-b/calib.jsonl",
+  "manifest_file": "probe-b/manifest.json",
+  "dataset_revision": null,
+  "probe": true,
+  "seeds": [
+    17,
+    18
+  ],
+  "rank": 16,
+  "alpha": 32,
+  "original_runtime_commit": "86a8203d792463536eb009a4d8da6c8681ffdd99",
+  "decision": {
+    "baseline": "two-seed A3 mean, unrounded, displayed 46.82",
+    "paired_ci95_lower_gt": 0,
+    "clinc_mean_macro_f1_loss_max_points": 2.5,
+    "tools_noise_points": 6,
+    "win_action": "Split into single rungs for confirmation only if probe wins; no promotion"
+  },
+  "allocation": {
+    "train_per_seed_minutes": 150,
+    "proxy_per_seed_minutes": 35,
+    "four_model_diagnostic_minutes": 45,
+    "total_ceiling_usd": 19.020833333333336,
+    "cap_usd": 20
+  },
+  "models": {
+    "17": "frontier-infra/jebadiah-9b-v2-1-probe-b-s17",
+    "18": "frontier-infra/jebadiah-9b-v2-1-probe-b-s18"
+  }
+}

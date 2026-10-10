@@ -1,0 +1,49 @@
+{
+  "dataset": "frontier-infra/jebadiah-data-v2-1-item47",
+  "sources": {
+    "rung2b": {
+      "revision": "c9fcf494319527d12888e0f5854980c11a51b91d",
+      "added_questions": 1000,
+      "diagnostic": "causal-diagnostic.jsonl",
+      "files": {
+        "NOTICE-Corr2Cause.txt": "5a2e4417d27849586ad9eefdf63f81b45100cec83baadc8dfbeb49054d367d38",
+        "addition-proof.json": "6b93869e5f4a7ee7b326a72e538811bf34089e73854dcbd1a5391d32b55fc284",
+        "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+        "causal-diagnostic.jsonl": "b0d9187a29da1b3941b29983e6f8d835b312d38d69dd39ad1d7d2c269d150db3",
+        "manifest.json": "4c090edd359d2899ca8bd82ea81dd344d98796790936db771571fc91ab598b5a",
+        "overlap-scan-report.json": "b71e225d957ac4c4322d65e6c4430df82197ac025f34eb46f7db784107e0971c",
+        "source-licenses.json": "60d3b2c1dba9c0d97c843caefff28cd11488ccd40d94f9536e1f7659e44410e8",
+        "train.jsonl": "225dc0d1d82b68b322a4c6f7cf5583c898f0e3530ea2c7b81521071201353088"
+      }
+    },
+    "rung3-add": {
+      "revision": "da7fbc3260d42103ed44f557b198bfe05af61976",
+      "added_questions": 1000,
+      "diagnostic": "nli-diagnostic.jsonl",
+      "files": {
+        "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+        "composition-slots.json": "eb9fb19019134cc93d5ee35bb04b6e24d605c5c74841c7d333c495857d23f0b7",
+        "manifest.json": "6d64777e07acd07fa1a23ded2cda2818efc40cfc1ad676ab828cfa6456ba2861",
+        "nli-diagnostic.jsonl": "4d24a646b16deb0981cac742ce4bdac4c303b98e222efb8a8243ae58f68b01bd",
+        "overlap-scan-report.json": "e8be66cad7f6af8ad9e4466537c3e08d2cfd9e61ab4c8aed3a1e58b3f57ebdf1",
+        "train.jsonl": "f97fbb29d82027367d4b4dbea9a469d0d757636da7f83aa85c3eb4930f118f60"
+      }
+    },
+    "rung4-add": {
+      "revision": "da7fbc3260d42103ed44f557b198bfe05af61976",
+      "added_questions": 749,
+      "diagnostic": "intent-diagnostic.jsonl",
+      "files": {
+        "NOTICE-MASSIVE.txt": "2202da05542d940e127f064165f0faed366399a900108337c0b8dc48a0f6ff3d",
+        "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+        "composition-proof.json": "bce491e9625a716426c580a674aca827a60a078925bd8a69b1c508df9f5ce450",
+        "intent-diagnostic.jsonl": "155a1dd492bcb6efe3bc60d5d7b26b2201fd78062202d6565e2baa3466c98b59",
+        "item54-additions.jsonl": "7fb195c9e51b0104449d1870bd3025b690c1009c4b9d246333a6d399898710fd",
+        "manifest.json": "331223a9276cddd1bbc6e139671ff961f1c42469ce1a1fc0850c07836758c0e4",
+        "overlap-scan-report.json": "693625cc6431aea9e7ba5fcbc6ede041166da2ee2ed353fcd191856a3b91fb88",
+        "source-licenses.json": "b286df5e3fca7644c530f9907989a37e2556e6fec5ac70b0f2125ba50953fab8",
+        "train.jsonl": "59ead2c0eb29a2aad09ed6d3066f52359202841e40aa1552fa0561131ab501c2"
+      }
+    }
+  }
+}

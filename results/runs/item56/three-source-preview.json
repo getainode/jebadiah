@@ -1,0 +1,224 @@
+{
+  "name": "item56-outside-data-probe-b",
+  "private": true,
+  "probe": true,
+  "preview_only": true,
+  "training_launched": false,
+  "a3_revision": "bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed",
+  "a3_input_hashes": {
+    "train.jsonl": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+    "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+    "manifest.json": "2269f3721576869e7be1df1d945259d1bd6a644557fc6bb0eae2138dff0ae7a4"
+  },
+  "a3_train_prefix_byte_identical": true,
+  "calibration_bytes_unchanged": true,
+  "questions": 23939,
+  "calibration_questions": 512,
+  "added_questions": 2749,
+  "removed_questions": 0,
+  "source_question_counts": {
+    "12ml/e-care": 102,
+    "agent_action_safety": 103,
+    "allenai/qasc": 102,
+    "allenai/quartz": 102,
+    "andychiang/cloth": 102,
+    "andychiang/dgen": 102,
+    "bogdanminko/wildguardmix-cleaned": 102,
+    "cambridgeltl/xcopa": 102,
+    "community-datasets/offenseval_dravidian": 102,
+    "community-datasets/proto_qa": 103,
+    "corr2cause": 1102,
+    "declare-lab/cicero": 102,
+    "deepset/prompt-injections": 102,
+    "docred": 103,
+    "dynabench/dynasent": 102,
+    "ethics/commonsense": 103,
+    "ethics/deontology": 102,
+    "ethics/justice": 102,
+    "fancyzhx/amazon_polarity": 102,
+    "flaitenberger/wnut_17": 102,
+    "gglab/paradise": 102,
+    "google-research-datasets/go_emotions": 80,
+    "google/civil_comments": 102,
+    "hannahrosekirk/hatemojibuild": 102,
+    "headline_cause/en_simple": 102,
+    "hendrycks/ethics": 102,
+    "hendzh/promptshield": 102,
+    "hope_edi/english": 102,
+    "hwu-slurp-massive": 851,
+    "jaredfern/codah": 102,
+    "jaredpalmer/kev-suites": 2510,
+    "labhc/moral_stories": 102,
+    "localllama/typed-decisions": 5710,
+    "marcov/health_fact_promptsource": 102,
+    "mteb/afrisenticlassification": 102,
+    "mteb/amazon_counterfactual": 103,
+    "multilingual-discourse-hub/disrpt": 103,
+    "multilingual/tweet_sentiment_multilingual": 102,
+    "nedjmaou/mlma_hate_speech": 102,
+    "neurae/dnd_style_intents": 102,
+    "neuralchemy/prompt-injection-dataset": 103,
+    "nightingal3/fig-qa": 102,
+    "nvidia/helpsteer": 102,
+    "nvidia/helpsteer2": 2375,
+    "nvidia/helpsteer3": 102,
+    "openlifescienceai/medmcqa": 103,
+    "original-code-output": 102,
+    "original-code-test-count": 102,
+    "original-code-verification": 102,
+    "original-music-intervals": 102,
+    "original-music-triads": 102,
+    "pkavumba/balanced-copa": 102,
+    "propsegment/nli": 102,
+    "prost": 102,
+    "pushpdeep/ultrafeedback-paired": 102,
+    "qbao775/pararule-plus": 102,
+    "s-labs/prompt-injection-dataset": 102,
+    "samsoup/cosmos_qa": 102,
+    "semevalworkshop/sem_eval_2010_task_8": 102,
+    "sileod/discovery": 102,
+    "sileod/mindgames": 102,
+    "sonos-nlu-benchmark/snips_built_in_intents": 102,
+    "spacenli": 1102,
+    "tasksource/acceptability-prediction": 102,
+    "tasksource/arct": 102,
+    "tasksource/babi_nli": 102,
+    "tasksource/blog_authorship_corpus": 102,
+    "tasksource/clcd-english": 102,
+    "tasksource/commonsense_qa_2.0": 102,
+    "tasksource/cycic_classification": 102,
+    "tasksource/cycic_multiplechoice": 102,
+    "tasksource/defeasible-nli": 102,
+    "tasksource/equate": 102,
+    "tasksource/feasibilityqa": 102,
+    "tasksource/hh-rlhf": 102,
+    "tasksource/hlgd": 102,
+    "tasksource/i2d2": 102,
+    "tasksource/jigsaw_toxicity": 102,
+    "tasksource/logical-entailment": 102,
+    "tasksource/lonli": 102,
+    "tasksource/math_qa": 102,
+    "tasksource/monotonicity-entailment": 102,
+    "tasksource/multilingual-sentiments": 102,
+    "tasksource/naturallogic": 102,
+    "tasksource/numer_sense": 102,
+    "tasksource/patent-phrase-similarity": 102,
+    "tasksource/procedural-typed-decisions": 102,
+    "tasksource/ruletaker": 102,
+    "tasksource/scone": 102,
+    "tasksource/sherliic": 102,
+    "tasksource/social_i_qa": 102,
+    "tasksource/spartqa-mchoice": 102,
+    "tasksource/spartqa-yn": 102,
+    "tasksource/starcon": 102,
+    "tasksource/stepgame": 102,
+    "tasksource/sts-companion": 102,
+    "tasksource/subjectivity": 102,
+    "tasksource/temporal-nli": 102,
+    "tasksource/tracie": 102,
+    "tomngdev/shell-safety-v2": 102,
+    "touche23-valueeval": 102,
+    "turingbench": 102,
+    "ucirvine/sms_spam": 102,
+    "unigram/fol-nli": 103,
+    "utilitarianism": 102,
+    "webis/args_me": 102,
+    "zapsdcn/hyperpartisan_news": 102
+  },
+  "aggregate_cap_questions": 2119,
+  "input_pins_sha256": "3c769dc03322a626b08228901acec5fb9c022e8db7b3a9986ff9c324ce64cddb",
+  "source_revisions": {
+    "rung2b": "c9fcf494319527d12888e0f5854980c11a51b91d",
+    "rung3-add": "da7fbc3260d42103ed44f557b198bfe05af61976",
+    "rung4-add": "da7fbc3260d42103ed44f557b198bfe05af61976"
+  },
+  "exposure_policy": "One epoch over untouched A3 plus all additions; original 50 percent mixture changes.",
+  "base_policy": "Private A3 exceptions preserved; no shipping clearance.",
+  "files": {
+    "NOTICE-Corr2Cause.txt": {
+      "sha256": "5a2e4417d27849586ad9eefdf63f81b45100cec83baadc8dfbeb49054d367d38",
+      "rows": null,
+      "questions": null
+    },
+    "NOTICE-MASSIVE.txt": {
+      "sha256": "2202da05542d940e127f064165f0faed366399a900108337c0b8dc48a0f6ff3d",
+      "rows": null,
+      "questions": null
+    },
+    "addition-proof.json": {
+      "sha256": "504a3a532d120350878b4724d65f74138bb2169c07af45377a0f871cf9da838e",
+      "rows": null,
+      "questions": null
+    },
+    "calib.jsonl": {
+      "sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+      "rows": 280,
+      "questions": 512
+    },
+    "causal-diagnostic.jsonl": {
+      "sha256": "b0d9187a29da1b3941b29983e6f8d835b312d38d69dd39ad1d7d2c269d150db3",
+      "rows": null,
+      "questions": null
+    },
+    "intent-diagnostic.jsonl": {
+      "sha256": "155a1dd492bcb6efe3bc60d5d7b26b2201fd78062202d6565e2baa3466c98b59",
+      "rows": null,
+      "questions": null
+    },
+    "nli-diagnostic.jsonl": {
+      "sha256": "4d24a646b16deb0981cac742ce4bdac4c303b98e222efb8a8243ae58f68b01bd",
+      "rows": null,
+      "questions": null
+    },
+    "rung2b-addition-proof.json": {
+      "sha256": "6b93869e5f4a7ee7b326a72e538811bf34089e73854dcbd1a5391d32b55fc284",
+      "rows": null,
+      "questions": null
+    },
+    "rung2b-overlap-scan-report.json": {
+      "sha256": "b71e225d957ac4c4322d65e6c4430df82197ac025f34eb46f7db784107e0971c",
+      "rows": null,
+      "questions": null
+    },
+    "rung2b-source-licenses.json": {
+      "sha256": "60d3b2c1dba9c0d97c843caefff28cd11488ccd40d94f9536e1f7659e44410e8",
+      "rows": null,
+      "questions": null
+    },
+    "rung3-add-composition-slots.json": {
+      "sha256": "eb9fb19019134cc93d5ee35bb04b6e24d605c5c74841c7d333c495857d23f0b7",
+      "rows": null,
+      "questions": null
+    },
+    "rung3-add-overlap-scan-report.json": {
+      "sha256": "e8be66cad7f6af8ad9e4466537c3e08d2cfd9e61ab4c8aed3a1e58b3f57ebdf1",
+      "rows": null,
+      "questions": null
+    },
+    "rung4-add-composition-proof.json": {
+      "sha256": "bce491e9625a716426c580a674aca827a60a078925bd8a69b1c508df9f5ce450",
+      "rows": null,
+      "questions": null
+    },
+    "rung4-add-item54-additions.jsonl": {
+      "sha256": "7fb195c9e51b0104449d1870bd3025b690c1009c4b9d246333a6d399898710fd",
+      "rows": null,
+      "questions": null
+    },
+    "rung4-add-overlap-scan-report.json": {
+      "sha256": "693625cc6431aea9e7ba5fcbc6ede041166da2ee2ed353fcd191856a3b91fb88",
+      "rows": null,
+      "questions": null
+    },
+    "rung4-add-source-licenses.json": {
+      "sha256": "b286df5e3fca7644c530f9907989a37e2556e6fec5ac70b0f2125ba50953fab8",
+      "rows": null,
+      "questions": null
+    },
+    "train.jsonl": {
+      "sha256": "5d525ffa8b41b4e87bca4434d64e95371d7e8e299eca8c5b060f4bd5863c029b",
+      "rows": 19371,
+      "questions": 23939
+    }
+  }
+}

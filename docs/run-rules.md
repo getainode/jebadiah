@@ -99,3 +99,5 @@ Nimble v3 and its run code/results are CC BY-NC 4.0. Learn from public facts onl
 its outputs or weights, initialize from its adapter, copy its restricted data, or import its run code
 into commercial Jeb. Independently implement experiments with our permitted data and the existing
 source-first contamination and license manifests.
+
+| ITEM 56 outside-data PROBE B, seeds 17 and 18 | Two-seed A3 mean 46.82 | Jason option B, Desk #646: untouched A3 plus exact scanned Corr2Cause, SpaceNLI, MASSIVE and DeepMind math additions; original A3 runtime and one epoch; exposure increases | Mean of probe seeds beats unrounded mean of A3 seeds on identical paired whole-group bootstrap draws with 95% interval entirely above zero, and mean CLINC macro-F1 loses at most 2.5 points; retain 0.05 merge gate | Prelaunch: pending scanned math revision; probe only, split into single rungs only if it wins; no model promotion |
