@@ -29,17 +29,17 @@ def test_ollama_pulls_a_missing_model(runtime):
             return 200, "\n".join(json.dumps(x) for x in lines).encode()
         return 404, {}
     rt = runtime(respond)
-    info = Ollama(url=rt.url, model="hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0").prepare(events.append)
+    info = Ollama(url=rt.url, model="hf.co/frontier-infra/jebadiah-9b-v2-1-GGUF:Q8_0").prepare(events.append)
     pull = [r for r in rt.requests if r["path"] == "/api/pull"][0]["body"]
-    assert pull == {"model": "hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0", "stream": True}
+    assert pull == {"model": "hf.co/frontier-infra/jebadiah-9b-v2-1-GGUF:Q8_0", "stream": True}
     assert any("Pulling" in e for e in events) and events[-1].strip() == "pulled"
     assert info["ollama"] == "0.34.4"
 
 
 def test_ollama_present_model_is_not_pulled(runtime):
     rt = runtime(lambda path, b: (200, {"version": "x"}) if path == "/api/version" else
-                 (200, {"models": [{"name": "hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0"}]}))
-    Ollama(url=rt.url, model="hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0").prepare(lambda m: None)
+                 (200, {"models": [{"name": "hf.co/frontier-infra/jebadiah-9b-v2-1-GGUF:Q8_0"}]}))
+    Ollama(url=rt.url, model="hf.co/frontier-infra/jebadiah-9b-v2-1-GGUF:Q8_0").prepare(lambda m: None)
     assert all(r["path"] != "/api/pull" for r in rt.requests)
 
 
@@ -49,10 +49,10 @@ def test_ollama_down_says_how_to_start_it():
 
 
 def test_lmstudio_finds_the_loaded_jeb(runtime):
-    rt = runtime(lambda path, b: (200, {"data": [{"id": "qwen3-8b"}, {"id": "jebadiah-9b-v2"}]}))
+    rt = runtime(lambda path, b: (200, {"data": [{"id": "qwen3-8b"}, {"id": "jebadiah-9b-v2-1"}]}))
     lm = LMStudio(url=rt.url)
     lm.prepare(lambda m: None)
-    assert lm.model == "jebadiah-9b-v2"
+    assert lm.model == "jebadiah-9b-v2-1"
 
 
 def test_lmstudio_without_jeb_says_what_to_click(runtime):
@@ -130,3 +130,48 @@ def test_health_and_cors(shim):
         h = json.loads(r.read())
         assert r.headers["Access-Control-Allow-Origin"] == "*"
     assert h["backend"] == "ollama" and h["max_options"] == 20
+
+
+@pytest.mark.parametrize("precision", ["8bit", "4bit"])
+def test_mlx_downloads_and_loads_repo_root(monkeypatch, tmp_path, precision):
+    import sys
+    from types import ModuleType, SimpleNamespace
+    from jebadiah_decide import defaults
+    from jebadiah_decide.backends import MLX
+
+    downloaded, loaded = [], []
+    root = str(tmp_path / "snapshot")
+
+    def snapshot_download(repo, **kwargs):
+        downloaded.append((repo, kwargs))
+        return root
+
+    def load(path):
+        loaded.append(path)
+        core = SimpleNamespace(embed_tokens=object())
+        model = SimpleNamespace(model=core, args=SimpleNamespace(tie_word_embeddings=True))
+        return model, SimpleNamespace(_tokenizer=object())
+
+    mlx = ModuleType("mlx")
+    mlx.core = ModuleType("mlx.core")
+    mlx_lm = ModuleType("mlx_lm")
+    mlx_lm.load = load
+    monkeypatch.setitem(sys.modules, "mlx", mlx)
+    monkeypatch.setitem(sys.modules, "mlx.core", mlx.core)
+    monkeypatch.setitem(sys.modules, "mlx_lm", mlx_lm)
+    monkeypatch.setattr("huggingface_hub.snapshot_download", snapshot_download)
+
+    jeb = Jeb("mlx", precision=precision, renderer=object(), temperature_table=TEMPS, revision="release")
+    repo, options = downloaded[0]
+    assert repo == defaults.mlx_repo("9b", precision)
+    assert options["revision"] == "release"
+    assert "*.safetensors" in options["allow_patterns"]
+    assert "*.json" in options["allow_patterns"]
+    assert all("/" not in pattern for pattern in options["allow_patterns"])
+    assert loaded == [root]
+    assert jeb.backend.path == root
+
+    downloaded.clear()
+    local = MLX(str(tmp_path), precision=precision)
+    assert downloaded == []
+    assert local.path == str(tmp_path)

@@ -1,7 +1,7 @@
 """`Jeb`: typed decisions from a Jebadiah model on the runtime you already run.
 
     from jebadiah_decide import Jeb
-    jeb = Jeb("ollama")            # Jebadiah 9B v2, hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0
+    jeb = Jeb("ollama")            # Jebadiah 9B v2.1, hf.co/frontier-infra/jebadiah-9b-v2-1-GGUF:Q8_0
     jeb.prepare()                  # checks Ollama is up and pulls the model on first use
     jeb.decide({"ticket": "..."}, {"route": {"type": "choice", "instructions": "...",
                                               "criteria": {"billing": "...", "support": "..."}}})
@@ -104,7 +104,8 @@ class Jeb:
         cls = BACKENDS[backend]
         self.backend_name = cls.name
         self.size = size
-        self.model = model or defaults.default_model(cls.name, size)
+        self.model = model or (defaults.mlx_repo(size, backend_options.get("precision", "8bit"))
+                               if cls.name == "mlx" else defaults.default_model(cls.name, size))
         self.calibrated = temperatures
         self.max_prompt_tokens = max_prompt_tokens
         self.backend = cls(url=url or cls.default_url, model=self.model, api_key=api_key, timeout=timeout,

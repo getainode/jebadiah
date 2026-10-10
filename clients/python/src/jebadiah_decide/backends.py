@@ -94,7 +94,7 @@ class LlamaServer:
 
     def prepare(self, progress=print) -> dict:
         _reachable(self.url + "/health", self.api_key, "llama-server",
-                   "Start it: llama-server -m jebadiah-9b-v2-Q8_0.gguf -c 4096 -np 1 --port 8080")
+                   "Start it: llama-server -m jebadiah-9b-v2-1-Q8_0.gguf -c 4096 -np 1 --port 8080")
         props = get_json(self.url + "/props", self.api_key)
         path = str(props.get("model_path") or "")
         if path and "jebadiah" not in path.lower():
@@ -183,8 +183,8 @@ class LMStudio:
     needs_renderer = True
     top_max = 20
 
-    HOW_TO_LOAD = ("In LM Studio: open Discover (the magnifying glass), search for jebadiah-9b-v2, and download the "
-                   "Q8_0 from frontier-infra/jebadiah-9b-v2-GGUF. Then open the Developer tab, click \"Select a model "
+    HOW_TO_LOAD = ("In LM Studio: open Discover (the magnifying glass), search for jebadiah-9b-v2-1, and download the "
+                   "Q8_0 from frontier-infra/jebadiah-9b-v2-1-GGUF. Then open the Developer tab, click \"Select a model "
                    "to load\" and pick it. From a terminal, `lms ls` lists what you have and `lms load <name>` loads it.")
 
     def __init__(self, url: str, model: str | None = None, api_key: str | None = None, timeout: float = 900, **_):
@@ -238,8 +238,8 @@ class VLLM:
 
     def prepare(self, progress=print) -> dict:
         models = _reachable(self.url + "/v1/models", self.api_key, "vLLM",
-                            "Start it: vllm serve frontier-infra/jebadiah-9b-v2 --max-model-len 4096 --language-model-only "
-                            "--served-model-name frontier-infra/jebadiah-9b-v2")
+                            "Start it: vllm serve frontier-infra/jebadiah-9b-v2-1 --max-model-len 4096 --language-model-only "
+                            "--served-model-name frontier-infra/jebadiah-9b-v2-1")
         ids = [m.get("id") for m in models.get("data", [])]
         if self.model not in ids:
             raise JebError(f"the server has no model {self.model!r} (it has: {', '.join(map(str, ids)) or 'none'})")
@@ -271,8 +271,8 @@ class MLX:
         path = model
         if not os.path.isdir(path):
             from huggingface_hub import snapshot_download
-            root = snapshot_download(model, revision=revision, allow_patterns=[f"{precision}/*", "temperatures.json"])
-            path = os.path.join(root, precision)
+            path = snapshot_download(model, revision=revision,
+                                     allow_patterns=["*.json", "*.jinja", "*.safetensors", "*.txt"])
         import mlx.core as mx  # noqa: F401  (fails early with a clear ImportError off Apple silicon)
         from mlx_lm import load
         self.path = path

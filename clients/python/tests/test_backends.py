@@ -83,7 +83,7 @@ def test_lmstudio_sends_messages_with_reasoning_off(renderer, runtime):
         return 200, {"usage": {"prompt_tokens": n}, "choices": [{"logprobs": {"content": [
             {"token": "A", "top_logprobs": [{"token": t, "logprob": v} for t, v in top_for(prompt)]}]}}]}
     rt = runtime(respond)
-    out = Jeb("lmstudio", url=rt.url, model="jebadiah-9b-v2", api_key="tok", renderer=renderer,
+    out = Jeb("lmstudio", url=rt.url, model="jebadiah-9b-v2-1", api_key="tok", renderer=renderer,
               temperature_table=TEMPS).decide(REQ["state"], REQ["questions"])
     check_answers(out)
     r = rt.requests[0]
@@ -118,7 +118,7 @@ def test_vllm_completions(renderer, runtime):
         n = 110 if b["prompt"] == GOLD["route"]["prompt"] else 95
         return 200, {"usage": {"prompt_tokens": n}, "choices": [{"text": "A", "logprobs": {"top_logprobs": [dict(top_for(b["prompt"]))]}}]}
     rt = runtime(respond)
-    out = Jeb("vllm", url=rt.url + "/v1", model="frontier-infra/jebadiah-9b-v2", renderer=renderer,
+    out = Jeb("vllm", url=rt.url + "/v1", model="frontier-infra/jebadiah-9b-v2-1", renderer=renderer,
               temperature_table=TEMPS).decide(REQ["state"], REQ["questions"])
     check_answers(out)
     r = rt.requests[0]
@@ -126,16 +126,16 @@ def test_vllm_completions(renderer, runtime):
 
 
 def test_systemone_passthrough(runtime):
-    answer = {"model": "frontier-infra/jebadiah-9b-v2", "answers": {"urgent": {"type": "noul", "noul": 0.16}},
+    answer = {"model": "frontier-infra/jebadiah-9b-v2-1", "answers": {"urgent": {"type": "noul", "noul": 0.16}},
               "calibration": {"applied": False, "temperatures": {}}}
     rt = runtime(lambda path, b: (200, answer))
-    out = Jeb("ainode", url=rt.url + "/v1", model="frontier-infra/jebadiah-9b-v2", api_key="k",
+    out = Jeb("ainode", url=rt.url + "/v1", model="frontier-infra/jebadiah-9b-v2-1", api_key="k",
               temperatures=False).decide(REQ["state"], REQ["questions"])
     assert out["answers"] == answer["answers"]
     r = rt.requests[0]
     assert r["path"] == "/v1/systemone" and r["auth"] == "Bearer k"
     assert r["body"] == {"state": REQ["state"], "questions": REQ["questions"],
-                         "model": "frontier-infra/jebadiah-9b-v2", "calibration": "raw"}
+                         "model": "frontier-infra/jebadiah-9b-v2-1", "calibration": "raw"}
 
 
 def test_runtime_http_error_is_a_jeb_error(renderer, runtime):
@@ -146,8 +146,8 @@ def test_runtime_http_error_is_a_jeb_error(renderer, runtime):
 
 def test_defaults_and_unknowns():
     from jebadiah_decide import defaults
-    assert defaults.default_model("ollama", "9b") == "hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0"
-    assert defaults.default_repo("vllm", "27b") == "frontier-infra/jebadiah-27b"
+    assert defaults.default_model("ollama", "9b") == "hf.co/frontier-infra/jebadiah-9b-v2-1-GGUF:Q8_0"
+    assert defaults.default_repo("vllm", "27b") == "frontier-infra/jebadiah-27b-v2-1"
     with pytest.raises(JebError, match="unknown backend"):
         Jeb("nope")
     with pytest.raises(JebError, match="unknown size"):
@@ -161,3 +161,19 @@ def test_capped_backend_refuses_more_than_20_options(renderer, runtime):
     with pytest.raises(JebError, match="21 options, but Ollama returns only its top 20"):
         jeb.decide({"x": 1}, {"wide": q})
     assert rt.requests == []   # refused before the runtime was called
+
+
+@pytest.mark.parametrize("size,stem", [
+    ("4b", "jebadiah-4b-v2"),
+    ("9b", "jebadiah-9b-v2-1"),
+    ("27b", "jebadiah-27b-v2-1"),
+])
+def test_release_defaults_for_each_runtime(size, stem):
+    from jebadiah_decide import defaults
+    assert defaults.gguf_repo(size) == f"frontier-infra/{stem}-GGUF"
+    assert defaults.default_model("ollama", size) == f"hf.co/frontier-infra/{stem}-GGUF:Q8_0"
+    assert defaults.default_model("vllm", size) == f"frontier-infra/{stem}"
+    assert defaults.default_model("systemone", size) == f"frontier-infra/{stem}"
+    assert defaults.default_model("mlx", size) == f"frontier-infra/{stem}-MLX-8bit"
+    assert defaults.mlx_repo(size, "4bit") == f"frontier-infra/{stem}-MLX-4bit"
+    assert defaults.default_repo("llama-server", size) == f"frontier-infra/{stem}-GGUF"

@@ -98,3 +98,28 @@ def test_request_json_output_stays_clean(monkeypatch, tmp_path, capsys):
     output = capsys.readouterr().out
     assert json.loads(output) == answer
     assert cli.AGENT_LINE not in output
+
+
+def test_doctor_checks_v21_reference_probabilities(monkeypatch, capsys):
+    class ReleaseJeb(FakeJeb):
+        renderer = object()
+        calibrated = True
+        temps = {"choice": 1.0467, "noul": 1.0284}
+        billing = 0.565991
+
+        def decide(self, state, questions):
+            return {
+                "answers": {
+                    "route": {"choice": "billing", "probabilities": {"billing": self.billing}},
+                    "urgent": {"noul": 0.170974},
+                },
+                "latency_ms": 1,
+            }
+
+    fake = ReleaseJeb()
+    monkeypatch.setattr(cli, "Jeb", lambda *_a, **_kw: fake)
+    assert cli.cmd_doctor(_common_args(size="9b")) == 0
+    assert "known example" in capsys.readouterr().out
+    fake.billing = 0.641142  # previous 9B v2, outside the v2.1 tolerance
+    assert cli.cmd_doctor(_common_args(size="9b")) == 1
+    assert "expected about 0.565991" in capsys.readouterr().out
