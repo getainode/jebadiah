@@ -30,5 +30,9 @@
       "proxy": 35
     },
     "allocation_ceiling_usd": 7.791666666666667
-  }
+  },
+  "proxy_running_seconds": 1126,
+  "proxy_runner_seconds": 1002.0,
+  "replicate_results_revision": "022ca2b1083ce6aca4ef11aac13930c029bca6db",
+  "estimated_seed17_total_usd": 3.1655555555555557
 }

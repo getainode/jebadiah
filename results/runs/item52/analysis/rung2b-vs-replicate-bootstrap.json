@@ -1,0 +1,53 @@
+{
+  "proxy": true,
+  "note": "Proxy, not a leaderboard score; conditional interval over this frozen proxy, not full-suite sampling uncertainty.",
+  "method": "paired percentile bootstrap of complete catalog_id/group_id units with replacement within benchmark/domain/track strata; official scorer recomputed for each draw",
+  "seed": 20261008,
+  "replicate_seed_rule": "seed + zero-based replicate index",
+  "replicates": 2000,
+  "manifest_sha256": "74d8162296f404a676624d87bf98abb920d46acff3c38be6a12504131bc43405",
+  "baseline": 46.97468441330149,
+  "candidate": 46.67517040087475,
+  "difference": -0.2995140124267408,
+  "difference_ci95": [
+    -1.7776363676262592,
+    0.9912870728662109
+  ],
+  "areas": {
+    "knowledge": {
+      "difference": -0.1092636691694544,
+      "difference_ci95": [
+        -3.0579155710387695,
+        2.5933861305800785
+      ]
+    },
+    "language": {
+      "difference": 5.71906310558451,
+      "difference_ci95": [
+        3.2374060073919697,
+        8.52162263574798
+      ]
+    },
+    "retrieval": {
+      "difference": -4.055550678545266,
+      "difference_ci95": [
+        -5.933884690725868,
+        -1.979783974613676
+      ]
+    },
+    "tools": {
+      "difference": -4.534929312147746,
+      "difference_ci95": [
+        -9.674276171493075,
+        -1.2663429266847062
+      ]
+    },
+    "arts": {
+      "difference": -1.086666666666673,
+      "difference_ci95": [
+        -3.8951249999999997,
+        1.6034166666666716
+      ]
+    }
+  }
+}

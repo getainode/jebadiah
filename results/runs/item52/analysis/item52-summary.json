@@ -1,0 +1,328 @@
+{
+  "control_run": true,
+  "proxy": true,
+  "private_only": true,
+  "comparisons": {
+    "replicate-vs-a3": {
+      "baseline": 46.97468441330149,
+      "candidate": 46.97468441330149,
+      "difference": 0.0,
+      "difference_ci95": [
+        0.0,
+        0.0
+      ],
+      "areas": {
+        "knowledge": {
+          "difference": 0.0,
+          "difference_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "language": {
+          "difference": 0.0,
+          "difference_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "retrieval": {
+          "difference": 0.0,
+          "difference_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "tools": {
+          "difference": 0.0,
+          "difference_ci95": [
+            0.0,
+            0.0
+          ]
+        },
+        "arts": {
+          "difference": 0.0,
+          "difference_ci95": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "rung1-vs-replicate": {
+      "baseline": 46.97468441330149,
+      "candidate": 46.091167791986884,
+      "difference": -0.8835166213146053,
+      "difference_ci95": [
+        -2.206653594352945,
+        0.38345258457706044
+      ],
+      "areas": {
+        "knowledge": {
+          "difference": -1.0711822981212862,
+          "difference_ci95": [
+            -3.7293580717185866,
+            1.8476616500769214
+          ]
+        },
+        "language": {
+          "difference": 2.4469494431217953,
+          "difference_ci95": [
+            0.024333180664966036,
+            4.914094753816142
+          ]
+        },
+        "retrieval": {
+          "difference": -1.6246685877536962,
+          "difference_ci95": [
+            -3.3402151248188767,
+            0.22188705663351596
+          ]
+        },
+        "tools": {
+          "difference": -4.241851851851848,
+          "difference_ci95": [
+            -9.423968289561603,
+            -0.9432483068890893
+          ]
+        },
+        "arts": {
+          "difference": -1.384999999999998,
+          "difference_ci95": [
+            -3.7600416666666576,
+            0.9102499999999952
+          ]
+        }
+      }
+    },
+    "rung2-vs-replicate": {
+      "baseline": 46.97468441330149,
+      "candidate": 45.95477972143606,
+      "difference": -1.0199046918654275,
+      "difference_ci95": [
+        -2.494359124400024,
+        0.27986300071173875
+      ],
+      "areas": {
+        "knowledge": {
+          "difference": -1.1435156314546155,
+          "difference_ci95": [
+            -4.44922398072608,
+            2.0689591882845146
+          ]
+        },
+        "language": {
+          "difference": 0.9291974420936668,
+          "difference_ci95": [
+            -1.4844750682031358,
+            3.3681880631084633
+          ]
+        },
+        "retrieval": {
+          "difference": 0.23441956972816058,
+          "difference_ci95": [
+            -1.9976692565640402,
+            2.450617110066271
+          ]
+        },
+        "tools": {
+          "difference": -6.01592592592592,
+          "difference_ci95": [
+            -10.656861111111112,
+            -3.1166666666666742
+          ]
+        },
+        "arts": {
+          "difference": 0.8816666666666677,
+          "difference_ci95": [
+            -1.7467500000000098,
+            3.450583333333326
+          ]
+        }
+      }
+    },
+    "rung2b-vs-replicate": {
+      "baseline": 46.97468441330149,
+      "candidate": 46.67517040087475,
+      "difference": -0.2995140124267408,
+      "difference_ci95": [
+        -1.7776363676262592,
+        0.9912870728662109
+      ],
+      "areas": {
+        "knowledge": {
+          "difference": -0.1092636691694544,
+          "difference_ci95": [
+            -3.0579155710387695,
+            2.5933861305800785
+          ]
+        },
+        "language": {
+          "difference": 5.71906310558451,
+          "difference_ci95": [
+            3.2374060073919697,
+            8.52162263574798
+          ]
+        },
+        "retrieval": {
+          "difference": -4.055550678545266,
+          "difference_ci95": [
+            -5.933884690725868,
+            -1.979783974613676
+          ]
+        },
+        "tools": {
+          "difference": -4.534929312147746,
+          "difference_ci95": [
+            -9.674276171493075,
+            -1.2663429266847062
+          ]
+        },
+        "arts": {
+          "difference": -1.086666666666673,
+          "difference_ci95": [
+            -3.8951249999999997,
+            1.6034166666666716
+          ]
+        }
+      }
+    }
+  },
+  "benchmarks": {
+    "CLadder": {
+      "a3": {
+        "raw": 0.658,
+        "skill": 0.316,
+        "coverage": 1.0,
+        "raw_metric": "accuracy"
+      },
+      "replicate": {
+        "raw": 0.658,
+        "skill": 0.316,
+        "coverage": 1.0,
+        "raw_metric": "accuracy"
+      },
+      "rung1": {
+        "raw": 0.64,
+        "skill": 0.28,
+        "coverage": 1.0,
+        "raw_metric": "accuracy"
+      },
+      "rung2": {
+        "raw": 0.644,
+        "skill": 0.288,
+        "coverage": 1.0,
+        "raw_metric": "accuracy"
+      },
+      "rung2b": {
+        "raw": 0.632,
+        "skill": 0.264,
+        "coverage": 1.0,
+        "raw_metric": "accuracy"
+      }
+    },
+    "CLINC150": {
+      "a3": {
+        "raw": 0.7681640964399585,
+        "skill": 0.7668,
+        "coverage": 1.0,
+        "raw_metric": "macro-F1"
+      },
+      "replicate": {
+        "raw": 0.7681640964399585,
+        "skill": 0.7668,
+        "coverage": 1.0,
+        "raw_metric": "macro-F1"
+      },
+      "rung1": {
+        "raw": 0.615337141844234,
+        "skill": 0.613,
+        "coverage": 1.0,
+        "raw_metric": "macro-F1"
+      },
+      "rung2": {
+        "raw": 0.6681843089395173,
+        "skill": 0.6662,
+        "coverage": 1.0,
+        "raw_metric": "macro-F1"
+      },
+      "rung2b": {
+        "raw": 0.5855833494323931,
+        "skill": 0.5831,
+        "coverage": 1.0,
+        "raw_metric": "macro-F1"
+      }
+    },
+    "POP909": {
+      "a3": {
+        "raw": 0.09788359788359788,
+        "skill": 0.0908,
+        "coverage": 1.0,
+        "raw_metric": "cluster macro accuracy"
+      },
+      "replicate": {
+        "raw": 0.09788359788359788,
+        "skill": 0.0908,
+        "coverage": 1.0,
+        "raw_metric": "cluster macro accuracy"
+      },
+      "rung1": {
+        "raw": 0.12433862433862433,
+        "skill": 0.1175,
+        "coverage": 1.0,
+        "raw_metric": "cluster macro accuracy"
+      },
+      "rung2": {
+        "raw": 0.0873015873015873,
+        "skill": 0.0802,
+        "coverage": 1.0,
+        "raw_metric": "cluster macro accuracy"
+      },
+      "rung2b": {
+        "raw": 0.06349206349206349,
+        "skill": 0.0562,
+        "coverage": 1.0,
+        "raw_metric": "cluster macro accuracy"
+      }
+    }
+  },
+  "areas": {
+    "a3": {
+      "knowledge": 31.64,
+      "language": 50.32,
+      "retrieval": 50.29,
+      "tools": 67.73,
+      "arts": 33.4
+    },
+    "replicate": {
+      "knowledge": 31.64,
+      "language": 50.32,
+      "retrieval": 50.29,
+      "tools": 67.73,
+      "arts": 33.4
+    },
+    "rung1": {
+      "knowledge": 30.570000000000004,
+      "language": 52.769999999999996,
+      "retrieval": 48.66,
+      "tools": 63.480000000000004,
+      "arts": 32.01
+    },
+    "rung2": {
+      "knowledge": 30.490000000000002,
+      "language": 51.24999999999999,
+      "retrieval": 50.519999999999996,
+      "tools": 61.71,
+      "arts": 34.28
+    },
+    "rung2b": {
+      "knowledge": 31.53,
+      "language": 56.04,
+      "retrieval": 46.23,
+      "tools": 63.190000000000005,
+      "arts": 32.31
+    }
+  },
+  "replicate_loses_tools_vs_a3": false,
+  "replicate_loses_clinc_vs_a3": false
+}

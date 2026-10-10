@@ -11,3 +11,15 @@ The frozen 11,079-row proxy reuses item51's exact runner snapshot 587f4f496b9cf1
 At $2.75/hour, hard limits of 135 training minutes and 35 proxy minutes cap total allocated compute at $7.7917 under the $8 cap. Item51 measured 3,279 seconds for training/export and 998.5 seconds inside the proxy runner, so estimated GPU duration is about 75 minutes including proxy setup, followed by CPU analysis. No extra GPU job is reserved. Large local artifacts stay in /Volumes/PRO-G40/scratch/item52 and are deleted after durable reports are uploaded. Live results pending.
 
 The lead extended ITEM 52 in message msg_76e46223b4db with an additional $8 for a second control changing seed 17 to 18 alone. The seed-17 repeat produced byte-identical served BF16 weights and refitted temperatures, so the second control measures sensitivity to a different training seed. The original pipeline hardcodes seed 17; a guarded patch changes exactly one byte in its config seed literal to 18 and records both source hashes. Every other original runtime byte and launcher argument is preserved apart from output routing. Seed-18 output and checkpoints stay private at frontier-infra/jebadiah-9b-v2-1-a3-seed18 and -checkpoints. Its separate 135-minute training and 35-minute proxy limits reserve $7.7917 under the additional $8 cap. The report will include both controls, seed-18 paired intervals and Tools/CLINC deltas, and rung comparisons against both A3 seeds. Pre-launch log is committed before seed-18 submission.
+
+The seed-17 control is complete: 46.97, exact paired difference 0.0 and 95% interval [0.0, 0.0] from 2,000 complete-group draws. All 11,079 scored answer maps are identical to original A3, with no failures. All four merged BF16 weight shards and the refitted choice/noul/score temperatures are byte-identical in value. The final adapter file SHA256 differs; the served merged model is identical. The control loses neither Tools nor CLINC.
+
+| Model | Proxy | Delta vs replicate | Paired 95% interval |
+|---|---:|---:|---|
+| Rung 1 | 46.09 | -0.88 | [-2.21, +0.38] |
+| Rung 2 | 45.95 | -1.02 | [-2.49, +0.28] |
+| Rung 2b | 46.68 | -0.30 | [-1.78, +0.99] |
+
+Deltas use unrounded scores. None of the rungs beats the replicate beyond the paired proxy noise. Seed-17 area skills are Knowledge 31.64, Language 50.32, Retrieval 50.29, Tools 67.73 and Arts 33.40, identical to A3. CLINC macro-F1 is 76.8164%, CLadder accuracy 65.80%, and POP909 cluster macro accuracy 9.7884%, all identical. Tools and CLINC losses for all three rungs remain when using the replicate baseline.
+
+Training/export took 3,018 job seconds (2,194.8 optimizer seconds); proxy took 1,126 job seconds (1,002 runner seconds). Estimated seed-17 compute is $3.1656 under the original $8 cap. Final installed dependencies match the original lock, including Triton 3.6.0 after the original setup sequence; the historical final freeze and driver were not retained. The proxy runner and inference hashes and Python/torch/transformers versions match original A3, while its host kernel differs. Seed-18 final results remain pending.

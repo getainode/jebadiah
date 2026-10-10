@@ -138,5 +138,21 @@
   },
   "intermediate_triton_override": "3.7.1",
   "observed_final_triton": "3.6.0",
-  "note": "The original launcher requests Triton 3.7.1, then installs causal-conv1d. The final replicate environment has 3.6.0, matching the original requirements lock; the historical final original freeze was not retained, so its final Triton version is unverified."
+  "note": "The original launcher requests Triton 3.7.1, then installs causal-conv1d. The final replicate environment has 3.6.0, matching the original requirements lock; the historical final original freeze was not retained, so its final Triton version is unverified.",
+  "proxy_comparison": {
+    "original_versions": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.17.0",
+      "python": "3.11.13"
+    },
+    "replicate_versions": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.17.0",
+      "python": "3.11.13"
+    },
+    "original_platform": "Linux-6.12.103-127.188.amzn2023.x86_64-x86_64-with-glibc2.35",
+    "replicate_platform": "Linux-6.12.100-125.179.amzn2023.x86_64-x86_64-with-glibc2.35",
+    "runner_sha256_identical": true,
+    "inference_code_sha256_identical": true
+  }
 }
