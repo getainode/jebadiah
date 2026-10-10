@@ -1,0 +1,19 @@
+{
+  "training_code_revision": "a0960e5c90ec6d24d376550628515114a70c9d95",
+  "original_runtime_commit": "86a8203d792463536eb009a4d8da6c8681ffdd99",
+  "data_revision": "1de4a087bf4aa8e7ffd2de99f0abefea7a7b2c80",
+  "hardware": "rtx-pro-6000",
+  "cap_usd": 20,
+  "reserved_allocation_usd": 19.020833333333336,
+  "seeds": {
+    "17": {
+      "training_job": "6ac9fd16095c5780893107cb",
+      "timeout_minutes": 150
+    },
+    "18": {
+      "training_job": "6ac9fd16fee2c90070185309",
+      "timeout_minutes": 150
+    }
+  },
+  "launch_method": "Authenticated Atlas HF CLI; connector validation does not support requested RTX PRO 6000"
+}
