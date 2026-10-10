@@ -1,5 +1,6 @@
 """Launch the paired causal diagnostic or strict export recovery within the $12 cap."""
 import argparse
+import json
 import os
 import re
 import shlex
@@ -11,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def command(stage, revision, code_revision, rung2_revision):
     script = ('scripts/item51_diagnostic.py ' + revision + ' ' + rung2_revision if stage == 'diagnostic' else
-              'scripts/item51_recover.py rung2b ' + revision + ' ' + __import__('json').loads((ROOT / 'configs/item51-rung2b.json').read_text())['dataset_revision'])
+              'scripts/item51_recover.py rung2b ' + revision + ' ' + json.loads((ROOT / 'configs/item51-rung2b.json').read_text())['dataset_revision'])
     setup=f'''set -euo pipefail
 apt-get update -qq >/dev/null 2>&1
 apt-get install -y -qq git build-essential >/dev/null 2>&1
@@ -39,7 +40,8 @@ if __name__=='__main__':
     p.add_argument('--dry-run',action='store_true')
     a=p.parse_args()
     code=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-    if not re.fullmatch('[0-9a-f]{40}',a.revision): p.error('Immutable revision required')
+    if not all(re.fullmatch('[0-9a-f]{40}', value) for value in (a.revision, a.rung2_revision)):
+        p.error('Immutable candidate and rung2 revisions required')
     cmd=command(a.stage,a.revision,code,a.rung2_revision)
     if a.dry_run: print(shlex.join(cmd))
     else:

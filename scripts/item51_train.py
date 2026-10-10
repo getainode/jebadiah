@@ -1,7 +1,7 @@
-"""Rung 2 experiment wrapper: pinned hash-only manifest and unchanged A3 temperatures.
+"""Rung 2b experiment wrapper: pinned hash-only manifest and unchanged A3 temperatures.
 
 The shared trainer, renderer, merge verifier and optimizer remain unchanged.
-The item49 manifest supplies hashes, so counts are independently validated here.
+The item51 manifest supplies hashes, so counts are independently validated here.
 """
 import json
 from pathlib import Path
