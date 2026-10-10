@@ -8,8 +8,10 @@ the run could not say which change hurt.
 
 1. **The baseline to beat is 9B v2: 44.67** on the frozen 10% Decision Index proxy
    (`eval/decision-index/proxy-0.3-10pct/`, manifest SHA256 `74d81622...3405`).
-   The current accepted private recipe is **A3: 46.97**; new rungs must beat A3
-   under rule 2, while v2 remains the comparison floor.
+   The 9B keep baseline is now the **two-seed A3 average: 46.82**
+   (seeds 17 and 18: 46.97 and 46.66). New rungs must beat that average
+   under rule 2, while v2 remains the comparison floor. Paired bootstrap draws
+   compare the candidate score with the mean of both A3 scores on the same draws.
 2. **One change per run**, measured against the current best recipe on that proxy, with the paired group
    bootstrap interval (`bootstrap.py`).
 3. **Keep a change only if it beats the baseline beyond the noise** (the 95% interval of the difference is above
@@ -20,6 +22,14 @@ the run could not say which change hurt.
 
 Constraints are not experiments. The source-level contamination rule and the license manifest always apply to
 anything we ship; a run that measures their cost is still a single-change run.
+
+ITEM 52: same-seed training reproduces bit-identical served BF16 weights and
+all proxy answers. Changing seed 17 to 18 moves the proxy -0.31, Tools -5.44,
+and CLINC -2.46 macro-F1 points. Adopted review policy treats Tools deltas within
+about 6 points as seed noise and CLINC losses beyond the observed 2.5-point
+spread as data regressions. These are operational allowances from two controls,
+not estimated variance or causal proof; HF-assigned driver/kernel differences
+are recorded in the report.
 
 ## Run log
 

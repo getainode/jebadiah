@@ -1,0 +1,19 @@
+{
+  "adopted_by": "lead follow-up msg_0950fb842655",
+  "keep_baseline": "two-seed A3 score average",
+  "seeds": [
+    17,
+    18
+  ],
+  "unrounded_seed_scores": [
+    46.97468441330149,
+    46.66413413267085
+  ],
+  "unrounded_average": 46.81940927298617,
+  "rounded_average": 46.82,
+  "bootstrap_rule": "candidate score minus mean of A3 seed17 and seed18 scores on each identical paired group draw",
+  "tools_operational_noise_allowance_points": 6,
+  "clinc_operational_seed_allowance_macro_f1_points": 2.5,
+  "causal_proof": false,
+  "note": "Review allowances from two controls with recorded driver/kernel differences, not estimated training variance."
+}

@@ -21,7 +21,7 @@ All area values are official chance-corrected skill points. Deltas and intervals
 | Rung 2 | -1.02 [-2.49, +0.28] | -0.71 [-2.34, +0.90] | below |
 | Rung 2b | -0.30 [-1.78, +0.99] | +0.01 [-1.22, +1.23] | within |
 
-The observed A3 two-seed range is [46.66, 46.97], width 0.31 points. It is a descriptive range from two seeds, not a training-variance confidence interval. The seed-17 repeat is not a third independent seed. No rung beats the accepted seed-17 A3 baseline beyond paired proxy noise.
+The observed A3 two-seed range is [46.66, 46.97], width 0.31 points. It is a descriptive range from two seeds, not a training-variance confidence interval. The seed-17 repeat is not a third independent seed. None of the reported rung comparisons beats either measured A3 seed beyond paired proxy noise; the lead subsequently adopted their average, 46.82, as the 9B keep baseline.
 
 | Area | Seed 18 minus seed 17 | Paired 95% interval |
 |---|---:|---|
@@ -48,7 +48,7 @@ Tools illustrates why the overall score hides seed sensitivity: seed 18 reproduc
 | Rung 2 | -0.58 [-6.70, +5.66] | -10.00 | -7.54 |
 | Rung 2b | +0.90 [-0.64, +2.54] | -18.26 | -15.80 |
 
-All rungs remain below both observed A3 seeds on CLINC, whose control range is [74.35, 76.82] macro-F1 percent. Their CLINC losses exceed this observed spread: -12.82, -7.54 and -15.80 percentage points against seed 18. The two-seed result therefore weakens attribution of Tools loss to the added data, while it does not explain away the much larger CLINC losses. No rung satisfies the unchanged keep rule against accepted A3.
+All rungs remain below both observed A3 seeds on CLINC, whose control range is [74.35, 76.82] macro-F1 percent. Their CLINC losses exceed this observed spread: -12.82, -7.54 and -15.80 percentage points against seed 18. The two-seed result therefore weakens attribution of Tools loss to the added data, while it does not explain away the much larger CLINC losses. The lead adopted the two-seed average as the subsequent 9B keep baseline, with about 6 Tools points and 2.5 CLINC macro-F1 points as operational review allowances. Two runs do not establish causal effects.
 
 Seed 18's Tools delta is -5.44 skill points and its CLINC delta is -2.46 macro-F1 percentage points. CLINC150+OOS has 550 requests, CLadder 500, and POP909 200. POP909 uses the official cluster macro accuracy for its index raw value. Both controls have all 11,079 proxy requests successful and zero whole-case failures.
 

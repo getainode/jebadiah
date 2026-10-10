@@ -15,9 +15,10 @@
     "Installed packages identical across controls; host differences reported",
     "Report regenerates deterministically from durable artifacts",
     "Each approved control below its separate8USD cap",
-    "Scripts compile and whitespace check passes"
+    "Scripts compile and whitespace check passes",
+    "Lead-requested two-seed average baseline policy recorded"
   ],
-  "report_sha256": "c7c7ba4c02904e81494bde01c3ccc681f45077a43a42929d6a0d5fa4d58ea203",
+  "report_sha256": "4b618b426bf3c612c2c875e4633f39b159993fac72c85d413f709130462b9a0e",
   "comparisons": 8,
   "gpu_jobs": 4,
   "new_gpu_rung_inference": false,
