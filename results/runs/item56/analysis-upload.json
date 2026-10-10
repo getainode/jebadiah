@@ -1,0 +1,23 @@
+{
+  "repository": "jbrashear/jebadiah-9b-v2-1-index-results",
+  "private": true,
+  "revision": "320506197e65a3efeb550d5e91e18de5487a715a",
+  "folder": "analysis/item56-probe-b",
+  "files": {
+    "a3-s17/benchmark-summary.json": "a036266e52a42fda5efb1185fbfced10b248c70e8bd2cd2c3e91bc708f73badd",
+    "a3-s17/index.json": "018ab7a111a49cef724f6c725832d5c7955b334fc1dc8aad77fdbc61941849bc",
+    "a3-s17/scores.json": "de71a263902a1d441a7817bff39b738bbf68902d01286835a64d2252f77c431a",
+    "a3-s18/benchmark-summary.json": "0bfbc7d20c793afe5e552b6e63bf9244ac4a51c30b3451998c980f4ece8c9bf3",
+    "a3-s18/index.json": "495d272ea2b227b21cf75d9a6884ee4c549afe7f40591dea2a158b44392c2238",
+    "a3-s18/scores.json": "6fe75213d4cbb4fe48580a462fdc240d1e66defeb77a676f46b2d71baee8a136",
+    "item56-bootstrap-draws.json": "e1344d6a62a0a5e2617a9775f8398d822c1b6ff8930c05ca6cd5de2c57cc99fe",
+    "item56-summary.json": "e82944114ca39ea9c5b69be21274ab84f695cc725bacec4395a2c1c8d2eb7cbf",
+    "probe-s17/benchmark-summary.json": "159f39067f0448f7a912605680ec3bcd314635b2edb6ff3c38511015c98f4c00",
+    "probe-s17/index.json": "a7259adcc1caa299ddca797683b7e8d38f0ae604df20ec5a15e7e3bf3c5f18c0",
+    "probe-s17/scores.json": "468d4bb99fea925bd2e33f9fba8dd1bc928a3342c9922b26f0752e4324187210",
+    "probe-s18/benchmark-summary.json": "3f115030858a9e9af4a83324a77e8916c9bbf1fd21c65869b42c9bbfc6086ad8",
+    "probe-s18/index.json": "dad3adf4e012a1ba69da0b0984b65a54d16a22382334a629fbdde0b071a2bf2d",
+    "probe-s18/scores.json": "10160b761021e53967acb928554518e99191419d6fe36b8ce1d157d75106f0be"
+  },
+  "downloaded_hashes_reverified": true
+}
