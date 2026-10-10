@@ -1,0 +1,36 @@
+{
+  "checkpoint_revision": "82573459086fde451b30bf8c63ba8866d4cd3c52",
+  "checkpoint_step": 500,
+  "all_recipe_fields_match_original_checkpoint": true,
+  "ignored_routing_fields": [
+    "base_model",
+    "checkpoint_repo",
+    "dataset_path",
+    "eval_dataset_path",
+    "output_dir"
+  ],
+  "differences": {
+    "base_model": {
+      "original": "/workspace/item32-a3/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "replicate": "/workspace/item52-a3-rep1/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a"
+    },
+    "checkpoint_repo": {
+      "original": "frontier-infra/jebadiah-9b-v2-1-a3-checkpoints",
+      "replicate": "frontier-infra/jebadiah-9b-v2-1-a3-rep1-checkpoints"
+    },
+    "dataset_path": {
+      "original": "/workspace/item32-a3/hf/hub/datasets--frontier-infra--jebadiah-data-v2-1-item32/snapshots/bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed/a3/train.jsonl",
+      "replicate": "/workspace/item52-a3-rep1/hf/hub/datasets--frontier-infra--jebadiah-data-v2-1-item32/snapshots/bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed/a3/train.jsonl"
+    },
+    "output_dir": {
+      "original": "/workspace/item32-a3/runs/9b",
+      "replicate": "/workspace/item52-a3-rep1/runs/9b"
+    },
+    "eval_dataset_path": {
+      "original": "/workspace/item32-a3/hf/hub/datasets--frontier-infra--jebadiah-data-v2-1-item32/snapshots/bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed/a3/calib.jsonl",
+      "replicate": "/workspace/item52-a3-rep1/hf/hub/datasets--frontier-infra--jebadiah-data-v2-1-item32/snapshots/bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed/a3/calib.jsonl"
+    }
+  },
+  "backbone_autocast": false,
+  "optimizer_target_steps": 2649
+}

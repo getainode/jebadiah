@@ -1,0 +1,15 @@
+{
+  "original": {
+    "checkpoints/checkpoint-2649/adapter_model.safetensors": {
+      "size": 173181072,
+      "sha256": "101cec2ee0c997211f0467eada2b5f270a229edc0975697d8a16ecb37ff1cbf6"
+    }
+  },
+  "replicate": {
+    "checkpoints/checkpoint-2649/adapter_model.safetensors": {
+      "size": 173181072,
+      "sha256": "d866805b5c1314c0c60bf331a7e8fce9920aad37cb9514f19888ac6fa90af142"
+    }
+  },
+  "byte_identical_final_adapter": false
+}

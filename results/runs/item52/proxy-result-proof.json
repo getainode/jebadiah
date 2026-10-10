@@ -1,0 +1,19 @@
+{
+  "results_revision": "022ca2b1083ce6aca4ef11aac13930c029bca6db",
+  "run_name": "jebadiah-9b-v2-1-a3-rep1-f1e2f66d-proxy-0.3-10pct",
+  "rows": 11079,
+  "all_ok": true,
+  "differing_complete_responses": 11079,
+  "all_complete_responses_identical": false,
+  "headline": 46.97,
+  "areas": {
+    "knowledge": 31.64,
+    "language": 50.32,
+    "retrieval": 50.29,
+    "tools": 67.73,
+    "arts": 33.4
+  },
+  "differing_scored_answer_maps": 0,
+  "all_scored_answer_maps_identical": true,
+  "note": "Complete response objects include model identity metadata; only the answers map is scored."
+}

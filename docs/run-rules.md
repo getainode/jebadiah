@@ -8,8 +8,10 @@ the run could not say which change hurt.
 
 1. **The baseline to beat is 9B v2: 44.67** on the frozen 10% Decision Index proxy
    (`eval/decision-index/proxy-0.3-10pct/`, manifest SHA256 `74d81622...3405`).
-   The current accepted private recipe is **A3: 46.97**; new rungs must beat A3
-   under rule 2, while v2 remains the comparison floor.
+   The 9B keep baseline is now the **two-seed A3 average: 46.82**
+   (seeds 17 and 18: 46.97 and 46.66). New rungs must beat that average
+   under rule 2, while v2 remains the comparison floor. Paired bootstrap draws
+   compare the candidate score with the mean of both A3 scores on the same draws.
 2. **One change per run**, measured against the current best recipe on that proxy, with the paired group
    bootstrap interval (`bootstrap.py`).
 3. **Keep a change only if it beats the baseline beyond the noise** (the 95% interval of the difference is above
@@ -20,6 +22,14 @@ the run could not say which change hurt.
 
 Constraints are not experiments. The source-level contamination rule and the license manifest always apply to
 anything we ship; a run that measures their cost is still a single-change run.
+
+ITEM 52: same-seed training reproduces bit-identical served BF16 weights and
+all proxy answers. Changing seed 17 to 18 moves the proxy -0.31, Tools -5.44,
+and CLINC -2.46 macro-F1 points. Adopted review policy treats Tools deltas within
+about 6 points as seed noise and CLINC losses beyond the observed 2.5-point
+spread as data regressions. These are operational allowances from two controls,
+not estimated variance or causal proof; HF-assigned driver/kernel differences
+are recorded in the report.
 
 ## Run log
 
@@ -32,6 +42,8 @@ anything we ship; a run that measures their cost is still a single-change run.
 | ITEM 47 rung 1 data preparation | A3 (46.97) | replace 1,000 matched language choice/noul slots with owned 2 to 4 document proof joins and minimal fact flips; total 21,190 presentations and original 512-question calibration unchanged | frozen-proxy paired whole-group bootstrap 95% interval vs A3 entirely above zero, score above 44.67, and separate held-out rule-family diagnostic improves; otherwise drop | CPU-only data PR; 6,000 train candidates plus 300 diagnostic, render checks passed; full-suite Studio scan and final composition pending; no training launched |
 | ITEM 49 rung 2 data preparation | A3 (46.97) | replace 1,000 matched knowledge choice/noul slots with unused original-train Corr2Cause graph families; aggregate source cap 2,119, total 21,190 presentations and original 512-question calibration unchanged | frozen-proxy paired whole-group bootstrap 95% interval vs A3 entirely above zero, score above 44.67, and separate graph-disjoint causal diagnostic improves; otherwise drop | Studio CPU-only data PR; 6,000 train candidates plus 300 diagnostic, 9,450 renders without truncation; full-release and converted-text Studio scans and final composition pending; no training launched |
 | Rung 2b (item51) | A3 (46.97) | append the exact 1,000 scanned rung2 Corr2Cause questions to unchanged A3 train; 22,190 presentations and 2,774 optimizer steps, original calibration bytes and all recipe settings unchanged | frozen-proxy paired whole-group bootstrap 95% interval vs A3 entirely above zero and score above 44.67; inspect Tools, five areas, CLadder, CLINC and causal diagnostic vs A3 and rung2 | 46.68; vs A3 -0.30, CI [-1.78, +0.99]; vs rung2 +0.72, CI [-0.95, +2.35]; drop; Tools -4.53; CLadder 63.20%; CLINC 58.56%; estimated $3.9050 |
+| A3 replicate 1 (ITEM 52 control) | A3 (46.97) | zero changes: retrain byte-identical a3/ at bb4ce7b with original runtime commit 86a8203, same parent, seed 17, recipe and flags; measure repeatability | control only, no candidate keep decision; report paired 95% interval vs A3 and recompare existing rungs against replicate; merge gate 0.05 unchanged | 46.97; delta 0.00, CI [0.00, 0.00]; all served BF16 shards, temperatures and 11,079 scored answers reproduce A3; Tools/CLINC unchanged; rungs vs replicate: 1 -0.88 [-2.21, +0.38], 2 -1.02 [-2.49, +0.28], 2b -0.30 [-1.78, +0.99]; estimated $3.1656; seed-18 extension pending |
+| A3 seed 18 (ITEM 52 control) | A3 seed 17 (46.97) | seed 17 to 18 only; same byte-identical a3/ data, parent, original runtime and recipe; measure A3 seed spread after seed-17 exported weights reproduced exactly | control only, no candidate keep decision; report paired interval, Tools/CLINC and rung comparisons against the two-seed spread; merge gate 0.05 unchanged | 46.66; vs A3 -0.31 [-1.77, +1.06]; Tools -5.44 [-10.70, -1.85], CLINC -2.46 macro-F1 points; rungs vs seed18: 1 -0.57 [-1.56, +0.61], 2 -0.71 [-2.34, +0.90], 2b +0.01 [-1.22, +1.23]; Tools seed sensitivity observed, larger rung CLINC losses persist; driver/kernel differences recorded; estimated $3.1717 under separately approved $8; private control, no candidate promotion |
 | N2 data preparation | A3 (46.97) | replace floor(10% of choice slots) with item43 owned 32/64/128/255-option taxonomy match/no-match tasks; all other recipe fields and calibration unchanged | overall and Retrieval paired 95% intervals vs A3 above zero, score above 44.67 | data-only PR; CPU render checks passed; full-suite Studio scan pending; no training launched |
 | N3 | A3 (46.97) | rank 16 to 64, alpha 32 to 128, fixed alpha/rank 2; identical data and recipe | frozen-proxy paired 95% interval vs A3 above zero | 42.29; vs A3 -4.68, CI [-6.25, -3.12]; vs v2 -2.38, CI [-4.19, -0.60]; drop; estimated $3.2351 |
 | R3 | A3 (46.97) | add deterministically regenerated item33 4,050 skill train questions; 450 diagnostic holdout questions; preserve original calibration and recipe | frozen-proxy paired 95% interval vs A3 above zero | 46.91; vs A3 -0.06, CI [-1.26, +1.08]; vs v2 +2.24, CI [+0.74, +3.73]; drop; initial merge gate failed (0.08355), lead msg_c4892b870ed6 allowed private proxy; unchanged recovery gate passed (0.02915); estimated $3.9585 including failed stage and recovery |

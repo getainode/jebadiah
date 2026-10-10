@@ -1,0 +1,49 @@
+{
+  "training_job": "6ac99854095c57808930c4bf",
+  "training_code_revision": "e656e8a430ce038e963517942929b5e08833ac7e",
+  "original_runtime_commit": "86a8203d792463536eb009a4d8da6c8681ffdd99",
+  "existing_results_revision": "b9aadd6cf73e6317afc7491b2e0796426fb9ed50",
+  "suite_revision": "e57106b5e0698e74bd1a88b3b4c19b94a0dc8328",
+  "caps_minutes": {
+    "training": 135,
+    "proxy": 35
+  },
+  "allocation_ceiling_usd": 7.791666666666667,
+  "pr": "https://github.com/getainode/jebadiah/pull/29",
+  "model_revision": "f1e2f66d3e2dce25596a9fc1b9d13fbfa72003da",
+  "checkpoint_revision": "1a7a0ee543f1a8c82103f3d5c3d0f36dd60c8a74",
+  "training_running_seconds": 3018,
+  "estimated_training_usd": 2.305416666666667,
+  "proxy_job": "6ac9a47c095c57808930cd1f",
+  "proxy_launcher_code_revision": "f132986f3b5dd44616e23f31b189c9c14e2c0e5c",
+  "optimizer_runtime_seconds": 2194.8,
+  "original_optimizer_runtime_seconds": 2191.4,
+  "original_and_replicate_truncated_prompts": 36,
+  "seed18": {
+    "training_job": "6ac9a555095c57808930cd95",
+    "training_code_revision": "c6a078945692bac4af0980845f598c5774442bd0",
+    "seed": 18,
+    "approval_message": "msg_76e46223b4db",
+    "additional_cap_usd": 8,
+    "caps_minutes": {
+      "training": 135,
+      "proxy": 35
+    },
+    "allocation_ceiling_usd": 7.791666666666667,
+    "model_revision": "2899e9d4c785ba0f845245c66c9c4e740efeeab9",
+    "checkpoint_revision": "83db063a25e32b264f6152f44f85597e0ded73b5",
+    "training_running_seconds": 3028,
+    "estimated_training_usd": 2.3130555555555556,
+    "optimizer_runtime_seconds": 2196.8,
+    "proxy_job": "6ac9b17c095c57808930d46f",
+    "proxy_launcher_code_revision": "c29da7b98b668ccb44cc0592f157e1398da885aa",
+    "proxy_running_seconds": 1124,
+    "proxy_runner_seconds": 1001.3,
+    "results_revision": "672f3419abb7ab39a6b97ef8b042439640e90041",
+    "estimated_total_usd": 3.171666666666667
+  },
+  "proxy_running_seconds": 1126,
+  "proxy_runner_seconds": 1002.0,
+  "replicate_results_revision": "022ca2b1083ce6aca4ef11aac13930c029bca6db",
+  "estimated_seed17_total_usd": 3.1655555555555557
+}

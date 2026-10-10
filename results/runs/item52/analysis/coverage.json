@@ -1,0 +1,38 @@
+{
+  "a3": {
+    "rows": 11079,
+    "unique_ids": 11079,
+    "all_ok": true,
+    "payload_hashes_match_frozen_suite": true
+  },
+  "replicate": {
+    "rows": 11079,
+    "unique_ids": 11079,
+    "all_ok": true,
+    "payload_hashes_match_frozen_suite": true
+  },
+  "rung1": {
+    "rows": 11079,
+    "unique_ids": 11079,
+    "all_ok": true,
+    "payload_hashes_match_frozen_suite": true
+  },
+  "rung2": {
+    "rows": 11079,
+    "unique_ids": 11079,
+    "all_ok": true,
+    "payload_hashes_match_frozen_suite": true
+  },
+  "rung2b": {
+    "rows": 11079,
+    "unique_ids": 11079,
+    "all_ok": true,
+    "payload_hashes_match_frozen_suite": true
+  },
+  "seed18": {
+    "rows": 11079,
+    "unique_ids": 11079,
+    "all_ok": true,
+    "payload_hashes_match_frozen_suite": true
+  }
+}

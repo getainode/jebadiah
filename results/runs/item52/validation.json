@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "hardware": "Mac Studio plus authorized HF Jobs RTX PRO 6000",
+  "checks": [
+    "Pinned A3 train/calibration byte hashes and original parent verified",
+    "43 original launcher arguments bound, output routes only changed",
+    "Original runtime commit reused; seed18 guarded one-byte patch verified live",
+    "Checkpoint500 and final2649 recipe comparisons passed",
+    "Both full epochs complete and all four HF jobs completed",
+    "Unchanged 0.05 gates passed with zero confident flips",
+    "All four model/checkpoint repositories private",
+    "Frozen payload SHA256s and exact11079 successful coverage verified for six result files",
+    "Eight official paired2000-draw whole-group comparisons complete",
+    "Seed17 served weights and scored answers exactly reproduce original",
+    "Installed packages identical across controls; host differences reported",
+    "Report regenerates deterministically from durable artifacts",
+    "Each approved control below its separate8USD cap",
+    "Scripts compile and whitespace check passes",
+    "Lead-requested two-seed average baseline policy recorded"
+  ],
+  "report_sha256": "4b618b426bf3c612c2c875e4633f39b159993fac72c85d413f709130462b9a0e",
+  "comparisons": 8,
+  "gpu_jobs": 4,
+  "new_gpu_rung_inference": false,
+  "github_hosted_ci": false,
+  "needs_lead_merge": true
+}

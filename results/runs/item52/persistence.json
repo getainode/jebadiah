@@ -1,0 +1,10 @@
+{
+  "repo": "jbrashear/jebadiah-9b-v2-1-index-results",
+  "private": true,
+  "evidence_revision": "ffbdd8aeed9f81c0e6d38448afde62ac0670f5c6",
+  "report_revision": "f4cfd5f2afc7ca6fd9741635ecba20202491ce29",
+  "latest_revision": "ffbdd8aeed9f81c0e6d38448afde62ac0670f5c6",
+  "evidence_path": "analysis/item52-controls/evidence",
+  "report_path": "analysis/item52-controls/item52-report.md",
+  "report_sha256": "4b618b426bf3c612c2c875e4633f39b159993fac72c85d413f709130462b9a0e"
+}

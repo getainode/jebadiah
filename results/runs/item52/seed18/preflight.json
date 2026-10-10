@@ -1,0 +1,38 @@
+{
+  "lead_approval_message": "msg_76e46223b4db",
+  "additional_cap_usd": 8,
+  "allocation_ceiling_usd": 7.791666666666667,
+  "seed": 18,
+  "original_seed": 17,
+  "changed_runtime_bytes": 1,
+  "original_pipeline_sha256": "a1a728024bd35ca8c0680262a5123aee7c97fc0c5339b82d5f82d143b87563b6",
+  "seed18_pipeline_sha256": "d6c24c18fe5c64272c648800f64f946847521eff052d75da05331faa912066d0",
+  "launcher_arguments": 43,
+  "launcher_differences": [
+    {
+      "flag": "--model-repo",
+      "original": "frontier-infra/jebadiah-9b-v2-1-a3",
+      "seed18": "frontier-infra/jebadiah-9b-v2-1-a3-seed18"
+    },
+    {
+      "flag": "--checkpoint-repo",
+      "original": "frontier-infra/jebadiah-9b-v2-1-a3-checkpoints",
+      "seed18": "frontier-infra/jebadiah-9b-v2-1-a3-seed18-checkpoints"
+    }
+  ],
+  "data_hashes": {
+    "train.jsonl": {
+      "sha256": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+      "bytes": 28316267,
+      "rows": 16622,
+      "questions": 21190
+    },
+    "calib.jsonl": {
+      "sha256": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+      "bytes": 787633,
+      "rows": 280,
+      "questions": 512
+    }
+  },
+  "private_model_repo": "frontier-infra/jebadiah-9b-v2-1-a3-seed18"
+}

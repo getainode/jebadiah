@@ -1,0 +1,18 @@
+{
+  "scratch_path": "/Volumes/PRO-G40/scratch/item52",
+  "deleted": true,
+  "bytes_removed": 146272225,
+  "removed": [
+    "HF dataset cache/downloads",
+    "A3 train/calibration copies",
+    "frozen suite copies",
+    "existing rung results and both control result downloads",
+    "Decision Index source kit",
+    "CPU analysis working files and logs",
+    "temporary report and PR body files"
+  ],
+  "local_merged_models_downloaded": false,
+  "all_gpu_jobs_completed": true,
+  "durable_report_verified": true,
+  "durable_eight_comparisons_verified": true
+}

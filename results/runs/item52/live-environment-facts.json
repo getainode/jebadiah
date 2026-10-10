@@ -1,0 +1,15 @@
+{
+  "python": "3.12.11",
+  "platform": "Linux-6.12.100-125.179.amzn2023.x86_64-x86_64-with-glibc2.35",
+  "torch": "2.11.0+cu128",
+  "cuda_runtime": "12.8",
+  "cudnn": 91900,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "capability": [
+    12,
+    0
+  ],
+  "driver": "580.178.04",
+  "nvcc": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Fri_Feb_21_20:23:50_PST_2025\nCuda compilation tools, release 12.8, V12.8.93\nBuild cuda_12.8.r12.8/compiler.35583870_0",
+  "original_runtime_commit": "86a8203d792463536eb009a4d8da6c8681ffdd99"
+}
