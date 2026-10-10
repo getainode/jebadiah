@@ -1,0 +1,15 @@
+{
+  "revision": "587f4f496b9cf1d83f0bc8e495379496f65afa2f",
+  "sha256": {
+    "code/indexrun-job.sh": "1f09bbaf9a36c974805eb142f934d4df2bc85d49cf4d05e47643623903137280",
+    "code/decision-index-src.tar.gz": "8de37c5c638c728050f0c6bfdd9408addd6816af79337c3eff44ebe2b1d580e0",
+    "code/proxy/run.py": "54491ec0f24c9fefc31e5dcb3deda263cec54ac62e8fa08531c2705296cf48f0",
+    "code/proxy/run-ids.txt": "74d8162296f404a676624d87bf98abb920d46acff3c38be6a12504131bc43405",
+    "code/proxy/run-ids.sha256": "6068e134c901286af8395252bcd41d329b7b76c1342244fdb0b46a783db10e16",
+    "code/proxy/manifest.json": "5f6cbef2acad5cf1b0c3750362a699b9d566a05bdd6728b92dda1dd00930d056",
+    "code/proxy/sample.py": "a939b60f114ab65014b497c7de7fc00de13049921e01344af589edeb5645c4e0",
+    "code/proxy/score.py": "2751b589ff8b5e0bbbfbf718d48adabce2d8ea31c1cff5c042d8b164d703c21c",
+    "code/engine/mps_delta.py": "78cf21dfa40def690c0314fdeaffb369e67eaa4984ec3804417127c0ac8bce8e",
+    "code/engine/jebadiah_engine.py": "e7b7f48ece6c7a4d6b6eaafec4bec15327120fdb86e448de83f1ed9f26806ffa"
+  }
+}

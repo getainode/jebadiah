@@ -8,5 +8,6 @@
     "training": 135,
     "proxy": 35
   },
-  "allocation_ceiling_usd": 7.791666666666667
+  "allocation_ceiling_usd": 7.791666666666667,
+  "pr": "https://github.com/getainode/jebadiah/pull/29"
 }
