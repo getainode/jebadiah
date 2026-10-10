@@ -17,6 +17,10 @@ if __name__ == '__main__':
             api.upload_file(repo_id=args.repo, path_or_fileobj=path,
                             path_in_repo='item51-initial/' + relative,
                             commit_message='Preserve initial training and merge gate evidence')
+            if relative == 'merged/NOTICE-Corr2Cause.txt':
+                api.upload_file(repo_id=args.repo, path_or_fileobj=path,
+                                path_in_repo='NOTICE-Corr2Cause.txt',
+                                commit_message='Preserve Corr2Cause attribution with checkpoints')
     log = Path('/workspace/item51-train.log')
     if log.exists():
         api.upload_file(repo_id=args.repo, path_or_fileobj=log,

@@ -1,0 +1,50 @@
+{
+  "target_modules": "all-linear",
+  "lora_modules": [
+    "down_proj",
+    "gate_proj",
+    "in_proj_a",
+    "in_proj_b",
+    "in_proj_qkv",
+    "in_proj_z",
+    "k_proj",
+    "o_proj",
+    "out_proj",
+    "q_proj",
+    "up_proj",
+    "v_proj"
+  ],
+  "trainable_params": 43278336,
+  "prompt_source_commit": "e5c089386e0239c9eb270eeb490d181722b8da5b",
+  "prompt_source_sha256": "d2660ebec28bd3f1704235bda88d24a397c1c62475e740519cb8ef2d08f25fdd",
+  "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "single_token_labels": 68,
+  "chat_template_kwargs": {
+    "add_generation_prompt": true,
+    "enable_thinking": false,
+    "thinking": false
+  },
+  "train_examples": 22190,
+  "calib_examples": 512,
+  "truncated_prompts": 36,
+  "steps": 2774,
+  "wall_clock_s": 2479.7,
+  "load_s": 4.6,
+  "peak_memory_allocated_gb": 64.81,
+  "final_calib": {
+    "calib_accuracy": 0.8491620111731844,
+    "calib_nll": 0.4444555443600733,
+    "calib_accuracy_choice": 0.875,
+    "calib_nll_choice": 0.43150316391607374,
+    "calib_accuracy_noul": 0.8541666666666666,
+    "calib_nll_noul": 0.32818262952421606,
+    "calib_accuracy_score": 0.8208955223880597,
+    "calib_nll_score": 0.5401279661591346
+  },
+  "hardware": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "torch": "2.11.0+cu128",
+  "adapter_dir": "/workspace/item51-rung2b/runs/9b/adapter",
+  "fp32_candidate_logits": true,
+  "score_targets": "ordinal",
+  "score_ordinal_adjacent": 0.2
+}

@@ -1,0 +1,38 @@
+{
+  "jobs": [
+    {
+      "name": "training",
+      "id": "6ac98474095c57808930bb39",
+      "status": "COMPLETED",
+      "started_at": "2026-10-10 00:19:04.861000+00:00",
+      "finished_at": "2026-10-10 01:13:44.334000+00:00",
+      "running_seconds": 3279,
+      "estimated_usd": 2.5047916666666667
+    },
+    {
+      "name": "proxy",
+      "id": "6ac9919d095c57808930c117",
+      "status": "COMPLETED",
+      "started_at": "2026-10-10 01:15:14.404000+00:00",
+      "finished_at": "2026-10-10 01:33:57.614000+00:00",
+      "running_seconds": 1123,
+      "estimated_usd": 0.8578472222222222
+    },
+    {
+      "name": "diagnostic",
+      "id": "6ac9919d095c57808930c116",
+      "status": "COMPLETED",
+      "started_at": "2026-10-10 01:15:14.475000+00:00",
+      "finished_at": "2026-10-10 01:27:04.727000+00:00",
+      "running_seconds": 710,
+      "estimated_usd": 0.5423611111111111
+    }
+  ],
+  "estimated_total_usd": 3.9050000000000002,
+  "rate_usd_hour": 2.75,
+  "cap_usd": 12,
+  "allocation_ceiling_usd": 11.6875,
+  "recovery_launched": false,
+  "retries": 0,
+  "billing": "Estimate from running seconds, not an invoice"
+}
