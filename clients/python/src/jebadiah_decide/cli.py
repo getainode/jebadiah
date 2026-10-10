@@ -24,7 +24,7 @@ def _common(p: argparse.ArgumentParser):
     p.add_argument("--backend", default="ollama", choices=BACKEND_CHOICES,
                    help="the runtime Jeb runs in (default: ollama)")
     p.add_argument("--size", default=defaults.DEFAULT_SIZE, choices=list(defaults.SIZES),
-                   help="Jebadiah 4B v2, 9B v2 or 27B (default: 9b)")
+                   help="Jebadiah 4B v2, 9B v2.1 or 27B v2.1 (default: 9b)")
     p.add_argument("--url", help="the runtime's base URL (default: its usual local address)")
     p.add_argument("--model", help="override the model name the runtime knows (Ollama tag, LM Studio identifier, "
                                    "vLLM served name, AINode model id, MLX repo or folder)")

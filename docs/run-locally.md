@@ -34,6 +34,8 @@ Everything below needs Python 3.10 or newer for the `jeb` command:
 pip install jebadiah-decide
 ```
 
+Version 0.3.0 defaults to Jeb v2.1 for 9B and 27B; 4B remains v2.
+
 It installs `tokenizers`, `jinja2` and `huggingface-hub`. No torch, no transformers.
 
 ---
@@ -51,10 +53,10 @@ It installs `tokenizers`, `jinja2` and `huggingface-hub`. No torch, no transform
 jeb serve
 ```
 
-The first time, this pulls `hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0` into Ollama (9.8 GB), then:
+The first time, this pulls `hf.co/frontier-infra/jebadiah-9b-v2-1-GGUF:Q8_0` into Ollama (9.8 GB), then:
 
 ```
-Jeb is up: ollama (hf.co/frontier-infra/jebadiah-9b-v2-GGUF:Q8_0), temperatures on, up to 20 options per question.
+Jeb is up: ollama (hf.co/frontier-infra/jebadiah-9b-v2-1-GGUF:Q8_0), temperatures on, up to 20 options per question.
   POST http://localhost:8100/v1/systemone   (Jev wire: JDE's default judge, TypeSafe clients)
   POST http://localhost:8100/v1/decide      (AINode's decide shape)
   GET  http://localhost:8100/health
@@ -73,12 +75,12 @@ curl -s localhost:8100/v1/systemone -H 'Content-Type: application/json' -d '{
 ```
 
 ```json
-{"answers": {"route": {"type": "choice", "choice": "billing", "confidence": 0.461713,
-  "probabilities": {"billing": 0.641142, "support": 0.036095, "sales": 0.322763}}}, ...}
+{"answers": {"route": {"type": "choice", "choice": "billing", "confidence": 0.348987,
+  "probabilities": {"billing": 0.565991, "support": 0.022795, "sales": 0.411213}}}, ...}
 ```
 
-Those are the exact numbers llama-server gives on the same file. If you want a check with a verdict,
-`jeb doctor` runs the same example and tells you what's wrong if anything is.
+Those are the published v2.1 Q8_0 reference probabilities; runtime rounding can differ slightly.
+If you want a check with a verdict, `jeb doctor` runs the same example and tells you what's wrong if anything is.
 
 **5. Point JDE at it** (or skip to [Integrate it](#integrate-it)). See [Use it from JDE](#use-it-from-jde).
 
@@ -94,10 +96,10 @@ Ollama gotchas:
 ## LM Studio
 
 **1. Install [LM Studio](https://lmstudio.ai)** (0.4 or newer). Open **Discover**, search for
-`jebadiah-9b-v2`, and download the **Q8_0** from `frontier-infra/jebadiah-9b-v2-GGUF`.
+`jebadiah-9b-v2-1`, and download the **Q8_0** from `frontier-infra/jebadiah-9b-v2-1-GGUF`.
 
 **2. Load it and start the server.** Open the **Developer** tab, switch the server on, click **Select a model
-to load** and pick Jebadiah. (Or in a terminal: `lms server start`, then `lms load jebadiah-9b-v2`.)
+to load** and pick Jebadiah. (Or in a terminal: `lms server start`, then `lms load jebadiah-9b-v2-1`.)
 
 **3. Install `jeb`** with the pip command above, then:
 
@@ -109,8 +111,8 @@ It finds the loaded Jebadiah on its own. If there isn't one, it tells you exactl
 **Require Authentication** is on in LM Studio's server settings, create a token under **Manage Tokens** and
 pass it: `jeb serve --backend lmstudio --api-key <token>`.
 
-**4. First decision:** the same curl as the [Ollama path](#ollama), step 4. Expect billing 0.64114,
-support 0.036056, sales 0.322804.
+**4. First decision:** the same curl as the [Ollama path](#ollama), step 4. Expect approximately billing 0.5660,
+support 0.0228, sales 0.4112.
 
 **5. Point JDE at it:** see [Use it from JDE](#use-it-from-jde).
 
@@ -129,8 +131,8 @@ LM Studio gotchas:
 doesn't use.
 
 ```bash
-vllm serve frontier-infra/jebadiah-9b-v2 --max-model-len 4096 --language-model-only \
-  --served-model-name frontier-infra/jebadiah-9b-v2
+vllm serve frontier-infra/jebadiah-9b-v2-1 --max-model-len 4096 --language-model-only \
+  --served-model-name frontier-infra/jebadiah-9b-v2-1
 ```
 
 **2. Install `jeb`**, then:
@@ -139,8 +141,8 @@ vllm serve frontier-infra/jebadiah-9b-v2 --max-model-len 4096 --language-model-o
 jeb serve --backend vllm --url http://localhost:8000
 ```
 
-**3. First decision:** the same curl as the [Ollama path](#ollama), step 4. On a DGX Spark in bf16 we got
-billing 0.6279, support 0.0385, sales 0.3337; the small differences are the bf16 engine's rounding.
+**3. First decision:** the same curl as the [Ollama path](#ollama), step 4. Expect billing to be the top option;
+`jeb doctor --backend vllm` checks the v2.1 reference probabilities with a tolerance for runtime rounding.
 
 **4. Point JDE at it:** see [Use it from JDE](#use-it-from-jde). **You're ready.**
 
@@ -152,8 +154,8 @@ past 20 options; we haven't run Jeb that way yet.
 No option cap. This is the path every GGUF was checked on.
 
 ```bash
-hf download frontier-infra/jebadiah-9b-v2-GGUF jebadiah-9b-v2-Q8_0.gguf --local-dir .
-llama-server -m jebadiah-9b-v2-Q8_0.gguf -c 4096 -np 1 --port 8080
+hf download frontier-infra/jebadiah-9b-v2-1-GGUF jebadiah-9b-v2-1-Q8_0.gguf --local-dir .
+llama-server -m jebadiah-9b-v2-1-Q8_0.gguf -c 4096 -np 1 --port 8080
 jeb serve --backend llama-server
 ```
 
@@ -166,11 +168,11 @@ No other runtime needed, no option cap.
 
 ```bash
 pip install "jebadiah-decide[mlx]"
-jeb serve --backend mlx          # downloads frontier-infra/jebadiah-9b-v2-MLX (8-bit) the first time
+jeb serve --backend mlx          # downloads frontier-infra/jebadiah-9b-v2-1-MLX-8bit (files at the repo root) the first time
 ```
 
-First decision: the curl from the [Ollama path](#ollama). The 8-bit 9B gives billing 0.640554, support
-0.037693, sales 0.321753. **You're ready.**
+First decision: the curl from the [Ollama path](#ollama). The published v2.1 8-bit 9B result gives billing 0.551405, support
+0.024583, sales 0.424012. **You're ready.**
 
 ## AINode
 
@@ -179,11 +181,11 @@ itself, so you can point clients straight at the node. Load it once:
 
 ```bash
 curl -s http://<node>:3000/api/models/load -H "Authorization: Bearer $AINODE_API_KEY" \
-  -H 'Content-Type: application/json' -d '{"model": "frontier-infra/jebadiah-9b-v2", "max_model_len": 4096,
+  -H 'Content-Type: application/json' -d '{"model": "frontier-infra/jebadiah-9b-v2-1", "max_model_len": 4096,
   "gpu_memory_utilization": 0.3, "extra_vllm_args": ["--language-model-only"]}'
 ```
 
-Then use `http://<node>:3000/v1/systemone` with `"model": "frontier-infra/jebadiah-9b-v2"` and your key. Set
+Then use `http://<node>:3000/v1/systemone` with `"model": "frontier-infra/jebadiah-9b-v2-1"` and your key. Set
 `gpu_memory_utilization` for your card; 0.3 is what we run the 9B at on a 128 GB DGX Spark. `jeb doctor
 --backend ainode --url http://<node>:3000 --api-key ...` checks it end to end.
 
@@ -526,10 +528,11 @@ Each model repository also carries one script per runtime (`scripts/decide_gguf.
 
 | Model | GGUF | Size (Q8_0) | Same pick as bf16 on 260 held-out questions |
 |---|---|---:|---:|
-| Jebadiah 27B | [frontier-infra/jebadiah-27b-GGUF](https://huggingface.co/frontier-infra/jebadiah-27b-GGUF) | 29 GB | 260 |
-| Jebadiah 9B v2 (default) | [frontier-infra/jebadiah-9b-v2-GGUF](https://huggingface.co/frontier-infra/jebadiah-9b-v2-GGUF) | 9.8 GB | 257 |
+| Jebadiah 27B v2.1 | [frontier-infra/jebadiah-27b-v2-1-GGUF](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1-GGUF) | 29 GB | 259 |
+| Jebadiah 9B v2.1 (default) | [frontier-infra/jebadiah-9b-v2-1-GGUF](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1-GGUF) | 9.8 GB | 257 |
 | Jebadiah 4B v2 | [frontier-infra/jebadiah-4b-v2-GGUF](https://huggingface.co/frontier-infra/jebadiah-4b-v2-GGUF) | 4.6 GB | 256 |
 
-In Ollama, all three gave the same pick as llama-server on all 260. All sizes, formats and results are in the
+The v2.1 agreement counts use the published A3 calibration sample; the 4B count uses its earlier release sample.
+All sizes, formats and results are in the
 [collection](https://huggingface.co/collections/frontier-infra/jebadiah-open-system-one-decision-models-6ab80765ddd3fa0b3eba5213)
 and on [jebadiah.ai](https://jebadiah.ai).

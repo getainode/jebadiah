@@ -1,6 +1,6 @@
 [project]
 name = "jebadiah-decide"
-version = "0.2.0"
+version = "0.3.0"
 description = "Typed decisions from a Jebadiah model on your own runtime: llama-server, Ollama, LM Studio, vLLM, MLX or a /v1/systemone server"
 readme = "README.md"
 requires-python = ">=3.10"

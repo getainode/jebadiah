@@ -3,5 +3,5 @@ vLLM, MLX, or any /v1/systemone server (AINode, jebadiah-serve). One request for
 from .backends import BACKENDS, JebError
 from .client import Jeb, decide
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 __all__ = ["BACKENDS", "Jeb", "JebError", "decide", "__version__"]
