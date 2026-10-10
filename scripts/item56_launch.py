@@ -54,7 +54,7 @@ git clone -q https://github.com/getainode/jebadiah.git /workspace/item56-src
 cd /workspace/item56-src
 git checkout -q 86a8203d792463536eb009a4d8da6c8681ffdd99
 export JEB_ROOT=/workspace/item56-diagnostic
-for script in item56_diagnostic item51_diagnostic item54_diagnostic_report; do
+for script in item56_diagnostic item51_diagnostic item54_diagnostic_report item55_diagnostic_report; do
   git show {code_revision}:scripts/$script.py > /workspace/$script.py
 done
 printf '%s' {payload} > /workspace/item56-diagnostic-config.json

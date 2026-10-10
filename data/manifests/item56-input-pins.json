@@ -44,6 +44,21 @@
         "source-licenses.json": "b286df5e3fca7644c530f9907989a37e2556e6fec5ac70b0f2125ba50953fab8",
         "train.jsonl": "59ead2c0eb29a2aad09ed6d3066f52359202841e40aa1552fa0561131ab501c2"
       }
+    },
+    "rung5-add": {
+      "revision": "764c465df998127df8801ddfc4bda49daa606721",
+      "added_questions": 1000,
+      "diagnostic": "math-diagnostic.jsonl",
+      "files": {
+        "LICENSE-DeepMind.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "NOTICE-DeepMind.txt": "b936d1c7bdf99207da3190b1b8886df2813cf22b5e2eed1898a86ee12f3361c2",
+        "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+        "composition-slots.json": "fb16af67c8f42651d4d6da4b9b318ec8ce7ce36b9eeb57718eb088c6f8bdad9a",
+        "manifest.json": "c54181a25370f1834a5f82e9cda496a8e947d27ed99e1b2105c4e19f376c0e5d",
+        "math-diagnostic.jsonl": "e960dcd0439b2f91758103c3a26eb541ae86583a45ac6ce034069165f3202aa7",
+        "overlap-scan-report.json": "1c368788d5ee2325adf85cf415910ff04bfa7c25da6b1ad1a1b9aa89e9d94a07",
+        "train.jsonl": "52b268ff5e1f88688878ed69f8d95a4509feb2eb37c711925df303a20d1c9d51"
+      }
     }
   }
 }

@@ -37,6 +37,7 @@ def main():
     import eval_jebadiah as evaluate
     from item51_diagnostic import summarize as causal_summary
     from item54_diagnostic_report import summarize as intent_summary
+    from item55_diagnostic_report import summarize as math_summary
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--config',type=Path,required=True);a=p.parse_args()
     cfg=json.loads(a.config.read_text());api=HfApi();dest='frontier-infra/jebadiah-9b-v2-1-probe-b-s17-checkpoints'
     assert api.model_info(dest).private
@@ -59,7 +60,7 @@ def main():
             timing=extra['timing']
             if timing['questions_scored']!=sum(len(r['questions']) for r in rr) or timing['truncated_prompts']!=0:
                 raise ValueError('Incomplete or truncated diagnostic')
-            summarizer=causal_summary if source=='rung2b' else intent_summary if source=='rung4-add' else summarize
+            summarizer=causal_summary if source=='rung2b' else intent_summary if source=='rung4-add' else math_summary if source=='rung5-add' else summarize
             result=summarizer(answers,rr);result['run_metrics']=timing
             report.setdefault(name,{})[source]=result
             temp=path.with_name('item56-diagnostics.tmp');temp.write_text(json.dumps(report,indent=2)+'\n');temp.replace(path)

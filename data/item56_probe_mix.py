@@ -65,7 +65,17 @@ def verify_source(folder, pin, original):
     for name, entry in manifest['files'].items():
         if sha(folder / name) != entry['sha256']:
             raise ValueError('Source manifest hash mismatch')
-    scan_gate(json.loads((folder / 'overlap-scan-report.json').read_text()))
+    scan = json.loads((folder / 'overlap-scan-report.json').read_text())
+    scan_gate(scan)
+    if folder.name == 'rung5-add':
+        policy = json.loads((Path(__file__).with_name('manifests') / 'item55-source-licenses.json').read_text())
+        source = policy['sources']['deepmind-mathematics-fresh']
+        if (scan['scanned_records'] != 24000 or scan['retained_records'] != 24000
+                or scan['candidates_sha256'] != source['finite_source_scan_sha256']
+                or scan['scanner_sha256'] != sha(Path(__file__).with_name('item33_full_suite_scan.py'))
+                or sha(folder / 'LICENSE-DeepMind.txt') != source['license_sha256']
+                or (folder / 'NOTICE-DeepMind.txt').read_text() != source['notice_text']):
+            raise ValueError('Math scan universe or license binding failed')
     full = (folder / 'train.jsonl').read_bytes()
     if not original.endswith(b'\n') or not full.startswith(original):
         raise ValueError('Source did not preserve A3 train bytes')
@@ -109,7 +119,7 @@ def compose(base, sources, output, pins=PINS, preview=False):
         # Keep every attribution notice and source receipt; preserve names for notices.
         for filename in pin['files']:
             if filename in ('train.jsonl','calib.jsonl','manifest.json'): continue
-            target = filename if filename.startswith('NOTICE') or filename == pin['diagnostic'] else name + '-' + filename
+            target = filename if filename.startswith(('NOTICE','LICENSE')) or filename == pin['diagnostic'] else name + '-' + filename
             if target in copied and copied[target].read_bytes() != (folder / filename).read_bytes():
                 raise ValueError('Conflicting retained notice or diagnostic')
             copied[target] = folder / filename
@@ -145,6 +155,8 @@ def compose(base, sources, output, pins=PINS, preview=False):
         raise ValueError('SpaceNLI license bytes changed')
     (output / 'NOTICE-SpaceNLI.txt').write_bytes(notice)
     shutil.copyfile(nli_license, output / 'rung3-add-source-licenses.json')
+    if not preview:
+        shutil.copyfile(Path(__file__).with_name('manifests') / 'item55-source-licenses.json', output / 'rung5-add-source-licenses.json')
     write_json(output / 'addition-proof.json',proof)
     report = {'name':'item56-outside-data-probe-b', 'private':True, 'probe':True,
               'preview_only':preview,'training_launched':False,

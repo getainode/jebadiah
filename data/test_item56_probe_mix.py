@@ -70,5 +70,23 @@ class ProbeContracts(unittest.TestCase):
                 self.assertEqual(report['source_question_counts'][source],count)
             with self.assertRaisesRegex(ValueError,'empty'): compose(base,sources,out,preview=True)
 
+    @unittest.skipUnless(os.environ.get('ITEM56_MATH_READY'), 'Requires scanned math composition')
+    def test_live_four_sources_exact_bytes_and_math_scan_binding(self):
+        root=Path(os.environ['ITEM56_SCRATCH']);base=root/'item56-a3/a3';sources=root/'item56-sources'
+        with tempfile.TemporaryDirectory(prefix='item56-final-test-',dir=root) as tmp:
+            out=Path(tmp)/'probe'
+            report=compose(base,sources,out)
+            self.assertFalse(report['preview_only'])
+            self.assertEqual(report['questions'],24939)
+            self.assertEqual(report['added_questions'],3749)
+            self.assertEqual(report['source_question_counts']['deepmind-math'],1000)
+            original=(base/'train.jsonl').read_bytes()
+            expected=original+b''.join((sources/n/'train.jsonl').read_bytes()[len(original):]
+                                      for n in ('rung2b','rung3-add','rung4-add','rung5-add'))
+            self.assertEqual((out/'train.jsonl').read_bytes(),expected)
+            self.assertEqual((out/'calib.jsonl').read_bytes(),(base/'calib.jsonl').read_bytes())
+            for notice in ('NOTICE-Corr2Cause.txt','NOTICE-MASSIVE.txt','NOTICE-DeepMind.txt','LICENSE-DeepMind.txt','NOTICE-SpaceNLI.txt'):
+                self.assertTrue((out/notice).exists())
+
 
 if __name__=='__main__': unittest.main()

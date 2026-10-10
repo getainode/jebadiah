@@ -31,17 +31,17 @@ def main():
     proof={'dataset_revision':os.environ['ITEM56_DATA_REVISION'],'data_validation':report,
            'manifest_sha256':pipeline.sha256(data/'manifest.json'),'original_runtime': '86a8203d792463536eb009a4d8da6c8681ffdd99',
            'seed':int(os.environ['ITEM52_CONTROL_SEED']), 'temperature_policy':'Original A3 calibration command, bytes unchanged',
-           'retained_notices':[p.name for p in sorted(data.glob('NOTICE*'))]}
+           'retained_notices':[p.name for p in sorted([*data.glob('NOTICE*'),*data.glob('LICENSE*')])]}
     (root/'item56-data-proof.json').write_text(json.dumps(proof,indent=2)+'\n')
     original_run=pipeline.run
     def run(script,*args):
         original_run(script,*args)
         if script=='merge_export.py':
             merged=Path(args[args.index('--output')+1])
-            for notice in data.glob('NOTICE*'):shutil.copyfile(notice,merged/notice.name)
+            for notice in [*data.glob('NOTICE*'),*data.glob('LICENSE*')]:shutil.copyfile(notice,merged/notice.name)
             # Trainer checkpoints are private and retain the same attribution.
             checkpoint=os.environ['ITEM56_MODEL_REPO']+'-checkpoints'
-            for notice in data.glob('NOTICE*'):
+            for notice in [*data.glob('NOTICE*'),*data.glob('LICENSE*')]:
                 api.upload_file(repo_id=checkpoint,path_or_fileobj=notice,path_in_repo=notice.name,
                                 commit_message='Keep outside-source attribution with private checkpoints')
     pipeline.run=run

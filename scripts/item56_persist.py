@@ -12,7 +12,7 @@ files=['item56-data-proof.json','item52-environment.json','item52-final-environm
        'runs/9b/config.json','runs/9b/trainer_state.json','runs/9b/log_history.json',
        'runs/9b/train_summary.json','runs/9b/merged/merge_verification.json',
        'runs/9b/merged/temperatures.json','runs/9b/merged/training_provenance.json']
-files += [str(p.relative_to(root)) for p in (root/'runs/9b/merged').glob('NOTICE*')]
+files += [str(p.relative_to(root)) for p in [*(root/'runs/9b/merged').glob('NOTICE*'),*(root/'runs/9b/merged').glob('LICENSE*')]]
 for name in files:
     path=root/name
     if path.exists():api.upload_file(repo_id=repo,path_or_fileobj=path,path_in_repo='item56-initial/'+name,

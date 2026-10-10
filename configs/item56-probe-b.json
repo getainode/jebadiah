@@ -36,7 +36,7 @@
   "train_file": "probe-b/train.jsonl",
   "calib_file": "probe-b/calib.jsonl",
   "manifest_file": "probe-b/manifest.json",
-  "dataset_revision": null,
+  "dataset_revision": "1de4a087bf4aa8e7ffd2de99f0abefea7a7b2c80",
   "probe": true,
   "seeds": [
     17,
