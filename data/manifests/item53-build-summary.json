@@ -1,0 +1,201 @@
+{
+  "candidate_build": {
+    "name": "item53-spacenli",
+    "private": true,
+    "source": "SpaceNLI",
+    "seed": "item53-rung3-20261009",
+    "upstream_revision": "8c10e94d238737be97142f5a7ffdffa49a6a6ab9",
+    "upstream_files": {
+      "LICENSE": "ac65b6957472ea27034d2b4900094556cb8d37f5d235685759c7faa524e69910",
+      "README.md": "b121fb4007dc285bfd858dd5f657a805b01bde089209abe2753ecc327679c93b",
+      "dataset/160x200.json": "52a06f16707b4a4c8c383a42d6247f0003f6c9139ec9b644d0f8adeb7f2e277b",
+      "dataset/problem_patterns.xml": "cae8023692a2366738ca3eebb8a98e743023336379f1e2d21b5d29415da8bf0d",
+      "config/selection_restriction.yaml": "e43514faa67eb3eef0f8dab3f185f147f038c4b4227cd52aa7925213c1ce5ec0",
+      "python/base_grammar.fcfg": "19bcec74911775ac547c1b53e06a36e9cc1b628b1472a989a6bae73003c93f2d"
+    },
+    "converter_sha256": "e136928aeb60d320ac943928d9d809d03f27bbb8583a62cdbfe495130f33e451",
+    "license_manifest_sha256": "63b4d8dba27ae3777cea107c6d4d8b4ca75a33501e0cd0467850f4a5d5ba61f8",
+    "a3_revision": "bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed",
+    "a3_input_hashes": {
+      "train.jsonl": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+      "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88"
+    },
+    "selection": {
+      "a3_exposed_pattern_families": [
+        "item53:pattern:1",
+        "item53:pattern:100",
+        "item53:pattern:102",
+        "item53:pattern:103",
+        "item53:pattern:104",
+        "item53:pattern:105",
+        "item53:pattern:13",
+        "item53:pattern:15",
+        "item53:pattern:18",
+        "item53:pattern:2",
+        "item53:pattern:20",
+        "item53:pattern:24",
+        "item53:pattern:26",
+        "item53:pattern:31",
+        "item53:pattern:36",
+        "item53:pattern:38",
+        "item53:pattern:46",
+        "item53:pattern:47",
+        "item53:pattern:48",
+        "item53:pattern:69",
+        "item53:pattern:7",
+        "item53:pattern:74",
+        "item53:pattern:79",
+        "item53:pattern:9",
+        "item53:pattern:95",
+        "item53:pattern:96",
+        "item53:pattern:97",
+        "item53:pattern:99"
+      ],
+      "heldout_pattern_families": [
+        "item53:pattern:4",
+        "item53:pattern:41"
+      ],
+      "eligible_unique_rows": 1800,
+      "upstream_rows": 32000,
+      "train_limit": 6000,
+      "diagnostic_count": 300,
+      "unused_holdout_siblings_excluded": 300,
+      "diagnostic_missing_labels": [
+        "contradiction"
+      ],
+      "split_policy": "Preserve all eligible training labels; reserve whole unseen pattern families; round-robin heldout labels."
+    },
+    "splits": {
+      "train": {
+        "questions": 1200,
+        "labels": {
+          "contradiction": 200,
+          "neutral": 400,
+          "entailment": 600
+        },
+        "pattern_families": 2
+      },
+      "diagnostic": {
+        "questions": 300,
+        "labels": {
+          "entailment": 150,
+          "neutral": 150
+        },
+        "pattern_families": 2
+      }
+    },
+    "render_validation": {
+      "checked_renders": 4500,
+      "max_prompt_tokens_by_size": {
+        "3": 118
+      },
+      "max_seq_length": 2048,
+      "prompt_budget": 1984,
+      "padding_reserve": 64,
+      "truncated": 0,
+      "order_checks": [
+        "canonical",
+        "reversed",
+        "seeded_shuffle"
+      ],
+      "label_schemes": {
+        "ainode": 4500
+      },
+      "available_single_token_labels": 588,
+      "prompt_source_sha256": "d2660ebec28bd3f1704235bda88d24a397c1c62475e740519cb8ef2d08f25fdd",
+      "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+    },
+    "overlap_scan": {
+      "status": "pending_studio_scan",
+      "source_level": true,
+      "candidates_sha256": "81365b83e69b2f44264a0795227305fe242abcf196ad2a6cf382114911f3a415",
+      "expected_records": 64000,
+      "protected_index_sha256": "cf54ade9013c05db74f4c70925287382708de965fbf3cba62145ee821adad0ff"
+    },
+    "files": {
+      "train.jsonl": {
+        "sha256": "183145e24a0edc7437c29e50363b06a448b3284fa90e3851be1c77803c1e2ac7"
+      },
+      "diagnostic.jsonl": {
+        "sha256": "4d24a646b16deb0981cac742ce4bdac4c303b98e222efb8a8243ae58f68b01bd"
+      },
+      "scan-candidates.jsonl": {
+        "sha256": "81365b83e69b2f44264a0795227305fe242abcf196ad2a6cf382114911f3a415"
+      }
+    },
+    "training_launched": false
+  },
+  "composition_previews": {
+    "replace": {
+      "mode": "replace",
+      "requested": 1000,
+      "incoming_questions": 1000,
+      "matched_donor_slots": 4462,
+      "questions_before": 21190,
+      "questions_after": 21190,
+      "source_questions_before": 102,
+      "source_questions_after": 1102,
+      "cap_denominator": 21190,
+      "source_cap": 2119,
+      "source_fraction_of_original_a3": 0.052005663048607834,
+      "source_fraction_of_composition": 0.052005663048607834,
+      "incoming_labels": {
+        "entailment": 502,
+        "neutral": 335,
+        "contradiction": 163
+      },
+      "incoming_pattern_families": 2,
+      "type_histogram": {
+        "choice": 11708,
+        "noul": 3696,
+        "score": 5786
+      },
+      "area_histogram": {
+        "unspecified": 10595,
+        "language": 5868,
+        "knowledge": 2690,
+        "tools": 659,
+        "retrieval": 766,
+        "arts": 612
+      }
+    },
+    "add": {
+      "mode": "add",
+      "requested": 1000,
+      "incoming_questions": 1000,
+      "matched_donor_slots": 4462,
+      "questions_before": 21190,
+      "questions_after": 22190,
+      "source_questions_before": 102,
+      "source_questions_after": 1102,
+      "cap_denominator": 21190,
+      "source_cap": 2119,
+      "source_fraction_of_original_a3": 0.052005663048607834,
+      "source_fraction_of_composition": 0.049662009914375846,
+      "incoming_labels": {
+        "entailment": 502,
+        "neutral": 335,
+        "contradiction": 163
+      },
+      "incoming_pattern_families": 2,
+      "type_histogram": {
+        "choice": 12708,
+        "noul": 3696,
+        "score": 5786
+      },
+      "area_histogram": {
+        "unspecified": 10595,
+        "language": 6868,
+        "knowledge": 2690,
+        "tools": 659,
+        "retrieval": 766,
+        "arts": 612
+      }
+    }
+  },
+  "composition_outputs_written": false,
+  "composition_gate_verified": "Both modes reject pending Studio full-source scan before creating output.",
+  "tests": "9 CPU tests passed; pinned live tokenizer renders all selected questions in 3 orders.",
+  "training_launched": false
+}

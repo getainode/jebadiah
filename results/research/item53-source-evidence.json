@@ -1,0 +1,67 @@
+{
+  "item": 53,
+  "verified_utc_date": "2026-10-10",
+  "method": "Live TinyFish CLI fetch content get; pinned upstream clone locally audited without model calls.",
+  "upstream_revision": "8c10e94d238737be97142f5a7ffdffa49a6a6ab9",
+  "rights": "MIT copyright and permission notice recorded verbatim in licence manifest.",
+  "ancestry_finding": "Spatial literature seed examples, expert revisions and toy-world grammatical substitutions. NLI model training corpora discussed in paper experiments are not source examples or teacher labels.",
+  "exclusion_catalog": "Item46 pinned Decision Index 0.3 catalog and v2.1 ancestor exclusions reused; exact full-suite overlap remains pending on Studio.",
+  "split_finding": "Upstream is one unsplit 32000-row generated file. Lead authorized this original file as source of truth, with deterministic family-disjoint local train and diagnostic splits; no mirror rows used.",
+  "limits": [
+    "MIT repository licence and public construction evidence support provenance admission; lexical overlap clearance is a separate gate.",
+    "Cannot establish independence from unavailable private tests or undo base-model pretraining.",
+    "Diagnostic has no contradiction rows because only one remaining unused family carries that label."
+  ],
+  "receipts": [
+    {
+      "url": "https://github.com/kovvalsky/SpaceNLI",
+      "final_url": "https://github.com/kovvalsky/SpaceNLI",
+      "tinyfish_extracted_text_sha256": "4cb8c0e59a2344b828629d5f5801843616f3c2dcbfe805fbad302121dc2d7c68",
+      "excerpts": [
+        "zed for spatial semantics & reasoning.  The NLI problem patterns and automatically generated NLI sample problems are under `dataset/`.  # Generating data  The dataset of NLI sample problems is generated from the patterns (using the mini world with selection restrictions and a toy grammar) with the following command:  ``` python/generate_nli.py --sr config/selection_restriction.yaml --gr ",
+        "e under `dataset/`.  # Generating data  The dataset of NLI sample problems is generated from the patterns (using the mini world with selection restrictions and a toy grammar) with the following command:  ``` python/generate_nli.py --sr config/selection_restriction.yaml --gr python/base_grammar.fcfg dataset/problem_patterns.xml -v --out dataset/160x200.json --out-max-seed 200 ```  Note th"
+      ]
+    },
+    {
+      "url": "https://github.com/kovvalsky/SpaceNLI/blob/main/LICENSE",
+      "final_url": "https://github.com/kovvalsky/SpaceNLI/blob/main/LICENSE",
+      "tinyfish_extracted_text_sha256": "ce200c4850948526be5de501f8861db2032e543d0225fd271f42650039fd337a",
+      "excerpts": [
+        "8 9 10 11 12 13 14 15 16 17 18 19 20 21 MIT License Copyright (c) 2023 Fibo Kowalsky Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell",
+        " 13 14 15 16 17 18 19 20 21 MIT License Copyright (c) 2023 Fibo Kowalsky Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of t"
+      ]
+    },
+    {
+      "url": "https://aclanthology.org/2023.naloma-1.2.pdf",
+      "final_url": "https://165.245.153.223/2023.naloma-1.2.pdf",
+      "tinyfish_extracted_text_sha256": "ac77595272f93c4f11f015d424beadea70d9459ffdc1de52a1a994f64b596c56",
+      "excerpts": [
+        "n NLI dataset for spa- tial inferences. First, we collected a diverse set of NLI problems inspired by the inference examples found in the literature on spatial semantics. Sec- ond, the NLI problems were manually converted into NLI patterns (see Figure 1), and finally, we automatically generated a large number of NLI problems from the patterns. The paper makes two main contributions: C1. ",
+        " obtained from the seed NLI prob- lems. To collect the latter, we extracted the initial 56 problems from Zwarts and Winter (2000) and Nam (1995), where a majority of the problems were labeled as entailment due to obvious biases in the semantic literature towards licensing entail-  15 Class (#patterns) Spatial expression counts Directional (95) in (20), from (17), into (9), to (8), on (8)",
+        "ct the latter, we extracted the initial 56 problems from Zwarts and Winter (2000) and Nam (1995), where a majority of the problems were labeled as entailment due to obvious biases in the semantic literature towards licensing entail-  15 Class (#patterns) Spatial expression counts Directional (95) in (20), from (17), into (9), to (8), on (8), away from (7), towards (7), out of (4), back (",
+        "n the generated samples, we de- fined a mini world with a domain containing 171 en- tities corresponding to common and proper nouns. The entities are organized in a taxonomy with 20 subclasses covering general types of entities (e.g., person, animal, vehicle), the projections of an ar- gument in certain argument structures (e.g., enter inX, be inX, throwX), compatibility with pro- jectiv"
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kovvalsky/SpaceNLI/8c10e94d238737be97142f5a7ffdffa49a6a6ab9/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/kovvalsky/SpaceNLI/8c10e94d238737be97142f5a7ffdffa49a6a6ab9/LICENSE",
+      "tinyfish_extracted_text_sha256": "b873bf44cdbac2a500d8980f693e955201fdba375fef7d24efd94deb8cfad957",
+      "excerpts": [
+        "MIT License Copyright (c) 2023 Fibo Kowalsky Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell",
+        "MIT License Copyright (c) 2023 Fibo Kowalsky Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of t"
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/kovvalsky/SpaceNLI/8c10e94d238737be97142f5a7ffdffa49a6a6ab9/README.md",
+      "final_url": "https://raw.githubusercontent.com/kovvalsky/SpaceNLI/8c10e94d238737be97142f5a7ffdffa49a6a6ab9/README.md",
+      "tinyfish_extracted_text_sha256": "aec0703fa68faaeba1a25174512458999c1727dfdb336e546d1f0828d4b664a3",
+      "excerpts": [
+        "ized for spatial semantics & reasoning. The NLI problem patterns and automatically generated NLI sample problems are under `dataset/`. # Generating data The dataset of NLI sample problems is generated from the patterns (using the mini world with selection restrictions and a toy grammar) with the following command: ``` python/generate\\_nli.py --sr config/selection\\_restriction.yaml --gr p",
+        "are under `dataset/`. # Generating data The dataset of NLI sample problems is generated from the patterns (using the mini world with selection restrictions and a toy grammar) with the following command: ``` python/generate\\_nli.py --sr config/selection\\_restriction.yaml --gr python/base\\_grammar.fcfg dataset/problem\\_patterns.xml -v --out dataset/160x200.json --out-max-seed 200 ``` Note "
+      ]
+    }
+  ],
+  "training_launched": false,
+  "protected_index_read_on_atlas": false,
+  "verified_local_date": "2026-10-09"
+}
