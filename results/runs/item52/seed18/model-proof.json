@@ -1,0 +1,39 @@
+{
+  "model_repo": "frontier-infra/jebadiah-9b-v2-1-a3-seed18",
+  "model_revision": "2899e9d4c785ba0f845245c66c9c4e740efeeab9",
+  "private": true,
+  "weights": {
+    "model.safetensors-00001-of-00004.safetensors": {
+      "size": 5276436248,
+      "sha256": "a8463a06e5d4040f275b90fc01b363d212378be6fd99486943a8acb070387572"
+    },
+    "model.safetensors-00002-of-00004.safetensors": {
+      "size": 5335161536,
+      "sha256": "23f80c4538619fb7d5a9635361063fd3b50a27b9209330881457cc86a17aba6b"
+    },
+    "model.safetensors-00003-of-00004.safetensors": {
+      "size": 5368717472,
+      "sha256": "d0f9c5b3c99897e4d72a54ab05237e6feff46f2c323288c347c3688e86b3d00e"
+    },
+    "model.safetensors-00004-of-00004.safetensors": {
+      "size": 3325988600,
+      "sha256": "069c3804e0b6a690ab11b957d3d5f35fb483e0097cf943c9b46afb36ee8144f5"
+    }
+  },
+  "byte_identical_to_original_a3": false,
+  "only_training_provenance_change": "seed 17 to 18",
+  "gate": {
+    "questions": 260,
+    "identical_picks": 260,
+    "agreement": 1.0,
+    "max_probability_delta": 0.011324286460876465,
+    "clear_margin_flips": 0,
+    "margin_threshold": 0.05,
+    "max_delta_allowed": 0.05
+  },
+  "temperatures": {
+    "choice": 1.109,
+    "noul": 0.9795,
+    "score": 0.6104
+  }
+}

@@ -29,7 +29,14 @@
       "training": 135,
       "proxy": 35
     },
-    "allocation_ceiling_usd": 7.791666666666667
+    "allocation_ceiling_usd": 7.791666666666667,
+    "model_revision": "2899e9d4c785ba0f845245c66c9c4e740efeeab9",
+    "checkpoint_revision": "83db063a25e32b264f6152f44f85597e0ded73b5",
+    "training_running_seconds": 3028,
+    "estimated_training_usd": 2.3130555555555556,
+    "optimizer_runtime_seconds": 2196.8,
+    "proxy_job": "6ac9b17c095c57808930d46f",
+    "proxy_launcher_code_revision": "c29da7b98b668ccb44cc0592f157e1398da885aa"
   },
   "proxy_running_seconds": 1126,
   "proxy_runner_seconds": 1002.0,

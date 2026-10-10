@@ -1,0 +1,14 @@
+{
+  "checkpoint_revision": "05d3f78bc9184a4a1e3124f518043c9e537c0bbb",
+  "steps": 2649,
+  "epoch": 1.0,
+  "seed": 18,
+  "all_other_recipe_fields_match_original": true,
+  "final_log": {
+    "epoch": 0.9966024915062288,
+    "grad_norm": 6.159763813018799,
+    "learning_rate": 3.5971914266852425e-09,
+    "loss": 0.6131200790405273,
+    "step": 2640
+  }
+}

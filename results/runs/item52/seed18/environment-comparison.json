@@ -1,0 +1,9 @@
+{
+  "installed_package_differences_vs_seed17": {},
+  "seed17_driver": "580.178.04",
+  "seed18_driver": "580.159.03",
+  "seed17_platform": "Linux-6.12.100-125.179.amzn2023.x86_64-x86_64-with-glibc2.35",
+  "seed18_platform": "Linux-6.12.94-123.192.amzn2023.x86_64-x86_64-with-glibc2.35",
+  "same_image_tag": true,
+  "same_cuda_cudnn_nvcc": true
+}
