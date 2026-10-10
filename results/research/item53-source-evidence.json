@@ -1,6 +1,6 @@
 {
   "item": 53,
-  "verified_utc_date": "2026-10-09",
+  "verified_utc_date": "2026-10-10",
   "method": "Live TinyFish CLI fetch content get; pinned upstream clone locally audited without model calls.",
   "upstream_revision": "8c10e94d238737be97142f5a7ffdffa49a6a6ab9",
   "rights": "MIT copyright and permission notice recorded verbatim in licence manifest.",
@@ -62,5 +62,6 @@
     }
   ],
   "training_launched": false,
-  "protected_index_read_on_atlas": false
+  "protected_index_read_on_atlas": false,
+  "verified_local_date": "2026-10-09"
 }
