@@ -2,8 +2,11 @@
 """Verify additive composition preserves mixed-question bytes and rejects collisions."""
 import hashlib
 import json
+import os
+from pathlib import Path
+import tempfile
 import unittest
-from item51_rung2b_mix import additive_bytes
+from item51_rung2b_mix import additive_bytes, compose
 
 
 class AdditiveMixTest(unittest.TestCase):
@@ -40,6 +43,29 @@ class AdditiveMixTest(unittest.TestCase):
         mapping[1] = mapping[0]
         with self.assertRaises(ValueError):
             additive_bytes(base, scanned, mapping)
+
+
+@unittest.skipUnless(os.environ.get('ITEM51_INPUT_ROOT'), 'Pinned private inputs are optional')
+class PinnedMixTest(unittest.TestCase):
+    def test_pinned_composition_and_rejects_changed_input(self):
+        root = Path(os.environ['ITEM51_INPUT_ROOT'])
+        base = root / 'item51-a3/a3'
+        rung = root / 'item51-scanned/rung2'
+        with tempfile.TemporaryDirectory(prefix='item51-test-', dir=root) as scratch:
+            output = Path(scratch) / 'mix'
+            report = compose(base, rung, output)
+            original = (base / 'train.jsonl').read_bytes()
+            self.assertEqual((output / 'train.jsonl').read_bytes()[:len(original)], original)
+            self.assertEqual((output / 'calib.jsonl').read_bytes(), (base / 'calib.jsonl').read_bytes())
+            self.assertEqual(report['questions'], 22190)
+            self.assertEqual(report['upstream_questions'], 1102)
+            altered = Path(scratch) / 'altered'
+            altered.mkdir()
+            (altered / 'train.jsonl').write_bytes(original + b'\n')
+            refused = Path(scratch) / 'refused'
+            with self.assertRaisesRegex(ValueError, 'Wrong pinned A3 bytes'):
+                compose(altered, rung, refused)
+            self.assertFalse(refused.exists())
 
 
 if __name__ == '__main__':
