@@ -51,6 +51,8 @@ stay private and are never submitted; A3 remains the best recipe.
 
 | ITEM 48 rung 1 | A3 (46.97) | replace 1,000 matched language choice/noul slots with scanned owned evidence-world questions at item47 revision 7b6b15f95cc9902e1ebd783656a3bd590350875d; all other A3 recipe fields, calibration and temperatures unchanged | frozen-proxy paired whole-group bootstrap 95% interval vs A3 entirely above zero, score above 44.67, and independent held-out evidence diagnostic macro accuracy improves; unchanged 0.05 merge gate | 46.09 vs A3 46.97; -0.88, CI [-2.21, +0.38]: drop. Evidence macro 54.67% to 99.67%; Tools -4.24, CI [-9.42, -0.94]. Initial 0.05 merge gate passed, max shift 0.01048, 259/260 picks, zero confident flips; no recovery. Estimated $4.24722 including diagnostic report retry. Private; [full results](item48-rung1-results.md) |
 
+| ITEM 50 rung 2 | A3 (46.97) | replace only 1,000 matched knowledge slots with item49 original-train Corr2Cause, pinned item47 data 2242e85fae6f8aff3fc3cea3fa95869d99132522; 21,190 presentations, unchanged calibration and A3 recipe | frozen-proxy paired whole-group bootstrap 95% interval vs A3 entirely above zero, score above 44.67, and graph-disjoint causal diagnostic balanced accuracy improves; otherwise drop | 45.95; vs A3 -1.02, CI [-2.49, +0.28]; drop; causal balanced accuracy 51.36% to 80.42%, ordinary accuracy 90.00% to 89.67%; initial 0.05 merge gate passed (0.01594), no export recovery; estimated $4.3565 including one diagnostic persistence retry; private only |
+
 ## ITEM 34 proposed ladder
 
 Research proposals only, not launched runs. [Evidence and ranked gaps](item34-nimble-v3-research.md)
