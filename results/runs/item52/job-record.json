@@ -13,5 +13,10 @@
   "model_revision": "f1e2f66d3e2dce25596a9fc1b9d13fbfa72003da",
   "checkpoint_revision": "1a7a0ee543f1a8c82103f3d5c3d0f36dd60c8a74",
   "training_running_seconds": 3018,
-  "estimated_training_usd": 2.305416666666667
+  "estimated_training_usd": 2.305416666666667,
+  "proxy_job": "6ac9a47c095c57808930cd1f",
+  "proxy_launcher_code_revision": "f132986f3b5dd44616e23f31b189c9c14e2c0e5c",
+  "optimizer_runtime_seconds": 2194.8,
+  "original_optimizer_runtime_seconds": 2191.4,
+  "original_and_replicate_truncated_prompts": 36
 }

@@ -20,6 +20,7 @@ facts = {
     'nvcc': subprocess.check_output(['nvcc', '--version'], text=True).strip(),
     'packages': {d.metadata['Name']: d.version for d in metadata.distributions()},
     'original_runtime_commit': '86a8203d792463536eb009a4d8da6c8681ffdd99',
+    'control_seed': int(os.environ.get('ITEM52_CONTROL_SEED', '17')),
 }
 (root / 'item52-environment.json').write_text(json.dumps(facts, indent=2) + '\n')
 subprocess.run([str(root / 'venv/bin/python'), '-m', 'pip', 'freeze'],
