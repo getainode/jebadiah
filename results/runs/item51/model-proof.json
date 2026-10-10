@@ -1,0 +1,25 @@
+{
+  "repo": "frontier-infra/jebadiah-9b-v2-1-rung2b",
+  "revision": "ec9b0cafd70a28cdce502d563f5e7d80a2ac12ab",
+  "checkpoint_revision": "5ed577ed92b847404ff25043b0f2b0128b25877a",
+  "private": true,
+  "optimizer_steps": 2774,
+  "epoch": 1.0,
+  "file_sha256": {
+    "merge_verification.json": "2e2956e7fe9e929bc05d080e4febb8b9d4f36eb9195ba52fcd05212180bfc1f0",
+    "training_provenance.json": "020ddc90dc41b6a011220e8e82cf05402d10e350212dd48bd3f5ecfef1adddf0",
+    "temperatures.json": "48424adbce6d97faa73dc7a6201df939e4d0119d97b90c4ceadfd3e1578c741b",
+    "NOTICE-Corr2Cause.txt": "5a2e4417d27849586ad9eefdf63f81b45100cec83baadc8dfbeb49054d367d38"
+  },
+  "unchanged_a3_recipe": true,
+  "unchanged_temperatures": true,
+  "gate": {
+    "questions": 260,
+    "identical_picks": 259,
+    "agreement": 0.9961538461538462,
+    "max_probability_delta": 0.011475205421447754,
+    "clear_margin_flips": 0,
+    "margin_threshold": 0.05,
+    "max_delta_allowed": 0.05
+  }
+}

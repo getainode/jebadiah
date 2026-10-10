@@ -1,6 +1,6 @@
 {
   "training_job": "6ac98474095c57808930bb39",
-  "code_revision": "d7398c8",
+  "code_revision": "d7398c8b113cdceb00d6070819447240e9a66c32",
   "dataset_revision": "c9fcf494319527d12888e0f5854980c11a51b91d",
   "pr": "https://github.com/getainode/jebadiah/pull/28",
   "caps_minutes": {
@@ -9,5 +9,10 @@
     "diagnostic": 45,
     "recovery": 45
   },
-  "allocation_ceiling_usd": 11.6875
+  "allocation_ceiling_usd": 11.6875,
+  "proxy_job": "6ac9919d095c57808930c117",
+  "diagnostic_job": "6ac9919d095c57808930c116",
+  "evaluation_code_revision": "8390f2235e54fa482bca1490796def9482537997",
+  "model_revision": "ec9b0cafd70a28cdce502d563f5e7d80a2ac12ab",
+  "training_running_seconds": 3279
 }

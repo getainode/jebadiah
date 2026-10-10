@@ -1,0 +1,18 @@
+{
+  "checkpoint_step": 500,
+  "a3_model_revision": "9e69926a007dd636e82d33485dcd48f9751c4248",
+  "a3_provenance_sha256": "c004bb24a8db7af4c2e4574ab4b3d51b0028f4f0b26029c39c1893bc377c3509",
+  "recipe_differences": {},
+  "ignored_path_and_train_identity_fields": [
+    "base_model",
+    "base_revision",
+    "checkpoint_repo",
+    "dataset_path",
+    "dataset_sha256",
+    "eval_dataset_path",
+    "max_steps",
+    "output_dir",
+    "resume"
+  ],
+  "calibration_sha256_unchanged": true
+}
