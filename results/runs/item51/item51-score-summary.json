@@ -1,0 +1,20 @@
+{
+  "a3_proxy": 46.97468441330148,
+  "rung2b_proxy": 46.67517040087475,
+  "difference": -0.2995140124267337,
+  "difference_ci95": [
+    -1.777636367626252,
+    0.9912870728662105
+  ],
+  "area_deltas": {
+    "knowledge": -0.10926366916945796,
+    "language": 5.71906310558451,
+    "retrieval": -4.0555506785452735,
+    "tools": -4.534929312147739,
+    "arts": -1.086666666666666
+  },
+  "statistical_keep": false,
+  "proxy": true,
+  "private_only": true,
+  "note": "A positive interval does not authorize shipping or submission."
+}

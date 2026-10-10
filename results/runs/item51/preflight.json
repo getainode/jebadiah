@@ -1,0 +1,10 @@
+{
+  "a3_train_byte_prefix": true,
+  "calibration_bytes_unchanged": true,
+  "added_rows_hash_bound": 1000,
+  "recipe_unchanged": true,
+  "diagnostic_oracle_balanced_accuracy": 1,
+  "majority_balanced_accuracy": 0.5,
+  "models_private": true,
+  "data_revision": "c9fcf494319527d12888e0f5854980c11a51b91d"
+}
