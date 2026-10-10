@@ -1,0 +1,30 @@
+{
+  "baseline_results_dataset": "jbrashear/jebadiah-9b-v2-1-index-results",
+  "results_revision": "672f3419abb7ab39a6b97ef8b042439640e90041",
+  "suite_revision": "e57106b5e0698e74bd1a88b3b4c19b94a0dc8328",
+  "scorer_source_revision": "587f4f496b9cf1d83f0bc8e495379496f65afa2f",
+  "seeds": {
+    "17": {
+      "raw_results_sha256": "0e4fa51efe1a766c2eb38888fe07c574e155b6a32b6c46d4632e6312f3d9ac69",
+      "decision_index": 46.97,
+      "completed": 11079,
+      "expected_rows": 11079,
+      "counts": {
+        "ok": 11079
+      },
+      "whole_case_failures": 0,
+      "outside_manifest_rows": 0
+    },
+    "18": {
+      "raw_results_sha256": "1e7bf31dfc7f6e4fa23b8fa2a9ca58cd3a9030e484bc8a8751ec023505317395",
+      "decision_index": 46.66,
+      "completed": 11079,
+      "expected_rows": 11079,
+      "counts": {
+        "ok": 11079
+      },
+      "whole_case_failures": 0,
+      "outside_manifest_rows": 0
+    }
+  }
+}

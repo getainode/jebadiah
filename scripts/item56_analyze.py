@@ -4,6 +4,7 @@ import argparse
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor
 import hashlib
+import gzip
 import json
 import multiprocessing
 from pathlib import Path
@@ -53,7 +54,13 @@ def main():
     expected={r['_evaluation']['run_id']:r['_evaluation']['payload_sha256'] for r in proxy.selected}
     results={};indices={};native={};inputs={}
     for name in ('a3-s17','a3-s18','probe-s17','probe-s18'):
-        path=getattr(a,name.replace('-','_'));result=load_results(path)
+        path=getattr(a,name.replace('-','_'))
+        opener=gzip.open if path.suffix=='.gz' else open
+        with opener(path,'rt') as stream:
+            raw=[json.loads(line) for line in stream if line.strip()]
+        if len(raw)!=len(ids) or len({r['run_id'] for r in raw})!=len(raw):
+            raise ValueError('Duplicate or missing raw proxy records: '+name)
+        result=load_results(path)
         if set(result)!=ids or any(r['status']!='ok' or r['payload_sha256']!=expected[rid] for rid,r in result.items()):
             raise ValueError('Incomplete or unbound frozen proxy: '+name)
         results[name]=result;inputs[name]=hashlib.sha256(path.read_bytes()).hexdigest()
@@ -97,6 +104,8 @@ def main():
     clinc=next(value for name,value in benchmarks.items() if 'clinc' in name.lower())
     loss=100*(sum(clinc[n]['raw'] for n in ('a3-s17','a3-s18'))/2-sum(clinc[n]['raw'] for n in ('probe-s17','probe-s18'))/2)
     summary['clinc_mean_macro_f1_loss_points']=loss
+    summary['clinc_matched_seed_macro_f1_loss_points']={str(seed):100*(clinc['a3-s'+str(seed)]['raw']-clinc['probe-s'+str(seed)]['raw']) for seed in (17,18)}
+    summary['clinc_single_seed_loss_over_five_points']={seed:value>5 for seed,value in summary['clinc_matched_seed_macro_f1_loss_points'].items()}
     summary['clinc_guard_passed']=loss<=2.5
     summary['probe_wins']=delta>0 and ci[0]>0 and loss<=2.5
     summary['decision']='split into single rungs for confirmation' if summary['probe_wins'] else 'drop probe'

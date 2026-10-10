@@ -145,6 +145,11 @@
       "rows": null,
       "questions": null
     },
+    "NOTICE-SpaceNLI.txt": {
+      "sha256": "ac65b6957472ea27034d2b4900094556cb8d37f5d235685759c7faa524e69910",
+      "rows": null,
+      "questions": null
+    },
     "addition-proof.json": {
       "sha256": "504a3a532d120350878b4724d65f74138bb2169c07af45377a0f871cf9da838e",
       "rows": null,
@@ -192,6 +197,11 @@
     },
     "rung3-add-overlap-scan-report.json": {
       "sha256": "e8be66cad7f6af8ad9e4466537c3e08d2cfd9e61ab4c8aed3a1e58b3f57ebdf1",
+      "rows": null,
+      "questions": null
+    },
+    "rung3-add-source-licenses.json": {
+      "sha256": "63b4d8dba27ae3777cea107c6d4d8b4ca75a33501e0cd0467850f4a5d5ba61f8",
       "rows": null,
       "questions": null
     },

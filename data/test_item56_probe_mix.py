@@ -53,6 +53,10 @@ class ProbeContracts(unittest.TestCase):
         root=Path(os.environ['ITEM56_SCRATCH']);base=root/'item56-a3/a3';sources=root/'item56-sources'
         with tempfile.TemporaryDirectory(prefix='item56-test-',dir=root) as tmp:
             out=Path(tmp)/'preview'
+            from item51_rung2b_mix import compose as causal_compose
+            causal=root/Path(tmp).name/'causal-rebuilt'
+            causal_compose(base,sources/'rung2',causal)
+            self.assertEqual((causal/'train.jsonl').read_bytes(),(sources/'rung2b/train.jsonl').read_bytes())
             report=compose(base,sources,out,preview=True)
             self.assertEqual(report['questions'],23939)
             self.assertEqual(report['added_questions'],2749)

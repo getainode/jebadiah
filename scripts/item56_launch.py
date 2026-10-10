@@ -44,6 +44,30 @@ def command(stage,revision,code_revision,seed=17,data_revision=None):
     raise ValueError('Unsupported stage')
 
 
+def diagnostic_command(config,code_revision):
+    if not re.fullmatch('[0-9a-f]{40}',code_revision):raise ValueError('Immutable code revision required')
+    payload=shlex.quote(json.dumps(config,separators=(',',':')))
+    setup=f"""set -euo pipefail
+apt-get update -qq >/dev/null 2>&1
+apt-get install -y -qq git build-essential >/dev/null 2>&1
+git clone -q https://github.com/getainode/jebadiah.git /workspace/item56-src
+cd /workspace/item56-src
+git checkout -q 86a8203d792463536eb009a4d8da6c8681ffdd99
+export JEB_ROOT=/workspace/item56-diagnostic
+for script in item56_diagnostic item51_diagnostic item54_diagnostic_report; do
+  git show {code_revision}:scripts/$script.py > /workspace/$script.py
+done
+printf '%s' {payload} > /workspace/item56-diagnostic-config.json
+bash scripts/v21.sh --help >/dev/null
+"$JEB_ROOT/venv/bin/python" -m pip install -q hf_xet ninja packaging
+MAX_JOBS=16 timeout 540 "$JEB_ROOT/venv/bin/python" -m pip install -q --no-build-isolation causal-conv1d
+"$JEB_ROOT/venv/bin/python" /workspace/item56_diagnostic.py --config /workspace/item56-diagnostic-config.json
+"""
+    return ['hf','jobs','run','--detach','--name','item56-diagnostics','--flavor','rtx-pro-6000',
+            '--timeout',str(CAP_MINUTES['diagnostic'])+'m','--secrets','HF_TOKEN',
+            'pytorch/pytorch:2.8.0-cuda12.8-cudnn9-devel','--','bash','-lc',setup]
+
+
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('stage',choices=['train','proxy']);p.add_argument('revision')
