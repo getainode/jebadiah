@@ -1,0 +1,40 @@
+{
+  "model_repo": "frontier-infra/jebadiah-9b-v2-1-probe-b-s18",
+  "model_revision": "cda11af970b00b1c39b7af02b1b6c19ff4340370",
+  "checkpoint_revision": "ba6435c68b81c8386355458d20edd80ae11a6d53",
+  "private": true,
+  "weights": {
+    "model.safetensors-00001-of-00004.safetensors": {
+      "size": 5276436248,
+      "sha256": "f9e5cae8bec542951d288683603dcb2cb825ec18d9670c75f3730b4b04838735"
+    },
+    "model.safetensors-00002-of-00004.safetensors": {
+      "size": 5335161536,
+      "sha256": "cf59de64fe3af44cdb136dd8417c468ad3058264bd21bada2ff15271501ce1a3"
+    },
+    "model.safetensors-00003-of-00004.safetensors": {
+      "size": 5368717472,
+      "sha256": "7ff0bf52aa1b45c9e0341a8b6234f37fc248c41e99d1ddaa05f5a0682d619082"
+    },
+    "model.safetensors-00004-of-00004.safetensors": {
+      "size": 3325988600,
+      "sha256": "53fb414a100caacbd70aa6ba7758e3431a10237c32efc1f9061c1982a5860111"
+    }
+  },
+  "gate": {
+    "questions": 260,
+    "identical_picks": 260,
+    "agreement": 1.0,
+    "max_probability_delta": 0.01266545057296753,
+    "clear_margin_flips": 0,
+    "margin_threshold": 0.05,
+    "max_delta_allowed": 0.05
+  },
+  "notices": {
+    "NOTICE-Corr2Cause.txt": "5a2e4417d27849586ad9eefdf63f81b45100cec83baadc8dfbeb49054d367d38",
+    "NOTICE-MASSIVE.txt": "2202da05542d940e127f064165f0faed366399a900108337c0b8dc48a0f6ff3d",
+    "NOTICE-SpaceNLI.txt": "ac65b6957472ea27034d2b4900094556cb8d37f5d235685759c7faa524e69910",
+    "NOTICE-DeepMind.txt": "b936d1c7bdf99207da3190b1b8886df2813cf22b5e2eed1898a86ee12f3361c2",
+    "LICENSE-DeepMind.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  }
+}

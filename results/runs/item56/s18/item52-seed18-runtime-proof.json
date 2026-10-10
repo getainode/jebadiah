@@ -1,0 +1,10 @@
+{
+  "control": "A3 seed 18",
+  "original_seed": 17,
+  "control_seed": 18,
+  "runtime_changed_bytes": 1,
+  "original_runtime_commit": "86a8203d792463536eb009a4d8da6c8681ffdd99",
+  "original_pipeline_sha256": "a1a728024bd35ca8c0680262a5123aee7c97fc0c5339b82d5f82d143b87563b6",
+  "seed18_pipeline_sha256": "d6c24c18fe5c64272c648800f64f946847521eff052d75da05331faa912066d0",
+  "only_change": "v21_pipeline.py config seed literal 17 to 18"
+}

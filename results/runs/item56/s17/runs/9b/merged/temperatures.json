@@ -1,0 +1,78 @@
+{
+ "temperatures": {
+  "choice": 1.0292,
+  "noul": 0.9834,
+  "score": 0.6269
+ },
+ "applied_target": "train",
+ "score_fit": "hard",
+ "calib_file": "/root/.cache/huggingface/hub/datasets--frontier-infra--jebadiah-data-v2-1-item47/snapshots/1de4a087bf4aa8e7ffd2de99f0abefea7a7b2c80/probe-b/calib.jsonl",
+ "n": {
+  "choice": 128,
+  "noul": 96,
+  "score": 288
+ },
+ "fits": {
+  "hard": {
+   "choice": {
+    "T": 0.4207,
+    "nll_before": 0.425,
+    "nll_after": 0.3251
+   },
+   "noul": {
+    "T": 0.3745,
+    "nll_before": 0.327,
+    "nll_after": 0.2539
+   },
+   "score": {
+    "T": 0.6269,
+    "nll_before": 0.8792,
+    "nll_after": 0.8353
+   }
+  },
+  "train": {
+   "choice": {
+    "T": 1.0292,
+    "nll_before": 0.6474,
+    "nll_after": 0.6473
+   },
+   "noul": {
+    "T": 0.9834,
+    "nll_before": 0.4558,
+    "nll_after": 0.4558
+   },
+   "score": {
+    "T": 1.0251,
+    "nll_before": 1.0617,
+    "nll_after": 1.0616
+   }
+  }
+ },
+ "nll_before": {
+  "choice": 0.6474,
+  "noul": 0.4558,
+  "score": 0.8792
+ },
+ "nll_after": {
+  "choice": 0.6473,
+  "noul": 0.4558,
+  "score": 0.8353
+ },
+ "ece_before": {
+  "choice": 0.1498,
+  "noul": 0.0965,
+  "score": 0.1248
+ },
+ "ece_after": {
+  "choice": 0.1535,
+  "noul": 0.0947,
+  "score": 0.0756
+ },
+ "accuracy": {
+  "choice": 0.8594,
+  "noul": 0.8646,
+  "score": 0.6285
+ },
+ "score_targets": "ordinal",
+ "score_ordinal_adjacent": 0.2
+}

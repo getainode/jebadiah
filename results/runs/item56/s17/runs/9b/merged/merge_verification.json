@@ -1,0 +1,9 @@
+{
+  "questions": 260,
+  "identical_picks": 259,
+  "agreement": 0.9961538461538462,
+  "max_probability_delta": 0.011040806770324707,
+  "clear_margin_flips": 0,
+  "margin_threshold": 0.05,
+  "max_delta_allowed": 0.05
+}

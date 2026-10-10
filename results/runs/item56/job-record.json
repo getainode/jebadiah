@@ -8,12 +8,28 @@
   "seeds": {
     "17": {
       "training_job": "6ac9fd16095c5780893107cb",
-      "timeout_minutes": 150
+      "timeout_minutes": 150,
+      "model_revision": "e1cdfee0d3659494b6451bf2fb3f08007f77a552",
+      "checkpoint_revision": "a2be3b498b615b6e13be53273e3d03b1e5f09778",
+      "training_status": "COMPLETED",
+      "training_running_seconds": 3484,
+      "estimated_training_usd": 2.661388888888889,
+      "proxy_job": "6aca0b00095c578089310efb",
+      "proxy_run": "jebadiah-9b-v2-1-probe-b-s17-e1cdfee0-proxy-0.3-10pct"
     },
     "18": {
       "training_job": "6ac9fd16fee2c90070185309",
-      "timeout_minutes": 150
+      "timeout_minutes": 150,
+      "model_revision": "cda11af970b00b1c39b7af02b1b6c19ff4340370",
+      "checkpoint_revision": "ba6435c68b81c8386355458d20edd80ae11a6d53",
+      "training_status": "COMPLETED",
+      "training_running_seconds": 3485,
+      "estimated_training_usd": 2.6621527777777776,
+      "proxy_job": "6aca0b00095c578089310efc",
+      "proxy_run": "jebadiah-9b-v2-1-probe-b-s18-cda11af9-proxy-0.3-10pct"
     }
   },
-  "launch_method": "Authenticated Atlas HF CLI; connector validation does not support requested RTX PRO 6000"
+  "launch_method": "Authenticated Atlas HF CLI; connector validation does not support requested RTX PRO 6000",
+  "evaluation_code_revision": "9bd4979acbdef044d33ce3df4607239a73c63b8b",
+  "diagnostic_job": "6aca0b00fee2c90070185c38"
 }
