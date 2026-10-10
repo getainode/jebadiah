@@ -1,0 +1,12 @@
+{
+  "training_job": "6ac99854095c57808930c4bf",
+  "training_code_revision": "e656e8a430ce038e963517942929b5e08833ac7e",
+  "original_runtime_commit": "86a8203d792463536eb009a4d8da6c8681ffdd99",
+  "existing_results_revision": "b9aadd6cf73e6317afc7491b2e0796426fb9ed50",
+  "suite_revision": "e57106b5e0698e74bd1a88b3b4c19b94a0dc8328",
+  "caps_minutes": {
+    "training": 135,
+    "proxy": 35
+  },
+  "allocation_ceiling_usd": 7.791666666666667
+}

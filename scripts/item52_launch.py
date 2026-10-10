@@ -57,8 +57,8 @@ exit "$status"
         setup = f'''set -euo pipefail
 export HF_HUB_DISABLE_XET=0
 pip install -q 'huggingface_hub==1.33.0' hf_xet
-hf download {RESULTS} --revision {PROXY_CODE} --include 'code/*' --repo-type dataset --local-dir /tmp/item52-src
-ENGINE=jebadiah_engine:JebadiahEngine RUN_NAME={name} ENGINE_OPTS={shlex.quote(options)} RESULTS_REPO={RESULTS} SUITE_DATASET=jbrashear/decision-index-suite-0.3 SYNC_SEC=120 ROWS_IN_SUITE='' LIMIT='' ATTEMPTS=1 bash /tmp/item52-src/code/indexrun-job.sh 2>&1 | tee /workspace/item52-indexrun-job.log
+hf download {RESULTS} --revision {PROXY_CODE} --include 'code/*' --repo-type dataset --local-dir /tmp/src
+ENGINE=jebadiah_engine:JebadiahEngine RUN_NAME={name} ENGINE_OPTS={shlex.quote(options)} RESULTS_REPO={RESULTS} SUITE_DATASET=jbrashear/decision-index-suite-0.3 SYNC_SEC=120 ROWS_IN_SUITE='' LIMIT='' ATTEMPTS=1 bash /tmp/src/code/indexrun-job.sh 2>&1 | tee /workspace/item52-indexrun-job.log
 '''
         image, minutes = 'pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime', 35
     return ['hf', 'jobs', 'run', '--detach', '--name', f'item52-{stage}',
