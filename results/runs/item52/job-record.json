@@ -36,7 +36,11 @@
     "estimated_training_usd": 2.3130555555555556,
     "optimizer_runtime_seconds": 2196.8,
     "proxy_job": "6ac9b17c095c57808930d46f",
-    "proxy_launcher_code_revision": "c29da7b98b668ccb44cc0592f157e1398da885aa"
+    "proxy_launcher_code_revision": "c29da7b98b668ccb44cc0592f157e1398da885aa",
+    "proxy_running_seconds": 1124,
+    "proxy_runner_seconds": 1001.3,
+    "results_revision": "672f3419abb7ab39a6b97ef8b042439640e90041",
+    "estimated_total_usd": 3.171666666666667
   },
   "proxy_running_seconds": 1126,
   "proxy_runner_seconds": 1002.0,

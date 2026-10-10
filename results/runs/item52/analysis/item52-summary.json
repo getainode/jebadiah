@@ -186,6 +186,190 @@
           ]
         }
       }
+    },
+    "seed18-vs-a3": {
+      "baseline": 46.97468441330149,
+      "candidate": 46.66413413267085,
+      "difference": -0.31055028063063617,
+      "difference_ci95": [
+        -1.7741038388383839,
+        1.0643202748631273
+      ],
+      "areas": {
+        "knowledge": {
+          "difference": -0.6623012546500107,
+          "difference_ci95": [
+            -3.7434258160580023,
+            2.2010057331172073
+          ]
+        },
+        "language": {
+          "difference": 2.9066824133941154,
+          "difference_ci95": [
+            0.24310413616751242,
+            5.387246323500901
+          ]
+        },
+        "retrieval": {
+          "difference": 0.5496056081986964,
+          "difference_ci95": [
+            -1.6766295002781841,
+            2.856026610933056
+          ]
+        },
+        "tools": {
+          "difference": -5.438633015851451,
+          "difference_ci95": [
+            -10.695987631041506,
+            -1.847825767184989
+          ]
+        },
+        "arts": {
+          "difference": -0.06666666666666998,
+          "difference_ci95": [
+            -2.6968750000000057,
+            2.3950416666666694
+          ]
+        }
+      }
+    },
+    "rung1-vs-seed18": {
+      "baseline": 46.66413413267085,
+      "candidate": 46.091167791986884,
+      "difference": -0.5729663406839691,
+      "difference_ci95": [
+        -1.5559224841080737,
+        0.6140677005973216
+      ],
+      "areas": {
+        "knowledge": {
+          "difference": -0.4088810434712755,
+          "difference_ci95": [
+            -2.3484320534192666,
+            2.4343328637564605
+          ]
+        },
+        "language": {
+          "difference": -0.4597329702723201,
+          "difference_ci95": [
+            -3.1297486585046137,
+            2.103997554570792
+          ]
+        },
+        "retrieval": {
+          "difference": -2.1742741959523926,
+          "difference_ci95": [
+            -4.509875394920836,
+            0.48235501033233774
+          ]
+        },
+        "tools": {
+          "difference": 1.1967811639996029,
+          "difference_ci95": [
+            -0.43195690211666005,
+            3.0628693869692594
+          ]
+        },
+        "arts": {
+          "difference": -1.318333333333328,
+          "difference_ci95": [
+            -4.031708333333336,
+            1.4961666666666613
+          ]
+        }
+      }
+    },
+    "rung2-vs-seed18": {
+      "baseline": 46.66413413267085,
+      "candidate": 45.95477972143606,
+      "difference": -0.7093544112347914,
+      "difference_ci95": [
+        -2.3430451962506216,
+        0.8992670771275252
+      ],
+      "areas": {
+        "knowledge": {
+          "difference": -0.4812143768046049,
+          "difference_ci95": [
+            -3.508208181636922,
+            2.916128834387882
+          ]
+        },
+        "language": {
+          "difference": -1.9774849713004485,
+          "difference_ci95": [
+            -4.466707662873602,
+            0.5084701507780564
+          ]
+        },
+        "retrieval": {
+          "difference": -0.31518603847053583,
+          "difference_ci95": [
+            -2.642802410737092,
+            1.6579286317890685
+          ]
+        },
+        "tools": {
+          "difference": -0.577292910074469,
+          "difference_ci95": [
+            -6.701382828042615,
+            5.659991262641711
+          ]
+        },
+        "arts": {
+          "difference": 0.9483333333333377,
+          "difference_ci95": [
+            -2.1168750000000007,
+            4.075041666666662
+          ]
+        }
+      }
+    },
+    "rung2b-vs-seed18": {
+      "baseline": 46.66413413267085,
+      "candidate": 46.67517040087475,
+      "difference": 0.01103626820389536,
+      "difference_ci95": [
+        -1.2197106247935943,
+        1.2251839932778628
+      ],
+      "areas": {
+        "knowledge": {
+          "difference": 0.5530375854805563,
+          "difference_ci95": [
+            -2.579446910594635,
+            3.962346571760032
+          ]
+        },
+        "language": {
+          "difference": 2.812380692190395,
+          "difference_ci95": [
+            0.35431943327873067,
+            5.4231899083229225
+          ]
+        },
+        "retrieval": {
+          "difference": -4.605156286743963,
+          "difference_ci95": [
+            -6.7828489062974775,
+            -2.3871894772268916
+          ]
+        },
+        "tools": {
+          "difference": 0.9037037037037052,
+          "difference_ci95": [
+            -0.6406069311845842,
+            2.536815002623661
+          ]
+        },
+        "arts": {
+          "difference": -1.0200000000000031,
+          "difference_ci95": [
+            -4.3580416666666695,
+            2.3026666666666777
+          ]
+        }
+      }
     }
   },
   "benchmarks": {
@@ -217,6 +401,12 @@
       "rung2b": {
         "raw": 0.632,
         "skill": 0.264,
+        "coverage": 1.0,
+        "raw_metric": "accuracy"
+      },
+      "seed18": {
+        "raw": 0.646,
+        "skill": 0.292,
         "coverage": 1.0,
         "raw_metric": "accuracy"
       }
@@ -251,6 +441,12 @@
         "skill": 0.5831,
         "coverage": 1.0,
         "raw_metric": "macro-F1"
+      },
+      "seed18": {
+        "raw": 0.7435432000949243,
+        "skill": 0.742,
+        "coverage": 1.0,
+        "raw_metric": "macro-F1"
       }
     },
     "POP909": {
@@ -281,6 +477,12 @@
       "rung2b": {
         "raw": 0.06349206349206349,
         "skill": 0.0562,
+        "coverage": 1.0,
+        "raw_metric": "cluster macro accuracy"
+      },
+      "seed18": {
+        "raw": 0.082010582010582,
+        "skill": 0.0748,
         "coverage": 1.0,
         "raw_metric": "cluster macro accuracy"
       }
@@ -321,8 +523,35 @@
       "retrieval": 46.23,
       "tools": 63.190000000000005,
       "arts": 32.31
+    },
+    "seed18": {
+      "knowledge": 30.97,
+      "language": 53.23,
+      "retrieval": 50.839999999999996,
+      "tools": 62.29,
+      "arts": 33.33
     }
   },
   "replicate_loses_tools_vs_a3": false,
-  "replicate_loses_clinc_vs_a3": false
+  "replicate_loses_clinc_vs_a3": false,
+  "a3_two_seed_spread": {
+    "seeds": [
+      17,
+      18
+    ],
+    "headline_range": [
+      46.66413413267085,
+      46.97468441330149
+    ],
+    "headline_width": 0.31055028063063617,
+    "tools_range": [
+      62.29,
+      67.73
+    ],
+    "clinc_raw_range": [
+      0.7435432000949243,
+      0.7681640964399585
+    ],
+    "note": "Two-seed descriptive range, not a training-variance confidence interval; the seed-17 repeat is not a third independent seed."
+  }
 }

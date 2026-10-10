@@ -1,0 +1,70 @@
+{
+  "engine": "jebadiah_engine:JebadiahEngine",
+  "engine_options": {
+    "model": "frontier-infra/jebadiah-9b-v2-1-a3-seed18",
+    "revision": "2899e9d4c785ba0f845245c66c9c4e740efeeab9",
+    "prefix_cache": true,
+    "max_batch": 64,
+    "cuda_alloc_conf": "expandable_segments:True",
+    "batch_tokens": 32768
+  },
+  "model_source": {
+    "kind": "merged",
+    "model_repo": "frontier-infra/jebadiah-9b-v2-1-a3-seed18",
+    "model_revision": "2899e9d4c785ba0f845245c66c9c4e740efeeab9",
+    "loaded_from": "hub snapshot",
+    "inference_code": {
+      "ainode_prompt_verbatim.py": "61e81179cbe39fc02607cda64770e02a433356ff1ef0020bea893d610cb9e8f9",
+      "jebadiah_prompt.py": "c0e74561a33c664e958faf0ed769239649944687c613460aa49823d711464b38",
+      "jebadiah_model.py": "97567c45146e8f31c53491e07f9d3cffad8ef9163290565981ae6797a3c70f33"
+    },
+    "inference_code_source": "https://huggingface.co/frontier-infra/jebadiah-9b-v2-1-a3-seed18/tree/2899e9d4c785ba0f845245c66c9c4e740efeeab9/scripts",
+    "prompt_source_sha256": "d2660ebec28bd3f1704235bda88d24a397c1c62475e740519cb8ef2d08f25fdd",
+    "prompt_source_commit": "e5c089386e0239c9eb270eeb490d181722b8da5b",
+    "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "chat_template_sha256_expected": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "chat_template_kwargs": {
+      "add_generation_prompt": true,
+      "enable_thinking": false,
+      "thinking": false
+    },
+    "temperatures": {
+      "choice": 1.109,
+      "noul": 0.9795,
+      "score": 0.6104
+    },
+    "fp32_candidate_logits": true,
+    "declared_context_tokens": 262144,
+    "declared_max_options": 588,
+    "ainode_label_alphabet": 68,
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "attn": "sdpa",
+    "batching": {
+      "max_batch": 64,
+      "batch_tokens": 32768,
+      "token_budget": 262144,
+      "prefix_cache": true,
+      "prefix_align": 64,
+      "pad_waste": 0.15,
+      "cuda_alloc_conf": "expandable_segments:True",
+      "mem_cap_gb": null
+    },
+    "delta_rule_kernel": "transformers default (flash-linear-attention when installed, else the torch reference)",
+    "versions": {
+      "torch": "2.8.0+cu128",
+      "transformers": "5.17.0",
+      "python": "3.11.13"
+    }
+  },
+  "device": "cuda",
+  "torch": "2.8.0+cu128",
+  "platform": "Linux-6.12.100-125.179.amzn2023.x86_64-x86_64-with-glibc2.35",
+  "machine": "x86_64",
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "loaded_seconds": 20.412481634877622,
+  "frozen_corpus_sha256": "74d8162296f404a676624d87bf98abb920d46acff3c38be6a12504131bc43405",
+  "rows_path": "/tmp/item31-proxy-rows.jsonl",
+  "runner_sha256": "f4c9f36c4c557f537f1d8184db7bf00c5a84d9f4f0aa67f8c06198cead25818d",
+  "latency": "In-process wall time of one request: AINode rendering, tokenization and one label-token logit read per question; when a request has two or more questions their shared system + state token prefix runs once and each question's suffix runs from its cached keys, values and Gated DeltaNet state (suffixes batched by padded token budget); device-synchronized; excludes model loading."
+}

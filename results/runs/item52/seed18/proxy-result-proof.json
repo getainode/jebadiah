@@ -1,0 +1,14 @@
+{
+  "results_revision": "672f3419abb7ab39a6b97ef8b042439640e90041",
+  "run_name": "jebadiah-9b-v2-1-a3-seed18-2899e9d4-proxy-0.3-10pct",
+  "rows": 11079,
+  "all_ok": true,
+  "headline": 46.66,
+  "areas": {
+    "knowledge": 30.97,
+    "language": 53.23,
+    "retrieval": 50.839999999999996,
+    "tools": 62.29,
+    "arts": 33.33
+  }
+}

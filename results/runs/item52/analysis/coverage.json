@@ -28,5 +28,11 @@
     "unique_ids": 11079,
     "all_ok": true,
     "payload_hashes_match_frozen_suite": true
+  },
+  "seed18": {
+    "rows": 11079,
+    "unique_ids": 11079,
+    "all_ok": true,
+    "payload_hashes_match_frozen_suite": true
   }
 }
