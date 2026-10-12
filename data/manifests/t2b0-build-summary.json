@@ -1,0 +1,245 @@
+{
+  "a3_revision": "bb4ce7b51ec3d2a8b8a0f3057afe25a9c3c9a5ed",
+  "a3_input_hashes": {
+    "train.jsonl": "46fe2a743535a2e841d6b5aa5df479209c9e0c14f04ca1c987570acddd69e2ee",
+    "calib.jsonl": "287dfda2c301bb836f1849c9c1a17738732576d7a3c1be2e4b9f7492f8febe88",
+    "manifest.json": "2269f3721576869e7be1df1d945259d1bd6a644557fc6bb0eae2138dff0ae7a4"
+  },
+  "approved_families": {
+    "tasksource/math_qa": [
+      "math_qa",
+      "math-QA",
+      "allenai/math_qa"
+    ],
+    "nvidia/HelpSteer2": [
+      "HelpSteer2"
+    ],
+    "AndyChiang/dgen": [
+      "dgen"
+    ],
+    "GGLab/PARADISE": [
+      "PARADISE"
+    ],
+    "jaredfern/codah": [
+      "codah"
+    ],
+    "mteb/amazon_counterfactual": [
+      "amazon_counterfactual"
+    ],
+    "propsegment/nli": [
+      "propsegment",
+      "sihaochen/propsegment"
+    ],
+    "tasksource/arct": [
+      "arct"
+    ],
+    "tasksource/equate": [
+      "equate"
+    ],
+    "unigram/FOL-nli": [
+      "FOL-nli"
+    ],
+    "webis/args_me": [
+      "args_me"
+    ]
+  },
+  "removed_by_family": {
+    "tasksource/math_qa": {
+      "train.jsonl": {
+        "records": 102,
+        "questions": 102,
+        "subsets": {
+          "math_qa": 102
+        }
+      }
+    },
+    "nvidia/HelpSteer2": {
+      "train.jsonl": {
+        "records": 2375,
+        "questions": 2375,
+        "subsets": {
+          "helpsteer2-helpfulness": 1495,
+          "helpsteer2-correctness": 220,
+          "helpsteer2-coherence": 220,
+          "helpsteer2-complexity": 220,
+          "helpsteer2-verbosity": 220
+        }
+      },
+      "calib.jsonl": {
+        "records": 156,
+        "questions": 156,
+        "subsets": {
+          "helpsteer2-helpfulness": 92,
+          "helpsteer2-correctness": 16,
+          "helpsteer2-coherence": 16,
+          "helpsteer2-complexity": 16,
+          "helpsteer2-verbosity": 16
+        }
+      }
+    },
+    "AndyChiang/dgen": {
+      "train.jsonl": {
+        "records": 102,
+        "questions": 102,
+        "subsets": {
+          "dgen": 102
+        }
+      }
+    },
+    "GGLab/PARADISE": {
+      "train.jsonl": {
+        "records": 102,
+        "questions": 102,
+        "subsets": {
+          "PARADISE": 102
+        }
+      }
+    },
+    "jaredfern/codah": {
+      "train.jsonl": {
+        "records": 102,
+        "questions": 102,
+        "subsets": {
+          "codah/codah": 102
+        }
+      }
+    },
+    "mteb/amazon_counterfactual": {
+      "train.jsonl": {
+        "records": 103,
+        "questions": 103,
+        "subsets": {
+          "amazon_counterfactual/en": 103
+        }
+      }
+    },
+    "propsegment/nli": {
+      "train.jsonl": {
+        "records": 102,
+        "questions": 102,
+        "subsets": {
+          "propsegment/nli": 102
+        }
+      }
+    },
+    "tasksource/arct": {
+      "train.jsonl": {
+        "records": 102,
+        "questions": 102,
+        "subsets": {
+          "arct": 102
+        }
+      }
+    },
+    "tasksource/equate": {
+      "train.jsonl": {
+        "records": 102,
+        "questions": 102,
+        "subsets": {
+          "equate": 102
+        }
+      }
+    },
+    "unigram/FOL-nli": {
+      "train.jsonl": {
+        "records": 103,
+        "questions": 103,
+        "subsets": {
+          "FOL-nli": 103
+        }
+      }
+    },
+    "webis/args_me": {
+      "train.jsonl": {
+        "records": 102,
+        "questions": 102,
+        "subsets": {
+          "args_me": 102
+        }
+      }
+    }
+  },
+  "original_questions": {
+    "train.jsonl": 21190,
+    "calib.jsonl": 512
+  },
+  "removed_questions": 3553,
+  "retained_rows_byte_identical_in_original_order": true,
+  "added_questions": 0,
+  "protected_index_sha256": "b92290742245132a59839fa565ecc70d691d26033533cb48eb3da702aebd9851",
+  "evidence_hashes": {
+    "a3-conflict.json": "ca616d20f75cdb4ed8204de26bd63f725bdf9dee80a5942c20ac1ac44e968a7d",
+    "legacy-raw-family-exposure.json": "3bc9854373adb1698c170ab0cfe59e104cefffc6472e6ad6b2091929534b68b2"
+  },
+  "files": {
+    "train.jsonl": {
+      "sha256": "20bb9822ea61f345b017d2623c03d5aafc2c99152c27435235fb4b45aab9d00f",
+      "bytes": 19246560,
+      "records": 13225,
+      "questions": 17793,
+      "by_set": {
+        "item25-original": 510,
+        "kev-v7-train": 2510,
+        "tasksource-filtered-full": 9063,
+        "typed-decisions-train": 1142
+      },
+      "by_type": {
+        "choice": 10809,
+        "noul": 3573,
+        "score": 3411
+      },
+      "rows": 13225
+    },
+    "calib.jsonl": {
+      "sha256": "47a091172f85ba22a8f2cf4cdd704f99225ea6e95af29a18391b1a40f76de5ad",
+      "bytes": 245564,
+      "records": 124,
+      "questions": 356,
+      "by_set": {
+        "kev-v7-train": 66,
+        "typed-decisions-train": 58
+      },
+      "by_type": {
+        "choice": 128,
+        "noul": 96,
+        "score": 132
+      },
+      "rows": 124
+    }
+  },
+  "calibration_policy": "Original A3 procedure on scrubbed calibration; no heldout fitting",
+  "scan": {
+    "scanned_records": 13349,
+    "direct_hits": 0,
+    "invalid_empty_state_records": 0,
+    "removed_families": 0,
+    "removed_records": 0,
+    "retained_records": 13349,
+    "methods": {},
+    "remaining_hits_under_scanner": 0,
+    "semantic_independence_proven": false,
+    "protected_index_sha256": "b92290742245132a59839fa565ecc70d691d26033533cb48eb3da702aebd9851",
+    "scanner_sha256": "f3c217cd0a7d6a44ef5c9405746d8c40d0634bb6b0561b79da453161d31c87af",
+    "candidates_sha256": "5d0727222e3bf776e601a58d7b128414e9fe728a6c7e9359fa8c2e84201a0deb",
+    "status": "passed"
+  },
+  "dataset_upload": {
+    "dataset": "frontier-infra/jebadiah-data-t2b",
+    "revision": "28f80a3c1430c27297e0944978bfda9310298623",
+    "private": true,
+    "folder": "t2b0/",
+    "initial_failed_revision": "cf5accb81b7108c27e6e3c3195d9e39257e268c1",
+    "code_hashes": {
+      "t2b0_launch.py": "3d9fba215997336adae7b32649079beab8efe116354c863a8d2049d9005e72a6",
+      "t2b0_persist.py": "74a49c199b2d81668531f7780c9c7f2670ec72a01fc7e2b8582549f1bc988eca",
+      "t2b0_analyze.py": "dfd6de5b368aec29a70bcb7bba021f9d8a665e382c9d417904603e79839144b8",
+      "t2b0_heldout.py": "790a81a730dc76e084ee2bb0b6906051a4ba46437a317efe1ce2d932739bfda8",
+      "t2b0_train.py": "7e323ceb503a84b8a03ff553467554f0ffcb95646b4ba8e85ae4fb8d1c258a49"
+    }
+  },
+  "heldout_input": {
+    "dataset": "frontier-infra/jebadiah-data-t2b",
+    "heldout_revision": "092e5a61556ee473339d41090b66da3aa530d7a0",
+    "heldout_sha256": "000451d29bb99b67b9b3925fb1cef5859f723cc6f5fd7c01850ec15a59fc472b"
+  }
+}

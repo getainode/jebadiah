@@ -1,0 +1,107 @@
+{
+  "clean_baseline": true,
+  "candidate_keep_decision": false,
+  "a3_reference": 46.82,
+  "a3_unrounded_two_seed_mean": 46.81940927298617,
+  "manifest_sha256": "5f6cbef2acad5cf1b0c3750362a699b9d566a05bdd6728b92dda1dd00930d056",
+  "selected_sha256": "1f92d9723b24ca5483474bf324d0ed8e5d542770f89694a579244c45a59cb7fe",
+  "per_seed": {
+    "17": {
+      "proxy": 44.553606653523076,
+      "areas": {
+        "knowledge": 33.60205567338601,
+        "language": 47.976090997643276,
+        "retrieval": 46.28200929674064,
+        "tools": 59.87780465614936,
+        "arts": 32.545
+      },
+      "proxy_records": 11079,
+      "all_proxy_records_ok": true,
+      "proxy_sha256": "67346d53204b3692c927e3cc588da9bddc6ecafa8c75eb064df2ce07d79dc039",
+      "heldout_accuracy": 0.7943333333333333,
+      "heldout_family_macro_accuracy": 0.7943333333333333,
+      "heldout_per_family": {
+        "tasksource/SDOH-NLI": {
+          "n": 600,
+          "correct": 554,
+          "accuracy": 0.9233333333333333
+        },
+        "google-research-datasets/circa": {
+          "n": 600,
+          "correct": 471,
+          "accuracy": 0.785
+        },
+        "michiel/xstance": {
+          "n": 600,
+          "correct": 503,
+          "accuracy": 0.8383333333333334
+        },
+        "google-research-datasets/poem_sentiment": {
+          "n": 600,
+          "correct": 420,
+          "accuracy": 0.7
+        },
+        "zeroshot/twitter-financial-news-sentiment": {
+          "n": 600,
+          "correct": 435,
+          "accuracy": 0.725
+        }
+      },
+      "heldout_sha256": "000451d29bb99b67b9b3925fb1cef5859f723cc6f5fd7c01850ec15a59fc472b",
+      "dataset_revision": "28f80a3c1430c27297e0944978bfda9310298623"
+    },
+    "18": {
+      "proxy": 43.67649613412877,
+      "areas": {
+        "knowledge": 30.95131247234909,
+        "language": 45.00885179075897,
+        "retrieval": 49.40957308040762,
+        "tools": 59.4239436460209,
+        "arts": 32.86333333333333
+      },
+      "proxy_records": 11079,
+      "all_proxy_records_ok": true,
+      "proxy_sha256": "5d72d822cd1fb174a5b25023a1cd217f6d95ad2202a4a3e534855cf249bf9ef0",
+      "heldout_accuracy": 0.7963333333333333,
+      "heldout_family_macro_accuracy": 0.7963333333333333,
+      "heldout_per_family": {
+        "tasksource/SDOH-NLI": {
+          "n": 600,
+          "correct": 559,
+          "accuracy": 0.9316666666666666
+        },
+        "google-research-datasets/circa": {
+          "n": 600,
+          "correct": 506,
+          "accuracy": 0.8433333333333334
+        },
+        "michiel/xstance": {
+          "n": 600,
+          "correct": 501,
+          "accuracy": 0.835
+        },
+        "google-research-datasets/poem_sentiment": {
+          "n": 600,
+          "correct": 378,
+          "accuracy": 0.63
+        },
+        "zeroshot/twitter-financial-news-sentiment": {
+          "n": 600,
+          "correct": 445,
+          "accuracy": 0.7416666666666667
+        }
+      },
+      "heldout_sha256": "000451d29bb99b67b9b3925fb1cef5859f723cc6f5fd7c01850ec15a59fc472b",
+      "dataset_revision": "28f80a3c1430c27297e0944978bfda9310298623"
+    }
+  },
+  "proxy_mean": 44.11505139382592,
+  "proxy_difference_vs_46_82": -2.704948606174078,
+  "proxy_difference_vs_unrounded_A3": -2.7043578791602485,
+  "heldout_family_mean": 0.7953333333333333,
+  "total_compute_usd": 6.302083333333334,
+  "cost_rate_usd_per_hour": 2.75,
+  "failed_setup_usd": 0.8822916666666667,
+  "analysis_private_revision": "e13d3e49542c520f723c56224bee7bce1ebd8ba9",
+  "pr_url": "https://github.com/getainode/jebadiah/pull/37"
+}

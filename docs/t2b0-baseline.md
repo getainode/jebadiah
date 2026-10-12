@@ -1,0 +1,75 @@
+# T2b-0 clean A3 baseline
+
+T2b-0 establishes the clean A3 baseline with a **44.12 proxy mean**, compared with A3's 46.82, a **2.70-point cost** for the required scrub. Its two-seed heldout-family accuracy is **79.53%**. There is no candidate keep decision. It removes all eleven approved upstream families from pinned A3, with no additions. It retains 17,793 training questions in 13,225 records and 356 calibration questions in 124 records. All retained rows preserve their original bytes and order. This becomes the clean baseline without a candidate keep decision. Compare the two-seed proxy mean with A3's 46.82 and report the independent heldout-family score.
+
+The original A3 runtime is `86a8203d792463536eb009a4d8da6c8681ffdd99`, with base `Qwen/Qwen3.5-9B` at `c202236235762e1c871ad0ccb60c8ee5ba337b9a`. Rank 16, alpha 32, learning rate 0.0001, one epoch, effective batch 8, length grouping, padding, objective, optimizer, schedule, evaluation flags and merge gate remain unchanged. Seeds are 17 and 18. Temperature fitting uses the original command on the scrubbed calibration. Calibration evaluation retains its original limit of 358, so all 356 remaining questions are evaluated.
+
+## Whole-family removal
+
+Identity resolution checks row identity, subset metadata and recorded upstream parents. All five HelpSteer2 rating views belong to the same family. The math-QA mapping covers tasksource and allenai aliases; PropSegmEnt covers its original sihaochen parent. HelpSteer and HelpSteer3 are separate retained sources. No extra parent exposure was found beyond the 3,553 questions in the evidence.
+
+| Family | Training questions removed | Calibration questions removed |
+|---|---:|---:|
+| tasksource/math_qa | 102 | 0 |
+| nvidia/HelpSteer2 | 2375 | 156 |
+| AndyChiang/dgen | 102 | 0 |
+| GGLab/PARADISE | 102 | 0 |
+| jaredfern/codah | 102 | 0 |
+| mteb/amazon_counterfactual | 103 | 0 |
+| propsegment/nli | 102 | 0 |
+| tasksource/arct | 102 | 0 |
+| tasksource/equate | 102 | 0 |
+| unigram/FOL-nli | 103 | 0 |
+| webis/args_me | 102 | 0 |
+
+The supplemented full-suite index has SHA256 `b92290742245132a59839fa565ecc70d691d26033533cb48eb3da702aebd9851`. The unchanged repository scanner checked all 13,349 retained records and found zero direct hits or invalid empty states. Both splits pass `lint_data.py --train`. Five ancestry and manifest-contract regression checks cover aliases, parents, rating siblings and false substring matches; two launcher checks preserve the recipe and proxy commands.
+
+## Private inputs and evaluation
+
+The existing private dataset `frontier-infra/jebadiah-data-t2b` contains the new `t2b0/` folder at revision `28f80a3c1430c27297e0944978bfda9310298623`. Runtime additions are pinned in that private folder, allowing jobs to run without publishing a source branch. The unchanged root `heldout.jsonl` has SHA256 `000451d29bb99b67b9b3925fb1cef5859f723cc6f5fd7c01850ec15a59fc472b`.
+
+Both seeds score all 3,000 heldout questions, 600 each from SDOH-NLI, circa, x-stance, poem sentiment and financial-news sentiment. Scoring uses the final unmerged adapter on the pinned base, the training evaluator's Scorer, canonical option menus, batch 8 and untempered candidate argmax. It fits no temperatures on the heldout. Report ordinary accuracy per family and the equal-family macro mean. Full answers persist only to private checkpoint repositories.
+
+## Jobs and cost
+
+The first two jobs failed before model loading or any optimizer step because the scrub manifest used records where the original pipeline requires rows. The metadata contract is corrected and checked by executing the unchanged original pipeline validation block against the real data. Their measured compute costs were USD 0.4400 and USD 0.4423, total USD 0.8823. Row bytes and scan results are unchanged.
+
+Each replacement seed reserves 84 minutes for training, calibration, merge, persistence and heldout scoring, then 35 minutes for the original frozen-proxy path. These four timeout ceilings sum to 238 minutes, USD 10.9083 at USD 2.75/h. Including both failed setup jobs, the entire task is bounded by USD 11.7906, below the hard USD 12 cap. No automatic retry is authorized. Every job ID and measured running-time cost will be recorded in the run log.
+
+Failed setup jobs were `6acd1fa7dd8177968b42b736` (seed 17) and `6acd1fafde32f9b0f431e385` (seed 18). Replacement training jobs are `6acd22f1de32f9b0f431ec45` (seed 17) and `6acd22fadd8177968b42c0a5` (seed 18). Both proxy jobs completed successfully. Private model destinations are `frontier-infra/jebadiah-9b-t2b0-s17` and `frontier-infra/jebadiah-9b-t2b0-s18`, with separate private checkpoint repositories. Only code, aggregate manifests and documentation are included in the authorized PR. Data, models, outputs and private suite contents remain private.
+
+## Training and heldout results
+
+Both seeds completed 2,225 optimizer steps and one epoch. Saved configuration and prompt-contract fields match A3 exactly apart from scrubbed input paths/hashes, private output routing and the approved seed. The original 2,048-token training limit truncates 30 retained presentations; A3 had 36. This behavior is unchanged. Heldout scoring has zero truncation.
+
+| Seed | Merge agreement | Maximum probability shift | Heldout family mean | Private model revision |
+|---|---:|---:|---:|---|
+| 17 | 260/260 | 0.014701 | 79.43% | `ba138d21f8dabd3c4a6c49a7499c999741a1b2ad` |
+| 18 | 257/260 | 0.011478 | 79.63% | `397dd221c335637fba9d185a00b71696356e5e5e` |
+
+Both retain the original 0.05 merge gate and have zero confident flips. Heldout family accuracy, 600 questions per family:
+
+| Family | Seed 17 | Seed 18 | Two-seed mean |
+|---|---:|---:|---:|
+| tasksource/SDOH-NLI | 92.33% (554/600) | 93.17% (559/600) | 92.75% |
+| google-research-datasets/circa | 78.50% (471/600) | 84.33% (506/600) | 81.42% |
+| michiel/xstance | 83.83% (503/600) | 83.50% (501/600) | 83.67% |
+| google-research-datasets/poem_sentiment | 70.00% (420/600) | 63.00% (378/600) | 66.50% |
+| zeroshot/twitter-financial-news-sentiment | 72.50% (435/600) | 74.17% (445/600) | 73.33% |
+
+The two-seed heldout family mean is **79.53%**. The proxy jobs are `6acd2ca9de32f9b0f4320492` (seed 17) and `6acd2ccadd8177968b42d9a3` (seed 18), each capped at 35 minutes. Completed training plus failed setup costs USD 4.5879; the two proxy timeout ceilings bound the entire task at USD 7.7963.
+
+## Final proxy and cost
+
+| Seed | Frozen proxy score | Heldout-family accuracy | Training + heldout USD | Proxy USD |
+|---|---:|---:|---:|---:|
+| 17 | 44.553607 | 79.43% | 1.8540 | 0.8571 |
+| 18 | 43.676496 | 79.63% | 1.8517 | 0.8571 |
+
+The unrounded proxy mean is **44.115051**, -2.704949 points against the stated A3 46.82 reference, or -2.704358 against A3's unrounded two-seed mean of 46.819409. Both runs contain all 11,079 frozen proxy IDs with matching payload hashes, no duplicates and all statuses successful. Native job scores and the local unchanged official scorer agree.
+
+Total compute is **USD 6.3021**, including both failed setup jobs, from 8,250 measured running seconds at USD 2.75/hour. This is a duration-based estimate. All six job IDs, statuses, durations and costs are in the run log and aggregate job receipt.
+
+Official scoring outputs, complete job receipts and training evidence are persisted privately in `jbrashear/jebadiah-9b-v2-1-index-results`, folder `analysis/t2b0-baseline`, at `e13d3e49542c520f723c56224bee7bce1ebd8ba9`. All heldout answers remain in the private checkpoint repositories. The training dataset remains pinned at `28f80a3c1430c27297e0944978bfda9310298623`.
+
+[PR 37](https://github.com/getainode/jebadiah/pull/37) contains code, aggregate manifests and documentation. It is not merged.

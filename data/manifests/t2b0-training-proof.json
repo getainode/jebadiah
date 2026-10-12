@@ -1,0 +1,100 @@
+{
+  "17": {
+    "seed": 17,
+    "model": "frontier-infra/jebadiah-9b-t2b0-s17",
+    "model_revision": "ba138d21f8dabd3c4a6c49a7499c999741a1b2ad",
+    "checkpoint_revision": "6ae3af062f2a47e0b34e58eeba2033b536a04a1d",
+    "recipe_matches_A3_except_scrubbed_data_and_approved_seed": true,
+    "steps": 2225,
+    "train_examples": 17793,
+    "calib_examples": 356,
+    "truncated_training_prompts": 30,
+    "merge_gate": {
+      "questions": 260,
+      "identical_picks": 260,
+      "agreement": 1.0,
+      "max_probability_delta": 0.014701128005981445,
+      "clear_margin_flips": 0,
+      "margin_threshold": 0.05,
+      "max_delta_allowed": 0.05
+    },
+    "heldout_family_accuracy": 0.7943333333333333,
+    "heldout_per_family": {
+      "tasksource/SDOH-NLI": {
+        "n": 600,
+        "correct": 554,
+        "accuracy": 0.9233333333333333
+      },
+      "google-research-datasets/circa": {
+        "n": 600,
+        "correct": 471,
+        "accuracy": 0.785
+      },
+      "michiel/xstance": {
+        "n": 600,
+        "correct": 503,
+        "accuracy": 0.8383333333333334
+      },
+      "google-research-datasets/poem_sentiment": {
+        "n": 600,
+        "correct": 420,
+        "accuracy": 0.7
+      },
+      "zeroshot/twitter-financial-news-sentiment": {
+        "n": 600,
+        "correct": 435,
+        "accuracy": 0.725
+      }
+    },
+    "dataset_revision": "28f80a3c1430c27297e0944978bfda9310298623"
+  },
+  "18": {
+    "seed": 18,
+    "model": "frontier-infra/jebadiah-9b-t2b0-s18",
+    "model_revision": "397dd221c335637fba9d185a00b71696356e5e5e",
+    "checkpoint_revision": "261b31d630ee27105100c95ef2588c49b78d4fbe",
+    "recipe_matches_A3_except_scrubbed_data_and_approved_seed": true,
+    "steps": 2225,
+    "train_examples": 17793,
+    "calib_examples": 356,
+    "truncated_training_prompts": 30,
+    "merge_gate": {
+      "questions": 260,
+      "identical_picks": 257,
+      "agreement": 0.9884615384615385,
+      "max_probability_delta": 0.011478185653686523,
+      "clear_margin_flips": 0,
+      "margin_threshold": 0.05,
+      "max_delta_allowed": 0.05
+    },
+    "heldout_family_accuracy": 0.7963333333333333,
+    "heldout_per_family": {
+      "tasksource/SDOH-NLI": {
+        "n": 600,
+        "correct": 559,
+        "accuracy": 0.9316666666666666
+      },
+      "google-research-datasets/circa": {
+        "n": 600,
+        "correct": 506,
+        "accuracy": 0.8433333333333334
+      },
+      "michiel/xstance": {
+        "n": 600,
+        "correct": 501,
+        "accuracy": 0.835
+      },
+      "google-research-datasets/poem_sentiment": {
+        "n": 600,
+        "correct": 378,
+        "accuracy": 0.63
+      },
+      "zeroshot/twitter-financial-news-sentiment": {
+        "n": 600,
+        "correct": 445,
+        "accuracy": 0.7416666666666667
+      }
+    },
+    "dataset_revision": "28f80a3c1430c27297e0944978bfda9310298623"
+  }
+}
