@@ -22,7 +22,8 @@ the run could not say which change hurt.
 5. **No full 175k run and no 27B run** until a combined recipe beats v2 on the proxy.
 6. **Before each run, write one line in the run log below**: what it tests, and which result means keep or drop.
 7. **Report the independent new-domain check for every seed**: all 3,000 questions in
-   private `frontier-infra/jebadiah-data-t2b/heldout.jsonl`, 600 from each of five
+   private `frontier-infra/jebadiah-data-t2b/heldout.jsonl`, pinned at
+   `28f80a3c1430c27297e0944978bfda9310298623`, 600 from each of five
    whole source families. Use the training evaluator's untempered candidate argmax,
    report per-family accuracy and their equal-family mean, and keep this heldout
    outside training and temperature fitting. T2b-0's two-seed family mean is 79.53%.
