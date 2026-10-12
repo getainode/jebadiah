@@ -127,3 +127,5 @@ source-first contamination and license manifests.
 | T2b-0 seed 17 proxy | A3 | Approved baseline proxy, seed 17 | Clean baseline, no keep decision | Job `6acd2ca9de32f9b0f4320492`; COMPLETED; 1122 running seconds, USD 0.8571; timeout 35 min, allocation ceiling USD 1.6042; proxy 44.5536, all 11,079 records successful. |
 
 | T2b-0 seed 18 proxy | A3 | Approved baseline proxy, seed 18 | Clean baseline, no keep decision | Job `6acd2ccadd8177968b42d9a3`; COMPLETED; 1122 running seconds, USD 0.8571; timeout 35 min, allocation ceiling USD 1.6042; proxy 43.6765, all 11,079 records successful. |
+
+| T2b | T2b-0 | the t2b tranche (256,965 questions) added to the scrubbed A3 data, one epoch, seeds 17 and 18 | keep if the paired bootstrap 95% CI vs the T2b-0 two-seed mean (44.12) is above zero; also report the heldout families vs 79.53%; Tools deltas within 6 are noise; CLINC losses beyond 2.5 count as regressions |
