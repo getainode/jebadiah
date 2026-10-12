@@ -113,3 +113,14 @@ The standalone variant check is `python -m unittest discover -s eval/decision-in
 The shell payload is syntax-checked with `bash -n scripts/track1_proxy_job.sh`.
 Suite processes ran directly without pipes, and their real exit codes were
 propagated by the parent subprocess runner.
+
+## Launched
+
+2026-10-12 13:06 CDT by the lead, after Desk #833 (default A). Commit c860af0, flavor rtx-pro-6000 at USD 2.75/h, spend ceiling USD 11.46 (timeouts 50 m and 3 x 70 m).
+
+| Run | HF job id |
+|---|---|
+| T1a baseline | 6acd2198de32f9b0f431e85b |
+| T1b reverse_avg | 6acd2198dd8177968b42bcda |
+| T1c repeat_payload | 6acd2199de32f9b0f431e85d |
+| T1d reverse_avg_below 0.7 | 6acd2199de32f9b0f431e85f |
