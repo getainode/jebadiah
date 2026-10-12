@@ -69,9 +69,10 @@ class OOM(Exception):
     pass
 
 
-def engine(reverse=False, repeat=False, prefix=False):
+def engine(reverse=False, repeat=False, prefix=False, below=None):
     e = engine_module.JebadiahEngine.__new__(engine_module.JebadiahEngine)
-    e.reverse_avg, e.repeat_payload, e.prefix_cache = reverse, repeat, prefix
+    e.reverse_avg, e.repeat_payload, e.prefix_cache = reverse or below is not None, repeat, prefix
+    e.reverse_avg_below = below
     e.scorer = Scorer(repeat)
     e.tok = e.scorer.tok
     e.answer_from_probs = jp.answer_from_probs
@@ -128,6 +129,19 @@ class VariantsTest(unittest.TestCase):
                 self.assertNotIn('reverse_avg', raw['n'])
                 self.assertEqual(sum(t == 'noul' for _, t in e.scorer.seen), 2)
                 self.assertEqual(bool(calls), prefix)
+
+    def test_reverse_avg_below_gate(self):
+        # threshold 0: the forward read is always confident enough, so the result equals a single forward read
+        plain, _ = engine()('state', {'c': CHOICE, 'n': NOUL})
+        never, raw = engine(below=0.0)('state', {'c': CHOICE, 'n': NOUL})
+        self.assertEqual(never['answers']['c']['probabilities'], plain['answers']['c']['probabilities'])
+        self.assertTrue(raw['c']['reverse_avg_skipped'])
+        self.assertNotIn('reverse_avg', raw['c'])
+        # threshold above 1: always averaged, identical to plain reverse averaging
+        always, raw2 = engine(below=1.01)('state', {'c': CHOICE, 'n': NOUL})
+        rev, _ = engine(reverse=True)('state', {'c': CHOICE, 'n': NOUL})
+        self.assertEqual(always['answers']['c']['probabilities'], rev['answers']['c']['probabilities'])
+        self.assertTrue(raw2['c']['reverse_avg'])
 
     def test_prefix_fallback_and_oom_retry_restore_batch_settings(self):
         for prefix in (False, True):

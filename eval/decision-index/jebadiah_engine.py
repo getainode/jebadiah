@@ -117,7 +117,7 @@ class JebadiahEngine(Engine):
 
     def __init__(self, adapter=ADAPTER_REPO, adapter_revision=ADAPTER_REVISION, base=BASE_REPO,
                  base_revision=BASE_REVISION, device=None, dtype=None, attn="sdpa", temperatures=True,
-                 max_tokens=None, token_budget=32768, max_batch=8, mps_fast_delta=True, reverse_avg=False, repeat_payload=False,
+                 max_tokens=None, token_budget=32768, max_batch=8, mps_fast_delta=True, reverse_avg=False, repeat_payload=False, reverse_avg_below=None,
                  model=None, revision=None, prefix_cache=False, batch_tokens=None, prefix_align=64,
                  pad_waste=0.15, cuda_alloc_conf=None, **options):
         super().__init__(**options)
@@ -125,6 +125,11 @@ class JebadiahEngine(Engine):
             os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", str(cuda_alloc_conf))
         self.reverse_avg = _flag(reverse_avg)
         self.repeat_payload = _flag(repeat_payload)
+        # Decider-style gate: keep the forward read when its top probability is at least this value.
+        # ponytail: both orders are still scored; skip the reverse read when confident only if latency matters.
+        self.reverse_avg_below = None if reverse_avg_below in (None, "", "none") else float(reverse_avg_below)
+        if self.reverse_avg_below is not None:
+            self.reverse_avg = True
         self.prefix_cache = _flag(prefix_cache)
         self.batch_tokens = int(batch_tokens) if batch_tokens else None
         self.prefix_align = max(1, int(prefix_align))
@@ -216,7 +221,8 @@ class JebadiahEngine(Engine):
             self.provenance["model_repo"] = adapter
             self.provenance["model_revision"] = adapter_revision
         if self.reverse_avg or self.repeat_payload:
-            self.provenance["inference_variants"] = {"reverse_avg": self.reverse_avg, "repeat_payload": self.repeat_payload}
+            self.provenance["inference_variants"] = {"reverse_avg": self.reverse_avg, "repeat_payload": self.repeat_payload,
+                                                    "reverse_avg_below": self.reverse_avg_below}
 
     latency = ("In-process wall time of one request: AINode rendering, tokenization and one label-token "
                "logit read per question (questions batched by padded token budget, no prefix cache), "
@@ -444,6 +450,10 @@ class JebadiahEngine(Engine):
             keys = rendered[qid][0].keys
             forward = dict(zip(keys, probs[qid]))
             reverse = dict(zip(rendered[rid][0].keys, probs[rid]))
+            if self.reverse_avg_below is not None and max(forward.values()) >= self.reverse_avg_below:
+                raw[qid]["reverse_avg_skipped"] = True
+                raw[qid]["order_probabilities"] = {"forward": forward, "reverse": reverse}
+                continue
             # Preserve zero support from underflow in either read: log(0) = -inf.
             logs = [(math.log(forward[k]) + math.log(reverse[k])) / 2
                     if forward[k] > 0 and reverse[k] > 0 else -math.inf for k in keys]

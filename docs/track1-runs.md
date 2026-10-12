@@ -43,14 +43,21 @@ TRACK1_JOB=$(cat scripts/track1_proxy_job.sh)
 # Use the logged-in local HF token without displaying its value.
 export HF_TOKEN=$(cat ~/.cache/huggingface/token)
 
-# T1a baseline omitted: reuse the existing A3 result (46.97).
+# T1a: baseline through the NEW engine, both options off. Run it so every variant differs from
+# its baseline by its option alone (the new engine also adds explicit merged-model loading).
+hf jobs run --detach --name track1-baseline-proxy --flavor rtx-pro-6000 --timeout 50m --secrets HF_TOKEN --env TRACK1_REVISION="$TRACK1_REVISION" --env TRACK1_POLICY=baseline pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime -- bash -lc "$TRACK1_JOB"
 
 # T1b: reverse_avg only.
 hf jobs run --detach --name track1-reverse-avg-proxy --flavor rtx-pro-6000 --timeout 70m --secrets HF_TOKEN --env TRACK1_REVISION="$TRACK1_REVISION" --env TRACK1_POLICY=reverse_avg pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime -- bash -lc "$TRACK1_JOB"
 
 # T1c: repeat_payload only.
 hf jobs run --detach --name track1-repeat-payload-proxy --flavor rtx-pro-6000 --timeout 70m --secrets HF_TOKEN --env TRACK1_REVISION="$TRACK1_REVISION" --env TRACK1_POLICY=repeat_payload pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime -- bash -lc "$TRACK1_JOB"
+
+# T1d: reversed read averaged only when the forward top probability is under 0.7 (Decider gate).
+hf jobs run --detach --name track1-reverse-avg-below-proxy --flavor rtx-pro-6000 --timeout 70m --secrets HF_TOKEN --env TRACK1_REVISION="$TRACK1_REVISION" --env TRACK1_POLICY=reverse_avg_below pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime -- bash -lc "$TRACK1_JOB"
 ```
+
+The lead added T1a back (a fresh baseline through the new engine; the reused A3 result stays as a cross-check) and T1d (the gated variant).
 
 At the [run rules](run-rules.md) rate of USD 2.75/h:
 

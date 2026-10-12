@@ -2,9 +2,9 @@
 # Remote job payload only. The lead submits it after Desk decision #833.
 set -euo pipefail
 : "${TRACK1_REVISION:?immutable getainode/jebadiah source SHA required}"
-: "${TRACK1_POLICY:?baseline, reverse_avg or repeat_payload required}"
+: "${TRACK1_POLICY:?baseline, reverse_avg, reverse_avg_below or repeat_payload required}"
 [[ "$TRACK1_REVISION" =~ ^[0-9a-f]{40}$ ]] || exit 2
-case "$TRACK1_POLICY" in baseline|reverse_avg|repeat_payload) ;; *) exit 2 ;; esac
+case "$TRACK1_POLICY" in baseline|reverse_avg|reverse_avg_below|repeat_payload) ;; *) exit 2 ;; esac
 export HF_HUB_DISABLE_XET=0
 pip install -q 'huggingface_hub==1.33.0' hf_xet
 hf download jbrashear/jebadiah-9b-v2-1-index-results \
@@ -35,7 +35,10 @@ PY
 export ENGINE=jebadiah_engine:JebadiahEngine
 export RUN_NAME="jebadiah-9b-v2-1-de19e80e-track1-${TRACK1_POLICY}-${TRACK1_REVISION:0:8}-proxy-0.3-10pct"
 export ENGINE_OPTS='--option model=frontier-infra/jebadiah-9b-v2-1 --option revision=de19e80e18aa23420be410d54fdee435587eaad3 --option prefix_cache=true --option max_batch=64 --option cuda_alloc_conf=expandable_segments:True --option batch_tokens=32768'
-if [[ "$TRACK1_POLICY" != baseline ]]; then
+if [[ "$TRACK1_POLICY" == reverse_avg_below ]]; then
+  # Decider gate: average the reversed read only when the forward top probability is under 0.7
+  ENGINE_OPTS+=" --option reverse_avg_below=0.7"
+elif [[ "$TRACK1_POLICY" != baseline ]]; then
   ENGINE_OPTS+=" --option ${TRACK1_POLICY}=true"
 fi
 export RESULTS_REPO=jbrashear/jebadiah-9b-v2-1-index-results
