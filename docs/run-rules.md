@@ -8,10 +8,12 @@ the run could not say which change hurt.
 
 1. **The baseline to beat is 9B v2: 44.67** on the frozen 10% Decision Index proxy
    (`eval/decision-index/proxy-0.3-10pct/`, manifest SHA256 `74d81622...3405`).
-   The 9B keep baseline is now the **two-seed A3 average: 46.82**
-   (seeds 17 and 18: 46.97 and 46.66). New rungs must beat that average
-   under rule 2, while v2 remains the comparison floor. Paired bootstrap draws
-   compare the candidate score with the mean of both A3 scores on the same draws.
+   The 9B clean comparison baseline is now the **two-seed T2b-0 average: 44.12**
+   (seeds 17 and 18: 44.55 and 43.68), after the mandatory whole-family scrub.
+   The earlier A3 average, 46.82, remains the historical reference for the scrub cost.
+   T2b-0 becomes the clean baseline without a candidate keep decision. New rungs
+   compare with the mean of both T2b-0 seeds on the same paired bootstrap draws
+   under rule 2, while v2 remains the comparison floor.
 2. **One change per run**, measured against the current best recipe on that proxy, with the paired group
    bootstrap interval (`bootstrap.py`).
 3. **Keep a change only if it beats the baseline beyond the noise** (the 95% interval of the difference is above
@@ -19,6 +21,11 @@ the run could not say which change hurt.
 4. **Combine changes only after each has proven itself alone**, then measure the combination as its own run.
 5. **No full 175k run and no 27B run** until a combined recipe beats v2 on the proxy.
 6. **Before each run, write one line in the run log below**: what it tests, and which result means keep or drop.
+7. **Report the independent new-domain check for every seed**: all 3,000 questions in
+   private `frontier-infra/jebadiah-data-t2b/heldout.jsonl`, 600 from each of five
+   whole source families. Use the training evaluator's untempered candidate argmax,
+   report per-family accuracy and their equal-family mean, and keep this heldout
+   outside training and temperature fitting. T2b-0's two-seed family mean is 79.53%.
 
 Constraints are not experiments. The source-level contamination rule and the license manifest always apply to
 anything we ship; a run that measures their cost is still a single-change run.
@@ -104,18 +111,18 @@ source-first contamination and license manifests.
 
 | ITEM 56 outside-data PROBE B, seeds 17 and 18 | Two-seed A3 mean 46.82 | Jason option B, Desk #646: untouched A3 plus exact scanned Corr2Cause, SpaceNLI, MASSIVE and DeepMind math additions; original A3 runtime and one epoch; exposure increases | Mean of probe seeds beats unrounded mean of A3 seeds on identical paired whole-group bootstrap draws with 95% interval entirely above zero, and mean CLINC macro-F1 loses at most 2.5 points; retain 0.05 merge gate | DROP: seeds 17/18 score 46.6834/46.2156; mean 46.4495 vs 46.8194, difference -0.3699 [-1.4626, +0.6483]; CLINC guard passes (+0.7469 mean points); no split or promotion; all jobs completed, $7.6343 estimated compute |
 
-| T2b-0 | A3 | the new whole-family scrub alone (11 families) on A3, seeds 17 and 18 | it becomes the clean baseline (no keep decision); report its proxy mean against A3's 46.82 and the heldout-family score | Prepared and zero-hit verified; dataset cf5accb81b7108c27e6e3c3195d9e39257e268c1; pre-launch timeout reservation: two 90-minute train/heldout jobs plus two 35-minute proxy jobs, 250 minutes at USD 2.75/h, at most USD 11.4583 under the USD 12 cap; job IDs pending. |
+| T2b-0 | A3 | the new whole-family scrub alone (11 families) on A3, seeds 17 and 18 | it becomes the clean baseline (no keep decision); report its proxy mean against A3's 46.82 and the heldout-family score | Clean baseline: seeds 17/18 proxy 44.5536/43.6765; mean 44.1151 vs A3 46.82, -2.7049 points. Heldout-family accuracy 79.43%/79.63%, mean 79.53%. Removed 3,553 questions across 11 families (3,397 train, 156 calibration); zero direct hits. Dataset 28f80a3c1430c27297e0944978bfda9310298623. All jobs finished; USD 6.3021 including USD 0.8823 failed setup; PR 37, unmerged. |
 
-| T2b-0 seed 17 train | A3 | Approved baseline train, seed 17 | Clean baseline, no keep decision | Job `6acd1fa7dd8177968b42b736`; timeout 90 min, maximum USD 4.1250; measured cost pending. |
+| T2b-0 seed 17 train | A3 | Approved baseline train, seed 17 | Clean baseline, no keep decision | Job `6acd1fa7dd8177968b42b736`; ERROR; 576 running seconds, USD 0.4400; timeout 90 min, allocation ceiling USD 4.1250; manifest schema failure before model loading or optimizer steps. |
 
-| T2b-0 seed 18 train | A3 | Approved baseline train, seed 18 | Clean baseline, no keep decision | Job `6acd1fafde32f9b0f431e385`; timeout 90 min, maximum USD 4.1250; measured cost pending. |
+| T2b-0 seed 18 train | A3 | Approved baseline train, seed 18 | Clean baseline, no keep decision | Job `6acd1fafde32f9b0f431e385`; ERROR; 579 running seconds, USD 0.4423; timeout 90 min, allocation ceiling USD 4.1250; manifest schema failure before model loading or optimizer steps. |
 
 | T2b-0 setup failure | A3 | No optimizer steps; original manifest requires rows, corrected metadata only | Recover within existing USD 12 cap; retain all recipe settings | Jobs `6acd1fa7dd8177968b42b736` and `6acd1fafde32f9b0f431e385` failed before model loading, USD 0.4400 and USD 0.4423; total USD 0.8823. Replacement allocations: two 84-minute train/heldout jobs and two 35-minute proxies; all-job ceiling USD 11.7906. Corrected private dataset 28f80a3c1430c27297e0944978bfda9310298623. |
 
-| T2b-0 seed 17 train | A3 | Approved baseline train, seed 17 | Clean baseline, no keep decision | Job `6acd22f1de32f9b0f431ec45`; timeout 84 min, maximum USD 3.8500; measured cost pending. |
+| T2b-0 seed 17 train | A3 | Approved baseline train, seed 17 | Clean baseline, no keep decision | Job `6acd22f1de32f9b0f431ec45`; COMPLETED; 2427 running seconds, USD 1.8540; timeout 84 min, allocation ceiling USD 3.8500; 2,225 steps, heldout-family accuracy 79.43%. |
 
-| T2b-0 seed 18 train | A3 | Approved baseline train, seed 18 | Clean baseline, no keep decision | Job `6acd22fadd8177968b42c0a5`; timeout 84 min, maximum USD 3.8500; measured cost pending. |
+| T2b-0 seed 18 train | A3 | Approved baseline train, seed 18 | Clean baseline, no keep decision | Job `6acd22fadd8177968b42c0a5`; COMPLETED; 2424 running seconds, USD 1.8517; timeout 84 min, allocation ceiling USD 3.8500; 2,225 steps, heldout-family accuracy 79.63%. |
 
-| T2b-0 seed 17 proxy | A3 | Approved baseline proxy, seed 17 | Clean baseline, no keep decision | Job `6acd2ca9de32f9b0f4320492`; timeout 35 min, maximum USD 1.6042; measured cost pending. |
+| T2b-0 seed 17 proxy | A3 | Approved baseline proxy, seed 17 | Clean baseline, no keep decision | Job `6acd2ca9de32f9b0f4320492`; COMPLETED; 1122 running seconds, USD 0.8571; timeout 35 min, allocation ceiling USD 1.6042; proxy 44.5536, all 11,079 records successful. |
 
-| T2b-0 seed 18 proxy | A3 | Approved baseline proxy, seed 18 | Clean baseline, no keep decision | Job `6acd2ccadd8177968b42d9a3`; timeout 35 min, maximum USD 1.6042; measured cost pending. |
+| T2b-0 seed 18 proxy | A3 | Approved baseline proxy, seed 18 | Clean baseline, no keep decision | Job `6acd2ccadd8177968b42d9a3`; COMPLETED; 1122 running seconds, USD 0.8571; timeout 35 min, allocation ceiling USD 1.6042; proxy 43.6765, all 11,079 records successful. |

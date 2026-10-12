@@ -1,6 +1,6 @@
 # T2b-0 clean A3 baseline
 
-T2b-0 removes all eleven approved upstream families from pinned A3, with no additions. It retains 17,793 training questions in 13,225 records and 356 calibration questions in 124 records. All retained rows preserve their original bytes and order. This becomes the clean baseline without a candidate keep decision. Compare the two-seed proxy mean with A3's 46.82 and report the independent heldout-family score.
+T2b-0 establishes the clean A3 baseline with a **44.12 proxy mean**, compared with A3's 46.82, a **2.70-point cost** for the required scrub. Its two-seed heldout-family accuracy is **79.53%**. There is no candidate keep decision. It removes all eleven approved upstream families from pinned A3, with no additions. It retains 17,793 training questions in 13,225 records and 356 calibration questions in 124 records. All retained rows preserve their original bytes and order. This becomes the clean baseline without a candidate keep decision. Compare the two-seed proxy mean with A3's 46.82 and report the independent heldout-family score.
 
 The original A3 runtime is `86a8203d792463536eb009a4d8da6c8681ffdd99`, with base `Qwen/Qwen3.5-9B` at `c202236235762e1c871ad0ccb60c8ee5ba337b9a`. Rank 16, alpha 32, learning rate 0.0001, one epoch, effective batch 8, length grouping, padding, objective, optimizer, schedule, evaluation flags and merge gate remain unchanged. Seeds are 17 and 18. Temperature fitting uses the original command on the scrubbed calibration. Calibration evaluation retains its original limit of 358, so all 356 remaining questions are evaluated.
 
@@ -36,7 +36,7 @@ The first two jobs failed before model loading or any optimizer step because the
 
 Each replacement seed reserves 84 minutes for training, calibration, merge, persistence and heldout scoring, then 35 minutes for the original frozen-proxy path. These four timeout ceilings sum to 238 minutes, USD 10.9083 at USD 2.75/h. Including both failed setup jobs, the entire task is bounded by USD 11.7906, below the hard USD 12 cap. No automatic retry is authorized. Every job ID and measured running-time cost will be recorded in the run log.
 
-Failed setup jobs were `6acd1fa7dd8177968b42b736` (seed 17) and `6acd1fafde32f9b0f431e385` (seed 18). Replacement training jobs are `6acd22f1de32f9b0f431ec45` (seed 17) and `6acd22fadd8177968b42c0a5` (seed 18). Proxy scores are pending. Private model destinations are `frontier-infra/jebadiah-9b-t2b0-s17` and `frontier-infra/jebadiah-9b-t2b0-s18`, with separate private checkpoint repositories. Only code, aggregate manifests and documentation are included in the authorized PR. Data, models, outputs and private suite contents remain private.
+Failed setup jobs were `6acd1fa7dd8177968b42b736` (seed 17) and `6acd1fafde32f9b0f431e385` (seed 18). Replacement training jobs are `6acd22f1de32f9b0f431ec45` (seed 17) and `6acd22fadd8177968b42c0a5` (seed 18). Both proxy jobs completed successfully. Private model destinations are `frontier-infra/jebadiah-9b-t2b0-s17` and `frontier-infra/jebadiah-9b-t2b0-s18`, with separate private checkpoint repositories. Only code, aggregate manifests and documentation are included in the authorized PR. Data, models, outputs and private suite contents remain private.
 
 ## Training and heldout results
 
@@ -58,3 +58,18 @@ Both retain the original 0.05 merge gate and have zero confident flips. Heldout 
 | zeroshot/twitter-financial-news-sentiment | 72.50% (435/600) | 74.17% (445/600) | 73.33% |
 
 The two-seed heldout family mean is **79.53%**. The proxy jobs are `6acd2ca9de32f9b0f4320492` (seed 17) and `6acd2ccadd8177968b42d9a3` (seed 18), each capped at 35 minutes. Completed training plus failed setup costs USD 4.5879; the two proxy timeout ceilings bound the entire task at USD 7.7963.
+
+## Final proxy and cost
+
+| Seed | Frozen proxy score | Heldout-family accuracy | Training + heldout USD | Proxy USD |
+|---|---:|---:|---:|---:|
+| 17 | 44.553607 | 79.43% | 1.8540 | 0.8571 |
+| 18 | 43.676496 | 79.63% | 1.8517 | 0.8571 |
+
+The unrounded proxy mean is **44.115051**, -2.704949 points against the stated A3 46.82 reference, or -2.704358 against A3's unrounded two-seed mean of 46.819409. Both runs contain all 11,079 frozen proxy IDs with matching payload hashes, no duplicates and all statuses successful. Native job scores and the local unchanged official scorer agree.
+
+Total compute is **USD 6.3021**, including both failed setup jobs, from 8,250 measured running seconds at USD 2.75/hour. This is a duration-based estimate. All six job IDs, statuses, durations and costs are in the run log and aggregate job receipt.
+
+Official scoring outputs, complete job receipts and training evidence are persisted privately in `jbrashear/jebadiah-9b-v2-1-index-results`, folder `analysis/t2b0-baseline`, at `e13d3e49542c520f723c56224bee7bce1ebd8ba9`. All heldout answers remain in the private checkpoint repositories. The training dataset remains pinned at `28f80a3c1430c27297e0944978bfda9310298623`.
+
+[PR 37](https://github.com/getainode/jebadiah/pull/37) contains code, aggregate manifests and documentation. It is not merged.
