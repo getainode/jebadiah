@@ -36,4 +36,25 @@ The first two jobs failed before model loading or any optimizer step because the
 
 Each replacement seed reserves 84 minutes for training, calibration, merge, persistence and heldout scoring, then 35 minutes for the original frozen-proxy path. These four timeout ceilings sum to 238 minutes, USD 10.9083 at USD 2.75/h. Including both failed setup jobs, the entire task is bounded by USD 11.7906, below the hard USD 12 cap. No automatic retry is authorized. Every job ID and measured running-time cost will be recorded in the run log.
 
-Failed setup jobs were `6acd1fa7dd8177968b42b736` (seed 17) and `6acd1fafde32f9b0f431e385` (seed 18). Replacement training jobs are `6acd22f1de32f9b0f431ec45` (seed 17) and `6acd22fadd8177968b42c0a5` (seed 18). Scores are pending. Private model destinations are `frontier-infra/jebadiah-9b-t2b0-s17` and `frontier-infra/jebadiah-9b-t2b0-s18`, with separate private checkpoint repositories. Only code, aggregate manifests and documentation are included in the authorized PR. Data, models, outputs and private suite contents remain private.
+Failed setup jobs were `6acd1fa7dd8177968b42b736` (seed 17) and `6acd1fafde32f9b0f431e385` (seed 18). Replacement training jobs are `6acd22f1de32f9b0f431ec45` (seed 17) and `6acd22fadd8177968b42c0a5` (seed 18). Proxy scores are pending. Private model destinations are `frontier-infra/jebadiah-9b-t2b0-s17` and `frontier-infra/jebadiah-9b-t2b0-s18`, with separate private checkpoint repositories. Only code, aggregate manifests and documentation are included in the authorized PR. Data, models, outputs and private suite contents remain private.
+
+## Training and heldout results
+
+Both seeds completed 2,225 optimizer steps and one epoch. Saved configuration and prompt-contract fields match A3 exactly apart from scrubbed input paths/hashes, private output routing and the approved seed. The original 2,048-token training limit truncates 30 retained presentations; A3 had 36. This behavior is unchanged. Heldout scoring has zero truncation.
+
+| Seed | Merge agreement | Maximum probability shift | Heldout family mean | Private model revision |
+|---|---:|---:|---:|---|
+| 17 | 260/260 | 0.014701 | 79.43% | `ba138d21f8dabd3c4a6c49a7499c999741a1b2ad` |
+| 18 | 257/260 | 0.011478 | 79.63% | `397dd221c335637fba9d185a00b71696356e5e5e` |
+
+Both retain the original 0.05 merge gate and have zero confident flips. Heldout family accuracy, 600 questions per family:
+
+| Family | Seed 17 | Seed 18 | Two-seed mean |
+|---|---:|---:|---:|
+| tasksource/SDOH-NLI | 92.33% (554/600) | 93.17% (559/600) | 92.75% |
+| google-research-datasets/circa | 78.50% (471/600) | 84.33% (506/600) | 81.42% |
+| michiel/xstance | 83.83% (503/600) | 83.50% (501/600) | 83.67% |
+| google-research-datasets/poem_sentiment | 70.00% (420/600) | 63.00% (378/600) | 66.50% |
+| zeroshot/twitter-financial-news-sentiment | 72.50% (435/600) | 74.17% (445/600) | 73.33% |
+
+The two-seed heldout family mean is **79.53%**. The proxy jobs are `6acd2ca9de32f9b0f4320492` (seed 17) and `6acd2ccadd8177968b42d9a3` (seed 18), each capped at 35 minutes. Completed training plus failed setup costs USD 4.5879; the two proxy timeout ceilings bound the entire task at USD 7.7963.

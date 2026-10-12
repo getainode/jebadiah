@@ -115,3 +115,7 @@ source-first contamination and license manifests.
 | T2b-0 seed 17 train | A3 | Approved baseline train, seed 17 | Clean baseline, no keep decision | Job `6acd22f1de32f9b0f431ec45`; timeout 84 min, maximum USD 3.8500; measured cost pending. |
 
 | T2b-0 seed 18 train | A3 | Approved baseline train, seed 18 | Clean baseline, no keep decision | Job `6acd22fadd8177968b42c0a5`; timeout 84 min, maximum USD 3.8500; measured cost pending. |
+
+| T2b-0 seed 17 proxy | A3 | Approved baseline proxy, seed 17 | Clean baseline, no keep decision | Job `6acd2ca9de32f9b0f4320492`; timeout 35 min, maximum USD 1.6042; measured cost pending. |
+
+| T2b-0 seed 18 proxy | A3 | Approved baseline proxy, seed 18 | Clean baseline, no keep decision | Job `6acd2ccadd8177968b42d9a3`; timeout 35 min, maximum USD 1.6042; measured cost pending. |
