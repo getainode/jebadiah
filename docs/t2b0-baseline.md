@@ -34,4 +34,4 @@ Both seeds score all 3,000 heldout questions, 600 each from SDOH-NLI, circa, x-s
 
 Each seed reserves 90 minutes for training, calibration, merge, persistence and heldout scoring, then 35 minutes for the original frozen-proxy path. The four timeout ceilings sum to 250 minutes, USD 11.4583 at USD 2.75/h, below the hard USD 12 task cap. No automatic retry is authorized. Every job ID and measured running-time cost will be recorded in the run log.
 
-Launches and scores pending. GitHub reports `getainode/jebadiah` is public. The requested PR is blocked by the instruction to publish nothing public; a question was sent to the master before any source push. Data, models, outputs and private suite contents remain private.
+Training jobs are `6acd1fa7dd8177968b42b736` (seed 17) and `6acd1fafde32f9b0f431e385` (seed 18). Scores are pending. Only code, aggregate manifests and documentation are included in the authorized PR. Data, models, outputs and private suite contents remain private.
