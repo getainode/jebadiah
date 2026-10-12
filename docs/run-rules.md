@@ -36,6 +36,8 @@ are recorded in the report.
 | Run | Change vs | Tests | Keep if | Result |
 |---|---|---|---|---|
 | v2 | published | baseline | | 44.67 |
+| T1b reverse_avg | 9B v2.1 proxy baseline | inference-only choice reads in given and reversed criteria order, average log probabilities by option key and renormalize; noul unchanged | vs 9B v2.1 proxy baseline, keep if the paired bootstrap 95% interval of the difference is above zero; Tools deltas within 6 are noise | prepared; lead launches after Desk #833; no job launched |
+| T1c repeat_payload | 9B v2.1 proxy baseline | inference-only verbatim user payload repeated twice with one blank line; assistant prefix and label read unchanged | vs 9B v2.1 proxy baseline, keep if the paired bootstrap 95% interval of the difference is above zero; Tools deltas within 6 are noise | prepared; lead launches after Desk #833; no job launched |
 | v2.1 r1 | v2 | three changes at once (breaks rule 2) | | 38.12, dropped |
 | A1 | v2 | the scrub alone: v2 recipe on v2 data minus BoolQ, DBpedia14, MNLI, SummEval and 42 overlapping HelpSteer2 records | the cost of the required scrub; becomes the clean floor | 45.25; vs v2 +0.57, CI [-0.80, +1.88]; private diagnostic floor |
 | A3 | A1 | new v2.1 sources, capped at 10% each and 50% total | interval vs A1 above zero | 46.97; vs A1 +1.73, CI [+0.32, +3.23]; vs v2 +2.30, CI [+1.04, +3.60]; accepted best recipe |
