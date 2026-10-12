@@ -194,6 +194,50 @@ def norm_label(q: dict, label):
     return str(label)
 
 
+def tasksource_jev_row(row: dict, revision: str) -> dict:
+    """Map a published Tasksource decision without generating text or labels.
+
+    The caller enforces source licensing, exclusions, deduplication and budgets.
+    Keep source terms and the original soft annotation outside the question.
+    """
+    kind = row["kind"]
+    options = row["options"] or []
+    target = row["target"]
+    if row["license_use"] != "commercial" or row.get("split") != "train":
+        raise ValueError("Commercial train decisions only")
+    if not isinstance(row["state"], str) or not row["state"].strip():
+        raise ValueError("Empty state")
+    if kind not in ("choice", "noul", "score") or not target:
+        raise ValueError("Missing decision kind or target")
+    if any(not isinstance(p, (int, float)) or not math.isfinite(p) or not 0 <= p <= 1 for p in target):
+        raise ValueError("Invalid target distribution")
+    q = {"type": kind, "instructions": row["question"]}
+    if kind == "noul":
+        if options or len(target) != 1:
+            raise ValueError("Invalid noul shape")
+        label = target[0] >= 0.5
+        weights = {"true": target[0], "false": 1 - target[0]}
+    else:
+        if not 2 <= len(options) <= 20 or len(options) != len(set(options)):
+            raise ValueError("Invalid or excessive options")
+        if len(target) != len(options) or abs(sum(target) - 1) > 1e-3:
+            raise ValueError("Invalid option distribution")
+        if sum(p == max(target) for p in target) != 1:
+            raise ValueError("Ambiguous hard label")
+        winner = max(range(len(target)), key=target.__getitem__)
+        q["criteria"] = {str(i): text for i, text in enumerate(options)} if kind == "choice" else options
+        label = str(winner) if kind == "choice" else winner
+        weights = {str(i): p for i, p in enumerate(target)}
+    return {"id": "t2b:" + row["id"], "set": "t2b-tasksource", "subset": row["source"],
+            "source": row["source"], "family": row["source"], "license": row["license"],
+            "license_use": row["license_use"], "state": row["state"],
+            "questions": {"decision": wire_question(q)}, "label": {"decision": label},
+            "target": {"decision": weights},
+            "provenance": {"dataset": "tasksource/tasksource-jev-typed-decisions",
+                           "revision": revision, "variant": row["variant"],
+                           "group_id": row["group_id"], "example_id": row.get("example_id")}}
+
+
 def summarize(rows):
     types = collections.Counter()
     subsets = collections.Counter()
