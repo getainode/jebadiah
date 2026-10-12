@@ -33,6 +33,8 @@ are recorded in the report.
 
 ## Run log
 
+T2b: A3 recipe plus the t2b tranche, one epoch, two seeds (17, 18), vs the A3 two-seed mean 46.82 on the frozen proxy; keep if the paired bootstrap 95% interval is above zero; also report the held-out-family set; Tools deltas within 6 are noise; CLINC losses beyond 2.5 count as regressions
+
 | Run | Change vs | Tests | Keep if | Result |
 |---|---|---|---|---|
 | v2 | published | baseline | | 44.67 |
