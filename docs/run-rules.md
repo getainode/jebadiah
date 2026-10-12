@@ -109,3 +109,5 @@ source-first contamination and license manifests.
 | T2b-0 seed 17 train | A3 | Approved baseline train, seed 17 | Clean baseline, no keep decision | Job `6acd1fa7dd8177968b42b736`; timeout 90 min, maximum USD 4.1250; measured cost pending. |
 
 | T2b-0 seed 18 train | A3 | Approved baseline train, seed 18 | Clean baseline, no keep decision | Job `6acd1fafde32f9b0f431e385`; timeout 90 min, maximum USD 4.1250; measured cost pending. |
+
+| T2b-0 setup failure | A3 | No optimizer steps; original manifest requires rows, corrected metadata only | Recover within existing USD 12 cap; retain all recipe settings | Jobs `6acd1fa7dd8177968b42b736` and `6acd1fafde32f9b0f431e385` failed before model loading, USD 0.4400 and USD 0.4423; total USD 0.8823. Replacement allocations: two 84-minute train/heldout jobs and two 35-minute proxies; all-job ceiling USD 11.7906. Corrected private dataset 28f80a3c1430c27297e0944978bfda9310298623. |

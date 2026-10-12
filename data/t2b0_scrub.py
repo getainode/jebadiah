@@ -40,6 +40,12 @@ def dump(path, value):
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n')
 
 
+def training_manifest_entry(path):
+    entry = describe(str(path))
+    # The pinned pipeline checks rows, while pool_manifest reports records.
+    return {**entry, 'rows': entry['records']}
+
+
 def ancestry(row, manifest):
     """Inspect identity and recorded parents, never question or state content."""
     meta = manifest['source_manifests'].get(row.get('subset'))
@@ -136,7 +142,7 @@ def build(base, evidence, index, output):
                'source_policy': manifest['source_policy'],
                'source_manifests': {k: v for k, v in manifest['source_manifests'].items() if k in retained_subsets},
                'evidence_hashes': {name: sha(evidence / name) for name in ('a3-conflict.json', 'legacy-raw-family-exposure.json')},
-               'files': {name: describe(str(output / name)) for name in ('train.jsonl', 'calib.jsonl')},
+               'files': {name: training_manifest_entry(output / name) for name in ('train.jsonl', 'calib.jsonl')},
                'calibration_policy': 'Original A3 procedure on scrubbed calibration; no heldout fitting',
                'scan': report}
     dump(output / 'manifest.json', receipt)

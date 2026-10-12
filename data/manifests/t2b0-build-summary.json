@@ -187,7 +187,8 @@
         "choice": 10809,
         "noul": 3573,
         "score": 3411
-      }
+      },
+      "rows": 13225
     },
     "calib.jsonl": {
       "sha256": "47a091172f85ba22a8f2cf4cdd704f99225ea6e95af29a18391b1a40f76de5ad",
@@ -202,7 +203,8 @@
         "choice": 128,
         "noul": 96,
         "score": 132
-      }
+      },
+      "rows": 124
     }
   },
   "calibration_policy": "Original A3 procedure on scrubbed calibration; no heldout fitting",
@@ -223,14 +225,16 @@
   },
   "dataset_upload": {
     "dataset": "frontier-infra/jebadiah-data-t2b",
-    "revision": "cf5accb81b7108c27e6e3c3195d9e39257e268c1",
+    "revision": "28f80a3c1430c27297e0944978bfda9310298623",
     "private": true,
     "folder": "t2b0/",
+    "initial_failed_revision": "cf5accb81b7108c27e6e3c3195d9e39257e268c1",
     "code_hashes": {
-      "t2b0_launch.py": "4432ef2d70159b5f7a5882ec5f98caa9e1fd4a0e8a98801a936f78458d87b307",
+      "t2b0_launch.py": "3d9fba215997336adae7b32649079beab8efe116354c863a8d2049d9005e72a6",
       "t2b0_persist.py": "74a49c199b2d81668531f7780c9c7f2670ec72a01fc7e2b8582549f1bc988eca",
+      "t2b0_analyze.py": "dfd6de5b368aec29a70bcb7bba021f9d8a665e382c9d417904603e79839144b8",
       "t2b0_heldout.py": "790a81a730dc76e084ee2bb0b6906051a4ba46437a317efe1ce2d932739bfda8",
-      "t2b0_train.py": "95b4dd252d2b3129587e361ac254d0a5bfa09e746d554b99a3dc057a828a40f9"
+      "t2b0_train.py": "7e323ceb503a84b8a03ff553467554f0ffcb95646b4ba8e85ae4fb8d1c258a49"
     }
   },
   "heldout_input": {

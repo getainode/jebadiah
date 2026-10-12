@@ -13,7 +13,7 @@ class LaunchTest(unittest.TestCase):
         self.assertLessEqual(TOTAL_MAX_USD, 12)
         for seed in (17, 18):
             cmd = command('train', CODE, CODE, seed, DATA, HELDOUT)
-            self.assertEqual(cmd[cmd.index('--timeout') + 1], '90m')
+            self.assertEqual(cmd[cmd.index('--timeout') + 1], '84m')
             self.assertEqual(cmd[cmd.index('--flavor') + 1], 'rtx-pro-6000')
             setup = cmd[-1]
             for flags in ('--rank 16 --alpha 32', '--epochs 1 --lr 0.0001',

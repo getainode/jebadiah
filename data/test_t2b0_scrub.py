@@ -1,5 +1,11 @@
 import unittest
-from t2b0_scrub import rejected_family, FAMILIES
+import ast
+import json
+from pathlib import Path
+import subprocess
+import tempfile
+from types import SimpleNamespace
+from t2b0_scrub import rejected_family, FAMILIES, training_manifest_entry
 
 
 class AncestryTest(unittest.TestCase):
@@ -27,6 +33,28 @@ class AncestryTest(unittest.TestCase):
     def test_ambiguous_parent_is_rejected(self):
         with self.assertRaises(ValueError):
             self.check_family('tasksource/arct', None, upstream_originals=['tasksource/equate'])
+
+    def test_original_pipeline_manifest_contract(self):
+        root = Path(__file__).resolve().parents[1]
+        source = subprocess.check_output(['git', 'show',
+            '86a8203d792463536eb009a4d8da6c8681ffdd99:train/v21_pipeline.py'], cwd=root)
+        main = next(n for n in ast.parse(source).body if isinstance(n, ast.FunctionDef) and n.name == 'main')
+        loop = next(n for n in main.body if isinstance(n, ast.For) and isinstance(n.target, ast.Tuple)
+                    and [v.id for v in n.target.elts] == ['split', 'filename'])
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'train.jsonl'
+            path.write_text(json.dumps({'set': 'fixture', 'questions': {'one': {'type': 'choice'}, 'two': {'type': 'score'}}}) + '\n')
+            entry = training_manifest_entry(path)
+            # Execute the unchanged original pipeline's actual validation block.
+            scope = {'Path': Path, 'args': SimpleNamespace(train_file='t2b0/train.jsonl',
+                      calib_file='t2b0/calib.jsonl', manifest_file='t2b0/manifest.json'),
+                     'manifest': {'files': {'train.jsonl': entry, 'calib.jsonl': entry}},
+                     'data_report': {split: {'sha256': entry['sha256'], 'rows': 1, 'questions': 2}
+                                     for split in ('train', 'calib')}}
+            exec(compile(ast.Module(body=[loop], type_ignores=[]), '<original-manifest-contract>', 'exec'), scope)
+            del entry['rows']
+            with self.assertRaises(KeyError):
+                exec(compile(ast.Module(body=[loop], type_ignores=[]), '<original-manifest-contract>', 'exec'), scope)
 
 
 if __name__ == '__main__':

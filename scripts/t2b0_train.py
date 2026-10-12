@@ -27,6 +27,9 @@ def main():
     for name, entry in manifest['files'].items():
         assert pipeline.sha256(data / 't2b0' / name) == entry['sha256']
     report = pipeline.validate_data(data / 't2b0/train.jsonl', data / 't2b0/calib.jsonl')
+    for split in ('train', 'calib'):
+        for key in ('sha256', 'rows', 'questions'):
+            assert manifest['files'][split + '.jsonl'][key] == report[split][key]
     assert report['train']['questions'] == 17793 and report['calib']['questions'] == 356
     heldout = data / 'heldout.jsonl'
     assert hashlib.sha256(heldout.read_bytes()).hexdigest() == os.environ['T2B0_HELDOUT_SHA256']

@@ -22,16 +22,18 @@ Identity resolution checks row identity, subset metadata and recorded upstream p
 | unigram/FOL-nli | 103 | 0 |
 | webis/args_me | 102 | 0 |
 
-The supplemented full-suite index has SHA256 `b92290742245132a59839fa565ecc70d691d26033533cb48eb3da702aebd9851`. The unchanged repository scanner checked all 13,349 retained records and found zero direct hits or invalid empty states. Both splits pass `lint_data.py --train`. Four ancestry regression checks cover aliases, parents, rating siblings and false substring matches; two launcher checks preserve the recipe and proxy commands.
+The supplemented full-suite index has SHA256 `b92290742245132a59839fa565ecc70d691d26033533cb48eb3da702aebd9851`. The unchanged repository scanner checked all 13,349 retained records and found zero direct hits or invalid empty states. Both splits pass `lint_data.py --train`. Five ancestry and manifest-contract regression checks cover aliases, parents, rating siblings and false substring matches; two launcher checks preserve the recipe and proxy commands.
 
 ## Private inputs and evaluation
 
-The existing private dataset `frontier-infra/jebadiah-data-t2b` contains the new `t2b0/` folder at revision `cf5accb81b7108c27e6e3c3195d9e39257e268c1`. Runtime additions are pinned in that private folder, allowing jobs to run without publishing a source branch. The unchanged root `heldout.jsonl` has SHA256 `000451d29bb99b67b9b3925fb1cef5859f723cc6f5fd7c01850ec15a59fc472b`.
+The existing private dataset `frontier-infra/jebadiah-data-t2b` contains the new `t2b0/` folder at revision `28f80a3c1430c27297e0944978bfda9310298623`. Runtime additions are pinned in that private folder, allowing jobs to run without publishing a source branch. The unchanged root `heldout.jsonl` has SHA256 `000451d29bb99b67b9b3925fb1cef5859f723cc6f5fd7c01850ec15a59fc472b`.
 
 Both seeds score all 3,000 heldout questions, 600 each from SDOH-NLI, circa, x-stance, poem sentiment and financial-news sentiment. Scoring uses the final unmerged adapter on the pinned base, the training evaluator's Scorer, canonical option menus, batch 8 and untempered candidate argmax. It fits no temperatures on the heldout. Report ordinary accuracy per family and the equal-family macro mean. Full answers persist only to private checkpoint repositories.
 
 ## Jobs and cost
 
-Each seed reserves 90 minutes for training, calibration, merge, persistence and heldout scoring, then 35 minutes for the original frozen-proxy path. The four timeout ceilings sum to 250 minutes, USD 11.4583 at USD 2.75/h, below the hard USD 12 task cap. No automatic retry is authorized. Every job ID and measured running-time cost will be recorded in the run log.
+The first two jobs failed before model loading or any optimizer step because the scrub manifest used records where the original pipeline requires rows. The metadata contract is corrected and checked by executing the unchanged original pipeline validation block against the real data. Their measured compute costs were USD 0.4400 and USD 0.4423, total USD 0.8823. Row bytes and scan results are unchanged.
 
-Training jobs are `6acd1fa7dd8177968b42b736` (seed 17) and `6acd1fafde32f9b0f431e385` (seed 18). Scores are pending. Only code, aggregate manifests and documentation are included in the authorized PR. Data, models, outputs and private suite contents remain private.
+Each replacement seed reserves 84 minutes for training, calibration, merge, persistence and heldout scoring, then 35 minutes for the original frozen-proxy path. These four timeout ceilings sum to 238 minutes, USD 10.9083 at USD 2.75/h. Including both failed setup jobs, the entire task is bounded by USD 11.7906, below the hard USD 12 cap. No automatic retry is authorized. Every job ID and measured running-time cost will be recorded in the run log.
+
+Failed setup jobs were `6acd1fa7dd8177968b42b736` (seed 17) and `6acd1fafde32f9b0f431e385` (seed 18). Replacement job IDs and scores are pending. Only code, aggregate manifests and documentation are included in the authorized PR. Data, models, outputs and private suite contents remain private.

@@ -5,9 +5,10 @@ import re
 import shlex
 from item52_launch import command as control_command, DATA_REVISION
 
-CAP_MINUTES = {'train': 90, 'proxy': 35}
+CAP_MINUTES = {'train': 84, 'proxy': 35}
 TOTAL_MAX_USD = 2 * sum(CAP_MINUTES.values()) * 2.75 / 60
 assert TOTAL_MAX_USD < 12
+# The external ledger also adds both failed setup jobs before any recovery launch.
 
 
 def command(stage, revision, code_revision, seed, data_revision, heldout_sha256):
