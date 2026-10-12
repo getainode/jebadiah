@@ -103,3 +103,9 @@ into commercial Jeb. Independently implement experiments with our permitted data
 source-first contamination and license manifests.
 
 | ITEM 56 outside-data PROBE B, seeds 17 and 18 | Two-seed A3 mean 46.82 | Jason option B, Desk #646: untouched A3 plus exact scanned Corr2Cause, SpaceNLI, MASSIVE and DeepMind math additions; original A3 runtime and one epoch; exposure increases | Mean of probe seeds beats unrounded mean of A3 seeds on identical paired whole-group bootstrap draws with 95% interval entirely above zero, and mean CLINC macro-F1 loses at most 2.5 points; retain 0.05 merge gate | DROP: seeds 17/18 score 46.6834/46.2156; mean 46.4495 vs 46.8194, difference -0.3699 [-1.4626, +0.6483]; CLINC guard passes (+0.7469 mean points); no split or promotion; all jobs completed, $7.6343 estimated compute |
+
+| T2b-0 | A3 | the new whole-family scrub alone (11 families) on A3, seeds 17 and 18 | it becomes the clean baseline (no keep decision); report its proxy mean against A3's 46.82 and the heldout-family score | Prepared and zero-hit verified; dataset cf5accb81b7108c27e6e3c3195d9e39257e268c1; pre-launch timeout reservation: two 90-minute train/heldout jobs plus two 35-minute proxy jobs, 250 minutes at USD 2.75/h, at most USD 11.4583 under the USD 12 cap; job IDs pending. |
+
+| T2b-0 seed 17 train | A3 | Approved baseline train, seed 17 | Clean baseline, no keep decision | Job `6acd1fa7dd8177968b42b736`; timeout 90 min, maximum USD 4.1250; measured cost pending. |
+
+| T2b-0 seed 18 train | A3 | Approved baseline train, seed 18 | Clean baseline, no keep decision | Job `6acd1fafde32f9b0f431e385`; timeout 90 min, maximum USD 4.1250; measured cost pending. |
