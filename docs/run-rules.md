@@ -35,6 +35,7 @@ are recorded in the report.
 
 | Run | Change vs | Tests | Keep if | Result |
 |---|---|---|---|---|
+| T1e full suite | published v2.1 | T1e (repeat plus reverse below 0.7) on the full public 0.3 suite, 9B and 27B | confirms if the public index beats the published v2.1 public (27B 57.03, 9B 47.20) | Approved Desk #855, 2026-10-12 14:39; 9B job 6acd38c3dd8177968b42f711 (13h); 27B job 6acd38c4dd8177968b42f713 (30h); smoke 6acd3801de32f9b0f4321ead (15m), 200/200 OK; shared hard cap USD 120, timeout maximum USD 118.9375 including smoke; private results frontier-infra/jebadiah-t1e-decision-index-results |
 | v2 | published | baseline | | 44.67 |
 | T1b reverse_avg | 9B v2.1 proxy baseline | inference-only choice reads in given and reversed criteria order, average log probabilities by option key and renormalize; noul unchanged | vs 9B v2.1 proxy baseline, keep if the paired bootstrap 95% interval of the difference is above zero; Tools deltas within 6 are noise | prepared; lead launches after Desk #833; no job launched |
 | T1c repeat_payload | 9B v2.1 proxy baseline | inference-only verbatim user payload repeated twice with one blank line; assistant prefix and label read unchanged | vs 9B v2.1 proxy baseline, keep if the paired bootstrap 95% interval of the difference is above zero; Tools deltas within 6 are noise | prepared; lead launches after Desk #833; no job launched |
