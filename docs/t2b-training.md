@@ -40,8 +40,8 @@ Two-seed proxy mean **36.567028**, -7.552972 points against the stated 44.12 ref
 
 Both seed comparisons and the two-seed mean use 2,000 complete catalog/group bootstrap replicates with seed 20261008. All four runs use the same paired draws. These intervals measure uncertainty conditional on the frozen proxy, not training-seed variance. All 11,079 frozen proxy IDs per run are unique, successful and payload-bound to the verified suite. The unchanged official scorer is recomputed for every draw.
 
-| Heldout family | Seed 17 | Seed 18 | Two-seed mean |
-|---|---:|---:|---:|
+| Heldout family | Seed 17 | Seed 18 | Two-seed mean | T2b-0 mean | Delta points |
+|---|---:|---:|---:|---:|---:|
 | tasksource/SDOH-NLI | 84.67% | 87.50% | 86.08% | 92.75% | -6.67 |
 | google-research-datasets/circa | 75.67% | 69.50% | 72.58% | 81.42% | -8.83 |
 | michiel/xstance | 82.50% | 84.50% | 83.50% | 83.67% | -0.17 |
