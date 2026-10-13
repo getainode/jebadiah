@@ -14,14 +14,20 @@ from t2b_finish import finish
 
 
 def wait_stage(root,stage):
+    misses=0
     while True:
         try:
-            ledger=poll(root)
+            ledger=poll(root);misses=0
         except Exception as exc:
-            # Preserve remote jobs and their timeout ceilings on contact loss.
+            # Preserve remote jobs and their timeout ceilings on contact loss. A blip
+            # (Studio IPv6/route flaps) gets 40 polls, about 30 min, before we give up.
+            misses+=1
+            if misses<40:
+                print(f'poll failed ({misses}/40), retrying: {type(exc).__name__}',flush=True);time.sleep(45);continue
             error=str(exc).replace(os.environ.get('HF_TOKEN','') or 'impossible-secret-placeholder','[REDACTED]')
             message(root,'question','T2b monitoring blocked',f'Monitoring error: {error}. Remote jobs retain hard timeouts; no replacement or extension launched. Please advise if connectivity cannot be restored.',f'monitor-error-{stage}-send.json')
-            raise
+            time.sleep(45)
+            continue
         entries=[ledger['jobs'][f'{stage}-s{s}'] for s in (17,18)]
         if any(e['status'] in TERMINAL and e['status']!='COMPLETED' for e in entries):
             save(root/'blocked.json',{'stage':stage,'reason':'Paid job ended unsuccessfully; no retry authorized','jobs':{f'{stage}-s{s}':ledger['jobs'][f'{stage}-s{s}'] for s in (17,18)}})

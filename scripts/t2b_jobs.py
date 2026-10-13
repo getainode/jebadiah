@@ -7,6 +7,8 @@ import json
 import os
 from pathlib import Path
 from huggingface_hub import HfApi
+from t2b_hf_client import configure_hf_client
+configure_hf_client()
 from t2b_launch import command, CAP_MINUTES, RATE, TOTAL_MAX_USD
 HELDOUT_SHA256 = '000451d29bb99b67b9b3925fb1cef5859f723cc6f5fd7c01850ec15a59fc472b'
 
@@ -25,6 +27,7 @@ def refresh(api, ledger):
         entry['status']=info.status.stage
         # Never serialize JobInfo: it includes secret environment fields.
         entry['status_message']=info.status.message
+        entry['hf_durations']=asdict(info.durations)
         entry['timestamps']={k:str(v) if v is not None else None for k,v in asdict(info).items() if k in ('created_at','started_at','finished_at')}
         entry['checked_at']=datetime.now(timezone.utc).isoformat()
     return ledger

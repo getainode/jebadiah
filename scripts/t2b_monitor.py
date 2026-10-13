@@ -3,6 +3,7 @@
 import argparse
 from datetime import datetime,timezone
 import json
+from itertools import islice
 import os
 from pathlib import Path
 import re
@@ -31,6 +32,8 @@ def cost(ledger):
         start=ts.get('started_at');end=ts.get('finished_at')
         if not start: e['estimated_usd']=0;continue
         seconds=max(0,((datetime.fromisoformat(end) if end else now)-datetime.fromisoformat(start)).total_seconds())
+        if end and e.get('hf_durations',{}).get('running_secs') is not None:
+            seconds=e['hf_durations']['running_secs']
         e['running_seconds']=seconds;e['estimated_usd']=seconds*RATE/3600
         total+=e['estimated_usd']
     ledger['estimated_total_usd']=total
@@ -45,7 +48,7 @@ def poll(root,logs=True):
         if e.get('running_seconds',0)>570*60 and e['stage']=='train' and e['status']=='RUNNING':
             message(root,'question','T2b training approaching timeout',f"{key} job {e['id']} is past 9.5 hours with a hard 630-minute timeout. Cost so far USD {total:.4f}; four paid timeout ceilings USD 61.4167. No extension or retry authorized. Please advise if recovery is needed.",f'near-timeout-{key}-send.json')
         if logs and e['status']=='RUNNING':
-            raw='\n'.join(api.fetch_job_logs(job_id=e['id'],tail=100))
+            raw='\n'.join(islice(api.fetch_job_logs(job_id=e['id'],tail=100),100))
             token=os.environ.get('HF_TOKEN','')
             if token:raw=raw.replace(token,'[REDACTED]')
             (root/f'{key}.log').write_text(raw)
@@ -56,6 +59,8 @@ def poll(root,logs=True):
                 files=api.list_repo_files(f"frontier-infra/jebadiah-9b-t2b-s{e['seed']}-checkpoints")
                 steps=[int(m.group(1)) for f in files if (m:=re.fullmatch(r'checkpoints/checkpoint-(\d+)/complete.json',f))]
                 e['latest_complete_checkpoint']=max(steps,default=0)
+                e['observed_optimizer_step']=max(e['observed_optimizer_step'],e['latest_complete_checkpoint'])
+    total=cost(ledger)
     save(path,ledger)
     seeds=[ledger['jobs'][f'train-s{s}'] for s in (17,18)]
     if all(e['status']=='RUNNING' and e.get('observed_optimizer_step',0)>500 and e.get('latest_complete_checkpoint',0)>=500 for e in seeds):
