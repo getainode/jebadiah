@@ -146,7 +146,8 @@ def main():
     print("\n".join(lines))
     if a.notify and changed:
         subj = "Jev Decision Index: grading changed" if base and diff(base["grading"], cur["grading"]) else "Jev Decision Index: our rows moved"
-        subprocess.run(["orca", "orchestration", "send", "--to", a.notify, "--type", "status",
+        # --from: launchd runs this outside any Orca terminal, and a send without a named sender fails.
+        subprocess.run(["orca", "orchestration", "send", "--from", "jevdi-board-check", "--to", a.notify, "--type", "status",
                         "--subject", subj, "--body", "\n".join(lines)[:6000]], check=False)
     if a.update or base is None:
         STATE.mkdir(parents=True, exist_ok=True)
