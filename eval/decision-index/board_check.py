@@ -155,7 +155,8 @@ def main():
         (STATE / f"sources-{stamp}.sha256").write_text(
             "".join(f"{hashlib.sha256(json.dumps(v, sort_keys=True).encode()).hexdigest()}  {k}\n" for k, v in src.items()))
         bp.write_text(json.dumps(cur, indent=1, sort_keys=True))
-    return 1 if changed else 0
+    # ponytail: under --notify the Orca message is the signal; a non-zero exit there reads as a failed launchd job (freshness alarm 10-16).
+    return 0 if a.notify else (1 if changed else 0)
 
 
 if __name__ == "__main__":
