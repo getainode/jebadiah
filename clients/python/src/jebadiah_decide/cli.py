@@ -20,6 +20,23 @@ def _finish_human_output():
     print(f"\n{AGENT_LINE}")
 
 
+class _HumanArgumentParser(argparse.ArgumentParser):
+    def print_help(self, file=None):
+        super().print_help(file)
+        print(f"\n{AGENT_LINE}", file=file or sys.stdout)
+
+    def error(self, message):
+        self.print_usage(sys.stderr)
+        self.exit(2, f"{self.prog}: error: {message}\n\n{AGENT_LINE}\n")
+
+
+class _VersionAction(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        print(f"jeb {__version__}")
+        _finish_human_output()
+        parser.exit()
+
+
 def _common(p: argparse.ArgumentParser):
     p.add_argument("--backend", default="ollama", choices=BACKEND_CHOICES,
                    help="the runtime Jeb runs in (default: ollama)")
@@ -174,8 +191,8 @@ def cmd_doctor(a) -> int:
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="jeb", description="Typed decisions from a Jebadiah model on your own runtime")
-    ap.add_argument("--version", action="version", version=f"jeb {__version__}")
+    ap = _HumanArgumentParser(prog="jeb", description="Typed decisions from a Jebadiah model on your own runtime")
+    ap.add_argument("--version", action=_VersionAction, nargs=0)
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("serve", help="serve /v1/systemone and /v1/decide on localhost in front of your runtime")
     _common(s)
@@ -209,7 +226,7 @@ def main(argv=None):
         print(json.dumps(build(a).decide(req.get("state"), req.get("questions")), indent=1))
         return 0
     except JebError as e:
-        print(f"jeb: {e}", file=sys.stderr)
+        print(f"jeb: {e}\n\n{AGENT_LINE}", file=sys.stderr)
         return 1
     except KeyboardInterrupt:
         return 130
