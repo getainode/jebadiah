@@ -81,6 +81,8 @@ criteria.
 
 ## Published versions
 
+Current v2.1 releases and the maintained board snapshot are in [Decision Index v0.4](#decision-index-v04). The following table retains the earlier experiments and their original result records.
+
 | Model | Base | Pool | Headline | Jevals PubMedQA | Jevals Banking77 | Jevals HelpSteer2 | Nimble 324 | Kev transfer | Nimble 13 macro | DSj HelpSteer2 | Record |
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | [jebadiah-27b](https://huggingface.co/frontier-infra/jebadiah-27b) | Qwen3.8-27B (chat, thinking off) | v1 | **78.95** | 90.0 | 77.0 | 48.7 | 93.5 | 85.9 | 78.6 | 19.9 | [`27b-chat-v1`](results/runs/27b-chat-v1/results.json) |
@@ -211,11 +213,194 @@ every top-ten row drops 48 to 57 points, and we have not been measured there. No
 toward JevBench, and an overlap check found no shared 8-word span between our training pool (the v1 pool, which the
 27B also trained on) and its public items.
 
-We also submitted Jebadiah to the [Decision Index](https://github.com/apolinario/decision-index)
-([apolinario/decision-index#8](https://github.com/apolinario/decision-index/pull/8)); the engine is in
-`eval/decision-index/` ([11](experiments/11-decision-index.md)). The PR first carried 9B v1 and now submits the 27B.
-The maintainer asked for a complete self-run before adding it, with the kit's job on an RTX PRO 6000; that run is in
-progress and its results are pending, so there is no Decision Index number here yet.
+## Results at a glance
+
+**Same released v2.1 weights, new T1e inference recipe.** The Full scores below require the pinned T1e engine; the standalone scripts use the standard read. Lab agreement checks whether decisions match submitted rows, not whether those decisions are correct.
+
+| Full-weight T1e entrant | Full (points) | Overall position (rows) | Displayed tied rank (groups) | Lab median (ms/request) | Lab decision agreement (%) | Primary source / caveat |
+|---|---:|---:|---:|---:|---:|---|
+| [Jebadiah 27B](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1) | 65.37 | 14 | =5 | 303.2 | 99.90 | [Board snapshot, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); full board including Jev, lab GPU timing. |
+| [Jebadiah 9B](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1) | 50.53 | 69 | =17 | 125.1 | 100.00 | [Board snapshot, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); same lab method and scope. |
+| [Jev reference](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jev) | 62.22 | 28 | =8 | Not compared | Not reported here | [Full-score ranks](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json); hosted service timing is not compared with local GPU timing. |
+
+| Lab check | Value | Unit | Primary source / caveat |
+|---|---:|---|---|
+| Submitted-row agreement sample, each entrant | 831 | rows | [Lab notes](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); decision agreement, not task accuracy. |
+| Lab agreement acceptance threshold | 98.5 | percent | [Lab notes](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); applies to sampled decision agreement. |
+| Answered, each entrant | 110201 / 110201 | questions | [Board counts](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); coverage is not correctness. |
+
+Snapshot generated 2026-10-20T14:13:56Z. Overall position counts rows; tied rank counts score groups. The lab used an RTX PRO 6000 and sequential requests in a single process. These figures do not establish CPU, Mac, GGUF or MLX scores or speed. Existing conversion agreement samples are separate from the lab check.
+
+## Decision Index v0.4
+
+[Live board](https://multimodalart-jev-decision-index.static.hf.space/index.html) · [Jebadiah 27B report](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jebadiah-27b-v2.1-t1e) · [Jebadiah 9B report](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jebadiah-9b-v2.1-t1e) · [Jev reference](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jev).
+This snapshot uses the published Full score. Public-only results are displayed separately.
+These results require the T1e engine recipe. Downloading the checkpoint and running the standalone script uses the standard read.
+
+| Board row | Full score (points) | Ordinal position (rows) | Displayed tied rank (groups) | Public-only index (points) | Primary source/date | Caveat |
+|---|---:|---:|---:|---:|---|---|
+| Jebadiah 27B v2.1 (t1e) | 65.37 | 14 | =5 | 60.46 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
+| Jev 1.14 | 62.22 | 28 | =8 | 60.70 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
+| Jebadiah 9B v2.1 (t1e) | 50.53 | 69 | =17 | 51.53 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
+
+| Snapshot/ranking rule | Value | Unit | Primary source/date | Caveat |
+|---|---:|---|---|---|
+| Open entrant rows | 208 | models | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Jev is an additional reference row. |
+| Ranked rows including Jev | 209 | rows | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | No size or technique filters. |
+| Tie band from each group's leading score | 0.9 | points | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Groups take successive ranks; this is not the ordinal row position or a significance claim. |
+| Snapshot generated | 2026-10-20T14:13:56Z | UTC timestamp | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Checked 2026-10-21; board positions can change. |
+| Scoring formula decided | 2026-10-19 | UTC date | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Formula date differs from data generation date. |
+
+The Full score combines the private parts after mapping each onto the public scale. Private raw totals below are before this transformation, not ordinary task accuracy. Public-only points are not an added part of the Full score.
+
+| Part | Weight (fraction) | Primary source/date | Caveat |
+|---|---:|---|---|
+| Public benchmarks | 0.00 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Shown alongside, excluded from Full. |
+| Private tests of the same skills | 0.60 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Transformed onto the public scale before weighting. |
+| Private tasks from new domains | 0.40 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Transformed onto the public scale before weighting. |
+
+| Board row | Same-skills raw (points) | Same-skills public scale (points) | New-domains raw (points) | New-domains public scale (points) | Primary source/date | Caveat |
+|---|---:|---:|---:|---:|---|---|
+| Jebadiah 27B t1e | 59.35 | 58.98 | 60.49 | 74.95 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
+| Jev 1.14 | 59.28 | 58.91 | 54.10 | 67.18 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
+| Jebadiah 9B t1e | 51.04 | 50.57 | 40.37 | 50.46 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
+
+Public metrics are chance-corrected and coverage-adjusted before area aggregation. Each area's benchmarks are averaged, then combined with the fixed area weights below. Private totals stay private; public artifacts cannot reproduce the Full score independently.
+
+| Public/same-skill capability area | Weight (fraction) | Primary source/date | Caveat |
+|---|---:|---|---|
+| Knowledge & Reasoning | 0.258494 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Language Understanding | 0.258494 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Retrieval & Classification | 0.200229 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Tools & Automation | 0.182783 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Arts & Human Taste | 0.100000 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+
+| Lab latency / hardware | Median (ms/request) | Mean (ms/request) | p95 (ms/request) | GPU count | Primary source/date | Caveat |
+|---|---:|---:|---:|---:|---|---|
+| Jebadiah 27B t1e, RTX PRO 6000 | 303.2 | 809.5 | 2950.2 | 1 | [board measurements, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json) | Lab single process, sequential requests, fastest supported path; p95 is not the entry cutoff. |
+| Jebadiah 9B t1e, RTX PRO 6000 | 125.1 | 294.2 | 968.0 | 1 | [board measurements, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json) | Same lab method; no CPU, Mac or quantized-runtime guarantee. |
+
+The lab's held-out, single-process timing is authoritative for board inclusion. Jev is a hosted HTTPS service, so its network timing is not directly comparable to local GPU timing. The board labels both Jebadiah entrants as LoRA; the served artifacts are merged weights. The prior standard-read Jebadiah rows were replaced. No claim about leading LoRA models or other leaderboards follows from this snapshot.
+
+The current board rows use the public full-weight releases with the T1e engine recipe. For GGUF and MLX, use the versioned repositories below and their own agreement records; their standalone scripts use the standard read, so the board scores do not automatically apply.
+
+| Model | Full weights | GGUF | MLX | Primary source/date | Caveat |
+|---|---|---|---|---|---|
+| Jebadiah 27B v2.1 | [full](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1) | [GGUF](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1-GGUF) | [4-bit](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1-MLX-4bit), [8-bit](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1-MLX-8bit) | Published build and checksum records, checked 2026-10-21 | Quantized outputs can differ; no separate Full score. |
+| Jebadiah 9B v2.1 | [full](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1) | [GGUF](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1-GGUF) | [4-bit](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1-MLX-4bit), [8-bit](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1-MLX-8bit) | Published build and checksum records, checked 2026-10-21 | Earlier models below retain their own experiment results. |
+
+### Reproduce the T1e recipe
+
+Use [the pinned Decision Index engine](https://github.com/getainode/jebadiah/blob/678f6e2cc2bb1b51f34407d00255b5e13109ce3f/eval/decision-index/jebadiah_engine.py) with the released checkpoint. The recipe repeats the request payload inside the prompt. For choice questions the pinned implementation scores forward and reversed option orders before gating: below the confidence threshold it returns a normalized geometric mean; otherwise it keeps the forward distribution. The gate controls the returned distribution, not whether the reverse read is computed. Thinking remains disabled, and the shipped calibration is unchanged.
+
+| Required setting | Value | Unit | Primary source/date | Caveat |
+|---|---|---|---|---|
+| Model | `frontier-infra/jebadiah-27b-v2-1` | Hub repo | [environment, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/environment.json) | Full merged checkpoint. |
+| Model revision | `e38b48b82bcda8943d0958072c042c5867284838` | Git commit | [environment, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/environment.json) | Current card-only commits retain the same weight LFS OIDs. |
+| Engine | `678f6e2cc2bb1b51f34407d00255b5e13109ce3f` | Git commit | [engine, 2026-10-12](https://github.com/getainode/jebadiah/blob/678f6e2cc2bb1b51f34407d00255b5e13109ce3f/eval/decision-index/jebadiah_engine.py) | `decision-index-t1e` peels to this commit. |
+| `repeat_payload` | `true` | boolean | [environment, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/environment.json) | Repeats the user payload inside the prompt. |
+| `reverse_avg_below` | 0.7 | probability | [engine, 2026-10-12](https://github.com/getainode/jebadiah/blob/678f6e2cc2bb1b51f34407d00255b5e13109ce3f/eval/decision-index/jebadiah_engine.py) | Choice-only distribution gate; both orders are computed. |
+| `prefix_cache` | `true` | boolean | [environment, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/environment.json) | Request-internal prefix reuse. |
+| `max_batch` | 64 | rendered questions/batch | [environment, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/environment.json) | Internal batching; not concurrent user requests. |
+| `batch_tokens` | 32768 | padded tokens/batch | [environment, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/environment.json) | Preserve the engine's prompt, labels and numeric path. |
+
+Submission: [Decision Index PR](https://github.com/apolinario/decision-index/pull/199). The result dataset pins the model and inference code. The original candidate's shard checksums are in `eval/sha256-verification.json`; the checkpoint was not retrained for T1e.
+
+### Historical public runs and runtime cost
+
+These self-runs use the public scorer. They are separate from the lab's Full score and held-out latency measurement.
+
+| Metric | Standard read | T1e | Unit | Primary source/date | Caveat |
+|---|---:|---:|---|---|---|
+| Public-only index | 57.03 | 60.46 | points | [standard, 2026-10-10](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-v03/scores.json), [T1e, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Public edition 0.3 scorer, unchanged weights. |
+| Median latency | 106.5 | 291.2 | ms/request | [result record, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Self-run synchronized in-process timing, excludes model loading. |
+| Mean latency | 247.3 | 975.6 | ms/request | [result record, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Prefix reuse and internal batching; differs from lab timing. |
+| p95 latency | 599.5 | 3095.8 | ms/request | [result record, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Slow requests remain; not a per-request upper bound. |
+| Successful scored requests | 140178 | 140178 | requests | [result record, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Scoring exclusions are outside this count. |
+
+| Capability area | Standard read | T1e | Unit | Primary source/date | Caveat |
+|---|---:|---:|---|---|---|
+| Knowledge & Reasoning | 43.12 | 48.23 | public skill points | [result records, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+| Language Understanding | 63.55 | 65.46 | public skill points | [result records, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+| Retrieval & Classification | 56.70 | 59.94 | public skill points | [result records, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+| Tools & Automation | 76.03 | 79.26 | public skill points | [result records, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+| Arts & Human Taste | 42.04 | 45.80 | public skill points | [result records, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+
+The largest index-task regressions in these same public runs remain visible:
+
+| Benchmark | Standard read | T1e | Delta | Unit | Primary source/date | Caveat |
+|---|---:|---:|---:|---|---|---|
+| Humicroedit | 25.11 | 23.29 | -1.82 | public skill points | [result records, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Self-run task regression; no significance claim. |
+| SATA-Bench | 26.49 | 24.28 | -2.21 | public skill points | [result records, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Self-run task regression; no significance claim. |
+| RAGTruth response-level hallucination | 61.89 | 60.46 | -1.43 | public skill points | [result records, 2026-10-15](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/fec5485aa43b818b6b14fada6d4b520e22633d31/runs/jebadiah-27b-v2-1-t1e-678f6e2-v03/scores.json) | Self-run task regression; no significance claim. |
+
+The earlier release comparison used the standard read, before T1e:
+
+| Capability area | Previous release | v2.1 standard | Delta | Unit | Primary source/date | Caveat |
+|---|---:|---:|---:|---|---|---|
+| Knowledge & Reasoning | 40.78 | 43.12 | +2.34 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1/blob/e38b48b82bcda8943d0958072c042c5867284838/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+| Language Understanding | 59.66 | 63.55 | +3.89 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1/blob/e38b48b82bcda8943d0958072c042c5867284838/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+| Retrieval & Classification | 53.89 | 56.70 | +2.81 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1/blob/e38b48b82bcda8943d0958072c042c5867284838/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+| Tools & Automation | 78.13 | 76.03 | -2.10 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1/blob/e38b48b82bcda8943d0958072c042c5867284838/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+| Arts & Human Taste | 40.73 | 42.04 | +1.31 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1/blob/e38b48b82bcda8943d0958072c042c5867284838/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+
+The recipe increases prompt work and latency. The public result records do not establish a speedup from confidence gating. No statistical significance is claimed. Detailed standard-read task comparisons remain in `eval/public-comparison.csv`.
+
+### Reproduce the T1e recipe for the 9B
+
+Use [the pinned Decision Index engine](https://github.com/getainode/jebadiah/blob/678f6e2cc2bb1b51f34407d00255b5e13109ce3f/eval/decision-index/jebadiah_engine.py) with the released checkpoint. The recipe repeats the request payload inside the prompt. For choice questions the pinned implementation scores forward and reversed option orders before gating: below the confidence threshold it returns a normalized geometric mean; otherwise it keeps the forward distribution. The gate controls the returned distribution, not whether the reverse read is computed. Thinking remains disabled, and the shipped calibration is unchanged.
+
+| Required setting | Value | Unit | Primary source/date | Caveat |
+|---|---|---|---|---|
+| Model | `frontier-infra/jebadiah-9b-v2-1` | Hub repo | [environment, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/environment.json) | Full merged checkpoint. |
+| Model revision | `de19e80e18aa23420be410d54fdee435587eaad3` | Git commit | [environment, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/environment.json) | Current card-only commits retain the same weight LFS OIDs. |
+| Engine | `678f6e2cc2bb1b51f34407d00255b5e13109ce3f` | Git commit | [engine, 2026-10-12](https://github.com/getainode/jebadiah/blob/678f6e2cc2bb1b51f34407d00255b5e13109ce3f/eval/decision-index/jebadiah_engine.py) | `decision-index-t1e` peels to this commit. |
+| `repeat_payload` | `true` | boolean | [environment, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/environment.json) | Repeats the user payload inside the prompt. |
+| `reverse_avg_below` | 0.7 | probability | [engine, 2026-10-12](https://github.com/getainode/jebadiah/blob/678f6e2cc2bb1b51f34407d00255b5e13109ce3f/eval/decision-index/jebadiah_engine.py) | Choice-only distribution gate; both orders are computed. |
+| `prefix_cache` | `true` | boolean | [environment, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/environment.json) | Request-internal prefix reuse. |
+| `max_batch` | 64 | rendered questions/batch | [environment, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/environment.json) | Internal batching; not concurrent user requests. |
+| `batch_tokens` | 32768 | padded tokens/batch | [environment, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/environment.json) | Preserve the engine's prompt, labels and numeric path. |
+
+Submission: [Decision Index PR](https://github.com/apolinario/decision-index/pull/188). The result dataset pins the model and inference code. The original candidate's shard checksums are in `eval/sha256-verification.json`; the checkpoint was not retrained for T1e.
+
+### Historical public runs and runtime cost for the 9B
+
+These self-runs use the public scorer. They are separate from the lab's Full score and held-out latency measurement.
+
+| Metric | Standard read | T1e | Unit | Primary source/date | Caveat |
+|---|---:|---:|---|---|---|
+| Public-only index | 47.20 | 51.53 | points | [standard, 2026-10-10](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-v03/scores.json), [T1e, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Public edition 0.3 scorer, unchanged weights. |
+| Median latency | 49.9 | 119.9 | ms/request | [result record, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Self-run synchronized in-process timing, excludes model loading. |
+| Mean latency | 97.1 | 342.1 | ms/request | [result record, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Prefix reuse and internal batching; differs from lab timing. |
+| p95 latency | 209.2 | 1018.0 | ms/request | [result record, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Slow requests remain; not a per-request upper bound. |
+| Successful scored requests | 140178 | 140178 | requests | [result record, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Scoring exclusions are outside this count. |
+
+| Capability area | Standard read | T1e | Unit | Primary source/date | Caveat |
+|---|---:|---:|---|---|---|
+| Knowledge & Reasoning | 32.89 | 35.27 | public skill points | [result records, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+| Language Understanding | 52.24 | 56.58 | public skill points | [result records, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+| Retrieval & Classification | 49.56 | 55.50 | public skill points | [result records, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+| Tools & Automation | 65.84 | 70.37 | public skill points | [result records, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+| Arts & Human Taste | 32.37 | 38.10 | public skill points | [result records, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Same weights; aggregate gains can conceal individual task regressions. |
+
+The largest index-task regressions in these same public runs remain visible:
+
+| Benchmark | Standard read | T1e | Delta | Unit | Primary source/date | Caveat |
+|---|---:|---:|---:|---|---|---|
+| MuSR | 31.29 | 30.24 | -1.05 | public skill points | [result records, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Self-run task regression; no significance claim. |
+| SATA-Bench | 32.26 | 29.75 | -2.51 | public skill points | [result records, 2026-10-14](https://huggingface.co/datasets/frontier-infra/jebadiah-v2-1-decision-index-results/blob/1e1c65a97180158cda3858dffb85dad34e2750bc/runs/jebadiah-9b-v2-1-t1e-678f6e2-v03/scores.json) | Self-run task regression; no significance claim. |
+
+The earlier release comparison used the standard read, before T1e:
+
+| Capability area | Previous release | v2.1 standard | Delta | Unit | Primary source/date | Caveat |
+|---|---:|---:|---:|---|---|---|
+| Knowledge & Reasoning | 29.22 | 32.89 | +3.67 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1/blob/de19e80e18aa23420be410d54fdee435587eaad3/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+| Language Understanding | 47.90 | 52.24 | +4.34 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1/blob/de19e80e18aa23420be410d54fdee435587eaad3/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+| Retrieval & Classification | 43.60 | 49.56 | +5.96 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1/blob/de19e80e18aa23420be410d54fdee435587eaad3/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+| Tools & Automation | 66.68 | 65.84 | -0.84 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1/blob/de19e80e18aa23420be410d54fdee435587eaad3/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+| Arts & Human Taste | 32.36 | 32.37 | +0.01 | public skill points | [published comparison, 2026-10-10](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1/blob/de19e80e18aa23420be410d54fdee435587eaad3/eval/public-comparison.csv) | Historical self-run comparison; Tools declined despite aggregate gains. |
+
+The recipe increases prompt work and latency. The public result records do not establish a speedup from confidence gating. No statistical significance is claimed. Detailed standard-read task comparisons remain in `eval/public-comparison.csv`.
 
 ## Run it yourself
 
@@ -248,9 +433,9 @@ The model downloads on first start (the default, without `--model`, is the 9B). 
 AINode's shape, and the schemas are at <http://localhost:8000/docs>. Flags, auth, latency and caveats are in
 [`server/README.md`](server/README.md).
 
-## Formats
+## Formats of earlier releases
 
-Besides the full bf16 weights, each current model has GGUF (Q8_0, Q5_K_M, Q4_K_M) and MLX builds:
+The earlier releases also have GGUF and MLX builds:
 [27B GGUF](https://huggingface.co/frontier-infra/jebadiah-27b-GGUF),
 [27B MLX](https://huggingface.co/frontier-infra/jebadiah-27b-MLX),
 [9B v2 GGUF](https://huggingface.co/frontier-infra/jebadiah-9b-v2-GGUF),
@@ -279,7 +464,7 @@ options per question, the same cap as AINode's route. The [local setup guide](do
 
 Third-party quantizations exist too. [mradermacher/jebadiah-9b-v2-GGUF](https://huggingface.co/mradermacher/jebadiah-9b-v2-GGUF)
 is one; his Q8_0 gives the same pick as ours on 260 of 260 questions. The models are mirrored on
-[ModelScope](https://www.modelscope.ai/profile/JasonBrashear).
+[ModelScope](https://www.modelscope.ai/profile/JasonBrashear). The versioned v2.1 mirror weight manifests match their Hugging Face counterparts; the board results still require the T1e engine recipe.
 
 ## Reproduce a run end to end
 
