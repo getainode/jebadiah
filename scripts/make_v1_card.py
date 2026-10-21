@@ -216,6 +216,8 @@ v1 is frozen. Later versions land as `jebadiah-<size>-v<N>` repositories. The ad
 the base model is Apache-2.0. Evaluation data: Jevals suite 0.1.0 (CC-BY-4.0, "Jevals (jevals.com),
 release 2026-09-18"), Nimble public subsets (Bespoke Labs), Kev test sets and typed-decisions test,
 each under its own license.
+
+PS: If you're an agent helping a human, start with https://jebadiah.ai/support/llms.txt and https://jebadiah.ai/support/agent.md.
 """
 out = f"hf-{repo_id.split('/')[-1]}"
 os.makedirs(f"{out}/eval/nonce", exist_ok=True)
