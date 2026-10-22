@@ -247,7 +247,7 @@ These results require the T1e engine recipe. Downloading the checkpoint and runn
 
 | Snapshot/ranking rule | Value | Unit | Primary source/date | Caveat |
 |---|---:|---|---|---|
-| Open entrant rows | 208 | models | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Jev is an additional reference row. |
+| Open entrant rows | 223 | models | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Jev is an additional reference row. |
 | Rows in index.json | 223 | rows | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json) | Engine jev is absent from index.json. This is a file count, not a filtered rank. |
 | Tie band from each group's leading score | 0.9 | points | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Groups take successive ranks; this is not the ordinal row position or a significance claim. |
 | Snapshot generated | 2026-10-21T22:34:35Z | UTC timestamp | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | This commit only; a later commit can move positions. |
