@@ -215,23 +215,25 @@ toward JevBench, and an overlap check found no shared 8-word span between our tr
 
 ## Results at a glance
 
+Current snapshot: Decision Index 0.4.1, generated **2026-10-21T22:34:35Z**, with 223 entrants plus the Jev reference. These ranks describe this dated full-weight T1e snapshot.
+
 **Same released v2.1 weights, new T1e inference recipe.** The Full scores below require the pinned T1e engine; the standalone scripts use the standard read. Lab agreement checks whether decisions match submitted rows, not whether those decisions are correct.
 
 | Full-weight T1e entrant | Full (points) | Overall position (rows) | Displayed tied rank (groups) | Lab median (ms/request) | Lab decision agreement (%) | Primary source / caveat |
 |---|---:|---:|---:|---:|---:|---|
-| [Jebadiah 27B](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1) | 65.37 | 14 | =5 | 303.2 | 99.90 | [Board snapshot, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); full board including Jev, lab GPU timing. |
-| [Jebadiah 9B](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1) | 50.53 | 69 | =17 | 125.1 | 100.00 | [Board snapshot, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); same lab method and scope. |
-| [Jev reference](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jev) | 62.22 | 28 | =8 | Not compared | Not reported here | [Full-score ranks](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json); hosted service timing is not compared with local GPU timing. |
+| [Jebadiah 27B](https://huggingface.co/frontier-infra/jebadiah-27b-v2-1) | 64.4 | 25 | =5 | 303.2 | 99.90 | [Board snapshot, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json); rank_v is among 224 v03.json rows, including Jev. Jev is not a row in index.json. Median is lab GPU timing. |
+| [Jebadiah 9B](https://huggingface.co/frontier-infra/jebadiah-9b-v2-1) | 50.9 | 79 | =17 | 125.1 | 100.00 | [Board snapshot, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json); same lab method and scope. |
+| [Jev reference](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jev) | 60.24 | 41 | =9 | Not compared | Not reported here | [Full-score ranks](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json); hosted service timing is not compared with local GPU timing. |
 
 | Lab check | Value | Unit | Primary source / caveat |
 |---|---:|---|---|
-| Submitted-row agreement sample, each entrant | 831 | rows | [Lab notes](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); decision agreement, not task accuracy. |
-| Lab agreement acceptance threshold | 98.5 | percent | [Lab notes](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); applies to sampled decision agreement. |
-| Answered, each entrant | 110201 / 110201 | questions | [Board counts](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json); coverage is not correctness. |
+| Submitted-row agreement sample, each entrant | 831 | rows | [Lab notes](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json); decision agreement, not task accuracy. |
+| Lab agreement acceptance threshold | 98.5 | percent | [Lab notes](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json); applies to sampled decision agreement. |
+| Answered, each entrant | 110201 / 110201 | questions | [Board counts](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json); coverage is not correctness. |
 
-Snapshot generated 2026-10-20T14:13:56Z. Overall position counts rows; tied rank counts score groups. The lab used an RTX PRO 6000 and sequential requests in a single process. These figures do not establish CPU, Mac, GGUF or MLX scores or speed. Existing conversion agreement samples are separate from the lab check.
+Snapshot generated 2026-10-21T22:34:35Z. Overall position counts rows; tied rank counts score groups. The lab used an RTX PRO 6000 and sequential requests in a single process. These figures do not establish CPU, Mac, GGUF or MLX scores or speed. Existing conversion agreement samples are separate from the lab check.
 
-## Decision Index v0.4
+## Decision Index 0.4.1 (formula v0.4)
 
 [Live board](https://multimodalart-jev-decision-index.static.hf.space/index.html) · [Jebadiah 27B report](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jebadiah-27b-v2.1-t1e) · [Jebadiah 9B report](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jebadiah-9b-v2.1-t1e) · [Jev reference](https://multimodalart-jev-decision-index.static.hf.space/index.html?model=jev).
 This snapshot uses the published Full score. Public-only results are displayed separately.
@@ -239,46 +241,46 @@ These results require the T1e engine recipe. Downloading the checkpoint and runn
 
 | Board row | Full score (points) | Ordinal position (rows) | Displayed tied rank (groups) | Public-only index (points) | Primary source/date | Caveat |
 |---|---:|---:|---:|---:|---|---|
-| Jebadiah 27B v2.1 (t1e) | 65.37 | 14 | =5 | 60.46 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
-| Jev 1.14 | 62.22 | 28 | =8 | 60.70 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
-| Jebadiah 9B v2.1 (t1e) | 50.53 | 69 | =17 | 51.53 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
+| Jebadiah 27B v2.1 (t1e) | 64.4 | 25 | =5 | 60.46 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
+| Jev 1.14 | 60.24 | 41 | =9 | 60.70 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
+| Jebadiah 9B v2.1 (t1e) | 50.9 | 79 | =17 | 51.53 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Full-board snapshot, including Jev; not a ranking outside this board. |
 
 | Snapshot/ranking rule | Value | Unit | Primary source/date | Caveat |
 |---|---:|---|---|---|
 | Open entrant rows | 208 | models | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Jev is an additional reference row. |
-| Ranked rows including Jev | 209 | rows | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | No size or technique filters. |
-| Tie band from each group's leading score | 0.9 | points | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Groups take successive ranks; this is not the ordinal row position or a significance claim. |
-| Snapshot generated | 2026-10-20T14:13:56Z | UTC timestamp | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Checked 2026-10-21; board positions can change. |
-| Scoring formula decided | 2026-10-19 | UTC date | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Formula date differs from data generation date. |
+| Rows in index.json | 223 | rows | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json) | Engine jev is absent from index.json. This is a file count, not a filtered rank. |
+| Tie band from each group's leading score | 0.9 | points | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Groups take successive ranks; this is not the ordinal row position or a significance claim. |
+| Snapshot generated | 2026-10-21T22:34:35Z | UTC timestamp | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | This commit only; a later commit can move positions. |
+| Scoring formula decided | 2026-10-19 | UTC date | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Formula date differs from data generation date. |
 
 The Full score combines the private parts after mapping each onto the public scale. Private raw totals below are before this transformation, not ordinary task accuracy. Public-only points are not an added part of the Full score.
 
 | Part | Weight (fraction) | Primary source/date | Caveat |
 |---|---:|---|---|
-| Public benchmarks | 0.00 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Shown alongside, excluded from Full. |
-| Private tests of the same skills | 0.60 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Transformed onto the public scale before weighting. |
-| Private tasks from new domains | 0.40 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Transformed onto the public scale before weighting. |
+| Public benchmarks | 0.00 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Shown alongside, excluded from Full. |
+| Private tests of the same skills | 0.60 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Transformed onto the public scale before weighting. |
+| Private tasks from new domains | 0.40 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Transformed onto the public scale before weighting. |
 
 | Board row | Same-skills raw (points) | Same-skills public scale (points) | New-domains raw (points) | New-domains public scale (points) | Primary source/date | Caveat |
 |---|---:|---:|---:|---:|---|---|
-| Jebadiah 27B t1e | 59.35 | 58.98 | 60.49 | 74.95 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
-| Jev 1.14 | 59.28 | 58.91 | 54.10 | 67.18 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
-| Jebadiah 9B t1e | 51.04 | 50.57 | 40.37 | 50.46 | [board data, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
+| Jebadiah 27B t1e | 59.35 | 58.98 | 56.57 | 72.52 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
+| Jev 1.14 | 59.28 | 58.91 | 48.26 | 62.24 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
+| Jebadiah 9B t1e | 51.04 | 50.57 | 39.47 | 51.39 | [board data, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/v03.json) | Rounded display values; Full uses the unrounded transformed components. |
 
 Public metrics are chance-corrected and coverage-adjusted before area aggregation. Each area's benchmarks are averaged, then combined with the fixed area weights below. Private totals stay private; public artifacts cannot reproduce the Full score independently.
 
 | Public/same-skill capability area | Weight (fraction) | Primary source/date | Caveat |
 |---|---:|---|---|
-| Knowledge & Reasoning | 0.258494 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
-| Language Understanding | 0.258494 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
-| Retrieval & Classification | 0.200229 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
-| Tools & Automation | 0.182783 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
-| Arts & Human Taste | 0.100000 | [area weights, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Knowledge & Reasoning | 0.258494 | [area weights, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Language Understanding | 0.258494 | [area weights, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Retrieval & Classification | 0.200229 | [area weights, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Tools & Automation | 0.182783 | [area weights, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
+| Arts & Human Taste | 0.100000 | [area weights, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/own.json) | Rounded weights; new-domain private tasks form a separate block. |
 
 | Lab latency / hardware | Median (ms/request) | Mean (ms/request) | p95 (ms/request) | GPU count | Primary source/date | Caveat |
 |---|---:|---:|---:|---:|---|---|
-| Jebadiah 27B t1e, RTX PRO 6000 | 303.2 | 809.5 | 2950.2 | 1 | [board measurements, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json) | Lab single process, sequential requests, fastest supported path; p95 is not the entry cutoff. |
-| Jebadiah 9B t1e, RTX PRO 6000 | 125.1 | 294.2 | 968.0 | 1 | [board measurements, 2026-10-20](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/133313cf8963f2b6bed960abb0152fd14cbb6731/data/index.json) | Same lab method; no CPU, Mac or quantized-runtime guarantee. |
+| Jebadiah 27B t1e, RTX PRO 6000 | 303.2 | 809.5 | 2950.2 | 1 | [board measurements, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json) | Lab single process, sequential requests, fastest supported path; p95 is not the entry cutoff. |
+| Jebadiah 9B t1e, RTX PRO 6000 | 125.1 | 294.2 | 968.0 | 1 | [board measurements, 2026-10-21](https://huggingface.co/spaces/multimodalart/jev-decision-index/blob/76fbe3765538c933477c7213158684edaa2048cb/data/index.json) | Same lab method; no CPU, Mac or quantized-runtime guarantee. |
 
 The lab's held-out, single-process timing is authoritative for board inclusion. Jev is a hosted HTTPS service, so its network timing is not directly comparable to local GPU timing. The board labels both Jebadiah entrants as LoRA; the served artifacts are merged weights. The prior standard-read Jebadiah rows were replaced. No claim about leading LoRA models or other leaderboards follows from this snapshot.
 
